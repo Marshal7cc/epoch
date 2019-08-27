@@ -1,0 +1,16 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: epoch-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster1:8010/eureka,http://eureka-cluster2:8020/eureka,http://eureka-cluster3:8030/eureka
+
+zuul:
+  routes:
+    petrichor-base:
+      path: /base/**
+      serviceId: epoch-base

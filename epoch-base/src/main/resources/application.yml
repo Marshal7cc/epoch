@@ -1,0 +1,18 @@
+##server配置##
+server:
+  port: 9010
+
+spring:
+  application:
+    name: epoch-base
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/epoch?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: marshal1234!
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster1:8010/eureka,http://eureka-cluster2:8020/eureka,http://eureka-cluster3:8030/eureka

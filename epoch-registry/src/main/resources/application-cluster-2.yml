@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: epoch-registry
+
+server:
+  port: 8020
+
+eureka:
+  #实例主机名，域名或ip
+  instance:
+    instance-id: eureka-cluster2
+    hostname: eureka-cluster2
+  client:
+    # 表示是否将自己注册到Eureka Server，默认为true,单机设为false，集群为true
+    register-with-eureka: true
+    # 表示是否从Eureka Server获取注册信息，默认为true
+    # 1.单点的Eureka Server，不需要同步其他的Eureka Server节点的数据，设为false
+    # 2.注册中心进行多副本发布即集群的时候，则设置为true
+    fetch-registry: true
+    #其他注册中心的地址
+    serviceUrl:
+      defaultZone: http://eureka-cluster1:8010/eureka/,http://eureka-cluster3:8030/eureka/
