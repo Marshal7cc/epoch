@@ -44,39 +44,15 @@
           </span>
         </el-form-item>
       </el-tooltip>
-
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
-
-      <div style="position:relative">
-        <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
-        </div>
-
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
-      </div>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
-
-    <el-dialog title="Or connect with" :visible.sync="showDialog">
-      Can not be simulated on local, so please combine you own business simulation! ! !
-      <br>
-      <br>
-      <br>
-      <social-sign />
-    </el-dialog>
   </div>
 </template>
 
 <script>
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
-
+import { getLogin } from '@/api/user/login.js'
 export default {
   name: 'Login',
   components: { SocialSign },
@@ -107,7 +83,6 @@ export default {
       passwordType: 'password',
       capsTooltip: false,
       loading: false,
-      showDialog: false,
       redirect: undefined,
       otherQuery: {}
     }
@@ -163,17 +138,28 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.loading = true
-          this.$store.dispatch('user/login', this.loginForm)
-            .then(() => {
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
-              this.loading = false
-            })
-            .catch(() => {
-              this.loading = false
+          debugger
+          window.sessionStorage.setItem('token', 'res')
+          getLogin(this.loginForm.username, this.loginForm.password)
+            .then(res => {
+              debugger
+              if (res) {
+                this.loading = true
+                this.$store.dispatch('user/login', this.loginForm)
+                  .then(() => {
+                    window.sessionStorage.setItem('token', res)
+                    this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+                    this.loading = false
+                  })
+                  .catch(() => {
+                    this.loading = false
+                  })
+              } else {
+                this.$message.error('账号密码错误')
+              }
             })
         } else {
-          console.log('error submit!!')
+          console.log('登录失败')
           return false
         }
       })
@@ -224,6 +210,8 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  background: url("~@/assets/img/login/login.jpg");
+  background-size: 100% 100%;
   .el-input {
     display: inline-block;
     height: 47px;
@@ -315,18 +303,6 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
-  }
-
-  .thirdparty-button {
-    position: absolute;
-    right: 0;
-    bottom: 6px;
-  }
-
-  @media only screen and (max-width: 470px) {
-    .thirdparty-button {
-      display: none;
-    }
   }
 }
 </style>
