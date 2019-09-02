@@ -1,7 +1,9 @@
 package com.marshal.epoch.core.security.component;
 
 import com.alibaba.fastjson.JSON;
+import com.marshal.epoch.core.constant.BaseConstant;
 import com.marshal.epoch.core.security.domain.CustomUserDetails;
+import com.marshal.epoch.core.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.jwt.Jwt;
@@ -23,19 +25,22 @@ import java.io.IOException;
  * @desc: JwtHeadFilter
  */
 @Component
-public class JwtHeadFilter extends OncePerRequestFilter {
+public class JwtHeadFilter extends OncePerRequestFilter implements BaseConstant {
+
+    public static final String EPOCH_TOKEN = "E-token";
+
+    private static final String HAVE_NO_TOKEN = "请先登录!";
+    private static final String TOKEN_IS_EXPIRED = "token失效!";
 
     @Autowired
     private RsaVerifier verifier;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String token = request.getHeader("Authentication");
-        if (token==null || token.isEmpty()){
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("认证失败!");
-//            filterChain.doFilter(request,response);
-//            return;
+        String token = request.getHeader(EPOCH_TOKEN);
+        if (token == null || token.isEmpty()) {
+            response.setContentType(APPLICATION_JSON_UTF8);
+            response.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(HAVE_NO_TOKEN)));
         }
 
         CustomUserDetails user;
@@ -44,17 +49,17 @@ public class JwtHeadFilter extends OncePerRequestFilter {
             String claims = jwt.getClaims();
             user = JSON.parseObject(claims, CustomUserDetails.class);
             //todo: 可以在这里添加检查用户是否过期,冻结...
-        }catch (Exception e){
+        } catch (Exception e) {
             //这里也可以filterChain.doFilter(request,response)然后return,那最后就会调用
             //.exceptionHandling().authenticationEntryPoint,也就是本列中的"需要登陆"
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("token 失效");
+            response.setContentType(APPLICATION_JSON_UTF8);
+            response.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(TOKEN_IS_EXPIRED)));
             return;
         }
         JwtLoginToken jwtLoginToken = new JwtLoginToken(user, "", user.getAuthorities());
         jwtLoginToken.setDetails(new WebAuthenticationDetails(request));
         SecurityContextHolder.getContext().setAuthentication(jwtLoginToken);
-        filterChain.doFilter(request,response);
+        filterChain.doFilter(request, response);
     }
 
 }

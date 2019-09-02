@@ -1,5 +1,6 @@
 package com.marshal.epoch.core.security.config;
 
+import com.marshal.epoch.core.security.component.EpochAuthenticationEntryPoint;
 import com.marshal.epoch.core.security.component.JwtAuthenticationProvider;
 import com.marshal.epoch.core.security.component.JwtHeadFilter;
 import com.marshal.epoch.core.security.component.JwtLoginFilter;
@@ -35,6 +36,9 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private EpochAuthenticationEntryPoint authenticationEntryPoint;
 
     @Autowired
     private CustomAuthenticationAccessDeniedHandler authenticationAccessDeniedHandler;
@@ -95,7 +99,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         jwtLoginFilter.setAuthenticationManager(this.authenticationManagerBean());
 
         //登录成功和失败的操作
-
         jwtLoginFilter.setAuthenticationSuccessHandler(authenticationSuccessHandler);
         jwtLoginFilter.setAuthenticationFailureHandler(authenticationFailureHandler);
 
@@ -106,10 +109,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //会进行判断SecurityContext是否有凭证(Authentication),若前面的过滤器都没有提供凭证,
                 //匿名过滤器会给SecurityContext提供一个匿名的凭证(可以理解为用户名和权限为anonymous的Authentication),
                 //这也是JwtHeadFilter发现请求头中没有jwtToken不作处理而直接进入下一个过滤器的原因
-                .exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
-            response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write("需要登陆");
-        })
+                .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
 
                 //拒绝访问处理,当已登录,但权限不足时调用
                 //抛出AccessDeniedException异常时且当不是匿名用户时调用

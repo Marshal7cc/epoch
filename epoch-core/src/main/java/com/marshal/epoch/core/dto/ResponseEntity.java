@@ -1,33 +1,55 @@
 package com.marshal.epoch.core.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * @auth: Marshal
  * @date: 2019/8/27
  * @desc: 标准返回结果
  */
-public class Response {
+public class ResponseEntity {
 
     /**
      * 本次请求是否成功
      */
-    private Boolean success;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Boolean success = true;
 
     /**
      * 返回数据
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Object data;
 
     /**
      * 状态码
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer code;
 
     /**
      * 提示消息
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
 
-    public Response(Boolean success, Object data, Integer code, String message) {
+    public ResponseEntity() {
+    }
+
+    public ResponseEntity(String message) {
+        this.message = message;
+    }
+
+    public ResponseEntity(Object data) {
+        this.data = data;
+    }
+
+    public ResponseEntity(Boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    public ResponseEntity(Boolean success, Object data, Integer code, String message) {
         this.success = success;
         this.data = data;
         this.code = code;

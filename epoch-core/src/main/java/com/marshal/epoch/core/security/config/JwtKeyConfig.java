@@ -1,9 +1,14 @@
 package com.marshal.epoch.core.security.config;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.jwt.Jwt;
+import org.springframework.security.jwt.JwtHelper;
 import org.springframework.security.jwt.crypto.sign.RsaSigner;
 import org.springframework.security.jwt.crypto.sign.RsaVerifier;
+
+import java.util.HashMap;
 
 /**
  * @auth: Marshal
@@ -13,8 +18,10 @@ import org.springframework.security.jwt.crypto.sign.RsaVerifier;
 @Configuration
 public class JwtKeyConfig {
 
-    /**RSA私钥*/
-    private static final String PRIVATE_KEY ="-----BEGIN RSA PRIVATE KEY-----" +
+    /**
+     * RSA私钥
+     */
+    private static final String PRIVATE_KEY = "-----BEGIN RSA PRIVATE KEY-----" +
             "MIICWwIBAAKBgQCM1YBbzMijYIp4/mf1+gdVBXQMJEv5KpuTDh6DiTGJAk1yrsWA" +
             "RfqjpC83/t0xzpmvHa1M7WykUg5E0PmneNddyD/MTjkCDNhqBgr0AnJTZsTnEjMa" +
             "PB0cXeVF1ty1p+ZBuvHKMvhJwqgNmQd7uGpl2Rq1gR1L86YTWSkYceSoNwIDAQAB" +
@@ -30,25 +37,29 @@ public class JwtKeyConfig {
             "6KOJ8lAFma4qxWKaMeNi0ekrzkSrJNEt5yJPbw1Lmg==" +
             "-----END RSA PRIVATE KEY-----";
 
-    /**使用私钥签名*/
+    /**
+     * 使用私钥签名
+     */
     @Bean
-    public RsaSigner getSigner(){
+    public RsaSigner getSigner() {
         return new RsaSigner(PRIVATE_KEY);
     }
 
-    /**使用公钥验签(这里是可以通过私钥生成密钥对,包含公钥)*/
+    /**
+     * 使用公钥验签(这里是可以通过私钥生成密钥对,包含公钥)
+     */
     @Bean
-    public RsaVerifier getVerifier(){
+    public RsaVerifier getVerifier() {
         return new RsaVerifier(PRIVATE_KEY);
     }
 
-//    public static void main(String[] args) {
-//        String jsonString = JSON.toJSONString(new HashMap<String, String>() {{
-//            put("name", "Marshal");
-//            put("id", "10001");
-//        }});
-//        System.out.println(JwtHelper.encode(jsonString, getSigner()).getEncoded());
-//        Jwt decode = JwtHelper.decode("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.aGhoaGhoaGhoaGhoaGhoaA.NXL4cJ9zMkKmaT2JnuYmr_sMRm51mil5ueje73NP5s96pOWPdHgUU875iFL-DabNu3hYOGEjO47rWnxTjzug9S_XOry7aAcKFA-cN3ROAD8rXON-dIH0gNnBYYcIWzcTAfvtGCNQjUrXyL4nxypBqog5Plw8k7V-6hS1L4PZYnM");
-//        System.out.println(decode.getClaims());
-//    }
+    public static void main(String[] args) {
+        String jsonString = JSON.toJSONString(new HashMap<String, String>() {{
+            put("name", "Marshal");
+            put("id", "10001");
+        }});
+        System.out.println(JwtHelper.encode(jsonString, new RsaSigner(PRIVATE_KEY)).getEncoded());
+        Jwt decode = JwtHelper.decode("eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTWFyc2hhbCIsImlkIjoiMTAwMDEifQ.SEZ3MerZmGD6KN9_2G2pop_iwA9LuQxpDjOlZk62qUIjTDn2qJGF6Hbxdq1tc-Mv33_va-h0RPVMsgIOm5_wGta4H10MkiYtJ25Gb_UroFMt3AM4ZHDzG2gt1NXX9jR87XANIi4-hVk71v7eHbO7sBh0RNiD0oYTBH6_Z5BLI0g");
+        System.out.println(decode.getClaims());
+    }
 }

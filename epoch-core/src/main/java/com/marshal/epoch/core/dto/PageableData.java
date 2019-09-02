@@ -9,13 +9,13 @@ import java.util.List;
  * @date: 2019/8/27
  * @desc: 分页数据封装
  */
-public class PagableData {
+public class PageableData {
 
     private long total;
 
     private List<?> rows;
 
-    public PagableData(List<?> rows) {
+    public PageableData(List<?> rows) {
         try {
             Page<?> page = (Page<?>) rows;
             this.rows = rows;

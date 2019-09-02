@@ -2,6 +2,10 @@ package com.marshal.epoch.core.security.handler;
 
 
 import com.alibaba.fastjson.JSON;
+import com.marshal.epoch.core.constant.BaseConstant;
+import com.marshal.epoch.core.security.component.JwtHeadFilter;
+import com.marshal.epoch.core.security.component.JwtLoginFilter;
+import com.marshal.epoch.core.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.jwt.JwtHelper;
@@ -13,6 +17,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @auth: Marshal
@@ -20,18 +26,21 @@ import java.io.IOException;
  * @Desc: 登录成功处理器
  */
 @Component
-public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class CustomAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler implements BaseConstant {
 
     @Autowired
     private RsaSigner signer;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        response.setContentType("application/json;charset=UTF-8");
+        response.setContentType(APPLICATION_JSON_UTF8);
         String userJsonStr = JSON.toJSONString(authentication.getPrincipal());
         String token = JwtHelper.encode(userJsonStr, signer).getEncoded();
+
+        Map tokenMap = new HashMap();
+        tokenMap.put(JwtHeadFilter.EPOCH_TOKEN, token);
         //签发token
-        response.getWriter().write("token="+token);
+        response.getWriter().write(JSON.toJSONString(ResponseUtil.responseOk(tokenMap)));
     }
 
 
