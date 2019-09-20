@@ -1,11 +1,24 @@
 package com.marshal.epoch.core.base;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
 import com.github.pagehelper.PageHelper;
+import com.marshal.epoch.core.constant.BaseConstant;
+import com.marshal.epoch.core.exception.ExcelException;
 import com.marshal.epoch.core.util.DtoUtil;
+import com.marshal.epoch.core.util.ResponseUtil;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import tk.mybatis.mapper.common.Mapper;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +27,7 @@ import java.util.List;
  * @desc: base service
  */
 @Transactional(rollbackFor = Exception.class)
-public class BaseServiceImpl<T> implements BaseService<T> {
+public class BaseServiceImpl<T> implements BaseService<T>, BaseConstant {
 
     @Autowired
     Mapper<T> mapper;
@@ -82,7 +95,7 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     @Override
     public void batchSubmit(List<T> records) {
         for (T record : records) {
-            select(record);
+            submit(record);
         }
     }
 
@@ -97,4 +110,29 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     public void batchDelete(List<T> records) {
         records.forEach(item -> this.deleteByPrimaryKey(item));
     }
+
+    @Override
+    public void excelImport(MultipartFile file, Class clazz) throws ExcelException {
+        List<T> list;
+        ImportParams params = new ImportParams();
+        try {
+            list = ExcelImportUtil.importExcel(file.getInputStream(), clazz, params);
+        } catch (Exception e) {
+            throw new ExcelException(EXCEL_IMPORT_FAIL);
+        }
+        if (CollectionUtils.isNotEmpty(list)) {
+            batchSubmit(list);
+        }
+    }
+
+    @Override
+    public void excelExport(HttpServletResponse response, List<T> records, Class clazz, String fileName) throws ExcelException {
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams(), clazz, records);
+        try {
+            ResponseUtil.responseExcel(workbook, fileName, response);
+        } catch (IOException e) {
+            throw new ExcelException(EXCEL_EXPORT_FAIL);
+        }
+    }
+
 }

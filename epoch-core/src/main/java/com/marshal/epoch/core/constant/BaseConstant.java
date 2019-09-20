@@ -45,6 +45,8 @@ public interface BaseConstant {
      */
     String OPERATE_SUCCESS = "操作成功!";
     String OPERATE_FAIL = "操作失败!";
+    String EXCEL_IMPORT_FAIL = "excel导入失败!";
+    String EXCEL_EXPORT_FAIL = "excel导出失败!";
 
     /**
      * request method
@@ -53,4 +55,6 @@ public interface BaseConstant {
     String GET = "GET";
     String PUT = "PUT";
     String DELETE = "DELETE";
+
+
 }

@@ -1,5 +1,9 @@
 package com.marshal.epoch.core.base;
 
+import com.marshal.epoch.core.exception.ExcelException;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 public interface BaseService<T> {
@@ -31,5 +35,9 @@ public interface BaseService<T> {
     int submit(T records);
 
     void batchSubmit(List<T> records);
+
+    void excelImport(MultipartFile file, Class clazz) throws ExcelException;
+
+    void excelExport(HttpServletResponse response, List<T> records, Class clazz, String fileName) throws ExcelException;
 
 }
