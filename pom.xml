@@ -8,6 +8,7 @@
         <module>epoch-gateway</module>
         <module>epoch-core</module>
         <module>epoch-base</module>
+        <module>epoch-monitor</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

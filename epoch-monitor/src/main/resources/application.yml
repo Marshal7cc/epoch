@@ -1,0 +1,18 @@
+server:
+  port: 9411
+
+spring:
+  application:
+    name: epoch-monitor
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-cluster1:8010/eureka,http://eureka-cluster2:8020/eureka,http://eureka-cluster3:8030/eureka
+
+#zipkin的ui界面配置
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false
