@@ -11,6 +11,9 @@ eureka:
 
 zuul:
   routes:
-    petrichor-base:
+    epoch-base:
       path: /base/**
       serviceId: epoch-base
+    epoch-monitor:
+      path: /monitor/**
+      serviceId: epoch-monitor

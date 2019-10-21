@@ -15,7 +15,19 @@
     <properties>
         <zipkin-server.version>2.12.9</zipkin-server.version>
     </properties>
+
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--eureka client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
 
         <!-- 链路追踪的依赖服务 采用http上传的模式,也可采用RabbitMq kafka来传输-->
         <dependency>
@@ -37,9 +49,5 @@
             <version>${zipkin-server.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-        </dependency>
     </dependencies>
 </project>

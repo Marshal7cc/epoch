@@ -23,10 +23,10 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- spring actuator 监控端点-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
-            <!--<scope>test</scope>-->
         </dependency>
 
         <!--spring security-->
@@ -108,14 +108,14 @@
             <version>${tk-mapper.version}</version>
         </dependency>
 
-        <!-- pagehelper分页插件 -->
+        <!-- pageHelper分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>${pageHelper.version}</version>
         </dependency>
 
-        <!-- fastjson -->
+        <!-- fast json -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
