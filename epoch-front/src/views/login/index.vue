@@ -65,7 +65,7 @@ export default {
       }
     }
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value.length < 1) {
         callback(new Error('The password can not be less than 6 digits'))
       } else {
         callback()
@@ -73,8 +73,8 @@ export default {
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: 'Marshal',
+        password: '1'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -137,25 +137,21 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
+      alert(valid)
         if (valid) {
-          debugger
-          window.sessionStorage.setItem('token', 'res')
           getLogin(this.loginForm.username, this.loginForm.password)
             .then(res => {
-              debugger
-              if (res) {
+              if (res.success) {
+
                 this.loading = true
-                this.$store.dispatch('user/login', this.loginForm)
-                  .then(() => {
-                    window.sessionStorage.setItem('token', res)
+                const data = res.data
+debugger
+                    window.sessionStorage.setItem("token", res.data.E-token)
                     this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
                     this.loading = false
-                  })
-                  .catch(() => {
-                    this.loading = false
-                  })
+
               } else {
-                this.$message.error('账号密码错误')
+                this.$message.error(res.message)
               }
             })
         } else {
