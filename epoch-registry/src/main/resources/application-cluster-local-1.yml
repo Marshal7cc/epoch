@@ -8,10 +8,8 @@ server:
 eureka:
   #实例主机名，域名或ip
   instance:
-    instance-id: eureka-cluster3
-    ip-address: 114.67.107.190
-    #优先以hostname进行连接
-    hostname: 114.67.107.190
+    instance-id: eureka-cluster1
+    hostname: eureka-cluster1
   client:
     # 表示是否将自己注册到Eureka Server，默认为true,单机设为false，集群为true
     register-with-eureka: true
@@ -21,4 +19,4 @@ eureka:
     fetch-registry: true
     #其他注册中心的地址
     serviceUrl:
-      defaultZone: http://47.102.158.43:8010/eureka/,http://106.53.38.153:8010/eureka/
+      defaultZone: http://eureka-cluster2:8020/eureka/,http://eureka-cluster3:8030/eureka/
