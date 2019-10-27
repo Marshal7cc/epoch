@@ -1,7 +1,7 @@
 import axios from 'axios'
-import { MessageBox, Message } from 'element-ui'
+import {MessageBox, Message} from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import {getToken} from '@/utils/auth'
 
 // create an axios instance
 const service = axios.create({
@@ -22,9 +22,9 @@ service.interceptors.request.use(
     //   config.headers['X-Token'] = getToken()
     // }
     // 从sessionStorage中获取token
-  debugger
-    if (sessionStorage.token) {
-      config.headers['E-Token'] = sessionStorage.token
+    debugger
+    if (getToken()) {
+      config.headers['Epochen'] = getToken()
     }
     return config
   },
@@ -40,7 +40,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code

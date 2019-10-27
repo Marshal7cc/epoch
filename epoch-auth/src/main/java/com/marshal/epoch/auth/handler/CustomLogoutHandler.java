@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.handler;
+package com.marshal.epoch.auth.handler;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;

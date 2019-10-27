@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.domain;
+package com.marshal.epoch.auth.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

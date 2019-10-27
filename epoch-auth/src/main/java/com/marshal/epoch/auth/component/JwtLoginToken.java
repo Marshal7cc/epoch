@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.component;
+package com.marshal.epoch.auth.component;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

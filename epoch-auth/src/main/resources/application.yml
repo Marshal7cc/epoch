@@ -1,10 +1,9 @@
-##server配置##
 server:
-  port: 9010
+  port: 8020
 
 spring:
   application:
-    name: epoch-base
+    name: epoch-auth
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,13 +11,12 @@ spring:
     username: root
     password: marshal1234!
 
-  #排除 easypoi与springboot-web-starter beanNameViewResolver冲突暂时方案
   main:
     allow-bean-definition-overriding: true
 
 eureka:
   instance:
-    instance-id: epoch-base
+    instance-id: epoch-auth
   client:
     service-url:
       defaultZone: http://106.53.38.153:8010/eureka/, http://114.67.107.190:8010/eureka/,http://47.102.158.43:8010/eureka/

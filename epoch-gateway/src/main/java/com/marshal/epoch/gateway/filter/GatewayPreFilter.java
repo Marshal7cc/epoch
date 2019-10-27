@@ -70,9 +70,9 @@ public class GatewayPreFilter extends ZuulFilter {
         /**
          * 转发会在此丢失的header
          */
-        String token = request.getHeader("Authentication");
+        String token = request.getHeader("Epochen");
         if (StringUtils.isNotBlank(token)) {
-            requestContext.addZuulRequestHeader("Authentication", token);
+            requestContext.addZuulRequestHeader("Epochen", token);
         }else{
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(403);

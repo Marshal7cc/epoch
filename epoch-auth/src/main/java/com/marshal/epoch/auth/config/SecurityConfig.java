@@ -1,14 +1,14 @@
-package com.marshal.epoch.core.security.config;
+package com.marshal.epoch.auth.config;
 
-import com.marshal.epoch.core.security.component.EpochAuthenticationEntryPoint;
-import com.marshal.epoch.core.security.component.JwtAuthenticationProvider;
-import com.marshal.epoch.core.security.component.JwtHeadFilter;
-import com.marshal.epoch.core.security.component.JwtLoginFilter;
-import com.marshal.epoch.core.security.voter.ResourceVoter;
-import com.marshal.epoch.core.security.handler.CustomAuthenticationAccessDeniedHandler;
-import com.marshal.epoch.core.security.handler.CustomAuthenticationFailureHandler;
-import com.marshal.epoch.core.security.handler.CustomAuthenticationSuccessHandler;
-import com.marshal.epoch.core.security.handler.CustomLogoutHandler;
+import com.marshal.epoch.auth.component.EpochAuthenticationEntryPoint;
+import com.marshal.epoch.auth.component.JwtAuthenticationProvider;
+import com.marshal.epoch.auth.component.JwtHeadFilter;
+import com.marshal.epoch.auth.component.JwtLoginFilter;
+import com.marshal.epoch.auth.voter.ResourceVoter;
+import com.marshal.epoch.auth.handler.CustomAuthenticationAccessDeniedHandler;
+import com.marshal.epoch.auth.handler.CustomAuthenticationFailureHandler;
+import com.marshal.epoch.auth.handler.CustomAuthenticationSuccessHandler;
+import com.marshal.epoch.auth.handler.CustomLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

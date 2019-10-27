@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.config;
+package com.marshal.epoch.auth.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

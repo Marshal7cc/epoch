@@ -1,8 +1,8 @@
-package com.marshal.epoch.core.security.component;
+package com.marshal.epoch.auth.component;
 
 import com.alibaba.fastjson.JSON;
 import com.marshal.epoch.core.constant.BaseConstant;
-import com.marshal.epoch.core.security.domain.CustomUserDetails;
+import com.marshal.epoch.auth.domain.CustomUserDetails;
 import com.marshal.epoch.core.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,7 +27,7 @@ import java.io.IOException;
 @Component
 public class JwtHeadFilter extends OncePerRequestFilter implements BaseConstant {
 
-    public static final String EPOCH_TOKEN = "E-token";
+    public static final String EPOCH_TOKEN = "Epochen";
 
     private static final String HAVE_NO_TOKEN = "请先登录!";
     private static final String TOKEN_IS_EXPIRED = "token失效!";

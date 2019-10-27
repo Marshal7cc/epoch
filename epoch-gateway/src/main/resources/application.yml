@@ -1,13 +1,16 @@
 server:
   port: 8888
+
 spring:
   application:
     name: epoch-gateway
 
 eureka:
+  instance:
+    instance-id: epoch-gateway
   client:
     service-url:
-      defaultZone: http://eureka-cluster1:8010/eureka,http://eureka-cluster2:8020/eureka,http://eureka-cluster3:8030/eureka
+      defaultZone: http://106.53.38.153:8010/eureka/, http://114.67.107.190:8010/eureka/,http://47.102.158.43:8010/eureka/
 
 zuul:
   routes:
@@ -17,3 +20,6 @@ zuul:
     epoch-monitor:
       path: /monitor/**
       serviceId: epoch-monitor
+    epoch-auth:
+      path: /auth/**
+      serviceId: epoch-auth

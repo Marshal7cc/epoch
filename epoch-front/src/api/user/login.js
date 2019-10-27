@@ -5,7 +5,7 @@ import request from '@/utils/request'
  */
 export function getLogin(username, password) {
   return request({
-    url: '/base/login',
+    url: '/auth/login',
     method: 'post',
     data: {
       "username": username,

@@ -7,6 +7,7 @@
         <module>epoch-registry</module>
         <module>epoch-gateway</module>
         <module>epoch-core</module>
+        <module>epoch-auth</module>
         <module>epoch-base</module>
         <module>epoch-monitor</module>
     </modules>
@@ -14,25 +15,19 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.7.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
 
     <groupId>com.marshal</groupId>
     <artifactId>epoch</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>epoch</name>
-    <description>Halcyon 2.0 for Spring Cloud - epoch</description>
+    <description>Halcyon 2.0 version of Spring Cloud ==> epoch</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <mybatis.version>1.3.2</mybatis.version>
-        <tk-mapper.version>2.1.3</tk-mapper.version>
-        <pageHelper.version>1.2.10</pageHelper.version>
-        <fastjson.version>1.2.47</fastjson.version>
-        <swagger2.version>2.6.1</swagger2.version>
-        <durid.version>1.1.18</durid.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <epoch.version>1.0.0-SNAPSHOT</epoch.version>
     </properties>
@@ -64,19 +59,6 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <!-- swagger2-->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger2.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger2.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.voter;
+package com.marshal.epoch.auth.voter;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.AccessDecisionVoter;

@@ -1,7 +1,7 @@
-package com.marshal.epoch.core.security.service;
+package com.marshal.epoch.auth.service;
 
 
-import com.marshal.epoch.core.security.domain.CustomUserDetails;
+import com.marshal.epoch.auth.domain.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

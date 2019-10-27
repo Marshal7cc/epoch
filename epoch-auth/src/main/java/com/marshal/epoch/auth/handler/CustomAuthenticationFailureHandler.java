@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.handler;
+package com.marshal.epoch.auth.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.marshal.epoch.core.constant.BaseConstant;

@@ -1,4 +1,4 @@
-package com.marshal.epoch.core.security.config;
+package com.marshal.epoch.auth.config;
 
 import com.alibaba.fastjson.JSON;
 import org.springframework.context.annotation.Bean;

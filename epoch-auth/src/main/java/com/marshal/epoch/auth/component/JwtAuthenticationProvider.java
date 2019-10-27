@@ -1,6 +1,6 @@
-package com.marshal.epoch.core.security.component;
+package com.marshal.epoch.auth.component;
 
-import com.marshal.epoch.core.security.service.CustomUserDetailService;
+import com.marshal.epoch.auth.service.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
