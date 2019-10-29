@@ -16,6 +16,25 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+# mybatis配置
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+#  configuration:
+#    jdbc-type-for-null: null
+
+# 通用 mapper插件配置
+mapper:
+  mappers: tk.mybatis.mapper.common.Mapper
+  not-empty: false
+  identity: mysql
+
+# pagehelper插件配置（分页）
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
 eureka:
   instance:
     instance-id: epoch-base

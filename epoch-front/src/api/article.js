@@ -1,10 +1,10 @@
 import request from '@/utils/request'
 
-export function fetchList(query) {
+export function fetchList(pagination,queryParam) {
   return request({
-    url: '/article/list',
-    method: 'get',
-    params: query
+    url: '/base/role/query/' + pagination.page + '/' + pagination.pageSize + '',
+    method: 'post',
+    data: queryParam
   })
 }
 
@@ -12,7 +12,7 @@ export function fetchArticle(id) {
   return request({
     url: '/article/detail',
     method: 'get',
-    params: { id }
+    params: {id}
   })
 }
 
@@ -20,7 +20,7 @@ export function fetchPv(pv) {
   return request({
     url: '/article/pv',
     method: 'get',
-    params: { pv }
+    params: {pv}
   })
 }
 

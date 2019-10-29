@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
+import tk.mybatis.spring.annotation.MapperScan;
 
 /**
  * @auth: Marshal
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @desc: 基础服务应用, 包括用户管理、角色管理、组织架构
  */
 @ComponentScan("com.marshal.epoch.**")
+@MapperScan("com.marshal.epoch.**.mapper")
 @EnableEurekaClient
 @SpringBootApplication
 public class BaseApplication {
