@@ -1,6 +1,8 @@
 import request from '@/utils/request'
 
-export function query(page, pageSize, queryParam) {
+export function query(pagination, queryParam) {
+  let page = pagination.page
+  let pageSize = pagination.pageSize
   return request({
     url: '/base/role/query/' + page + '/' + pageSize + '',
     method: 'post',
@@ -16,18 +18,10 @@ export function submit(dto) {
   })
 }
 
-export function remove(idList) {
+export function remove(rows) {
   return request({
     url: '/base/role/remove',
     method: 'post',
-    data: idList
-  })
-}
-
-export function queryById(id) {
-  return request({
-    url: '/base/role/queryById',
-    method: 'get',
-    params: {id}
+    data: rows
   })
 }

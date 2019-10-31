@@ -9,11 +9,16 @@
                  @click="add">
         新增
       </el-button>
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-delete"
+                 @click="remove">
+        删除
+      </el-button>
     </div>
     <el-table
       :key="0"
       v-loading="loading"
       :data="rows"
+      ref="dataGrid"
       border
       fit
       highlight-current-row
@@ -47,9 +52,6 @@
           <el-button type="primary" size="mini" @click="edit(row)">
             编辑
           </el-button>
-          <el-button size="mini" type="danger" @click="remove(row.roleId)">
-            删除
-          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -59,18 +61,22 @@
                 @pagination="query"/>
 
     <el-dialog :title="dialog.title" :visible.sync="dialog.visible">
-      <el-form ref="dataForm" :rules="rules" :model="dto" label-position="left" label-width="70px"
+      <el-form ref="dataForm" :model="dto" label-position="left" label-width="70px"
                style="width: 400px; margin-left:50px;">
-        <el-form-item label="Type" prop="type">
-          <el-select v-model="dto.roleName" class="filter-item" placeholder="Please select">
-          </el-select>
+        <el-form-item label="角色代码" prop="roleCode">
+          <el-input v-model="dto.roleCode" class="filter-item" placeholder="Please select">
+          </el-input>
+        </el-form-item>
+        <el-form-item label="角色名称" prop="roleName">
+          <el-input v-model="dto.roleName" class="filter-item" placeholder="Please select">
+          </el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialog.visible = false">
           取消
         </el-button>
-        <el-button type="primary" @click="save">
+        <el-button type="primary" @click="submit">
           确认
         </el-button>
       </div>
@@ -79,7 +85,8 @@
 </template>
 
 <script>
-  import {query, submit, remove, queryById} from '@/api/article'
+  import base from "../../utils/base";
+  import {query, submit, remove} from '@/api/article'
   import Pagination from '@/components/Pagination'
 
   export default {
@@ -87,8 +94,6 @@
     data() {
       return {
         rows: null,
-        queryParam: {},
-        dto: {},
         pagination: {
           total: 0,
           page: 1,
@@ -98,6 +103,8 @@
           title: null,
           visible: false
         },
+        queryParam: {},
+        dto: {},
         loading: true
       }
     },
@@ -107,20 +114,8 @@
     methods: {
       query() {
         this.loading = true
-        query(this.pagination.page, this.pagination.pageSize, this.queryParam).then(response => {
-          if (response.success) {
-            this.rows = response.data.rows
-            this.pagination.total = response.data.total
-            setTimeout(() => {
-              this.loading = false
-            }, 0.5 * 1000)
-          } else {
-            this.$notify({
-              message: response.message,
-              type: "error",
-              duration: 2000
-            })
-          }
+        query(this.pagination, this.queryParam).then(response => {
+          base.parseResponse(response, this)
         })
       },
       reset() {
@@ -136,18 +131,19 @@
         this.dialog.visible = true
         this.dialog.title = '编辑'
       },
-      save() {
+      submit() {
         submit(this.dto).then((response) => {
           this.dialog.visible = false
-          this.$notify({
-            message: response.message,
-            type: response.success ? "success" : "error",
-            duration: 2000
-          })
+          base.parseResponse(response, this)
+          this.query()
         })
       },
-      delete(row) {
-        this.query()
+      remove() {
+        base.removeCheck(this)
+        remove(this.$refs.dataGrid.selection).then((response) => {
+          base.parseResponse(response, this)
+          this.query()
+        })
       }
     }
   }

@@ -27,15 +27,15 @@ public class SysRoleController extends BaseController {
         return ResponseUtil.responseOk(list);
     }
 
-    @RequestMapping("/submit")
+    @PostMapping("/submit")
     public ResponseEntity save(@RequestBody SysRole sysRole) {
-
+        sysRoleService.submit(sysRole);
         return ResponseUtil.responseOk();
     }
 
-    @RequestMapping("/remove")
-    public ResponseEntity delete(@RequestParam("selectedIds") Long[] selectedIds) {
-        sysRoleService.batchDelete(selectedIds);
+    @PostMapping("/remove")
+    public ResponseEntity delete(@RequestBody List<SysRole> dtoList) {
+        sysRoleService.batchDelete(dtoList);
         return ResponseUtil.responseOk();
     }
 
