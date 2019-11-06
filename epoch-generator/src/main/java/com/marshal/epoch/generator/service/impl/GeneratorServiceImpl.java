@@ -1,8 +1,9 @@
 package com.marshal.epoch.generator.service.impl;
 
+import com.marshal.epoch.core.util.ResponseUtil;
 import com.marshal.epoch.generator.dto.DBColumn;
 import com.marshal.epoch.generator.dto.DBTable;
-import com.marshal.epoch.generator.dto.GeneratorInfo;
+import com.marshal.epoch.generator.dto.GeneratorConfig;
 import com.marshal.epoch.generator.service.GeneratorService;
 import com.marshal.epoch.generator.util.DBUtil;
 import com.marshal.epoch.generator.util.FileUtil;
@@ -16,13 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Service
@@ -50,7 +51,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     }
 
     @Override
-    public void generatorFile(GeneratorInfo info) throws Exception {
+    public void generatorFile(GeneratorConfig info, HttpServletResponse response) throws Exception {
         if (StringUtils.isAnyBlank(info.getProjectPath(), info.getParentPackagePath(), info.getPackagePath(), info.getTargetName())) {
             throw new Exception("请将信息填写完整!");
         }
@@ -64,7 +65,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         info.setMapperXmlName(beanName + "Mapper.xml");
         DBTable dbTable = getTableInfo(tableName);
         try {
-            createFile(dbTable, info);
+            createFile(dbTable, info, response);
         } catch (IOException e) {
             logger.error(e.getMessage());
             throw e;
@@ -136,12 +137,18 @@ public class GeneratorServiceImpl implements GeneratorService {
         return column;
     }
 
-    public int createFile(DBTable table, GeneratorInfo info) throws IOException {
+    public int createFile(DBTable table, GeneratorConfig info, HttpServletResponse response) throws IOException {
 
         int rs = FileUtil.isFileExist(info);
         if (rs == 0) {
+            Map<String, byte[]> files = new HashMap<>();
             if (!"NotOperation".equalsIgnoreCase(info.getDtoStatus())) {
-                FileUtil.createDto(table, info);
+                byte[] bytes = FileUtil.createDto(table, info);
+                if (bytes != null) {
+                    files.put("user.java", bytes);
+//                    ResponseUtil.responseFile(bytes, "123.java", response);
+//                    return 1;
+                }
             }
             if (!"NotOperation".equalsIgnoreCase(info.getControllerStatus())) {
                 FileUtil.createFtlInfoByType(FileUtil.pType.Controller, table, info);
@@ -156,8 +163,14 @@ public class GeneratorServiceImpl implements GeneratorService {
                 FileUtil.createFtlInfoByType(FileUtil.pType.Service, table, info);
             }
             if (!"NotOperation".equalsIgnoreCase(info.getMapperXmlStatus())) {
-                FileUtil.createMapperXml(table, info);
+                byte[] bytes = FileUtil.createMapperXml(table, info);
+                if (bytes != null) {
+                    files.put("userMapper.xml", bytes);
+//                    ResponseUtil.responseFile(bytes, "UserMapper.xml", response);
+//                    return 1;
+                }
             }
+            ResponseUtil.responseZip(files, "yasuo.zip", response);
         }
         return rs;
     }

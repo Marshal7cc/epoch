@@ -22,7 +22,7 @@ public class ResponseEntity {
     private Object data;
 
     /**
-     * 状态码
+     * 状态码-默认200为正常
      */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Integer code;

@@ -1,7 +1,6 @@
 package com.marshal.epoch.generator.util;
 
 
-
 import com.marshal.epoch.core.dto.BaseDto;
 import com.marshal.epoch.core.dto.ResponseEntity;
 import com.marshal.epoch.core.service.BaseService;
@@ -29,6 +28,8 @@ import java.util.regex.Pattern;
 @Component
 public class FileUtil {
 
+    private static final String GENERATE_METHOD_ZIP = "zip";
+    private static final String GENERATE_METHOD_LOCAL = "local";
 
     private FileUtil() {
 
@@ -60,22 +61,19 @@ public class FileUtil {
         return str.replaceAll("[A-Z]", "_$0").toLowerCase();
     }
 
-    public static void createDto(DBTable table, GeneratorInfo generatorInfo) throws IOException {
+    public static byte[] createDto(DBTable table, GeneratorConfig generatorConfig) throws IOException {
         // key 是否需要引入相对包
         boolean needUtil = false;
         boolean needNotNull = false;
         boolean needNotEmpty = false;
 
-        String name = generatorInfo.getDtoName().substring(0, generatorInfo.getDtoName().indexOf("."));
-        String projectPath = generatorInfo.getProjectPath();
-        String parentPackagePath = generatorInfo.getParentPackagePath();
-        String packagePath = generatorInfo.getPackagePath();
+        String name = generatorConfig.getDtoName().substring(0, generatorConfig.getDtoName().indexOf("."));
+        String projectPath = generatorConfig.getProjectPath();
+        String parentPackagePath = generatorConfig.getParentPackagePath();
+        String packagePath = generatorConfig.getPackagePath();
         String directory = projectPath + "/src/main/java/" + parentPackagePath + "/" + packagePath + "/entity/"
-                + generatorInfo.getDtoName();
+                + generatorConfig.getDtoName();
 
-        File file = new File(directory);
-        createFileDir(file);
-        file.createNewFile();
         List<DBColumn> columns = table.getColumns();
         // 判断是否需要引入包
         for (DBColumn s : columns) {
@@ -175,24 +173,30 @@ public class FileUtil {
         }
         sb.append("     }\r\n");
 
-        PrintWriter p = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
-        p.write(sb.toString());
-        p.close();
+        if (GENERATE_METHOD_LOCAL.equals(generatorConfig.getGenerateMethod())) {
+            File file = new File(directory);
+            createFileDir(file);
+            file.createNewFile();
+            PrintWriter p = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+            p.write(sb.toString());
+            p.close();
+        } else {
+            return sb.toString().getBytes("utf-8");
+        }
 
+        return null;
     }
 
-    public static void createMapperXml(DBTable table, GeneratorInfo generatorInfo) throws IOException {
+    public static byte[] createMapperXml(DBTable table, GeneratorConfig generatorConfig) throws IOException {
 
-        String parentPackagePath = generatorInfo.getParentPackagePath();
-        String projectPath = generatorInfo.getProjectPath();
-        String packagePath = generatorInfo.getPackagePath();
-        String directory = projectPath + "/src/main/resources/mapper/" + generatorInfo.getMapperXmlName();
-        String dtoName = generatorInfo.getDtoName().substring(0, generatorInfo.getDtoName().indexOf('.'));
+        String parentPackagePath = generatorConfig.getParentPackagePath();
+        String projectPath = generatorConfig.getProjectPath();
+        String packagePath = generatorConfig.getPackagePath();
+        String directory = projectPath + "/src/main/resources/mapper/" + generatorConfig.getMapperXmlName();
+        String dtoName = generatorConfig.getDtoName().substring(0, generatorConfig.getDtoName().indexOf('.'));
         String packageName = parentPackagePath.replaceAll("/", ".") + "." + packagePath;
-        String mapperNameSpace = generatorInfo.getMapperXmlName().substring(0, generatorInfo.getMapperXmlName().indexOf('.'));
-        File file = new File(directory);
-        createFileDir(file);
-        file.createNewFile();
+        String mapperNameSpace = generatorConfig.getMapperXmlName().substring(0, generatorConfig.getMapperXmlName().indexOf('.'));
+
         List<DBColumn> columns = table.getColumns();
         for (DBColumn s : columns) {
 
@@ -214,33 +218,41 @@ public class FileUtil {
             sb.append("    </resultMap>\r\n");
             sb.append("</mapper>");
 
-            PrintWriter p = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
-            p.write(sb.toString());
-            p.close();
+            if (GENERATE_METHOD_LOCAL.equals(generatorConfig.getGenerateMethod())) {
+                File file = new File(directory);
+                createFileDir(file);
+                file.createNewFile();
+                PrintWriter p = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+                p.write(sb.toString());
+                p.close();
+            } else {
+                return sb.toString().getBytes();
+            }
         }
+        return null;
     }
 
-    public static void createFtlInfoByType(pType type, DBTable table, GeneratorInfo generatorInfo) throws IOException {
-        String projectPath = generatorInfo.getProjectPath();
-        String parentPackagePath = generatorInfo.getParentPackagePath();
-        String packagePath = generatorInfo.getPackagePath();
-        String htmlModelName = generatorInfo.getHtmlModelName();
+    public static byte[] createFtlInfoByType(pType type, DBTable table, GeneratorConfig generatorConfig) throws IOException {
+        String projectPath = generatorConfig.getProjectPath();
+        String parentPackagePath = generatorConfig.getParentPackagePath();
+        String packagePath = generatorConfig.getPackagePath();
+        String htmlModelName = generatorConfig.getHtmlModelName();
         String pac = parentPackagePath + "/" + packagePath;
         FtlInfo info = new FtlInfo();
         String directory = null;
         List<String> importPackages = new ArrayList<>();
         if (type == pType.Controller) {
-            directory = projectPath + "/src/main/java/" + pac + "/controller/" + generatorInfo.getControllerName();
+            directory = projectPath + "/src/main/java/" + pac + "/controller/" + generatorConfig.getControllerName();
             importPackages.add(RequestHelper.class.getName());
             importPackages.add(ResponseEntity.class.getName());
         } else if (type == pType.Mapper) {
-            directory = projectPath + "/src/main/java/" + pac + "/mapper/" + generatorInfo.getMapperName();
+            directory = projectPath + "/src/main/java/" + pac + "/mapper/" + generatorConfig.getMapperName();
             importPackages.add("tk.mybatis.mapper.common.Mapper");
         } else if (type == pType.Service) {
-            directory = projectPath + "/src/main/java/" + pac + "/service/" + generatorInfo.getServiceName();
+            directory = projectPath + "/src/main/java/" + pac + "/service/" + generatorConfig.getServiceName();
             importPackages.add(BaseService.class.getName());
         } else if (type == pType.Impl) {
-            directory = projectPath + "/src/main/java/" + pac + "/service/impl/" + generatorInfo.getImplName();
+            directory = projectPath + "/src/main/java/" + pac + "/service/impl/" + generatorConfig.getImplName();
             importPackages.add(BaseServiceImpl.class.getName());
             importPackages.add("org.springframework.stereotype.Service");
         }
@@ -262,10 +274,10 @@ public class FileUtil {
             columnsInfos.add(columnsInfo);
         }
         info.setColumnsInfo(columnsInfos);
-        createFtl(info, type, generatorInfo);
+        return createFtl(info, type, generatorConfig);
     }
 
-    public static void createFtl(FtlInfo ftlInfo, pType type, GeneratorInfo generatorInfo) throws IOException {
+    public static byte[] createFtl(FtlInfo ftlInfo, pType type, GeneratorConfig generatorConfig) throws IOException {
         TemplateEngine templateEngine = ThymeLeafConfig.getTemplateEngine();
         Context context = new Context();
         Map<String, Object> map = new HashMap<String, Object>();
@@ -290,17 +302,17 @@ public class FileUtil {
             map.put("package", ftlInfo.getPackageName());
             map.put("import", ftlInfo.getImportName());
             map.put("name", ftlInfo.getFileName());
-            map.put("dtoName", generatorInfo.getDtoName().substring(0, generatorInfo.getDtoName().indexOf('.')));
+            map.put("dtoName", generatorConfig.getDtoName().substring(0, generatorConfig.getDtoName().indexOf('.')));
             map.put("controllerName",
-                    generatorInfo.getControllerName().substring(0, generatorInfo.getControllerName().indexOf('.')));
-            map.put("implName", generatorInfo.getImplName().substring(0, generatorInfo.getImplName().indexOf('.')));
+                    generatorConfig.getControllerName().substring(0, generatorConfig.getControllerName().indexOf('.')));
+            map.put("implName", generatorConfig.getImplName().substring(0, generatorConfig.getImplName().indexOf('.')));
             map.put("serviceName",
-                    generatorInfo.getServiceName().substring(0, generatorInfo.getServiceName().indexOf('.')));
-            map.put("mapperName", generatorInfo.getMapperName().substring(0, generatorInfo.getMapperName().indexOf('.')));
+                    generatorConfig.getServiceName().substring(0, generatorConfig.getServiceName().indexOf('.')));
+            map.put("mapperName", generatorConfig.getMapperName().substring(0, generatorConfig.getMapperName().indexOf('.')));
             map.put("xmlName",
-                    generatorInfo.getMapperXmlName().substring(0, generatorInfo.getMapperXmlName().indexOf('.')));
+                    generatorConfig.getMapperXmlName().substring(0, generatorConfig.getMapperXmlName().indexOf('.')));
             map.put("columnsInfo", ftlInfo.getColumnsInfo());
-            String url = generatorInfo.getTargetName().toLowerCase();
+            String url = generatorConfig.getTargetName().toLowerCase();
             url = url.replaceAll("_", "/");
             map.put("queryUrl", "/" + url + "/query");
             map.put("submitUrl", "/" + url + "/save");
@@ -308,10 +320,16 @@ public class FileUtil {
             map.forEach((k, v) -> {
                 context.setVariable(k, v);
             });
-            writer.write(templateEngine.process(templateName, context));
-            writer.flush();
-            writer.close();
+
+            if (GENERATE_METHOD_LOCAL.equals(generatorConfig.getGenerateMethod())) {
+                writer.write(templateEngine.process(templateName, context));
+                writer.flush();
+                writer.close();
+            } else {
+                return templateEngine.process(templateName, context).getBytes();
+            }
         }
+        return null;
     }
 
     // 判断文件目录是否存在不存在则创建
@@ -322,21 +340,21 @@ public class FileUtil {
     }
 
     // 判断文件是否已经存在
-    public static int isFileExist(GeneratorInfo generatorInfo) {
+    public static int isFileExist(GeneratorConfig generatorConfig) {
         int rs = 0;
-        String classDir = generatorInfo.getProjectPath() + "/src/main/java/" + generatorInfo.getParentPackagePath();
-        String xmlDir = generatorInfo.getProjectPath() + "/src/main/resources/" + generatorInfo.getParentPackagePath();
-        getFileList(classDir, classDir, generatorInfo);
+        String classDir = generatorConfig.getProjectPath() + "/src/main/java/" + generatorConfig.getParentPackagePath();
+        String xmlDir = generatorConfig.getProjectPath() + "/src/main/resources/" + generatorConfig.getParentPackagePath();
+        getFileList(classDir, classDir, generatorConfig);
         // 判断有没有重复的java文件
 
         for (String name : allClassFiles) {
-            if (name.equals(generatorInfo.getDtoName())) {
-                if ("Create".equalsIgnoreCase(generatorInfo.getDtoStatus())) {
+            if (name.equals(generatorConfig.getDtoName())) {
+                if ("Create".equalsIgnoreCase(generatorConfig.getDtoStatus())) {
                     rs = 1;
                     break;
-                } else if ("Cover".equalsIgnoreCase(generatorInfo.getDtoStatus())) {
+                } else if ("Cover".equalsIgnoreCase(generatorConfig.getDtoStatus())) {
                     File file1 = new File(
-                            classDir + "/" + generatorInfo.getPackagePath() + "/entity/" + generatorInfo.getDtoName());
+                            classDir + "/" + generatorConfig.getPackagePath() + "/entity/" + generatorConfig.getDtoName());
                     if (!file1.exists()) {
                         rs = 1;
                         break;
@@ -347,13 +365,13 @@ public class FileUtil {
 
         if (rs == 0) {
             for (String name : allClassFiles) {
-                if (name.equals(generatorInfo.getServiceName())) {
-                    if ("Create".equalsIgnoreCase(generatorInfo.getServiceStatus())) {
+                if (name.equals(generatorConfig.getServiceName())) {
+                    if ("Create".equalsIgnoreCase(generatorConfig.getServiceStatus())) {
                         rs = 2;
                         break;
-                    } else if ("Cover".equalsIgnoreCase(generatorInfo.getServiceStatus())) {
-                        File file1 = new File(classDir + "/" + generatorInfo.getPackagePath() + "/service/"
-                                + generatorInfo.getServiceName());
+                    } else if ("Cover".equalsIgnoreCase(generatorConfig.getServiceStatus())) {
+                        File file1 = new File(classDir + "/" + generatorConfig.getPackagePath() + "/service/"
+                                + generatorConfig.getServiceName());
                         if (!file1.exists()) {
                             rs = 2;
                             break;
@@ -365,13 +383,13 @@ public class FileUtil {
 
         if (rs == 0) {
             for (String name : allClassFiles) {
-                if (name.equals(generatorInfo.getImplName())) {
-                    if ("Create".equalsIgnoreCase(generatorInfo.getImplStatus())) {
+                if (name.equals(generatorConfig.getImplName())) {
+                    if ("Create".equalsIgnoreCase(generatorConfig.getImplStatus())) {
                         rs = 3;
                         break;
-                    } else if ("Cover".equalsIgnoreCase(generatorInfo.getImplStatus())) {
-                        File file1 = new File(classDir + "/" + generatorInfo.getPackagePath() + "/service/impl/"
-                                + generatorInfo.getImplName());
+                    } else if ("Cover".equalsIgnoreCase(generatorConfig.getImplStatus())) {
+                        File file1 = new File(classDir + "/" + generatorConfig.getPackagePath() + "/service/impl/"
+                                + generatorConfig.getImplName());
                         if (!file1.exists()) {
                             rs = 3;
                             break;
@@ -383,13 +401,13 @@ public class FileUtil {
 
         if (rs == 0) {
             for (String name : allClassFiles) {
-                if (name.equals(generatorInfo.getControllerName())) {
-                    if ("Create".equalsIgnoreCase(generatorInfo.getControllerStatus())) {
+                if (name.equals(generatorConfig.getControllerName())) {
+                    if ("Create".equalsIgnoreCase(generatorConfig.getControllerStatus())) {
                         rs = 4;
                         break;
-                    } else if ("Cover".equalsIgnoreCase(generatorInfo.getControllerStatus())) {
-                        File file1 = new File(classDir + "/" + generatorInfo.getPackagePath() + "/controllers/"
-                                + generatorInfo.getControllerName());
+                    } else if ("Cover".equalsIgnoreCase(generatorConfig.getControllerStatus())) {
+                        File file1 = new File(classDir + "/" + generatorConfig.getPackagePath() + "/controllers/"
+                                + generatorConfig.getControllerName());
                         if (!file1.exists()) {
                             rs = 4;
                             break;
@@ -400,13 +418,13 @@ public class FileUtil {
         }
         if (rs == 0) {
             for (String name : allClassFiles) {
-                if (name.equals(generatorInfo.getMapperName())) {
-                    if ("Create".equalsIgnoreCase(generatorInfo.getMapperStatus())) {
+                if (name.equals(generatorConfig.getMapperName())) {
+                    if ("Create".equalsIgnoreCase(generatorConfig.getMapperStatus())) {
                         rs = 5;
                         break;
-                    } else if ("Cover".equalsIgnoreCase(generatorInfo.getMapperStatus())) {
-                        File file1 = new File(classDir + "/" + generatorInfo.getPackagePath() + "/mapper/"
-                                + generatorInfo.getMapperName());
+                    } else if ("Cover".equalsIgnoreCase(generatorConfig.getMapperStatus())) {
+                        File file1 = new File(classDir + "/" + generatorConfig.getPackagePath() + "/mapper/"
+                                + generatorConfig.getMapperName());
                         if (!file1.exists()) {
                             rs = 5;
                             break;
@@ -418,15 +436,15 @@ public class FileUtil {
 
         // 判断有没有重复的xml文件
         if (rs == 0) {
-            getFileList(xmlDir, xmlDir, generatorInfo);
+            getFileList(xmlDir, xmlDir, generatorConfig);
             for (String name : allXmlFiles) {
-                if (name.equals(generatorInfo.getMapperXmlName())) {
-                    if ("Create".equalsIgnoreCase(generatorInfo.getMapperXmlStatus())) {
+                if (name.equals(generatorConfig.getMapperXmlName())) {
+                    if ("Create".equalsIgnoreCase(generatorConfig.getMapperXmlStatus())) {
                         rs = 6;
                         break;
-                    } else if ("Cover".equalsIgnoreCase(generatorInfo.getMapperXmlStatus())) {
-                        File file1 = new File(xmlDir + "/" + generatorInfo.getPackagePath() + "/mapper/"
-                                + generatorInfo.getMapperXmlName());
+                    } else if ("Cover".equalsIgnoreCase(generatorConfig.getMapperXmlStatus())) {
+                        File file1 = new File(xmlDir + "/" + generatorConfig.getPackagePath() + "/mapper/"
+                                + generatorConfig.getMapperXmlName());
                         if (!file1.exists()) {
                             rs = 6;
                             break;
@@ -439,22 +457,22 @@ public class FileUtil {
     }
 
     // 获取文件夹下所有文件列表
-    public static void getFileList(String basePath, String directory, GeneratorInfo generatorInfo) {
+    public static void getFileList(String basePath, String directory, GeneratorConfig generatorConfig) {
         File dir = new File(basePath);
         File[] files = dir.listFiles();
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 String fileName = files[i].getName();
                 if (files[i].isDirectory()) {
-                    getFileList(files[i].getAbsolutePath(), directory, generatorInfo);
+                    getFileList(files[i].getAbsolutePath(), directory, generatorConfig);
                 } else {
-                    if (directory.equals(generatorInfo.getProjectPath() + "/src/main/java/"
-                            + generatorInfo.getParentPackagePath())) {
+                    if (directory.equals(generatorConfig.getProjectPath() + "/src/main/java/"
+                            + generatorConfig.getParentPackagePath())) {
                         allClassFiles.add(fileName);
-                    } else if (directory.equals(generatorInfo.getProjectPath() + "/src/main/resources/"
-                            + generatorInfo.getParentPackagePath())) {
+                    } else if (directory.equals(generatorConfig.getProjectPath() + "/src/main/resources/"
+                            + generatorConfig.getParentPackagePath())) {
                         allXmlFiles.add(fileName);
-                    } else if (directory.equals(generatorInfo.getProjectPath() + "/src/main/webapp/WEB-INF/view")) {
+                    } else if (directory.equals(generatorConfig.getProjectPath() + "/src/main/webapp/WEB-INF/view")) {
                         allHtmlFiles.add(fileName);
                     }
                 }

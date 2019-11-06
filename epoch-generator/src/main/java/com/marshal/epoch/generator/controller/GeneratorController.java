@@ -3,11 +3,12 @@ package com.marshal.epoch.generator.controller;
 
 import com.marshal.epoch.core.dto.ResponseEntity;
 import com.marshal.epoch.core.util.ResponseUtil;
-import com.marshal.epoch.generator.dto.GeneratorInfo;
+import com.marshal.epoch.generator.dto.GeneratorConfig;
 import com.marshal.epoch.generator.service.GeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,13 +44,14 @@ public class GeneratorController {
     /**
      * 生成文件
      *
-     * @param generatorInfo
+     * @param generatorConfig
      * @return
      */
     @PostMapping(value = "/create")
-    public ResponseEntity generatorTables(@RequestBody GeneratorInfo generatorInfo) throws Exception {
-        service.generatorFile(generatorInfo);
-        return ResponseUtil.responseOk("生成文件成功!");
+    public void generatorTables(@RequestBody GeneratorConfig generatorConfig,
+                                HttpServletResponse response) throws Exception {
+        service.generatorFile(generatorConfig, response);
+//        return ResponseUtil.responseOk("生成文件成功!");
     }
 
 }

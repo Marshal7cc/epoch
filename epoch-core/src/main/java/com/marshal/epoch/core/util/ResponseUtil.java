@@ -9,9 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.io.*;
 import java.net.URLEncoder;
 import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 /**
  * @auth: Marshal
@@ -23,7 +26,6 @@ public class ResponseUtil implements BaseConstant {
     private static final Logger logger = LoggerFactory.getLogger(ResponseUtil.class);
 
     private ResponseUtil() {
-
     }
 
     /**
@@ -108,6 +110,45 @@ public class ResponseUtil implements BaseConstant {
         } finally {
             outputStream.close();
         }
+    }
+
+    /**
+     * 压缩包下载
+     *
+     * @param files
+     * @param fileName
+     * @param response
+     * @throws IOException
+     */
+    public static void responseZip(Map<String, byte[]> files, String fileName, HttpServletResponse response) throws IOException {
+        response.setHeader("content-type", "application/octet-stream");
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+
+        ServletOutputStream servletOutputStream = response.getOutputStream();
+        ZipOutputStream zos = new ZipOutputStream(servletOutputStream);
+        BufferedOutputStream bos = new BufferedOutputStream(zos);
+
+        for (Map.Entry<String, byte[]> entry : files.entrySet()) {
+            String name = entry.getKey();
+            byte[] content = entry.getValue();
+
+            BufferedInputStream bis = new BufferedInputStream(new ByteArrayInputStream(content));
+            zos.putNextEntry(new ZipEntry(name));
+
+            int len = 0;
+            byte[] buf = new byte[content.length];
+            while ((len = bis.read(buf, 0, buf.length)) != -1) {
+                bos.write(buf, 0, len);
+            }
+            bos.flush();
+            zos.closeEntry();
+            bis.close();
+        }
+        bos.flush();
+        bos.close();
+        servletOutputStream.close();
     }
 
 }
