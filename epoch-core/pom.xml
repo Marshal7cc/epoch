@@ -19,6 +19,8 @@
         <fastjson.version>1.2.47</fastjson.version>
         <swagger2.version>2.6.1</swagger2.version>
         <durid.version>1.1.18</durid.version>
+        <guava.version>18.0</guava.version>
+        <easy-poi.version>4.1.2</easy-poi.version>
     </properties>
 
     <dependencies>
@@ -38,7 +40,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>${guava.version}</version>
         </dependency>
 
         <!--读取yml配置文件-->
@@ -136,7 +138,7 @@
         <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-spring-boot-starter</artifactId>
-            <version>4.1.2</version>
+            <version>${easy-poi.version}</version>
         </dependency>
 
         <!--  http servlet  -->
@@ -145,7 +147,5 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.version}</version>
         </dependency>
-
     </dependencies>
-
 </project>

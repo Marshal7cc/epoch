@@ -11,13 +11,12 @@
 
     <artifactId>epoch-monitor</artifactId>
 
-
     <properties>
         <zipkin-server.version>2.12.9</zipkin-server.version>
     </properties>
 
     <dependencies>
-
+        <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -48,6 +47,5 @@
             <artifactId>zipkin-autoconfigure-ui</artifactId>
             <version>${zipkin-server.version}</version>
         </dependency>
-
     </dependencies>
 </project>

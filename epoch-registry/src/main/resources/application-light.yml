@@ -1,11 +1,13 @@
-#单点eureka配置
+# spring
 spring:
   application:
     name: eureka-server
 
+# server
 server:
   port: 8010
 
+# eureka
 eureka:
   instance:
     hostname: localhost
@@ -16,6 +18,6 @@ eureka:
     # 1.单点的Eureka Server，不需要同步其他的Eureka Server节点的数据，设为false
     # 2.注册中心进行多副本发布即集群的时候，则设置为true
     fetch-registry: false
-    #其他注册中心的地址
+    # 其他注册中心的地址
     serviceUrl:
       defaultZone: http://localhost:8010/eureka

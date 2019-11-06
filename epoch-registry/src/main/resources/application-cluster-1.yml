@@ -1,16 +1,19 @@
+# spring
 spring:
   application:
     name: epoch-registry
 
+# server
 server:
   port: 8010
 
+# eureka
 eureka:
-  #实例主机名，域名或ip
+  # 实例信息，实例ID/ip/主机名
   instance:
     instance-id: eureka-cluster1
     ip-address: 47.102.158.43
-    #优先以hostname进行连接
+    # 优先以hostname进行连接
     hostname: 47.102.158.43
   client:
     # 表示是否将自己注册到Eureka Server，默认为true,单机设为false，集群为true
@@ -19,6 +22,6 @@ eureka:
     # 1.单点的Eureka Server，不需要同步其他的Eureka Server节点的数据，设为false
     # 2.注册中心进行多副本发布即集群的时候，则设置为true
     fetch-registry: true
-    #其他注册中心的地址
+    # 其他注册中心的地址
     serviceUrl:
       defaultZone: http://106.53.38.153:8010/eureka/,http://114.67.107.190:8010/eureka/

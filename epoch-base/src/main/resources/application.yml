@@ -1,11 +1,13 @@
-##server配置##
+# server
 server:
   port: 9010
 
+# spring
 spring:
   application:
     name: epoch-base
 
+  # 数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/epoch?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
@@ -18,19 +20,20 @@ mybatis:
 #  configuration:
 #    jdbc-type-for-null: null
 
-# 通用 mapper插件配置
+# 通用mapper配置
 mapper:
   mappers: tk.mybatis.mapper.common.Mapper
   not-empty: false
   identity: mysql
 
-# pagehelper插件配置（分页）
+# pageHelper插件
 pagehelper:
   helper-dialect: mysql
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
 
+# eureka
 eureka:
   instance:
     instance-id: epoch-base

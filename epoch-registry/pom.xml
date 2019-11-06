@@ -12,11 +12,10 @@
     <artifactId>epoch-registry</artifactId>
 
     <dependencies>
-        <!--SpringCloud服务注册中心-->
+        <!--SpringCloud eureka server注册中心-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
     </dependencies>
-
 </project>
