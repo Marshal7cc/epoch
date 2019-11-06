@@ -4,7 +4,6 @@ import com.marshal.epoch.base.account.dto.SysRole;
 
 import com.marshal.epoch.base.account.service.SysRoleService;
 
-import com.marshal.epoch.core.base.BaseController;
 import com.marshal.epoch.core.dto.ResponseEntity;
 import com.marshal.epoch.core.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/role")
-public class SysRoleController extends BaseController {
+public class SysRoleController {
 
     @Autowired
     SysRoleService sysRoleService;

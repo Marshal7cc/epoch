@@ -1,7 +1,0 @@
-security:
-  loginUrl: /login
-  logout-url: /logout
-  login-page: /login.html
-  default-target-url: /index.html
-  authentication-failure-url: /login.html
-  static-resources: /static/**,/login/**,/css/**,/js/**,/diagram-viewer/**,/editor-app/**,/images/**,/plugins/**

@@ -132,18 +132,11 @@
             <artifactId>lombok</artifactId>
         </dependency>
 
-        <!-- ognl,用于thymeleaf模板引擎 -->
-        <dependency>
-            <groupId>ognl</groupId>
-            <artifactId>ognl</artifactId>
-            <version>3.1.12</version>
-        </dependency>
-
         <!--  easy-poi  -->
         <dependency>
             <groupId>cn.afterturn</groupId>
             <artifactId>easypoi-spring-boot-starter</artifactId>
-            <version>4.0.0</version>
+            <version>4.1.2</version>
         </dependency>
 
         <!--  http servlet  -->

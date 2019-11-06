@@ -68,18 +68,29 @@ public class GatewayPreFilter extends ZuulFilter {
         if (request.getRequestURL().indexOf("login") != -1)
             return null;
         /**
-         * 转发会在此丢失的header
+         * 一些敏感header会被过滤掉：
+         * "Cookie", "Set-Cookie", "Authorization"
+         * 1：可以在ZuulFilter中手动添加如下：
+         * String token = request.getHeader("Authorization");
+         * if (StringUtils.isNotBlank(token)) {
+         *     requestContext.addZuulRequestHeader("Authorization", token);
+         *  }
+         *
+         *  2：通过application.yml如下配置可以解决
+         *
+         *  zuul:
+         *      sensitive-headers: Authorization
          */
         String token = request.getHeader("Epochen");
-        if (StringUtils.isNotBlank(token)) {
-            requestContext.addZuulRequestHeader("Epochen", token);
-        }else{
+        if (StringUtils.isBlank(token)) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(403);
             requestContext.setResponseBody("权限不足");
             requestContext.getResponse().setContentType("text/html;charset=utf-8");
         }
-
+        /**
+         * return null表示正常继续执行
+         */
         return null;
     }
 }

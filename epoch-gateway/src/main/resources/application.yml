@@ -5,6 +5,14 @@ spring:
   application:
     name: epoch-gateway
 
+### --actuator端点开放规则-- ###
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+        exclude: env,beans
+
 eureka:
   instance:
     instance-id: epoch-gateway

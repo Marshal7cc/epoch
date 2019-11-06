@@ -12,10 +12,6 @@ spring:
     username: root
     password: marshal1234!
 
-  #排除 easypoi与springboot-web-starter beanNameViewResolver冲突暂时方案
-  main:
-    allow-bean-definition-overriding: true
-
 # mybatis配置
 mybatis:
   mapper-locations: classpath*:mapper/*.xml

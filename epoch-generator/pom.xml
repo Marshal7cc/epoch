@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>epoch</artifactId>
+        <groupId>com.marshal</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>epoch-generator</artifactId>
+
+    <properties>
+        <swagger2.version>2.6.1</swagger2.version>
+        <ognl.version>3.1.12</ognl.version>
+    </properties>
+
+    <dependencies>
+        <!--epoch core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch auth -->
+        <!--        <dependency>-->
+        <!--            <groupId>com.marshal</groupId>-->
+        <!--            <artifactId>epoch-auth</artifactId>-->
+        <!--            <version>${epoch.version}</version>-->
+        <!--        </dependency>-->
+
+        <!--eureka client-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!-- swagger2-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${swagger2.version}</version>
+        </dependency>
+
+        <!--spring web mvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- thymeleaf -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- ognl,用于thymeleaf模板引擎 -->
+        <dependency>
+            <groupId>ognl</groupId>
+            <artifactId>ognl</artifactId>
+            <version>${ognl.version}</version>
+        </dependency>
+    </dependencies>
+</project>

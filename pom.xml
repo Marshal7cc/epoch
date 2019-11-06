@@ -10,6 +10,7 @@
         <module>epoch-auth</module>
         <module>epoch-base</module>
         <module>epoch-monitor</module>
+        <module>epoch-generator</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

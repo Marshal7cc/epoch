@@ -2,7 +2,7 @@ package com.marshal.epoch.base.account.service.impl;
 
 import com.marshal.epoch.base.account.dto.SysRole;
 import com.marshal.epoch.base.account.service.SysRoleService;
-import com.marshal.epoch.core.base.BaseServiceImpl;
+import com.marshal.epoch.core.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
