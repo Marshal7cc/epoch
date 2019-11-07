@@ -10,6 +10,9 @@ import lombok.Data;
 @Data
 public class GeneratorConfig {
 
+    /**
+     * 数据源信息
+     */
     private String dataSourceUrl;
 
     private String userName;
@@ -23,12 +26,15 @@ public class GeneratorConfig {
      */
     private String generateMethod;
 
+    private boolean isCutPrefix;
+
     private String projectPath;
 
     private String parentPackagePath;
 
     private String packagePath;
 
+    private String tableName;
     private String targetName;
     private String controllerStatus;
     private String controllerName;

@@ -8,6 +8,7 @@ import com.marshal.epoch.generator.service.GeneratorService;
 import com.marshal.epoch.generator.util.DBUtil;
 import com.marshal.epoch.generator.util.FileUtil;
 import com.marshal.epoch.generator.util.StringUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -28,6 +29,12 @@ import java.util.*;
 
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
+
+    /**
+     * 文件生成行为
+     */
+    private static final String NOT_OPERATION = "NotOperation";
+    private static final String CREATE = "create";
 
     @Autowired
     @Qualifier("sqlSessionFactory")
@@ -52,17 +59,17 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public void generatorFile(GeneratorConfig info, HttpServletResponse response) throws Exception {
-        if (StringUtils.isAnyBlank(info.getProjectPath(), info.getParentPackagePath(), info.getPackagePath(), info.getTargetName())) {
+        if (StringUtils.isAnyBlank(info.getProjectPath(), info.getParentPackagePath(), info.getPackagePath(), info.getTableName(), info.getTargetName())) {
             throw new Exception("请将信息填写完整!");
         }
-        String tableName = info.getTargetName();
-        String beanName = StringUtil.getBeanName(tableName);
-        info.setDtoName(beanName + ".java");
-        info.setControllerName(beanName + "Controller.java");
-        info.setServiceName(beanName + "Service.java");
-        info.setImplName(beanName + "ServiceImpl.java");
-        info.setMapperName(beanName + "Mapper.java");
-        info.setMapperXmlName(beanName + "Mapper.xml");
+        String tableName = info.getTableName();
+        String targetName = info.getTargetName();
+        info.setDtoName(targetName + ".java");
+        info.setControllerName(targetName + "Controller.java");
+        info.setServiceName(targetName + "Service.java");
+        info.setImplName(targetName + "ServiceImpl.java");
+        info.setMapperName(targetName + "Mapper.java");
+        info.setMapperXmlName(targetName + "Mapper.xml");
         DBTable dbTable = getTableInfo(tableName);
         try {
             createFile(dbTable, info, response);
@@ -75,12 +82,16 @@ public class GeneratorServiceImpl implements GeneratorService {
         }
     }
 
-    // 获取table信息
-    public DBTable getTableInfo(String tableName) {
+    /**
+     * 获取table信息
+     *
+     * @param tableName
+     * @return
+     */
+    private DBTable getTableInfo(String tableName) {
         Connection conn = null;
         DBTable dbTable = new DBTable();
         List<DBColumn> columns = dbTable.getColumns();
-        List<String> multiColumns = null;
         List<String> NotNullColumns = null;
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
             // 设置tablename
@@ -99,7 +110,7 @@ public class GeneratorServiceImpl implements GeneratorService {
                 if ("object_version".equalsIgnoreCase(columnName) || "create_time".equalsIgnoreCase(columnName) || "update_time".equalsIgnoreCase(columnName)) {
                     continue;
                 }
-                columns.add(setColumnInfo(rs1, columnPk, NotNullColumns, multiColumns));
+                columns.add(setColumnInfo(rs1, columnPk, NotNullColumns));
             }
             rs1.close();
             conn.close();
@@ -109,7 +120,7 @@ public class GeneratorServiceImpl implements GeneratorService {
         return dbTable;
     }
 
-    private DBColumn setColumnInfo(ResultSet rs1, String columnPk, List<String> NotNullColumns, List<String> multiColumns) throws SQLException {
+    private DBColumn setColumnInfo(ResultSet rs1, String columnPk, List<String> NotNullColumns) throws SQLException {
         DBColumn column = new DBColumn();
         String columnName = rs1.getString("COLUMN_NAME");
         column.setName(columnName);
@@ -137,42 +148,51 @@ public class GeneratorServiceImpl implements GeneratorService {
         return column;
     }
 
-    public int createFile(DBTable table, GeneratorConfig info, HttpServletResponse response) throws IOException {
+    private void createFile(DBTable table, GeneratorConfig info, HttpServletResponse response) throws IOException {
 
         int rs = FileUtil.isFileExist(info);
         if (rs == 0) {
             Map<String, byte[]> files = new HashMap<>();
-            if (!"NotOperation".equalsIgnoreCase(info.getDtoStatus())) {
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getDtoStatus())) {
                 byte[] bytes = FileUtil.createDto(table, info);
                 if (bytes != null) {
-                    files.put("user.java", bytes);
-//                    ResponseUtil.responseFile(bytes, "123.java", response);
-//                    return 1;
+                    files.put(info.getDtoName(), bytes);
                 }
             }
-            if (!"NotOperation".equalsIgnoreCase(info.getControllerStatus())) {
-                FileUtil.createFtlInfoByType(FileUtil.pType.Controller, table, info);
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getControllerStatus())) {
+                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Controller, table, info);
+                if (bytes != null) {
+                    files.put(info.getControllerName(), bytes);
+                }
             }
-            if (!"NotOperation".equalsIgnoreCase(info.getMapperStatus())) {
-                FileUtil.createFtlInfoByType(FileUtil.pType.Mapper, table, info);
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getMapperStatus())) {
+                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Mapper, table, info);
+                if (bytes != null) {
+                    files.put(info.getMapperName(), bytes);
+                }
             }
-            if (!"NotOperation".equalsIgnoreCase(info.getImplStatus())) {
-                FileUtil.createFtlInfoByType(FileUtil.pType.Impl, table, info);
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getImplStatus())) {
+                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Impl, table, info);
+                if (bytes != null) {
+                    files.put(info.getImplName(), bytes);
+                }
             }
-            if (!"NotOperation".equalsIgnoreCase(info.getServiceStatus())) {
-                FileUtil.createFtlInfoByType(FileUtil.pType.Service, table, info);
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getServiceStatus())) {
+                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Service, table, info);
+                if (bytes != null) {
+                    files.put(info.getServiceName(), bytes);
+                }
             }
-            if (!"NotOperation".equalsIgnoreCase(info.getMapperXmlStatus())) {
+            if (!NOT_OPERATION.equalsIgnoreCase(info.getMapperXmlStatus())) {
                 byte[] bytes = FileUtil.createMapperXml(table, info);
                 if (bytes != null) {
-                    files.put("userMapper.xml", bytes);
-//                    ResponseUtil.responseFile(bytes, "UserMapper.xml", response);
-//                    return 1;
+                    files.put(info.getMapperXmlName(), bytes);
                 }
             }
-            ResponseUtil.responseZip(files, "yasuo.zip", response);
+            if (files.size() > 0) {
+                ResponseUtil.responseZip(files, info.getTargetName() + ".zip", response);
+            }
         }
-        return rs;
     }
 
 }

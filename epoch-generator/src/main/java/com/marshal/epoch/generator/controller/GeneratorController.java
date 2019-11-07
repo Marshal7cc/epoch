@@ -51,7 +51,6 @@ public class GeneratorController {
     public void generatorTables(@RequestBody GeneratorConfig generatorConfig,
                                 HttpServletResponse response) throws Exception {
         service.generatorFile(generatorConfig, response);
-//        return ResponseUtil.responseOk("生成文件成功!");
     }
 
 }

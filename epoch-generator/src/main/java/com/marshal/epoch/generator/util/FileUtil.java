@@ -295,10 +295,6 @@ public class FileUtil {
             templateName = "serviceImpl.java";
         }
         if (templateName != null) {
-            File file = new File(ftlInfo.getDir());
-            createFileDir(file);
-            FileWriter writer = new FileWriter(file);
-//            OutputStream out = new FileOutputStream(file);
             map.put("package", ftlInfo.getPackageName());
             map.put("import", ftlInfo.getImportName());
             map.put("name", ftlInfo.getFileName());
@@ -315,13 +311,16 @@ public class FileUtil {
             String url = generatorConfig.getTargetName().toLowerCase();
             url = url.replaceAll("_", "/");
             map.put("queryUrl", "/" + url + "/query");
-            map.put("submitUrl", "/" + url + "/save");
-            map.put("removeUrl", "/" + url + "/delete");
+            map.put("submitUrl", "/" + url + "/submit");
+            map.put("removeUrl", "/" + url + "/remove");
             map.forEach((k, v) -> {
                 context.setVariable(k, v);
             });
 
             if (GENERATE_METHOD_LOCAL.equals(generatorConfig.getGenerateMethod())) {
+                File file = new File(ftlInfo.getDir());
+                createFileDir(file);
+                FileWriter writer = new FileWriter(file);
                 writer.write(templateEngine.process(templateName, context));
                 writer.flush();
                 writer.close();

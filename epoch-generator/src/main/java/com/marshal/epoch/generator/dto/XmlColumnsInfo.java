@@ -1,5 +1,9 @@
 package com.marshal.epoch.generator.dto;
 
+/**
+ * 用于生成Mapper.xml
+ * 记录每一列的属性
+ */
 public class XmlColumnsInfo {
     private String tableColumnsName;
     private String dBColumnsName;

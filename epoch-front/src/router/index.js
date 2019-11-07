@@ -360,6 +360,19 @@ export const asyncRoutes = [
   },
 
   {
+    path: '/generator',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/generator/generator'),
+        name: 'Theme',
+        meta: { title: '代码生成', icon: 'theme' }
+      }
+    ]
+  },
+
+  {
     path: '/clipboard',
     component: Layout,
     children: [
