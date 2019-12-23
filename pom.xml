@@ -11,6 +11,7 @@
         <module>epoch-base</module>
         <module>epoch-monitor</module>
         <module>epoch-generator</module>
+        <module>epoch-test</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -109,6 +109,7 @@ public class ResponseUtil implements BaseConstant {
             throw new IOException("导出失败!");
         } finally {
             outputStream.close();
+            workbook.close();
         }
     }
 

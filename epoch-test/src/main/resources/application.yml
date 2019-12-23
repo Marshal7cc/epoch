@@ -1,0 +1,36 @@
+# server
+server:
+  port: 7777
+
+# spring
+spring:
+  application:
+    name: epoch-test
+
+  # 数据源
+  datasource:
+    dynamic:
+      # 设置默认的数据源或者数据源组,默认值即为master
+      primary: master
+      # 设置严格模式,默认false不启动. 启动后在未匹配到指定数据源时候回抛出异常,不启动会使用默认数据源.
+      strict: false
+      datasource:
+        master:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://47.102.158.43:3306/epoch?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+          username: root
+          password: marshal1234!
+        slave_1:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/seal?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+          username: root
+          password: 123456
+        slave_2:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/fy_octopus?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+          username: root
+          password: 123456
+
+  autoconfigure:
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+
