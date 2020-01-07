@@ -34,3 +34,14 @@ spring:
   autoconfigure:
     exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
 
+# swagger配置
+swagger:
+  base-package: com.marshal.epoch
+  title: epoch api
+  description: epoch api description
+  version: 1.0.0
+  contact:
+    name: Marshal
+    email: 453607106@qq.com
+  terms-of-service-url: www.marshalyuan.com
+

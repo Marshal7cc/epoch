@@ -12,7 +12,7 @@
     <artifactId>epoch-monitor</artifactId>
 
     <properties>
-        <zipkin-server.version>2.12.9</zipkin-server.version>
+        <zipkin-server.version>2.12.3</zipkin-server.version>
     </properties>
 
     <dependencies>
