@@ -45,3 +45,12 @@ swagger:
     email: 453607106@qq.com
   terms-of-service-url: www.marshalyuan.com
 
+# eureka
+eureka:
+  instance:
+    instance-id: epoch-test
+  client:
+    service-url:
+      defaultZone: http://106.53.38.153:8010/eureka/, http://114.67.107.190:8010/eureka/,http://47.102.158.43:8010/eureka/
+
+

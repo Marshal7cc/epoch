@@ -35,3 +35,6 @@ zuul:
     epoch-auth:
       path: /auth/**
       serviceId: epoch-auth
+    epoch-test:
+      path: /test/**
+      serviceId: epoch-test

@@ -18,6 +18,8 @@ public class GatewayPreFilter extends ZuulFilter {
 
     private static final String filterType = "pre";
 
+    private static final String API_DOC = "v2/api-docs";
+
     /**
      * 过滤器类型
      * <p>
@@ -61,8 +63,13 @@ public class GatewayPreFilter extends ZuulFilter {
     public Object run() throws ZuulException {
         //得到requestContext
         RequestContext requestContext = RequestContext.getCurrentContext();
-        //得到Request域
         HttpServletRequest request = requestContext.getRequest();
+        /**
+         * 判断特定白名单
+         */
+        if (request.getRequestURI().indexOf(API_DOC) != -1) {
+            return null;
+        }
         if ("OPTIONS".equals(request.getMethod()))
             return null;
         if (request.getRequestURL().indexOf("login") != -1)
