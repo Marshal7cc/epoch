@@ -34,12 +34,32 @@
         <epoch.version>1.0.0-SNAPSHOT</epoch.version>
     </properties>
 
+    <!-- maven 私服地址 -->
+    <distributionManagement>
+        <repository>
+            <id>epoch-snapshots</id>
+            <url>http://47.102.158.43:8081/repository/epoch-snapshots/</url>
+        </repository>
+    </distributionManagement>
+
     <!-- 设定主仓库，按设定顺序进行查找。 -->
     <repositories>
         <repository>
-            <id>epoch-repos</id>
-            <name>epoch Repository</name>
+            <id>aliyun-repos</id>
+            <name>aliyun Repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+
+        <repository>
+            <id>epoch-releases</id>
+            <name>epoch-releases repository</name>
+            <url>http://47.102.158.43:8081/repository/epoch-releases/</url>
+        </repository>
+
+        <repository>
+            <id>epoch-snapshots</id>
+            <name>epoch-snapshots repository</name>
+            <url>http://47.102.158.43:8081/repository/epoch-snapshots/</url>
         </repository>
     </repositories>
 
