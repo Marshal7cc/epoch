@@ -22,12 +22,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--eureka client-->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
-
         <!-- 链路追踪的依赖服务 采用http上传的模式,也可采用RabbitMq kafka来传输-->
         <dependency>
             <groupId>io.zipkin.java</groupId>

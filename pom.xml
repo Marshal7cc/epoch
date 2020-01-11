@@ -27,14 +27,16 @@
     <description>Halcyon 2.0 version of Spring Cloud ==> epoch</description>
 
     <properties>
+        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
+        <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
+        <epoch.version>1.0.0-SNAPSHOT</epoch.version>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
-        <epoch.version>1.0.0-SNAPSHOT</epoch.version>
     </properties>
 
-    <!-- maven 私服地址 -->
+    <!-- maven 私服地址,用于deploy -->
     <distributionManagement>
         <repository>
             <id>epoch-snapshots</id>
@@ -55,12 +57,6 @@
             <name>epoch-releases repository</name>
             <url>http://47.102.158.43:8081/repository/epoch-releases/</url>
         </repository>
-
-        <repository>
-            <id>epoch-snapshots</id>
-            <name>epoch-snapshots repository</name>
-            <url>http://47.102.158.43:8081/repository/epoch-snapshots/</url>
-        </repository>
     </repositories>
 
     <!-- 设定插件仓库 -->
@@ -75,10 +71,20 @@
     <!--  依赖管理  -->
     <dependencyManagement>
         <dependencies>
+            <!-- spring cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- spring cloud alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -93,5 +99,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: epoch-auth
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.102.158.43:8010,114.67.107.190:8010,http://106.53.38.153:8010
+        group: DEFAULT_GROUP
+        prefix: epoch-auth
+        file-extension: yml
+        refreshable-dataids:
+      discovery:
+        server-addr: 47.102.158.43:8010,114.67.107.190:8010,http://106.53.38.153:8010
