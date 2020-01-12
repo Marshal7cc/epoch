@@ -7,7 +7,7 @@ spring:
     nacos:
       config:
         server-addr: 47.102.158.43:8010,114.67.107.190:8010,http://106.53.38.153:8010
-        group: DEFAULT_GROUP
+        group: EPOCH_GROUP
         prefix: epoch-account
         file-extension: yml
         refreshable-dataids:
