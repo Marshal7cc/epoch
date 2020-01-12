@@ -3,16 +3,13 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
-    <modules>
-        <module>epoch-registry</module>
-        <module>epoch-gateway</module>
-        <module>epoch-core</module>
-        <module>epoch-auth</module>
-        <module>epoch-base</module>
-        <module>epoch-monitor</module>
-        <module>epoch-generator</module>
-        <module>epoch-test</module>
-    </modules>
+    <groupId>com.marshal</groupId>
+    <artifactId>epoch</artifactId>
+    <version>${epoch.version}</version>
+
+    <name>epoch</name>
+    <description>Halcyon 2.0 version of Spring Cloud ==> epoch</description>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -20,16 +17,19 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.marshal</groupId>
-    <artifactId>epoch</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-    <name>epoch</name>
-    <description>Halcyon 2.0 version of Spring Cloud ==> epoch</description>
+    <modules>
+        <module>epoch-core</module>
+        <module>epoch-auth</module>
+        <module>epoch-base</module>
+        <module>epoch-server</module>
+        <module>epoch-server-api</module>
+        <module>epoch-server-entity</module>
+    </modules>
 
     <properties>
+        <epoch.version>1.0.0-SNAPSHOT</epoch.version>
         <spring-cloud.version>Greenwich.RELEASE</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
-        <epoch.version>1.0.0-SNAPSHOT</epoch.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -44,10 +44,10 @@
         </repository>
     </distributionManagement>
 
-    <!-- 设定主仓库，按设定顺序进行查找。 -->
+    <!-- 设定主仓库，按设定顺序进行查找 -->
     <repositories>
         <repository>
-            <id>aliyun-repos</id>
+            <id>aliyun-repository</id>
             <name>aliyun Repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
@@ -90,13 +90,4 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 </project>

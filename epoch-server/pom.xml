@@ -7,13 +7,18 @@
         <groupId>com.marshal</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>epoch-server</artifactId>
+    <packaging>pom</packaging>
 
-    <artifactId>epoch-auth</artifactId>
-
-    <properties>
-        <security.jwt.version>1.0.10.RELEASE</security.jwt.version>
-    </properties>
+    <modules>
+        <module>epoch-account</module>
+        <module>epoch-generator</module>
+        <module>epoch-HR</module>
+        <module>epoch-test</module>
+        <module>epoch-function</module>
+    </modules>
 
     <dependencies>
         <!--epoch core -->
@@ -23,17 +28,11 @@
             <version>${epoch.version}</version>
         </dependency>
 
-        <!--spring security-->
+        <!--epoch auth -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-
-        <!--spring security jwt-->
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-jwt</artifactId>
-            <version>${security.jwt.version}</version>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth</artifactId>
+            <version>${epoch.version}</version>
         </dependency>
 
         <!--spring web mvc-->
@@ -54,4 +53,13 @@
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

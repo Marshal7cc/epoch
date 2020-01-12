@@ -9,19 +9,17 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
-    <artifactId>epoch-base</artifactId>
-
     <modules>
-        <module>epoch-registry</module>
-        <module>epoch-gateway</module>
+        <module>epoch-api-account</module>
     </modules>
+    <artifactId>epoch-server-api</artifactId>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
+    <dependencies>
+        <!--epoch core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+    </dependencies>
 </project>
