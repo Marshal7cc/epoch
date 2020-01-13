@@ -18,6 +18,7 @@
         <module>epoch-HR</module>
         <module>epoch-test</module>
         <module>epoch-function</module>
+        <module>epoch-wechat</module>
     </modules>
 
     <dependencies>
