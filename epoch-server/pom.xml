@@ -28,13 +28,6 @@
             <version>${epoch.version}</version>
         </dependency>
 
-        <!--epoch auth -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
