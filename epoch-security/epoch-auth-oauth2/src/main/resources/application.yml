@@ -1,0 +1,39 @@
+server:
+  port: 8020
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+justauth:
+  enabled: true
+  type:
+    github:
+      client-id:
+      client-secret:
+      redirect-uri:
+    gitee:
+      client-id:
+      client-secret:
+      redirect-uri:
+    tencent_cloud:
+      client-id:
+      client-secret:
+      redirect-uri:
+    dingtalk:
+      client-id:
+      client-secret:
+      redirect-uri:
+    qq:
+      client-id:
+      client-secret:
+      redirect-uri:
+    microsoft:
+      client-id:
+      client-secret:
+      redirect-uri:
