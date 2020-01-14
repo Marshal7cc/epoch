@@ -12,6 +12,13 @@
     <artifactId>epoch-account</artifactId>
 
     <dependencies>
+        <!--epoch auth -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
         <!-- account api -->
         <dependency>
             <groupId>com.marshal</groupId>
