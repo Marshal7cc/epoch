@@ -12,24 +12,29 @@
     <artifactId>epoch-auth-oauth2</artifactId>
 
     <dependencies>
+        <!--epoch core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- oauth2 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
+
+        <!-- redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
-
 </project>

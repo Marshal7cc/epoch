@@ -1,7 +1,10 @@
 package com.marshal.epoch.auth.config;
 
 
-import com.marshal.epoch.auth.service.CustomUserDetailService;
+import com.marshal.epoch.auth.component.EpochRedisTokenStore;
+import com.marshal.epoch.auth.properties.EpochSecurityProperties;
+import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
+import com.marshal.epoch.auth.translator.EpochExceptionTranslator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +17,10 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.OAuth2RequestFactory;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.security.oauth2.provider.request.DefaultOAuth2RequestFactory;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
@@ -25,54 +31,77 @@ import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenCo
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
-import java.util.UUID;
+import javax.sql.DataSource;
 
 /**
  * @auth: Marshal
  * @date: 2020/1/15
- * @desc:
+ * @desc: 认证服务器配置
  */
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    private static final String JWT = "jwt";
+    private static final String JDBC = "jdbc";
+
+    @Autowired
+    private DataSource dataSource;
+
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Autowired
-    private CustomUserDetailService userDetailService;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private EpochUserDetailService userDetailService;
 
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    @Autowired
+    private EpochExceptionTranslator exceptionTranslator;
+
+    @Autowired
+    private EpochSecurityProperties securityProperties;
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.withClientDetails(redisClientDetailsService);
+        clients.withClientDetails(clientDetails());
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.tokenStore(tokenStore())
                 .userDetailsService(userDetailService)
                 .authenticationManager(authenticationManager)
                 .exceptionTranslator(exceptionTranslator);
-        if (properties.getEnableJwt()) {
+        if (JWT.equals(securityProperties.getTokenStoreStrategy())) {
             endpoints.accessTokenConverter(jwtAccessTokenConverter());
         }
     }
 
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) {
+        //it will be 401 without this
+        security.allowFormAuthenticationForClients();
+    }
+
     @Bean
     public TokenStore tokenStore() {
-        if (properties.getEnableJwt()) {
+        if (JWT.equals(securityProperties.getTokenStoreStrategy())) {
             return new JwtTokenStore(jwtAccessTokenConverter());
         } else {
-            RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
-            // 解决每次生成的 token都一样的问题
-            redisTokenStore.setAuthenticationKeyGenerator(oAuth2Authentication -> UUID.randomUUID().toString());
+            RedisTokenStore redisTokenStore = new EpochRedisTokenStore(redisConnectionFactory);
             return redisTokenStore;
         }
+    }
+
+    @Bean
+    public ClientDetailsService clientDetails() {
+        ClientDetailsService clientDetailsService = null;
+        if (JDBC.equals(securityProperties.getClientDetailsStrategy())) {
+            clientDetailsService = new JdbcClientDetailsService(dataSource);
+        }
+        return clientDetailsService;
     }
 
     @Bean
@@ -82,7 +111,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         tokenServices.setTokenStore(tokenStore());
         tokenServices.setSupportRefreshToken(true);
-        tokenServices.setClientDetailsService(redisClientDetailsService);
+        tokenServices.setClientDetailsService(clientDetails());
         return tokenServices;
     }
 
@@ -93,23 +122,24 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         DefaultUserAuthenticationConverter userAuthenticationConverter = new DefaultUserAuthenticationConverter();
         userAuthenticationConverter.setUserDetailsService(userDetailService);
         defaultAccessTokenConverter.setUserTokenConverter(userAuthenticationConverter);
-        accessTokenConverter.setSigningKey(properties.getJwtAccessKey());
+        accessTokenConverter.setSigningKey(securityProperties.getJwtTokenAccessKey());
         return accessTokenConverter;
     }
 
     @Bean
     public ResourceOwnerPasswordTokenGranter resourceOwnerPasswordTokenGranter(AuthenticationManager authenticationManager, OAuth2RequestFactory oAuth2RequestFactory) {
         DefaultTokenServices defaultTokenServices = defaultTokenServices();
-        if (properties.getEnableJwt()) {
+        if (JWT.equals(securityProperties.getTokenStoreStrategy())) {
             defaultTokenServices.setTokenEnhancer(jwtAccessTokenConverter());
         }
-        return new ResourceOwnerPasswordTokenGranter(authenticationManager, defaultTokenServices, redisClientDetailsService, oAuth2RequestFactory);
+        return new ResourceOwnerPasswordTokenGranter(authenticationManager, defaultTokenServices, clientDetails(), oAuth2RequestFactory);
     }
 
     @Bean
     public DefaultOAuth2RequestFactory oAuth2RequestFactory() {
-        return new DefaultOAuth2RequestFactory(redisClientDetailsService);
+        return new DefaultOAuth2RequestFactory(clientDetails());
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

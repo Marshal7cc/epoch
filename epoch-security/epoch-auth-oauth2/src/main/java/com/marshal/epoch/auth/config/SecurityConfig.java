@@ -1,5 +1,7 @@
 package com.marshal.epoch.auth.config;
 
+import com.marshal.epoch.auth.constants.Oauth2EndpointConstant;
+import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,7 +10,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @auth: Marshal
@@ -16,12 +17,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @desc:
  */
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter implements Oauth2EndpointConstant {
 
     @Autowired
-    private FebsUserDetailService userDetailService;
-    @Autowired
-    private ValidateCodeFilter validateCodeFilter;
+    private EpochUserDetailService userDetailService;
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -32,12 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
+        http
                 .requestMatchers()
-                .antMatchers(EndpointConstant.OAUTH_ALL)
+                .antMatchers(OAUTH_ALL)
                 .and()
                 .authorizeRequests()
-                .antMatchers(EndpointConstant.OAUTH_ALL).authenticated()
+                .antMatchers(OAUTH_ALL).authenticated()
                 .and()
                 .csrf().disable();
     }

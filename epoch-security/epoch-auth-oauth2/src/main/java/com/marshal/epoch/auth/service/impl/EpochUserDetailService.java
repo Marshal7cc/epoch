@@ -1,7 +1,7 @@
-package com.marshal.epoch.auth.service;
+package com.marshal.epoch.auth.service.impl;
 
 
-import com.marshal.epoch.auth.domain.CustomUserDetails;
+import com.marshal.epoch.auth.component.EpochUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -18,7 +19,7 @@ import java.util.*;
  * @desc: Spring Security UserService
  */
 @Component
-public class CustomUserDetailService implements UserDetailsService {
+public class EpochUserDetailService implements UserDetailsService , Serializable {
 
     private static final String VALID_SQL = "select * from sys_user where user_name = :username";
 
@@ -47,8 +48,8 @@ public class CustomUserDetailService implements UserDetailsService {
 //            authorities.add(new SimpleGrantedAuthority(role));
 //        }
 
-        UserDetails userDetails = new CustomUserDetails((Long)userInfo.get("user_id"), (String)userInfo.get("user_name"),
-                (String)userInfo.get("password_encrypted"), true, true, true, true, authorities) {
+        UserDetails userDetails = new EpochUserDetails((Long)userInfo.get("user_id"), (String)userInfo.get("user_name"),
+                (String)userInfo.get("password"), true, true, true, true, authorities) {
         };
         return userDetails;
     }

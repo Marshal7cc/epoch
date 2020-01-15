@@ -49,6 +49,12 @@ public class ResponseEntity {
         this.message = message;
     }
 
+    public ResponseEntity(Integer code, Boolean success, String message) {
+        this.code = code;
+        this.success = success;
+        this.message = message;
+    }
+
     public ResponseEntity(Boolean success, Object data, Integer code, String message) {
         this.success = success;
         this.data = data;

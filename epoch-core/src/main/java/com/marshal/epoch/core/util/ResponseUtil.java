@@ -62,6 +62,10 @@ public class ResponseUtil implements BaseConstant {
         return new ResponseEntity(false, message);
     }
 
+    public static ResponseEntity responseErr(Integer code, String message) {
+        return new ResponseEntity(false, message);
+    }
+
     /**
      * 文件下载
      *

@@ -13,7 +13,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-auth</module>
+        <module>epoch-auth-jwt</module>
         <module>epoch-auth-oauth2</module>
     </modules>
 
