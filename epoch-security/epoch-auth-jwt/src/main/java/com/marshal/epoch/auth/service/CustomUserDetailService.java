@@ -23,7 +23,7 @@ public class CustomUserDetailService implements UserDetailsService {
     private static final String VALID_SQL = "select * from sys_user where user_name = :username";
 
     @Autowired
-    private NamedParameterJdbcTemplate jdbcTemplate;
+    private transient NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

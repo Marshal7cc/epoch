@@ -1,6 +1,7 @@
 package com.marshal.epoch.auth.component;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marshal.epoch.auth.entity.OauthAccessToken;
@@ -10,12 +11,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.stereotype.Component;
 
-import java.util.Calendar;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -28,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 public class EpochRedisTokenStore extends RedisTokenStore {
 
     public final static String REDIS_CATALOG = "epoch:cache:oauth2_token:";
+    public final static String REDIS_CATALOG_AUTHENTICATION = "epoch:cache:oauth2_authentication:";
 
     @Autowired
     private OauthAccessTokenService oauthAccessTokenService;
@@ -42,8 +45,16 @@ public class EpochRedisTokenStore extends RedisTokenStore {
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
         String tokenState = redisTemplate.opsForValue().get(REDIS_CATALOG + tokenValue);
+        Map map = JSONObject.parseObject(tokenState, Map.class);
+
         if (StringUtils.isNotEmpty(tokenState)) {
-            OAuth2AccessToken accessToken = JSON.parseObject(tokenState, OAuth2AccessToken.class);
+            DefaultOAuth2AccessToken accessToken = JSON.parseObject(tokenState, DefaultOAuth2AccessToken.class);
+//            accessToken.setValue(String.valueOf(map.get("token")));
+//            accessToken.setTokenType(String.valueOf(map.get("tokenAccessType")));
+//            Set<String> set = new HashSet<>();
+//            set.add("all");
+//            accessToken.setScope(set);
+//            accessToken.setExpiration(new Date((Long) map.get("tokenExpiresTime")));
             return accessToken;
         }
         return null;
@@ -83,8 +94,11 @@ public class EpochRedisTokenStore extends RedisTokenStore {
             log.error(e.getMessage(), e);
         }
 
-        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), tokenString, token.getExpiresIn(),
+        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), JSON.toJSONString(token), token.getExpiresIn(),
                 TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(REDIS_CATALOG_AUTHENTICATION + token.getValue(), JSON.toJSONString(authentication), token.getExpiresIn(),
+                TimeUnit.SECONDS);
+        super.storeAccessToken(token, authentication);
 
     }
 
