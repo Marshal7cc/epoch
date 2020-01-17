@@ -2,7 +2,6 @@ package com.marshal.epoch.auth.component;
 
 import com.alibaba.fastjson.JSON;
 import com.marshal.epoch.core.constant.BaseConstant;
-import com.marshal.epoch.auth.domain.CustomUserDetails;
 import com.marshal.epoch.core.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -43,11 +42,11 @@ public class JwtHeadFilter extends OncePerRequestFilter implements BaseConstant 
             response.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(HAVE_NO_TOKEN)));
         }
 
-        CustomUserDetails user;
+        EpochUserDetails user;
         try {
             Jwt jwt = JwtHelper.decodeAndVerify(token, verifier);
             String claims = jwt.getClaims();
-            user = JSON.parseObject(claims, CustomUserDetails.class);
+            user = JSON.parseObject(claims, EpochUserDetails.class);
             //todo: 可以在这里添加检查用户是否过期,冻结...
         } catch (Exception e) {
             //这里也可以filterChain.doFilter(request,response)然后return,那最后就会调用

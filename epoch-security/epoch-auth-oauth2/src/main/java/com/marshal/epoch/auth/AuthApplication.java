@@ -2,6 +2,7 @@ package com.marshal.epoch.auth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import tk.mybatis.spring.annotation.MapperScan;
 
 /**
@@ -11,10 +12,10 @@ import tk.mybatis.spring.annotation.MapperScan;
  */
 @MapperScan("com.marshal.epoch.**.mapper")
 @SpringBootApplication
-public class AuthOauth2Application {
+public class AuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthOauth2Application.class, args);
+        SpringApplication.run(AuthApplication.class, args);
     }
 
 }

@@ -36,8 +36,9 @@ public interface BaseConstant {
      * 请求返回code
      */
     int REQUEST_SUCCESS = 200;
-    int SERVER_ERROR = 500;
+    int INTERNAL_SERVER_ERROR = 500;
     int PAGE_NOT_FOUNT = 404;
+    int UN_AUTHORIZED = 403;
 
 
     /**

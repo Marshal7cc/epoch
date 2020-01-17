@@ -1,9 +1,6 @@
 package com.marshal.epoch.auth.component;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marshal.epoch.auth.entity.OauthAccessToken;
 import com.marshal.epoch.auth.service.OauthAccessTokenService;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -30,13 +26,12 @@ import java.util.concurrent.TimeUnit;
 public class EpochRedisTokenStore extends RedisTokenStore {
 
     public final static String REDIS_CATALOG = "epoch:cache:oauth2_token:";
-    public final static String REDIS_CATALOG_AUTHENTICATION = "epoch:cache:oauth2_authentication:";
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     @Autowired
     private OauthAccessTokenService oauthAccessTokenService;
-
-    @Autowired
-    StringRedisTemplate redisTemplate;
 
     public EpochRedisTokenStore(RedisConnectionFactory connectionFactory) {
         super(connectionFactory);
@@ -45,16 +40,9 @@ public class EpochRedisTokenStore extends RedisTokenStore {
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
         String tokenState = redisTemplate.opsForValue().get(REDIS_CATALOG + tokenValue);
-        Map map = JSONObject.parseObject(tokenState, Map.class);
 
         if (StringUtils.isNotEmpty(tokenState)) {
-            DefaultOAuth2AccessToken accessToken = JSON.parseObject(tokenState, DefaultOAuth2AccessToken.class);
-//            accessToken.setValue(String.valueOf(map.get("token")));
-//            accessToken.setTokenType(String.valueOf(map.get("tokenAccessType")));
-//            Set<String> set = new HashSet<>();
-//            set.add("all");
-//            accessToken.setScope(set);
-//            accessToken.setExpiration(new Date((Long) map.get("tokenExpiresTime")));
+            OAuth2AccessToken accessToken = super.readAccessToken(tokenValue);
             return accessToken;
         }
         return null;
@@ -63,13 +51,11 @@ public class EpochRedisTokenStore extends RedisTokenStore {
     @Override
     public void removeAccessToken(String tokenValue) {
         redisTemplate.delete(REDIS_CATALOG + tokenValue);
-//        oauthAccessTokenService.revokeToken(token.getValue());
         super.removeAccessToken(tokenValue);
     }
 
     @Override
     public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
-//        super.storeAccessToken(token, authentication);
         String clientId = authentication.getOAuth2Request().getClientId();
         OauthAccessToken oauthAccessToken = new OauthAccessToken();
         Object principal = authentication.getPrincipal();
@@ -87,19 +73,11 @@ public class EpochRedisTokenStore extends RedisTokenStore {
         oauthAccessToken.setTokenAccessTime(expiration.getTime());
         oauthAccessToken.setTokenExpiresTime(token.getExpiration());
         oauthAccessTokenService.submit(oauthAccessToken);
-        String tokenString = "";
-        try {
-            tokenString = new ObjectMapper().writeValueAsString(oauthAccessToken);
-        } catch (JsonProcessingException e) {
-            log.error(e.getMessage(), e);
-        }
 
         redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), JSON.toJSONString(token), token.getExpiresIn(),
                 TimeUnit.SECONDS);
-        redisTemplate.opsForValue().set(REDIS_CATALOG_AUTHENTICATION + token.getValue(), JSON.toJSONString(authentication), token.getExpiresIn(),
-                TimeUnit.SECONDS);
-        super.storeAccessToken(token, authentication);
 
+        super.storeAccessToken(token, authentication);
     }
 
 }

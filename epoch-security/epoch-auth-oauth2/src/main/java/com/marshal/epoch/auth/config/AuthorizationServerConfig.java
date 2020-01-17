@@ -3,8 +3,8 @@ package com.marshal.epoch.auth.config;
 
 import com.marshal.epoch.auth.component.EpochRedisTokenStore;
 import com.marshal.epoch.auth.properties.EpochSecurityProperties;
-import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import com.marshal.epoch.auth.translator.EpochExceptionTranslator;
+import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

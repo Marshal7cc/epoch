@@ -3,6 +3,7 @@ package com.marshal.epoch.test;
 import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @auth Marshal
@@ -10,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @desc
  */
 @EnableSwagger2Doc
+@ComponentScan(basePackages = "com.marshal.epoch")
 @SpringBootApplication
 public class TestApplication {
     public static void main(String[] args) {

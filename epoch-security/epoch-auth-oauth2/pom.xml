@@ -15,7 +15,7 @@
         <!--epoch core -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
+            <artifactId>epoch-auth-base</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 

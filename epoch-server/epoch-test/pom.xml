@@ -12,6 +12,23 @@
     <artifactId>epoch-test</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth-base</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!-- oauth2 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- dynamic-datasource -->
         <dependency>
             <groupId>com.baomidou</groupId>

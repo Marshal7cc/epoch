@@ -16,17 +16,11 @@
     </properties>
 
     <dependencies>
-        <!--epoch core -->
+        <!--epoch security common -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
+            <artifactId>epoch-auth-base</artifactId>
             <version>${epoch.version}</version>
-        </dependency>
-
-        <!--spring security-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <!--spring security jwt-->

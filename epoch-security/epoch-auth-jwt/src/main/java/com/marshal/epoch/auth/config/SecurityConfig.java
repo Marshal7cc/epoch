@@ -1,14 +1,10 @@
 package com.marshal.epoch.auth.config;
 
-import com.marshal.epoch.auth.component.EpochAuthenticationEntryPoint;
 import com.marshal.epoch.auth.component.JwtAuthenticationProvider;
 import com.marshal.epoch.auth.component.JwtHeadFilter;
 import com.marshal.epoch.auth.component.JwtLoginFilter;
+import com.marshal.epoch.auth.handler.*;
 import com.marshal.epoch.auth.voter.ResourceVoter;
-import com.marshal.epoch.auth.handler.CustomAuthenticationAccessDeniedHandler;
-import com.marshal.epoch.auth.handler.CustomAuthenticationFailureHandler;
-import com.marshal.epoch.auth.handler.CustomAuthenticationSuccessHandler;
-import com.marshal.epoch.auth.handler.CustomLogoutHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +53,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private JwtHeadFilter jwtHeadFilter;
-
 
     /**
      * 认证管理器,确定用户,角色及相应的权限

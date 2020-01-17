@@ -1,6 +1,6 @@
 package com.marshal.epoch.auth.component;
 
-import com.marshal.epoch.auth.service.CustomUserDetailService;
+import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -17,14 +17,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtAuthenticationProvider implements AuthenticationProvider {
 
-    /**供根据用户名查询用户,获取UserDetails的方法*/
     @Autowired
-    private CustomUserDetailService userDetailsService;
+    private EpochUserDetailService userDetailsService;
 
-    /**提供加密方式,密码验证时,需要加密后进行对比*/
     @Autowired
     private PasswordEncoder passwordEncoder;
-
 
     /** 认证提供者进行认证,注意这里传入的authentication对象,是JwtLoginFilter里调用
      * @see JwtLoginToken#JwtLoginToken(Object, Object) 方法生成的,是未认证状态的(setAuthenticated(false))
