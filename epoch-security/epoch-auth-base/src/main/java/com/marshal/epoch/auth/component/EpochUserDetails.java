@@ -9,19 +9,19 @@ import java.util.Collection;
 /**
  * @auth: Marshal
  * @date: 2018/11/12
- * @desc: spring security user detail
+ * @desc: custom userDetails
  */
 public class EpochUserDetails implements UserDetails, Serializable {
 
-    final Long userId;
-    final String userName;
-    final String password;
-    final boolean enabled;
-    final boolean accountNonExpired;
-    final boolean credentialsNonExpired;
-    final boolean accountNonLocked;
+    private final Long userId;
+    private final String userName;
+    private final String password;
+    private final boolean enabled;
+    private final boolean accountNonExpired;
+    private final boolean credentialsNonExpired;
+    private final boolean accountNonLocked;
 
-    final Collection<? extends GrantedAuthority> authorities;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     public EpochUserDetails(Long userId, String userName, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
