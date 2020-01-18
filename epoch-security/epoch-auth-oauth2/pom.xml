@@ -12,7 +12,7 @@
     <artifactId>epoch-auth-oauth2</artifactId>
 
     <dependencies>
-        <!--epoch core -->
+        <!--epoch auth base -->
         <dependency>
             <groupId>com.marshal</groupId>
             <artifactId>epoch-auth-base</artifactId>
@@ -35,6 +35,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- spring cloud nacos config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- spring cloud nacos registry -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -8,11 +8,12 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>epoch-server-entity</artifactId>
     <packaging>pom</packaging>
+
     <modules>
         <module>epoch-entity-account</module>
     </modules>
-    <artifactId>epoch-server-entity</artifactId>
 
     <properties>
         <persistence-api.version>1.0</persistence-api.version>
@@ -20,11 +21,14 @@
     </properties>
 
     <dependencies>
+        <!-- javax persistence -->
         <dependency>
             <groupId>javax.persistence</groupId>
             <artifactId>persistence-api</artifactId>
             <version>${persistence-api.version}</version>
         </dependency>
+
+        <!-- jackson annotations -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>

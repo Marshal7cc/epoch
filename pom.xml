@@ -20,10 +20,10 @@
     <modules>
         <module>epoch-core</module>
         <module>epoch-base</module>
+        <module>epoch-security</module>
         <module>epoch-server</module>
         <module>epoch-server-api</module>
         <module>epoch-server-entity</module>
-        <module>epoch-security</module>
     </modules>
 
     <properties>

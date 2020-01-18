@@ -2,6 +2,7 @@ package com.marshal.epoch.auth.config;
 
 
 import com.marshal.epoch.auth.component.EpochRedisTokenStore;
+import com.marshal.epoch.auth.filter.TokenEndpointAuthenticationFilter;
 import com.marshal.epoch.auth.properties.EpochSecurityProperties;
 import com.marshal.epoch.auth.translator.EpochExceptionTranslator;
 import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
@@ -61,6 +62,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private EpochExceptionTranslator exceptionTranslator;
 
     @Autowired
+    private TokenEndpointAuthenticationFilter tokenEndpointAuthenticationFilter;
+
+    @Autowired
     private EpochSecurityProperties securityProperties;
 
     @Override
@@ -82,6 +86,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {
         //it will be 401 without this
+        security.addTokenEndpointAuthenticationFilter(tokenEndpointAuthenticationFilter);
         security.allowFormAuthenticationForClients();
     }
 

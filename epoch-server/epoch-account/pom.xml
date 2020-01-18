@@ -12,10 +12,16 @@
     <artifactId>epoch-account</artifactId>
 
     <dependencies>
-        <!--epoch auth -->
+        <!-- spring cloud oauth2 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
+        <!-- epoch auth base -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth</artifactId>
+            <artifactId>epoch-auth-base</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 

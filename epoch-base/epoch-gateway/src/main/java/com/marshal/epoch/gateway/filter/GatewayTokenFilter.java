@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @auth: Marshal
  * @date: 2019/8/25
- * @desc: 路由过滤器
+ * @desc: token过滤器
  */
 @Component
-public class GatewayPreFilter extends ZuulFilter {
+public class GatewayTokenFilter extends ZuulFilter {
 
     private static final String filterType = "pre";
 
@@ -74,6 +74,9 @@ public class GatewayPreFilter extends ZuulFilter {
             return null;
         if (request.getRequestURL().indexOf("login") != -1)
             return null;
+        if (request.getRequestURL().indexOf("oauth/token") != -1) {
+            return null;
+        }
         /**
          * 一些敏感header会被过滤掉：
          * "Cookie", "Set-Cookie", "Authorization"
@@ -88,7 +91,10 @@ public class GatewayPreFilter extends ZuulFilter {
          *  zuul:
          *      sensitive-headers: Authorization
          */
-        String token = request.getHeader("Epochen");
+        String token = request.getHeader("Authorization");
+        if (StringUtils.isNotBlank(token)) {
+            requestContext.addZuulRequestHeader("Authorization", token);
+        }
         if (StringUtils.isBlank(token)) {
             requestContext.setSendZuulResponse(false);
             requestContext.setResponseStatusCode(403);
