@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-entity-account</module>
+        <module>epoch-entity-system</module>
     </modules>
 
     <properties>

@@ -13,11 +13,10 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-account</module>
+        <module>epoch-system</module>
         <module>epoch-generator</module>
         <module>epoch-HR</module>
         <module>epoch-test</module>
-        <module>epoch-function</module>
         <module>epoch-wechat</module>
     </modules>
 
