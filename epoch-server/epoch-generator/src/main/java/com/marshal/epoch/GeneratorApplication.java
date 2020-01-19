@@ -1,5 +1,6 @@
 package com.marshal.epoch;
 
+import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @date: 2019/10/31
  * @desc: 代码生成器服务
  */
+@EnableSwagger2Doc
 @SpringBootApplication
 public class GeneratorApplication {
 
