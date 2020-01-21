@@ -11,14 +11,14 @@ import java.util.List;
 @RequestMapping("/[(${dtoName})]")
 public interface [(${apiName})]{
 
-    @RequestMapping(value = "/query")
+    @PostMapping(value = "/query")
     ResponseEntity query(@RequestParam int page,
                          @RequestParam int pageSize,
                          [(${dtoName})] dto);
 
-    @RequestMapping(value = "/submit")
+    @PostMapping(value = "/submit")
     ResponseEntity submit(@RequestBody [(${dtoName})] dto);
 
-    @RequestMapping(value = "/remove")
+    @PostMapping(value = "/remove")
     ResponseEntity remove(@RequestBody List<[(${dtoName})]> list);
 }
