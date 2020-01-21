@@ -4,6 +4,7 @@ package [(${package})].controller;
 import [(${item})];
 [/]
 import [(${package})].entity.[(${dtoName})];
+import [(${package})].api.[(${apiName})];
 import [(${package})].service.[(${serviceName})];
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,34 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-public class [(${controllerName})] extends BaseController{
+public class [(${controllerName})] implements [(${apiName})]{
 
     @Autowired
     private [(${serviceName})] service;
 
-
-    @RequestMapping(value = "[(${queryUrl})]")
-    public ResponseData query([(${dtoName})] dto,
-        @RequestParam int pageNum,
-        @RequestParam int pageSize,
-        HttpServletRequest request) {
-        SessionContext sessionContext = RequestHelper.getSessionContext(request);
-        return new ResponseData(service.select(dto,pageNum,pageSize));
+    public ResponseEntity query(int pageNum,
+                                int pageSize,
+                                [(${dtoName})] dto) {
+        return ResponseUtil.responseOk(service.select(dto,pageNum,pageSize));
     }
 
-    @RequestMapping(value = "[(${submitUrl})]")
-    public ResponseData update(@RequestBody [(${dtoName})] dto,
-    HttpServletRequest request){
-        if (getValidator().hasError(dto)) {
-            return new ResponseData(false, getValidator().getErrors(dto));
-        }
-        service.save(dto);
-        return new ResponseData();
+    public ResponseEntity submit([(${dtoName})] dto){
+        service.submit(dto);
+        return ResponseUtil.responseOk();
     }
 
-    @RequestMapping(value = "[(${removeUrl})]")
-    public ResponseData delete(@RequestParam("selectedIds") Long[] selectedIds) {
-        service.batchDelete(selectedIds);
-        return new ResponseData(true, "删除成功");
+    public ResponseEntity remove(List<[(${dtoName})]> list) {
+        service.batchDelete(list);
+        return ResponseUtil.responseOk();
     }
 }

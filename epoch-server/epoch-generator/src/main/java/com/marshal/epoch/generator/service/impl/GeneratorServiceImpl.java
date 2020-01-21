@@ -1,14 +1,13 @@
 package com.marshal.epoch.generator.service.impl;
 
 import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.generator.component.AbstractGenerator;
 import com.marshal.epoch.generator.dto.DBColumn;
 import com.marshal.epoch.generator.dto.DBTable;
 import com.marshal.epoch.generator.dto.GeneratorConfig;
+import com.marshal.epoch.generator.enums.FileType;
 import com.marshal.epoch.generator.service.GeneratorService;
 import com.marshal.epoch.generator.util.DBUtil;
-import com.marshal.epoch.generator.util.FileUtil;
-import com.marshal.epoch.generator.util.StringUtil;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -16,10 +15,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
@@ -30,15 +30,14 @@ import java.util.*;
 @Service
 public class GeneratorServiceImpl implements GeneratorService {
 
-    /**
-     * 文件生成行为
-     */
-    private static final String NOT_OPERATION = "NotOperation";
-    private static final String CREATE = "create";
+    private Map<FileType, AbstractGenerator> generatorMap = new HashMap<>();
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @Autowired
     @Qualifier("sqlSessionFactory")
-    SqlSessionFactory sqlSessionFactory;
+    private SqlSessionFactory sqlSessionFactory;
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -59,23 +58,14 @@ public class GeneratorServiceImpl implements GeneratorService {
 
     @Override
     public void generatorFile(GeneratorConfig info, HttpServletResponse response) throws Exception {
-        if (StringUtils.isAnyBlank(info.getProjectPath(), info.getParentPackagePath(), info.getPackagePath(), info.getTableName(), info.getTargetName())) {
+        if (StringUtils.isAnyBlank(info.getParentPackagePath(), info.getPackagePath(), info.getTableName(), info.getTargetName())) {
             throw new Exception("请将信息填写完整!");
         }
         String tableName = info.getTableName();
-        String targetName = info.getTargetName();
-        info.setDtoName(targetName + ".java");
-        info.setControllerName(targetName + "Controller.java");
-        info.setServiceName(targetName + "Service.java");
-        info.setImplName(targetName + "ServiceImpl.java");
-        info.setMapperName(targetName + "Mapper.java");
-        info.setMapperXmlName(targetName + "Mapper.xml");
+
         DBTable dbTable = getTableInfo(tableName);
         try {
             createFile(dbTable, info, response);
-        } catch (IOException e) {
-            logger.error(e.getMessage());
-            throw e;
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw e;
@@ -107,7 +97,8 @@ public class GeneratorServiceImpl implements GeneratorService {
 
             while (rs1.next()) {
                 String columnName = rs1.getString("COLUMN_NAME");
-                if ("object_version".equalsIgnoreCase(columnName) || "create_time".equalsIgnoreCase(columnName) || "update_time".equalsIgnoreCase(columnName)) {
+                if ("object_version".equalsIgnoreCase(columnName) || "creation_date".equalsIgnoreCase(columnName) || "created_by".equalsIgnoreCase(columnName)
+                        || "last_update_date".equalsIgnoreCase(columnName) || "last_updated_by".equalsIgnoreCase(columnName)) {
                     continue;
                 }
                 columns.add(setColumnInfo(rs1, columnPk, NotNullColumns));
@@ -148,51 +139,28 @@ public class GeneratorServiceImpl implements GeneratorService {
         return column;
     }
 
-    private void createFile(DBTable table, GeneratorConfig info, HttpServletResponse response) throws IOException {
+    private void createFile(DBTable table, GeneratorConfig info, HttpServletResponse response) throws Exception {
+        Map<String, byte[]> files = new HashMap<>();
 
-        int rs = FileUtil.isFileExist(info);
-        if (rs == 0) {
-            Map<String, byte[]> files = new HashMap<>();
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getDtoStatus())) {
-                byte[] bytes = FileUtil.createDto(table, info);
-                if (bytes != null) {
-                    files.put(info.getDtoName(), bytes);
-                }
+        for (FileType type : FileType.values()) {
+            String targetName = info.getTargetName();
+            byte[] bytes = generatorMap.get(type).generate(table, info);
+            if (bytes != null) {
+                files.put(targetName + type.getFileSuffix(), bytes);
             }
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getControllerStatus())) {
-                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Controller, table, info);
-                if (bytes != null) {
-                    files.put(info.getControllerName(), bytes);
-                }
-            }
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getMapperStatus())) {
-                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Mapper, table, info);
-                if (bytes != null) {
-                    files.put(info.getMapperName(), bytes);
-                }
-            }
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getImplStatus())) {
-                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Impl, table, info);
-                if (bytes != null) {
-                    files.put(info.getImplName(), bytes);
-                }
-            }
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getServiceStatus())) {
-                byte[] bytes = FileUtil.createFtlInfoByType(FileUtil.pType.Service, table, info);
-                if (bytes != null) {
-                    files.put(info.getServiceName(), bytes);
-                }
-            }
-            if (!NOT_OPERATION.equalsIgnoreCase(info.getMapperXmlStatus())) {
-                byte[] bytes = FileUtil.createMapperXml(table, info);
-                if (bytes != null) {
-                    files.put(info.getMapperXmlName(), bytes);
-                }
-            }
-            if (files.size() > 0) {
-                ResponseUtil.responseZip(files, info.getTargetName() + ".zip", response);
-            }
+        }
+
+        if (files.size() > 0) {
+            ResponseUtil.responseZip(files, info.getTargetName() + ".zip", response);
         }
     }
 
+
+    @PostConstruct
+    public void init() {
+        Map<String, AbstractGenerator> beans = applicationContext.getBeansOfType(AbstractGenerator.class);
+        beans.forEach((k, v) -> {
+            generatorMap.put(v.getFileType(), v);
+        });
+    }
 }

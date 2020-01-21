@@ -4,8 +4,10 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 
 /**
- * 枚举单例
- * ThymeLeaf的Text模式,用于生成Java文件
+ * @auth: Marshal
+ * @date: 2019/10/31
+ * @desc: 枚举单例
+ * * ThymeLeaf的Text模式,用于生成文件
  */
 public enum ThymeLeafConfig {
 
