@@ -9,22 +9,23 @@ import com.marshal.epoch.system.api.SysMenuApi;
 import com.marshal.epoch.system.service.SysMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-public class SysMenuController implements SysMenuApi{
+public class SysMenuController implements SysMenuApi {
 
     @Autowired
     private SysMenuService service;
 
     public ResponseEntity query(SysMenu dto,
-        int pageNum,
-        int pageSize) {
-        return ResponseUtil.responseOk(service.select(dto,pageNum,pageSize));
+                                int pageNum,
+                                int pageSize) {
+        return ResponseUtil.responseOk(service.select(dto, pageNum, pageSize));
     }
 
-    public ResponseEntity submit(SysMenu dto){
+    public ResponseEntity submit(SysMenu dto) {
         service.submit(dto);
         return ResponseUtil.responseOk();
     }
@@ -32,5 +33,10 @@ public class SysMenuController implements SysMenuApi{
     public ResponseEntity remove(List<SysMenu> list) {
         service.batchDelete(list);
         return ResponseUtil.responseOk();
+    }
+
+    @Override
+    public ResponseEntity getUserMenu() {
+        return ResponseUtil.responseOk(service.getUserMenu());
     }
 }

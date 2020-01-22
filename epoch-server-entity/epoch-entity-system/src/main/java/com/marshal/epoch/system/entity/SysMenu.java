@@ -54,7 +54,7 @@ public class SysMenu extends BaseDto {
     /**
      * 路径
      */
-    private Long path;
+    private String path;
 
     /**
      * 父级菜单id

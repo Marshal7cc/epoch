@@ -7,18 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author MrBird
+ * TreeUtil
  */
 public class TreeUtil {
 
-    private final static String TOP_NODE_ID = "0";
+    private TreeUtil() {
+    }
 
-    /**
-     * 用于构建菜单或部门树
-     *
-     * @param nodes nodes
-     * @return <T> List<? extends Tree>
-     */
     public static <T> List<? extends TreeNode<?>> build(List<? extends TreeNode<T>> nodes) {
         if (nodes == null) {
             return null;
@@ -26,7 +21,7 @@ public class TreeUtil {
         List<TreeNode<T>> topNodes = new ArrayList<>();
         nodes.forEach(node -> {
             String pid = node.getParentId();
-            if (pid == null || TOP_NODE_ID.equals(pid)) {
+            if (pid == null) {
                 topNodes.add(node);
                 return;
             }

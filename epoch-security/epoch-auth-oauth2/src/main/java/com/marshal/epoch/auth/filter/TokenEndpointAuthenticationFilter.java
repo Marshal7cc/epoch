@@ -26,7 +26,8 @@ public class TokenEndpointAuthenticationFilter extends OncePerRequestFilter impl
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         if (httpServletRequest.getRequestURL().indexOf(OAUTH_TOKEN) != -1) {
             String[] clientDetails = getClientDetails(httpServletRequest);
-            log.info("clientId:{};clientSecret:{}", clientDetails[0], clientDetails[1]);
+            System.out.println("1" + clientDetails);
+//            log.info("clientId:{};clientSecret:{}", clientDetails[0], clientDetails[1]);
         }
         doFilter(httpServletRequest, httpServletResponse, filterChain);
     }
