@@ -13,13 +13,13 @@ import java.util.List;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TreeNode<T> {
+public class TreeNode {
 
     private String id;
 
     private String label;
 
-    private List<TreeNode<T>> children;
+    private List<TreeNode> children;
 
     private String parentId;
 

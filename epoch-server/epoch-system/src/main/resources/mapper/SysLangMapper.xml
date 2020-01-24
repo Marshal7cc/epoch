@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marshal.epoch.system.mapper.SysLangMapper">
+    <resultMap id="BaseResultMap" type="com.marshal.epoch.system.entity.SysLang">
+        <id column="lang_id" property="langCode" jdbcType="VARCHAR"/>
+        <result column="lang_code" property="langCode" jdbcType="VARCHAR"/>
+        <result column="lang_name" property="langName" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+</mapper>

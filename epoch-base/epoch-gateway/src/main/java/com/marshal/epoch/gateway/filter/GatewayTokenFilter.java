@@ -70,6 +70,9 @@ public class GatewayTokenFilter extends ZuulFilter {
         if (request.getRequestURI().indexOf(API_DOC) != -1) {
             return null;
         }
+        if (request.getRequestURI().indexOf("/prompt/i18n") != -1) {
+            return null;
+        }
         if ("OPTIONS".equals(request.getMethod()))
             return null;
         if (request.getRequestURL().indexOf("login") != -1)

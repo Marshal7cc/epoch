@@ -36,6 +36,16 @@ public class SysMenuController implements SysMenuApi {
     }
 
     @Override
+    public ResponseEntity queryById(Long id) {
+        return ResponseUtil.responseOk(service.selectByPrimaryKey(id));
+    }
+
+    @Override
+    public ResponseEntity queryMenuTree(SysMenu dto) {
+        return ResponseUtil.responseOk(service.queryMenuTree(dto));
+    }
+
+    @Override
     public ResponseEntity getUserMenu() {
         return ResponseUtil.responseOk(service.getUserMenu());
     }

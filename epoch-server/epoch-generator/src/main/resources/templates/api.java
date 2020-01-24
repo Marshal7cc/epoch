@@ -14,11 +14,15 @@ public interface [(${apiName})]{
     @PostMapping(value = "/query")
     ResponseEntity query(@RequestParam int page,
                          @RequestParam int pageSize,
-                         [(${dtoName})] dto);
+                         @RequestBody [(${dtoName})] dto);
 
     @PostMapping(value = "/submit")
     ResponseEntity submit(@RequestBody [(${dtoName})] dto);
 
     @PostMapping(value = "/remove")
     ResponseEntity remove(@RequestBody List<[(${dtoName})]> list);
+
+    @GetMapping(value = "/queryById")
+    ResponseEntity queryById(@RequestParam Long id);
+
 }

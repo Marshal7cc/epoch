@@ -17,10 +17,10 @@ public class [(${controllerName})] implements [(${apiName})]{
     @Autowired
     private [(${serviceName})] service;
 
-    public ResponseEntity query(int pageNum,
+    public ResponseEntity query(int page,
                                 int pageSize,
                                 [(${dtoName})] dto) {
-        return ResponseUtil.responseOk(service.select(dto,pageNum,pageSize));
+        return ResponseUtil.responseOk(service.select(dto,page,pageSize));
     }
 
     public ResponseEntity submit([(${dtoName})] dto){
@@ -32,4 +32,9 @@ public class [(${controllerName})] implements [(${apiName})]{
         service.batchDelete(list);
         return ResponseUtil.responseOk();
     }
+
+    public ResponseEntity queryById(Long id) {
+        return ResponseUtil.responseOk(service.selectByPrimaryKey(id));
+    }
+
 }

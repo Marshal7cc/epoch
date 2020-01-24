@@ -14,18 +14,18 @@ public class TreeUtil {
     private TreeUtil() {
     }
 
-    public static <T> List<? extends TreeNode<?>> build(List<? extends TreeNode<T>> nodes) {
+    public static List<TreeNode> build(List<TreeNode> nodes) {
         if (nodes == null) {
             return null;
         }
-        List<TreeNode<T>> topNodes = new ArrayList<>();
+        List<TreeNode> topNodes = new ArrayList<>();
         nodes.forEach(node -> {
             String pid = node.getParentId();
             if (pid == null) {
                 topNodes.add(node);
                 return;
             }
-            for (TreeNode<T> n : nodes) {
+            for (TreeNode n : nodes) {
                 String id = n.getId();
                 if (id != null && id.equals(pid)) {
                     if (n.getChildren() == null)

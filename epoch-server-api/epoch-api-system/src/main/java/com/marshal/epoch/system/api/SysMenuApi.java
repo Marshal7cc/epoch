@@ -23,6 +23,12 @@ public interface SysMenuApi {
     @PostMapping(value = "/remove")
     ResponseEntity remove(@RequestBody List<SysMenu> list);
 
+    @GetMapping(value = "/queryById")
+    ResponseEntity queryById(@RequestParam Long id);
+
+    @PostMapping(value = "/queryMenuTree")
+    ResponseEntity queryMenuTree(@RequestBody SysMenu dto);
+
     @GetMapping(value = "/getUserMenu")
     ResponseEntity getUserMenu();
 }
