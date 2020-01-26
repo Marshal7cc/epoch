@@ -3,24 +3,19 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>epoch</artifactId>
+        <artifactId>epoch-server-api</artifactId>
         <groupId>com.marshal</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>epoch-server-api</artifactId>
-    <packaging>pom</packaging>
 
-    <modules>
-        <module>epoch-api-system</module>
-        <module>epoch-api-HR</module>
-    </modules>
+    <artifactId>epoch-api-HR</artifactId>
 
     <dependencies>
-        <!--epoch core -->
+        <!--epoch entity HR -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
+            <artifactId>epoch-entity-HR</artifactId>
             <version>${epoch.version}</version>
         </dependency>
     </dependencies>

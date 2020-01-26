@@ -20,4 +20,7 @@ public interface SysRoleApi {
 
     @PostMapping("/remove")
     ResponseEntity delete(@RequestBody List<SysRole> list);
+
+    @GetMapping(value = "/queryById")
+    ResponseEntity queryById(@RequestParam Long id);
 }

@@ -34,4 +34,8 @@ public class SysRoleController implements SysRoleApi {
         return ResponseUtil.responseOk();
     }
 
+    public ResponseEntity queryById(Long id) {
+        return ResponseUtil.responseOk(sysRoleService.selectByPrimaryKey(id));
+    }
+
 }

@@ -11,5 +11,32 @@
 
     <artifactId>epoch-HR</artifactId>
 
+    <dependencies>
+        <!-- spring cloud oauth2 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
 
+        <!-- epoch auth base -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth-base</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!-- HR api -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-api-HR</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!-- HR entity -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-entity-HR</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+    </dependencies>
 </project>

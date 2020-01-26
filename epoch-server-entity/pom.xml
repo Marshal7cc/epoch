@@ -13,6 +13,7 @@
 
     <modules>
         <module>epoch-entity-system</module>
+        <module>epoch-entity-HR</module>
     </modules>
 
     <properties>
