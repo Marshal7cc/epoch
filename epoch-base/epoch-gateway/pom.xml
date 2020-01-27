@@ -11,6 +11,10 @@
 
     <artifactId>epoch-gateway</artifactId>
 
+    <properties>
+        <fastjson.version>1.2.47</fastjson.version>
+    </properties>
+
     <dependencies>
         <!-- spring cloud nacos config -->
         <dependency>
@@ -35,6 +39,13 @@
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.9.1.RELEASE</version>
+        </dependency>
+
+        <!-- fast json -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
         </dependency>
     </dependencies>
 </project>
