@@ -21,6 +21,7 @@
         <durid.version>1.1.18</durid.version>
         <guava.version>18.0</guava.version>
         <easy-poi.version>4.1.2</easy-poi.version>
+        <security.version>5.2.1.RELEASE</security.version>
     </properties>
 
     <dependencies>
@@ -139,6 +140,13 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <version>${servlet.version}</version>
+        </dependency>
+
+        <!--  security  -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${security.version}</version>
         </dependency>
     </dependencies>
 </project>

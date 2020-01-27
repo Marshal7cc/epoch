@@ -1,5 +1,6 @@
 package com.marshal.epoch.core.dto;
 
+import lombok.Data;
 import tk.mybatis.mapper.annotation.Version;
 
 import java.io.Serializable;
@@ -10,7 +11,13 @@ import java.util.Date;
  * @date: 2019/11/1
  * @desc: BaseDto
  */
+@Data
 public class BaseDto implements Serializable {
+
+    public static String FILED_CREATED_BY = "createdBy";
+    public static String FILED_CREATION_DATE = "creationDate";
+    public static String FILED_LAST_UPDATED_BY = "lastUpdatedBy";
+    public static String FILED_LAST_UPDATE_DATE = "lastUpdateDate";
 
     /**
      * 创建者
@@ -38,43 +45,4 @@ public class BaseDto implements Serializable {
     @Version
     private Long objectVersion;
 
-    public Long getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Long createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    public Long getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-
-    public void setLastUpdatedBy(Long lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-
-    public Date getLastUpdateDate() {
-        return lastUpdateDate;
-    }
-
-    public void setLastUpdateDate(Date lastUpdateDate) {
-        this.lastUpdateDate = lastUpdateDate;
-    }
-
-    public Long getObjectVersion() {
-        return objectVersion;
-    }
-
-    public void setObjectVersion(Long objectVersion) {
-        this.objectVersion = objectVersion;
-    }
 }

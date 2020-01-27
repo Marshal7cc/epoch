@@ -15,6 +15,7 @@ public class SecurityEndPoints {
 
     /**
      * oauth2 resource endpoint
+     * 所有资源服务器请求接口前均会访问请求该接口
      *
      * @param principal
      * @return
