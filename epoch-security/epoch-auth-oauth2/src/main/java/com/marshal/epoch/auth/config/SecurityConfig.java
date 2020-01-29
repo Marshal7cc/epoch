@@ -1,6 +1,7 @@
 package com.marshal.epoch.auth.config;
 
 import com.marshal.epoch.auth.constants.Oauth2EndpointConstant;
+import com.marshal.epoch.auth.filter.ValidateCodeFilter;
 import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 /**
  * @auth: Marshal
@@ -25,6 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Oaut
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ValidateCodeFilter validateCodeFilter;
+
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
@@ -32,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Oaut
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .requestMatchers()
                 .antMatchers(OAUTH_ALL)
                 .and()

@@ -51,19 +51,13 @@
             <name>aliyun Repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
-
-        <repository>
-            <id>epoch-releases</id>
-            <name>epoch-releases repository</name>
-            <url>http://47.102.158.43:8081/repository/epoch-releases/</url>
-        </repository>
     </repositories>
 
     <!-- 设定插件仓库 -->
     <pluginRepositories>
         <pluginRepository>
-            <id>epoch-repos</id>
-            <name>epoch Repository</name>
+            <id>aliyun-repository</id>
+            <name>aliyun-repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
@@ -79,7 +73,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
             <!-- spring cloud alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>

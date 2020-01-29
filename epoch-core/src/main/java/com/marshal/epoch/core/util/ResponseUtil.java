@@ -1,5 +1,6 @@
 package com.marshal.epoch.core.util;
 
+import com.alibaba.fastjson.JSON;
 import com.marshal.epoch.core.constant.BaseConstant;
 import com.marshal.epoch.core.dto.PageableData;
 import com.marshal.epoch.core.dto.ResponseEntity;
@@ -64,6 +65,19 @@ public class ResponseUtil implements BaseConstant {
 
     public static ResponseEntity responseErr(Integer code, String message) {
         return new ResponseEntity(false, message);
+    }
+
+    public static void responseErr(HttpServletResponse response, String message) {
+        response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        PrintWriter writer = null;
+        try {
+            writer = response.getWriter();
+            writer.write(JSON.toJSONString(responseErr(message)));
+        } catch (IOException e) {
+            logger.error("io exception happen ,please check");
+        } finally {
+            writer.close();
+        }
     }
 
     /**

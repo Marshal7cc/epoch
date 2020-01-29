@@ -11,5 +11,12 @@
 
     <artifactId>epoch-entity-HR</artifactId>
 
-
+    <dependencies>
+        <!--epoch entity core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-entity-system</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+    </dependencies>
 </project>

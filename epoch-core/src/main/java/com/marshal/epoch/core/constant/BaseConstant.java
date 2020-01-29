@@ -58,4 +58,10 @@ public interface BaseConstant {
     String DELETE = "DELETE";
 
 
+    /**
+     * 文件后缀
+     */
+    String FILE_SUFFIX_PNG = "png";
+    String FILE_SUFFIX_GIF = "gif";
+
 }

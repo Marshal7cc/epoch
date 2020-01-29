@@ -25,6 +25,13 @@
     </properties>
 
     <dependencies>
+        <!--epoch entity core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-entity-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+        
         <!-- spring actuator 监控端点-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

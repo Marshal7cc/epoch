@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 /**
  * @auth: Marshal
  * @date: 2020/1/15
- * @desc:
+ * @desc: 资源服务器配置
  */
 @Configuration
 @EnableResourceServer

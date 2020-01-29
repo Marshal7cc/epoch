@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.marshal.epoch.auth.entity.OauthAccessToken;
 import com.marshal.epoch.auth.service.OauthAccessTokenService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -25,7 +24,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class EpochRedisTokenStore extends RedisTokenStore {
 
-    public final static String REDIS_CATALOG = "epoch:cache:oauth2_token:";
+    private final static String REDIS_CATALOG = "epoch:cache:oauth2_token:";
 
     @Autowired
     private StringRedisTemplate redisTemplate;
@@ -39,13 +38,8 @@ public class EpochRedisTokenStore extends RedisTokenStore {
 
     @Override
     public OAuth2AccessToken readAccessToken(String tokenValue) {
-        String tokenState = redisTemplate.opsForValue().get(REDIS_CATALOG + tokenValue);
-
-        if (StringUtils.isNotEmpty(tokenState)) {
-            OAuth2AccessToken accessToken = super.readAccessToken(tokenValue);
-            return accessToken;
-        }
-        return null;
+        OAuth2AccessToken accessToken = super.readAccessToken(tokenValue);
+        return accessToken;
     }
 
     @Override
@@ -56,6 +50,9 @@ public class EpochRedisTokenStore extends RedisTokenStore {
 
     @Override
     public void storeAccessToken(OAuth2AccessToken token, OAuth2Authentication authentication) {
+        super.storeAccessToken(token, authentication);
+
+        //自定义操作
         String clientId = authentication.getOAuth2Request().getClientId();
         OauthAccessToken oauthAccessToken = new OauthAccessToken();
         Object principal = authentication.getPrincipal();
@@ -76,8 +73,5 @@ public class EpochRedisTokenStore extends RedisTokenStore {
 
         redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), JSON.toJSONString(token), token.getExpiresIn(),
                 TimeUnit.SECONDS);
-
-        super.storeAccessToken(token, authentication);
     }
-
 }

@@ -12,7 +12,7 @@
     <artifactId>epoch-api-system</artifactId>
 
     <dependencies>
-        <!--epoch entity system -->
+        <!--epoch entity core -->
         <dependency>
             <groupId>com.marshal</groupId>
             <artifactId>epoch-entity-system</artifactId>

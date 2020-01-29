@@ -19,6 +19,13 @@
             <version>${epoch.version}</version>
         </dependency>
 
+        <!-- easy captcha  -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
+        </dependency>
+
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
