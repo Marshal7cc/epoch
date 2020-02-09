@@ -31,7 +31,7 @@
             <artifactId>epoch-entity-core</artifactId>
             <version>${epoch.version}</version>
         </dependency>
-        
+
         <!-- spring actuator 监控端点-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -154,6 +154,12 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>${security.version}</version>
+        </dependency>
+
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 </project>
