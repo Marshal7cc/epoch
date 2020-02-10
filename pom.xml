@@ -8,7 +8,7 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <name>epoch</name>
-    <description>Halcyon 2.0 version of Spring Cloud ==> epoch</description>
+    <description>Halcyon version 2.0 of Spring Cloud ==> epoch</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -18,7 +18,6 @@
     </parent>
 
     <modules>
-        <module>epoch-core</module>
         <module>epoch-base</module>
         <module>epoch-security</module>
         <module>epoch-server</module>

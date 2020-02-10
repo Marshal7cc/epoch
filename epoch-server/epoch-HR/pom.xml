@@ -12,6 +12,31 @@
     <artifactId>epoch-HR</artifactId>
 
     <dependencies>
+        <!--epoch core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--spring web mvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- spring cloud nacos config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- spring cloud nacos registry -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
         <!-- spring cloud oauth2 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

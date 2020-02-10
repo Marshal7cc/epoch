@@ -13,39 +13,13 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>epoch-core</module>
         <module>epoch-system</module>
         <module>epoch-generator</module>
         <module>epoch-HR</module>
         <module>epoch-test</module>
         <module>epoch-wechat</module>
     </modules>
-
-    <dependencies>
-        <!--epoch core -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
-        <!--spring web mvc-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- spring cloud nacos config -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <!-- spring cloud nacos registry -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
-        </dependency>
-    </dependencies>
 
     <build>
         <plugins>
