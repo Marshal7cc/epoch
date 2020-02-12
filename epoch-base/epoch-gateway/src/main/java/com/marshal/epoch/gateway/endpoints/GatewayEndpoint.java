@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 public class GatewayEndpoint {
 
     @RequestMapping("fallback/{name}")
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ResponseStatus(HttpStatus.BAD_GATEWAY)
     public Mono<ResponseEntity> systemFallback(@PathVariable String name) {
         String response = String.format("访问%s超时或者服务不可用", name);
         return Mono.just(new ResponseEntity(false, response));
