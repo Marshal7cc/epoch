@@ -12,5 +12,4 @@ spring:
         file-extension: yml
         refreshable-dataids:
       discovery:
-        # ip: 47.102.158.43
         server-addr: localhost:8010

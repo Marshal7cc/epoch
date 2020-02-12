@@ -1,17 +1,13 @@
 package com.marshal.epoch.gateway;
 
-import com.spring4all.swagger.EnableSwagger2Doc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * @auth: Marshal
  * @date: 2019/8/25
  * @desc: 网关应用
  */
-@EnableZuulProxy
-@EnableSwagger2Doc
 @SpringBootApplication
 public class GatewayApplication {
 
