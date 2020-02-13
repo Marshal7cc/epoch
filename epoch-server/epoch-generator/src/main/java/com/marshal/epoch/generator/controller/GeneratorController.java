@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
  * epoch代码生成器
  */
 @RestController
-@RequestMapping(value = "/generator")
 public class GeneratorController {
 
     @Autowired

@@ -14,14 +14,17 @@ import java.io.IOException;
 /**
  * @auth: Marshal
  * @date: 2020/1/15
- * @desc:
+ * @desc: unauthorized entry point
  */
 @Component
 public class EpochAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
+    private static final String TIP_UNAUTHORIZED = "epoch.tip-unauthorized";
+
     @Override
-    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-        httpServletResponse.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr("you are unauthorized ,please login")));
+    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
+        httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        httpServletResponse.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(TIP_UNAUTHORIZED)));
     }
 
 }
