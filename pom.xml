@@ -23,12 +23,14 @@
         <module>epoch-server</module>
         <module>epoch-server-api</module>
         <module>epoch-server-entity</module>
+        <module>epoch-monitor</module>
     </modules>
 
     <properties>
         <epoch.version>1.0.0-SNAPSHOT</epoch.version>
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
+        <springboot-admin.version>2.2.0</springboot-admin.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: epoch-monitor-admin
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8010
+        group: EPOCH_GROUP
+        prefix: epoch-monitor-admin
+        file-extension: yml
+        refreshable-dataids:
+      discovery:
+        server-addr: localhost:8010
