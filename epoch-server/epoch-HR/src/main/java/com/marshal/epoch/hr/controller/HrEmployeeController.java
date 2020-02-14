@@ -4,9 +4,9 @@ package com.marshal.epoch.hr.controller;
 import com.marshal.epoch.core.dto.ResponseEntity;
 import com.marshal.epoch.core.util.ResponseUtil;
 
-import com.marshal.epoch.hr.entity.HrCompany;
-import com.marshal.epoch.hr.api.HrCompanyApi;
-import com.marshal.epoch.hr.service.HrCompanyService;
+import com.marshal.epoch.hr.entity.HrEmployee;
+import com.marshal.epoch.hr.api.HrEmployeeApi;
+import com.marshal.epoch.hr.service.HrEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,21 +14,23 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
-public class HrCompanyController implements HrCompanyApi {
+public class HrEmployeeController implements HrEmployeeApi {
 
     @Autowired
-    private HrCompanyService service;
+    private HrEmployeeService service;
 
-    public ResponseEntity query() {
-        return ResponseUtil.responseOk(service.selectOne(null));
+    public ResponseEntity query(int page,
+                                int pageSize,
+                                HrEmployee dto) {
+        return ResponseUtil.responseOk(service.select(dto, page, pageSize));
     }
 
-    public ResponseEntity submit(HrCompany dto) {
+    public ResponseEntity submit(HrEmployee dto) {
         service.submit(dto);
         return ResponseUtil.responseOk();
     }
 
-    public ResponseEntity remove(List<HrCompany> list) {
+    public ResponseEntity remove(List<HrEmployee> list) {
         service.batchDelete(list);
         return ResponseUtil.responseOk();
     }

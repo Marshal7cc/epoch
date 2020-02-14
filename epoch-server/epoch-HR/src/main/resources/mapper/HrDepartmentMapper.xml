@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marshal.epoch.hr.mapper.HrDepartmentMapper">
+    <resultMap id="BaseResultMap" type="com.marshal.epoch.hr.entity.HrDepartment">
+        <id column="department_id" property="departmentId" jdbcType="BIGINT"/>
+        <result column="parent_id" property="parentId" jdbcType="BIGINT"/>
+        <result column="department_code" property="departmentCode" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="manager_position" property="managerPosition" jdbcType="BIGINT"/>
+        <result column="company_id" property="companyId" jdbcType="BIGINT"/>
+        <result column="department_type" property="departmentType" jdbcType="VARCHAR"/>
+        <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectForTree" resultType="com.marshal.epoch.core.dto.TreeNode">
+        select hd.department_id id,hd.name label,hd.parent_id parentId from hr_department hd
+    </select>
+</mapper>

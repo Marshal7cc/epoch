@@ -12,10 +12,8 @@ import java.util.List;
 @RequestMapping("/company")
 public interface HrCompanyApi {
 
-    @PostMapping(value = "/query")
-    ResponseEntity query(@RequestParam int page,
-                         @RequestParam int pageSize,
-                         @RequestBody HrCompany dto);
+    @GetMapping(value = "/query")
+    ResponseEntity query();
 
     @PostMapping(value = "/submit")
     ResponseEntity submit(@RequestBody HrCompany dto);
