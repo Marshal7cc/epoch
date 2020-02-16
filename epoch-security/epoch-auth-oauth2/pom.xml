@@ -55,6 +55,13 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
+
+        <!-- spring-boot-admin-client -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${springboot-admin.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
