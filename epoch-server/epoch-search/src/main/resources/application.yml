@@ -1,0 +1,18 @@
+# server
+server:
+  port: 9030
+
+spring:
+  application:
+    name: epoch-search
+
+  # elasticsearch
+  data:
+    elasticsearch:
+      cluster-name: elasticsearch-cluster
+      cluster-nodes: 192.168.1.102:9300,192.168.1.102:9301,192.168.1.102:9302
+      repositories:
+        enabled: true
+#    rest:
+#      uris: 192.168.1.102:9200,192.168.1.102:9201,192.168.1.102:9202
+

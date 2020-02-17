@@ -1,0 +1,12 @@
+package com.marshal.epoch.search.standard.repository;
+
+import com.marshal.epoch.search.standard.dto.SysUser;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+/**
+ * @auth: Marshal
+ * @date: 2020/2/16
+ * @desc:
+ */
+public interface SysUserRepository extends ElasticsearchRepository<SysUser, Long> {
+}

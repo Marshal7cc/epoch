@@ -19,6 +19,7 @@
         <module>epoch-HR</module>
         <module>epoch-test</module>
         <module>epoch-wechat</module>
+        <module>epoch-search</module>
     </modules>
 
 </project>

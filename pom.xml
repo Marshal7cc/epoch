@@ -52,6 +52,12 @@
             <name>aliyun Repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
+
+        <repository>
+            <id>maven-repository</id>
+            <name>maven Repository</name>
+            <url>http://repo2.maven.org/maven2/</url>
+        </repository>
     </repositories>
 
     <!-- 设定插件仓库 -->
