@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  epoch-gateway:
+    image: epoch-gateway:latest
+    container_name: epoch-gateway
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8888:8888
+    restart: on-failure
+
