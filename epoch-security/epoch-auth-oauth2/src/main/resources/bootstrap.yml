@@ -6,11 +6,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: ${nacos.url}:8010
+        server-addr: ${nacos.url:localhost}:8010
         group: EPOCH_GROUP
         prefix: epoch-auth-oauth2
         file-extension: yml
         refreshable-dataids:
       discovery:
         # ip: 114.67.107.190
-        server-addr: ${nacos.url}:8010
+        server-addr: ${nacos.url:localhost}:8010

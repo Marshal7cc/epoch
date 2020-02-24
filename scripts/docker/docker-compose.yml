@@ -45,7 +45,7 @@ services:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=114.67.107.190:8020"
+      - "--auth.url=http://114.67.107.190:8020"
       - "--redis.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
@@ -60,7 +60,7 @@ services:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=114.67.107.190:8020"
+      - "--auth.url=http://114.67.107.190:8020"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -74,7 +74,7 @@ services:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=114.67.107.190:8020"
+      - "--auth.url=http://114.67.107.190:8020"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
