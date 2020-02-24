@@ -5,10 +5,77 @@ services:
     image: epoch-gateway:latest
     container_name: epoch-gateway
     command:
+      - "--admin.url=epoch-monitor-admin"
       - "--nacos.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
       - 8888:8888
+    restart: on-failure
+
+  epoch-monitor-admin:
+    image: epoch-monitor-admin:latest
+    container_name: epoch-monitor-admin
+    command:
+      - "--nacos.url=47.102.158.43"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8090:8090
+    restart: on-failure
+
+  epoch-auth-oauth2:
+    image: epoch-gateway:latest
+    container_name: epoch-gateway
+    command:
+      - "--nacos.url=47.102.158.43"
+      - "--admin.url=epoch-monitor-admin"
+      - "--mysql.url=114.67.107.190:3306"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 8020:8020
+    restart: on-failure
+
+  epoch-system:
+    image: epoch-system:latest
+    container_name: epoch-system
+    command:
+      - "--nacos.url=47.102.158.43"
+      - "--admin.url=epoch-monitor-admin"
+      - "--mysql.url=114.67.107.190:3306"
+      - "--auth.url=epoch-auth-oauth2:8010"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 9010:9010
+    restart: on-failure
+
+  epoch-generator:
+    image: epoch-generator:latest
+    container_name: epoch-generator
+    command:
+      - "--nacos.url=47.102.158.43"
+      - "--admin.url=epoch-monitor-admin"
+      - "--mysql.url=114.67.107.190:3306"
+      - "--auth.url=epoch-auth-oauth2:8010"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 9030:9030
+    restart: on-failure
+
+  epoch-HR:
+    image: epoch-HR:latest
+    container_name: epoch-HR
+    command:
+      - "--nacos.url=47.102.158.43"
+      - "--admin.url=epoch-monitor-admin"
+      - "--mysql.url=114.67.107.190:3306"
+      - "--auth.url=epoch-auth-oauth2:8010"
+    environment:
+      - "TZ=Asia/Shanghai"
+    ports:
+      - 9020:9020
     restart: on-failure
 
