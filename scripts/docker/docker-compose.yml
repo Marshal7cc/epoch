@@ -65,9 +65,9 @@ services:
       - 9030:9030
     restart: on-failure
 
-  epoch-HR:
-    image: epoch-HR:latest
-    container_name: epoch-HR
+  epoch-hr:
+    image: epoch-hr:latest
+    container_name: epoch-hr
     command:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=epoch-monitor-admin"

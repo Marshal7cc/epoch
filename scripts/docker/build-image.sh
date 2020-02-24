@@ -20,7 +20,7 @@ docker build -t epoch-system .
 
 # epoch-HR
 cd $SOURCE_PATH/epoch/epoch-server/epoch-HR
-docker build -t epoch-HR .
+docker build -t epoch-hr .
 
 # epoch-generator
 cd $SOURCE_PATH/epoch/epoch-server/epoch-generator
