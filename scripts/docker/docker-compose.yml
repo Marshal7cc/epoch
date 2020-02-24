@@ -5,7 +5,7 @@ services:
     image: epoch-gateway:latest
     container_name: epoch-gateway
     command:
-      - "--admin.url=127.0.0.1"
+      - "--admin.url=114.67.107.190"
       - "--nacos.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
@@ -29,7 +29,7 @@ services:
     container_name: epoch-auth-oauth2
     command:
       - "--nacos.url=47.102.158.43"
-      - "--admin.url=127.0.0.1"
+      - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
       - "--redis.url=47.102.158.43"
     environment:
@@ -43,9 +43,9 @@ services:
     container_name: epoch-system
     command:
       - "--nacos.url=47.102.158.43"
-      - "--admin.url=127.0.0.1"
+      - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=127.0.0.1:8010"
+      - "--auth.url=114.67.107.190:8010"
       - "--redis.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
@@ -58,9 +58,9 @@ services:
     container_name: epoch-generator
     command:
       - "--nacos.url=47.102.158.43"
-      - "--admin.url=127.0.0.1"
+      - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=127.0.0.1:8010"
+      - "--auth.url=114.67.107.190:8010"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -72,9 +72,9 @@ services:
     container_name: epoch-hr
     command:
       - "--nacos.url=47.102.158.43"
-      - "--admin.url=127.0.0.1"
+      - "--admin.url=114.67.107.190"
       - "--mysql.url=114.67.107.190:3306"
-      - "--auth.url=127.0.0.1:8010"
+      - "--auth.url=114.67.107.190:8010"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
