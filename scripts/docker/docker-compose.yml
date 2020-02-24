@@ -4,6 +4,8 @@ services:
   epoch-gateway:
     image: epoch-gateway:latest
     container_name: epoch-gateway
+    command:
+      - "--nacos.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
