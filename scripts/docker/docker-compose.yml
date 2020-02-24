@@ -25,12 +25,13 @@ services:
     restart: on-failure
 
   epoch-auth-oauth2:
-    image: epoch-gateway:latest
-    container_name: epoch-gateway
+    image: epoch-auth-oauth2:latest
+    container_name: epoch-auth-oauth2
     command:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=epoch-monitor-admin"
       - "--mysql.url=114.67.107.190:3306"
+      - "--redis.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
@@ -45,6 +46,7 @@ services:
       - "--admin.url=epoch-monitor-admin"
       - "--mysql.url=114.67.107.190:3306"
       - "--auth.url=epoch-auth-oauth2:8010"
+      - "--redis.url=47.102.158.43"
     environment:
       - "TZ=Asia/Shanghai"
     ports:
