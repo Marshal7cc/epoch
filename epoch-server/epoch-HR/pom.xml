@@ -37,6 +37,12 @@
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!-- spring cloud seata -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-seata</artifactId>
+        </dependency>
+
         <!-- spring-boot-admin-client -->
         <dependency>
             <groupId>de.codecentric</groupId>

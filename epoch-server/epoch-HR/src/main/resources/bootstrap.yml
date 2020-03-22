@@ -13,3 +13,6 @@ spring:
         refreshable-dataids:
       discovery:
         server-addr: ${nacos.url:localhost}:8010
+    alibaba:
+      seata:
+        tx-service-group: ${spring.application.name}

@@ -12,13 +12,6 @@
     <artifactId>epoch-system</artifactId>
 
     <dependencies>
-        <!--epoch core -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -37,6 +30,12 @@
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
 
+        <!-- spring cloud seata -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-alibaba-seata</artifactId>
+        </dependency>
+
         <!-- spring-boot-admin-client -->
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -50,6 +49,23 @@
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
+        <!-- spring cloud feign -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-httpclient</artifactId>
+        </dependency>
+
+        <!--epoch core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
         <!-- epoch auth base -->
         <dependency>
             <groupId>com.marshal</groupId>
@@ -61,6 +77,13 @@
         <dependency>
             <groupId>com.marshal</groupId>
             <artifactId>epoch-api-system</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!-- HR api -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-api-HR</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 

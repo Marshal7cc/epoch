@@ -14,6 +14,7 @@
     <modules>
         <module>epoch-registry</module>
         <module>epoch-gateway</module>
+        <module>epoch-tx</module>
     </modules>
 
     <build>

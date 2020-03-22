@@ -2,6 +2,8 @@ package com.marshal.epoch.system.controller;
 
 import com.marshal.epoch.core.dto.ResponseEntity;
 import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.system.service.SysUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +20,9 @@ import java.util.Map;
 @RestController
 public class TestController {
 
+    @Autowired
+    private SysUserService sysUserService;
+
     @GetMapping("/user/info")
     public ResponseEntity user() {
         Map<String, Object> info = new HashMap<>();
@@ -30,4 +35,9 @@ public class TestController {
         return ResponseUtil.responseOk(info);
     }
 
+    @GetMapping("/tx/test")
+    public ResponseEntity txTest() {
+        sysUserService.txTest();
+        return ResponseUtil.responseOk();
+    }
 }
