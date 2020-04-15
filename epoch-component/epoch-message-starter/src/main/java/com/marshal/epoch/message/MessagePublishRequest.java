@@ -5,12 +5,22 @@ import lombok.Data;
 @Data
 public class MessagePublishRequest {
 
+    /**
+     * message content
+     */
     private Object message;
 
+    /**
+     * rabbitMQ params
+     */
     private String queueName;
-
     private String exchangeName;
-
     private String routingKey;
+
+    /**
+     * redis params
+     */
+    private String redisChannel;
+    private String redisQueue;
 
 }

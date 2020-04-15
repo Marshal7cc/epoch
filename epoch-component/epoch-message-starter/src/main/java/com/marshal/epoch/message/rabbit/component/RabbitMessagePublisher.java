@@ -1,4 +1,4 @@
-package com.marshal.epoch.message.rabbit;
+package com.marshal.epoch.message.rabbit.component;
 
 import com.marshal.epoch.message.MessagePublishRequest;
 import com.marshal.epoch.message.MessagePublisher;
@@ -10,7 +10,7 @@ import org.springframework.util.StringUtils;
 /**
  * @auth: Marshal
  * @date: 2020/4/10
- * @desc:
+ * @desc: RabbitMQ消息发布器
  */
 @Data
 public class RabbitMessagePublisher implements MessagePublisher {
@@ -23,6 +23,9 @@ public class RabbitMessagePublisher implements MessagePublisher {
         String exchangeName = request.getExchangeName();
         String routingKey = request.getRoutingKey();
 
+        /**
+         * 消息与交换机名称不为空，路由键可以为空
+         */
         Assert.notNull(message, "message can not be null");
         Assert.hasText(exchangeName, "exchange name should have a value");
 
