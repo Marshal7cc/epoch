@@ -8,4 +8,8 @@ public interface Oauth2EndpointConstant {
 
     String OAUTH_TOKEN = "/oauth/token";
 
+    String OAUTH_AUTHORIZE = "/oauth/authorize";
+
+    String LOGIN = "/login";
+
 }

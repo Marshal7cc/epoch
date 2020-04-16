@@ -23,8 +23,10 @@ public class EpochAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
     public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
+        String message = e.getMessage() == null ? TIP_UNAUTHORIZED : e.getMessage();
+
         httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        httpServletResponse.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(TIP_UNAUTHORIZED)));
+        httpServletResponse.getWriter().write(JSON.toJSONString(ResponseUtil.responseErr(message)));
     }
 
 }

@@ -5,6 +5,7 @@ import com.marshal.epoch.auth.filter.ValidateCodeFilter;
 import com.marshal.epoch.auth.service.impl.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -18,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * @date: 2020/1/15
  * @desc:
  */
+@Order(2)
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter implements Oauth2EndpointConstant {
 
@@ -39,12 +41,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Oaut
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(validateCodeFilter, UsernamePasswordAuthenticationFilter.class)
                 .requestMatchers()
-                .antMatchers(OAUTH_ALL)
+                .antMatchers(OAUTH_ALL, LOGIN)
                 .and()
                 .authorizeRequests()
-                .antMatchers(OAUTH_ALL).authenticated()
+                .antMatchers(LOGIN).permitAll()
+                .antMatchers(OAUTH_AUTHORIZE).authenticated()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                //为了oauth2 授权码模式而追加 ==》/oauth/authorize接口必须走security认证,也就是必须登录
+                .formLogin();
     }
 
     @Override
