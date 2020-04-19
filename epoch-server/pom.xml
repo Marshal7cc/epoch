@@ -13,7 +13,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-core</module>
         <module>epoch-system</module>
         <module>epoch-generator</module>
         <module>epoch-HR</module>
