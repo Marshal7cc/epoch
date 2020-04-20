@@ -1,8 +1,8 @@
 package com.marshal.epoch.auth.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.marshal.epoch.core.constant.BaseConstant;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.constant.BaseConstant;
+import com.marshal.epoch.common.util.ResponseUtil;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

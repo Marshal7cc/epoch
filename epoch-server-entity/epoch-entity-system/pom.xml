@@ -12,10 +12,10 @@
     <artifactId>epoch-entity-system</artifactId>
 
     <dependencies>
-        <!--epoch entity core -->
+        <!--epoch entity common -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-entity-core</artifactId>
+            <artifactId>epoch-entity-common</artifactId>
             <version>${epoch.version}</version>
         </dependency>
     </dependencies>

@@ -1,21 +1,17 @@
 package com.marshal.epoch.generator.util;
 
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.service.BaseService;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
-import com.marshal.epoch.core.util.RequestHelper;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.database.service.BaseService;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
+import com.marshal.epoch.common.util.ResponseUtil;
 import com.marshal.epoch.generator.config.ThymeLeafConfig;
 import com.marshal.epoch.generator.dto.*;
 import com.marshal.epoch.generator.enums.FileType;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;

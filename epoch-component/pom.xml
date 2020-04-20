@@ -13,9 +13,10 @@
     <description>epoch平台标准starter组件</description>
 
     <modules>
-        <module>epoch-core</module>
+        <module>epoch-common</module>
         <module>epoch-message-starter</module>
         <module>epoch-database-starter</module>
         <module>epoch-distributedlock-starter</module>
+        <module>epoch-cache-starter</module>
     </modules>
 </project>

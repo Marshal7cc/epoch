@@ -15,7 +15,7 @@
         <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectForTree" resultType="com.marshal.epoch.core.dto.TreeNode">
+    <select id="selectForTree" resultType="com.marshal.epoch.common.dto.TreeNode">
         select sm.menu_id id,menu_name label,parent_id parentId from sys_menu sm
     </select>
 </mapper>

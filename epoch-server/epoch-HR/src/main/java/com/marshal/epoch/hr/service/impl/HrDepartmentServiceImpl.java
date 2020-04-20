@@ -1,9 +1,9 @@
 package com.marshal.epoch.hr.service.impl;
 
 
-import com.marshal.epoch.core.dto.TreeNode;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
-import com.marshal.epoch.core.util.TreeUtil;
+import com.marshal.epoch.common.dto.TreeNode;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
+import com.marshal.epoch.common.util.TreeUtil;
 import com.marshal.epoch.hr.mapper.HrDepartmentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

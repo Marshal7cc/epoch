@@ -1,13 +1,12 @@
 package com.marshal.epoch.system.service.impl;
 
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import com.marshal.epoch.hr.entity.HrEmployee;
 import com.marshal.epoch.system.feign.HrEmployeeClient;
 import com.marshal.epoch.system.mapper.SysUserMapper;
-import io.seata.spring.annotation.GlobalTransactional;
-import org.checkerframework.checker.units.qual.A;
+//import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser> implements SysU
     private HrEmployeeClient employeeClient;
 
     @Override
-    @GlobalTransactional
+//    @GlobalTransactional
     public void txTest() {
         SysUser sysUser = userMapper.selectByPrimaryKey(10001);
         sysUser.setUserId(10099L);

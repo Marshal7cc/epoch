@@ -24,10 +24,10 @@
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
-        <!--epoch core -->
+        <!--epoch common -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
+            <artifactId>epoch-common</artifactId>
             <version>${epoch.version}</version>
             <exclusions>
                 <exclusion>

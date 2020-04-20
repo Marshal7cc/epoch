@@ -1,8 +1,8 @@
 package com.marshal.epoch.system.controller;
 
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.common.util.ResponseUtil;
 import com.marshal.epoch.system.api.SysLangApi;
 import com.marshal.epoch.system.entity.SysLang;
 import com.marshal.epoch.system.service.SysLangService;

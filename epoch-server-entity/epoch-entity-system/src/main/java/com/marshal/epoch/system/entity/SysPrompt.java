@@ -7,7 +7,7 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Table;
 
-import com.marshal.epoch.core.dto.BaseDto;
+import com.marshal.epoch.common.dto.BaseDto;
 
 @Data
 @Table(name = "sys_prompt")

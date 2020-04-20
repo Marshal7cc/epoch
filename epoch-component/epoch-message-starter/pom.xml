@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>epoch-message-starter</artifactId>
-    <description>epoch message boot starter 消息发送组件</description>
+    <description>epoch message boot starter:epoch标准化消息发送组件</description>
 
     <dependencies>
         <!-- rabbitMQ -->

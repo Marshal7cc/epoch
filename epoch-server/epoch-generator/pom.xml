@@ -16,13 +16,6 @@
     </properties>
 
     <dependencies>
-        <!--epoch core -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -66,6 +59,20 @@
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.9.1.RELEASE</version>
+        </dependency>
+
+        <!--epoch common -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-common</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch db starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-database-starter</artifactId>
+            <version>${epoch.version}</version>
         </dependency>
     </dependencies>
 

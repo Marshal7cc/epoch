@@ -1,7 +1,7 @@
 package com.marshal.epoch.hr.api;
 
 
-import com.marshal.epoch.core.dto.ResponseEntity;
+import com.marshal.epoch.common.dto.ResponseEntity;
 
 import com.marshal.epoch.hr.entity.HrDepartment;
 import org.springframework.web.bind.annotation.*;

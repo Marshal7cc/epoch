@@ -3,7 +3,7 @@ package com.marshal.epoch.auth.service.impl;
 
 import com.marshal.epoch.auth.entity.OauthClientDetails;
 import com.marshal.epoch.auth.service.OauthClientDetailsService;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**

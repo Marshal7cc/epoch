@@ -12,13 +12,6 @@
     <artifactId>epoch-HR</artifactId>
 
     <dependencies>
-        <!--epoch core -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!--spring web mvc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -38,10 +31,10 @@
         </dependency>
 
         <!-- spring cloud seata -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-seata</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-alibaba-seata</artifactId>-->
+        <!--        </dependency>-->
 
         <!-- spring-boot-admin-client -->
         <dependency>
@@ -54,6 +47,20 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
+        </dependency>
+
+        <!--epoch common -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-common</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch db starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-database-starter</artifactId>
+            <version>${epoch.version}</version>
         </dependency>
 
         <!-- epoch auth base -->

@@ -1,6 +1,7 @@
 package com.marshal.epoch.system.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.marshal.epoch.common.dto.BaseDto;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
@@ -8,7 +9,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Table(name = "sys_role")
-public class SysRole {
+public class SysRole extends BaseDto {
     @Id
     @Column(name = "ROLE_ID")
     private Long roleId;

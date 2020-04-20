@@ -1,6 +1,6 @@
 package com.marshal.epoch.generator.component;
 
-import com.marshal.epoch.core.dto.BaseDto;
+import com.marshal.epoch.common.dto.BaseDto;
 import com.marshal.epoch.generator.dto.DBColumn;
 import com.marshal.epoch.generator.dto.DBTable;
 import com.marshal.epoch.generator.dto.GeneratorConfig;

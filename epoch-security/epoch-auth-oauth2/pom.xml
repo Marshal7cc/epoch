@@ -12,13 +12,6 @@
     <artifactId>epoch-auth-oauth2</artifactId>
 
     <dependencies>
-        <!--epoch auth base -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth-base</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!-- easy captcha  -->
         <dependency>
             <groupId>com.github.whvcse</groupId>
@@ -61,6 +54,13 @@
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>${springboot-admin.version}</version>
+        </dependency>
+
+        <!--epoch auth base -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth-base</artifactId>
+            <version>${epoch.version}</version>
         </dependency>
     </dependencies>
 

@@ -20,11 +20,11 @@
     <modules>
         <module>epoch-base</module>
         <module>epoch-component</module>
+        <module>epoch-monitor</module>
         <module>epoch-security</module>
         <module>epoch-server</module>
         <module>epoch-server-api</module>
         <module>epoch-server-entity</module>
-        <module>epoch-monitor</module>
     </modules>
 
     <properties>

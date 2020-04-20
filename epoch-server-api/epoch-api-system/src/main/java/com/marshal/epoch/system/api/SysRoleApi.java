@@ -2,7 +2,7 @@ package com.marshal.epoch.system.api;
 
 
 import com.marshal.epoch.system.entity.SysRole;
-import com.marshal.epoch.core.dto.ResponseEntity;
+import com.marshal.epoch.common.dto.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.marshal.epoch.auth.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.util.ResponseUtil;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

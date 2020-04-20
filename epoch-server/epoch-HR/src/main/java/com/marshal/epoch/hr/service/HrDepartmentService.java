@@ -1,8 +1,8 @@
 package com.marshal.epoch.hr.service;
 
 
-import com.marshal.epoch.core.dto.TreeNode;
-import com.marshal.epoch.core.service.BaseService;
+import com.marshal.epoch.common.dto.TreeNode;
+import com.marshal.epoch.database.service.BaseService;
 
 import com.marshal.epoch.hr.entity.HrDepartment;
 

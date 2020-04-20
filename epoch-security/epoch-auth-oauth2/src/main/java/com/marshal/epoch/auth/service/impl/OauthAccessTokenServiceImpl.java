@@ -4,7 +4,7 @@ package com.marshal.epoch.auth.service.impl;
 import com.marshal.epoch.auth.entity.OauthAccessToken;
 import com.marshal.epoch.auth.mapper.OauthAccessTokenMapper;
 import com.marshal.epoch.auth.service.OauthAccessTokenService;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -36,6 +36,13 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+        <!-- spring-boot-admin-client -->
+        <dependency>
+            <groupId>de.codecentric</groupId>
+            <artifactId>spring-boot-admin-starter-client</artifactId>
+            <version>${springboot-admin.version}</version>
+        </dependency>
+
         <!-- spring cloud nacos config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -48,17 +55,10 @@
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
         </dependency>
 
-        <!-- spring-boot-admin-client -->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${springboot-admin.version}</version>
-        </dependency>
-
-        <!--epoch entity core -->
+        <!--epoch entity common -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-entity-core</artifactId>
+            <artifactId>epoch-entity-common</artifactId>
             <version>${epoch.version}</version>
         </dependency>
     </dependencies>

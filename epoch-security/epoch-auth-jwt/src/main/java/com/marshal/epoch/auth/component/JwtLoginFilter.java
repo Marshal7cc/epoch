@@ -1,8 +1,8 @@
 package com.marshal.epoch.auth.component;
 
 import com.alibaba.fastjson.JSONObject;
-import com.marshal.epoch.core.constant.BaseConstant;
-import com.marshal.epoch.core.util.RequestHelper;
+import com.marshal.epoch.common.constant.BaseConstant;
+import com.marshal.epoch.common.util.RequestHelper;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;

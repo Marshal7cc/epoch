@@ -1,7 +1,7 @@
 package com.marshal.epoch.hr.service.impl;
 
 
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import org.springframework.stereotype.Service;
 
 import com.marshal.epoch.hr.entity.HrPosition;

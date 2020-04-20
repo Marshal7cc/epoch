@@ -1,7 +1,7 @@
 package com.marshal.epoch.system.service.impl;
 
 
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import com.marshal.epoch.system.mapper.SysPromptMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,6 @@ import com.marshal.epoch.system.entity.SysPrompt;
 import com.marshal.epoch.system.service.SysPromptService;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

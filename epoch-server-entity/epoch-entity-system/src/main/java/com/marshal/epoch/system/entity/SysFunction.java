@@ -1,6 +1,6 @@
 package com.marshal.epoch.system.entity;
 
-import com.marshal.epoch.core.dto.BaseDto;
+import com.marshal.epoch.common.dto.BaseDto;
 import lombok.Data;;
 import javax.persistence.Id;
 import org.hibernate.validator.constraints.Length;

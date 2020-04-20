@@ -1,6 +1,6 @@
 package com.marshal.epoch.auth.translator;
 
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.util.ResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -24,7 +24,7 @@ public class EpochExceptionTranslator implements WebResponseExceptionTranslator 
     @Override
     public ResponseEntity<?> translate(Exception e) {
         ResponseEntity.BodyBuilder status = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        com.marshal.epoch.core.dto.ResponseEntity response = new com.marshal.epoch.core.dto.ResponseEntity();
+        com.marshal.epoch.common.dto.ResponseEntity response = new com.marshal.epoch.common.dto.ResponseEntity();
         String message = "认证失败";
         log.error(message, e);
         if (e instanceof UnsupportedGrantTypeException) {

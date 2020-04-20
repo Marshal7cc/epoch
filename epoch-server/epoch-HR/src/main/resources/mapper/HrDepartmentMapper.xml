@@ -13,7 +13,7 @@
         <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectForTree" resultType="com.marshal.epoch.core.dto.TreeNode">
+    <select id="selectForTree" resultType="com.marshal.epoch.common.dto.TreeNode">
         select hd.department_id id,hd.name label,hd.parent_id parentId from hr_department hd
     </select>
 </mapper>

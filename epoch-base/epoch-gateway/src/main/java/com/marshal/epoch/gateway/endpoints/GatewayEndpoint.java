@@ -1,6 +1,6 @@
 package com.marshal.epoch.gateway.endpoints;
 
-import com.marshal.epoch.core.dto.ResponseEntity;
+import com.marshal.epoch.common.dto.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-entity-core</module>
+        <module>epoch-entity-common</module>
         <module>epoch-entity-system</module>
         <module>epoch-entity-HR</module>
     </modules>

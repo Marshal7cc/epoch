@@ -1,18 +1,15 @@
 package com.marshal.epoch.system.controller;
 
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.common.util.ResponseUtil;
 
 import com.marshal.epoch.system.entity.SysPrompt;
 import com.marshal.epoch.system.api.SysPromptApi;
 import com.marshal.epoch.system.service.SysPromptService;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController

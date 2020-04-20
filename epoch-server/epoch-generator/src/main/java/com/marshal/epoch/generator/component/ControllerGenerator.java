@@ -1,10 +1,7 @@
 package com.marshal.epoch.generator.component;
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.service.BaseService;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
-import com.marshal.epoch.core.util.RequestHelper;
-import com.marshal.epoch.generator.config.ThymeLeafConfig;
+import com.marshal.epoch.database.service.BaseService;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import com.marshal.epoch.generator.dto.*;
 import com.marshal.epoch.generator.enums.FileType;
 import com.marshal.epoch.generator.util.TemplateUtil;

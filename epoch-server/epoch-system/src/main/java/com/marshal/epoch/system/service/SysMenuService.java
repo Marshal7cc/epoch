@@ -1,9 +1,9 @@
 package com.marshal.epoch.system.service;
 
 
-import com.marshal.epoch.core.dto.TreeNode;
+import com.marshal.epoch.common.dto.TreeNode;
 import com.marshal.epoch.system.dto.VueRouter;
-import com.marshal.epoch.core.service.BaseService;
+import com.marshal.epoch.database.service.BaseService;
 
 import com.marshal.epoch.system.entity.SysMenu;
 

@@ -1,11 +1,11 @@
 package com.marshal.epoch.system.service.impl;
 
 
-import com.marshal.epoch.core.dto.TreeNode;
-import com.marshal.epoch.core.util.TreeUtil;
+import com.marshal.epoch.common.dto.TreeNode;
+import com.marshal.epoch.common.util.TreeUtil;
 import com.marshal.epoch.system.dto.VueRouter;
 import com.marshal.epoch.system.dto.VueRouterMeta;
-import com.marshal.epoch.core.service.impl.BaseServiceImpl;
+import com.marshal.epoch.database.service.impl.BaseServiceImpl;
 import com.marshal.epoch.system.mapper.SysMenuMapper;
 import com.marshal.epoch.system.util.VueRouterTreeUtil;
 import org.apache.commons.collections.CollectionUtils;

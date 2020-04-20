@@ -1,11 +1,13 @@
 package com.marshal.epoch.auth.entity;
 
-import com.marshal.epoch.core.dto.BaseDto;
+import com.marshal.epoch.database.annotation.StdWho;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.util.Date;
 
+@StdWho(enabled = false)
 @Table(name = "oauth_access_token")
 public class OauthAccessToken {
     @Id

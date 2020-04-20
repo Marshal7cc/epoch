@@ -1,7 +1,7 @@
 package com.marshal.epoch.hr.mapper;
 
 
-import com.marshal.epoch.core.dto.TreeNode;
+import com.marshal.epoch.common.dto.TreeNode;
 import tk.mybatis.mapper.common.Mapper;
 
 import com.marshal.epoch.hr.entity.HrDepartment;

@@ -1,6 +1,6 @@
 package com.marshal.epoch.auth.properties;
 
-import com.marshal.epoch.core.constant.BaseConstant;
+import com.marshal.epoch.common.constant.BaseConstant;
 import lombok.Data;
 
 

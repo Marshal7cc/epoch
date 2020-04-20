@@ -1,6 +1,5 @@
 package com.marshal.epoch.system.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;;
 import javax.persistence.Id;
 
@@ -8,11 +7,9 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Table;
 
-import com.marshal.epoch.core.dto.BaseDto;
+import com.marshal.epoch.common.dto.BaseDto;
 
 import java.util.Date;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Data
 @Table(name = "sys_user")

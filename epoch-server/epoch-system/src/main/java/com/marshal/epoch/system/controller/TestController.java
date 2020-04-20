@@ -1,7 +1,7 @@
 package com.marshal.epoch.system.controller;
 
-import com.marshal.epoch.core.dto.ResponseEntity;
-import com.marshal.epoch.core.util.ResponseUtil;
+import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.common.util.ResponseUtil;
 import com.marshal.epoch.system.service.SysUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

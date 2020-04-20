@@ -1,6 +1,6 @@
 package com.marshal.epoch.auth.handler;
 
-import com.marshal.epoch.core.util.RequestHelper;
+import com.marshal.epoch.common.util.RequestHelper;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;

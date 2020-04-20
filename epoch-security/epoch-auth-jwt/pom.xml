@@ -16,13 +16,6 @@
     </properties>
 
     <dependencies>
-        <!--epoch security common -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth-base</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
         <!--spring security jwt-->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -46,6 +39,13 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!--epoch security base -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-auth-base</artifactId>
+            <version>${epoch.version}</version>
         </dependency>
     </dependencies>
 </project>

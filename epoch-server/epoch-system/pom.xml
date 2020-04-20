@@ -31,10 +31,10 @@
         </dependency>
 
         <!-- spring cloud seata -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-seata</artifactId>
-        </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>com.alibaba.cloud</groupId>-->
+        <!--            <artifactId>spring-cloud-alibaba-seata</artifactId>-->
+        <!--        </dependency>-->
 
         <!-- spring-boot-admin-client -->
         <dependency>
@@ -59,10 +59,24 @@
             <artifactId>feign-httpclient</artifactId>
         </dependency>
 
-        <!--epoch core -->
+        <!--epoch common -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-core</artifactId>
+            <artifactId>epoch-common</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch db starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-database-starter</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch cache starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-cache-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 
