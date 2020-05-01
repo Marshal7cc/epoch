@@ -15,7 +15,7 @@
     <modules>
         <module>epoch-auth-base</module>
         <module>epoch-auth-jwt</module>
-        <module>epoch-auth-oauth2</module>
+        <module>epoch-auth-server</module>
     </modules>
 
     <dependencies>

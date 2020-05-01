@@ -14,9 +14,10 @@
 
     <modules>
         <module>epoch-common</module>
-        <module>epoch-message-starter</module>
+        <module>epoch-cache-starter</module>
         <module>epoch-database-starter</module>
         <module>epoch-distributedlock-starter</module>
-        <module>epoch-cache-starter</module>
+        <module>epoch-message-starter</module>
+        <module>epoch-security-starter</module>
     </modules>
 </project>

@@ -1,6 +1,6 @@
 package com.marshal.epoch.system.cache;
 
-import com.marshal.epoch.cache.impl.RedisCache;
+import com.marshal.epoch.cache.component.RedisCache;
 import org.springframework.stereotype.Component;
 
 /**

@@ -24,9 +24,9 @@ services:
       - 8090:8090
     restart: on-failure
 
-  epoch-auth-oauth2:
-    image: epoch-auth-oauth2:latest
-    container_name: epoch-auth-oauth2
+  epoch-auth-server:
+    image: epoch-auth-server:latest
+    container_name: epoch-auth-server
     command:
       - "--nacos.url=47.102.158.43"
       - "--admin.url=114.67.107.190"

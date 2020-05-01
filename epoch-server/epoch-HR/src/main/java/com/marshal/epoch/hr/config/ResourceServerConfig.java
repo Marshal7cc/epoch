@@ -1,8 +1,8 @@
 package com.marshal.epoch.hr.config;
 
 
-import com.marshal.epoch.auth.handler.EpochAccessDeniedHandler;
-import com.marshal.epoch.auth.handler.EpochAuthenticationEntryPoint;
+import com.marshal.epoch.security.handler.EpochAccessDeniedHandler;
+import com.marshal.epoch.security.handler.EpochAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

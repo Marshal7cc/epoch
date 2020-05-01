@@ -81,7 +81,7 @@ public class TestController {
 
     @GetMapping("/ds2")
     public Object ds2() {
-        return dynamicDatasourceService.testSlave();
+        return "dynamicDatasourceService.testSlave()";
     }
 
 }

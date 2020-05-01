@@ -13,3 +13,9 @@ spring:
         refreshable-dataids:
       discovery:
         server-addr: ${nacos.url:localhost}:8010
+logging:
+  level:
+    ROOT: debug
+    com:
+      marshal: debug
+

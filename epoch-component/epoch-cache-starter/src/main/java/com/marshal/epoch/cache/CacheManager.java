@@ -3,7 +3,9 @@ package com.marshal.epoch.cache;
 /**
  * @auth: Marshal
  * @date: 2019/6/25
- * @desc: 缓存管理器
+ * @desc: 缓存管理器 CacheManager
+ * <p>提供了采用本机制的系统缓存的一些操作
+ * </p>
  */
 public interface CacheManager {
 

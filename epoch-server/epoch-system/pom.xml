@@ -43,12 +43,6 @@
             <version>${springboot-admin.version}</version>
         </dependency>
 
-        <!-- spring cloud oauth2 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-
         <!-- spring cloud feign -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -80,10 +74,10 @@
             <version>${epoch.version}</version>
         </dependency>
 
-        <!-- epoch auth base -->
+        <!--epoch security starter -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth-base</artifactId>
+            <artifactId>epoch-security-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 

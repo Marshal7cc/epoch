@@ -10,9 +10,9 @@ docker build -t epoch-gateway .
 cd $SOURCE_PATH/epoch/epoch-monitor/epoch-monitor-admin
 docker build -t epoch-monitor-admin .
 
-# epoch-auth-oauth2
-cd $SOURCE_PATH/epoch/epoch-security/epoch-auth-oauth2
-docker build -t epoch-auth-oauth2 .
+# epoch-auth-server
+cd $SOURCE_PATH/epoch/epoch-security/epoch-auth-server
+docker build -t epoch-auth-server .
 
 # epoch-system
 cd $SOURCE_PATH/epoch/epoch-server/epoch-system
