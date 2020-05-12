@@ -8,7 +8,7 @@ import lombok.Data;
  * @desc: 用于RequestHelper, 获取当前认证用户信息
  */
 @Data
-public class AuthenticationUser {
+public class AuthenticatedUser {
 
     private Long userId;
 

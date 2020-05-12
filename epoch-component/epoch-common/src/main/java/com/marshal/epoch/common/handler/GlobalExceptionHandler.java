@@ -2,6 +2,7 @@ package com.marshal.epoch.common.handler;
 
 
 import com.marshal.epoch.common.dto.ResponseEntity;
+import com.marshal.epoch.common.exception.CommonException;
 import com.marshal.epoch.common.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +23,16 @@ public class GlobalExceptionHandler {
     /**
      * 异常处理
      *
-     * @param e
+     * @param commonException
      * @return
      */
     @ResponseBody
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity handleException(Exception e) {
+    @ExceptionHandler(value = CommonException.class)
+    public ResponseEntity handleException(CommonException commonException) {
         if (logger.isDebugEnabled()) {
-            logger.debug(e.getMessage());
+            logger.debug(commonException.getMessage());
         }
-        return ResponseUtil.responseErr(e.getMessage());
+        return ResponseUtil.responseErr(commonException.getCode(), commonException.getDescription());
     }
 
 }

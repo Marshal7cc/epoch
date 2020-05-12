@@ -2,7 +2,7 @@ package com.marshal.epoch.common.util;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.marshal.epoch.common.dto.AuthenticationUser;
+import com.marshal.epoch.common.dto.AuthenticatedUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +34,10 @@ public class RequestHelper {
     private static final String FILED_USER_ID = "userId";
     private static final String FILED_USER_NAME = "userName";
 
-    private static ThreadLocal<AuthenticationUser> authenticationUser = new ThreadLocal<>();
+    private static ThreadLocal<AuthenticatedUser> authenticationUser = new ThreadLocal<>();
 
-    public static AuthenticationUser getCurrentUser() {
-        AuthenticationUser user = RequestHelper.authenticationUser.get();
+    public static AuthenticatedUser getCurrentUser() {
+        AuthenticatedUser user = RequestHelper.authenticationUser.get();
         if (user == null) {
             SecurityContext context = SecurityContextHolder.getContext();
             Authentication authentication = context.getAuthentication();
@@ -46,7 +46,7 @@ public class RequestHelper {
             LinkedHashMap details = (LinkedHashMap<String, Object>) userAuthentication.getDetails();
 
             LinkedHashMap<String, String> map = (LinkedHashMap<String, String>) details.get(FILED_PRINCIPAL);
-            user = new AuthenticationUser();
+            user = new AuthenticatedUser();
             user.setUserId(Long.parseLong(String.valueOf(map.get(FILED_USER_ID))));
             user.setUsername(map.get(FILED_USER_NAME));
 
@@ -57,7 +57,7 @@ public class RequestHelper {
         return user;
     }
 
-    public static void setCurrentUser(AuthenticationUser user) {
+    public static void setCurrentUser(AuthenticatedUser user) {
         authenticationUser.set(user);
     }
 

@@ -1,6 +1,6 @@
 package com.marshal.epoch.database.interceptor;
 
-import com.marshal.epoch.common.dto.AuthenticationUser;
+import com.marshal.epoch.common.dto.AuthenticatedUser;
 import com.marshal.epoch.common.dto.BaseDto;
 import com.marshal.epoch.common.util.ReflectUtil;
 import com.marshal.epoch.common.util.RequestHelper;
@@ -45,7 +45,7 @@ public class StandardDataInterceptor implements Interceptor {
             BoundSql boundSql = mappedStatement.getBoundSql(param);
 
             //当前认证用户信息
-            AuthenticationUser user = RequestHelper.getCurrentUser();
+            AuthenticatedUser user = RequestHelper.getCurrentUser();
             Long userId = user.getUserId();
 
             ReflectUtil.setFieldValue(param, BaseDto.FILED_LAST_UPDATED_BY, userId);
