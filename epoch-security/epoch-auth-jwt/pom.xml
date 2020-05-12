@@ -47,5 +47,12 @@
             <artifactId>epoch-auth-base</artifactId>
             <version>${epoch.version}</version>
         </dependency>
+
+        <!--epoch db starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-database-starter</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
     </dependencies>
 </project>

@@ -2,7 +2,7 @@ package com.marshal.epoch.security.config;
 
 import com.marshal.epoch.security.constants.Oauth2EndpointConstant;
 import com.marshal.epoch.security.filter.ValidateCodeFilter;
-import com.marshal.epoch.security.service.impl.EpochUserDetailService;
+import com.marshal.epoch.security.service.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;

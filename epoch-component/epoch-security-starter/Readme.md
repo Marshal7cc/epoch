@@ -21,6 +21,11 @@ epoch:
     white-list:/query
 ```
 
+application.java
+```
+@EnableEpochResourceServer
+```
+
 ### 添加自定义权限策略
 
 继承PermissionVoter并实现其vote方法

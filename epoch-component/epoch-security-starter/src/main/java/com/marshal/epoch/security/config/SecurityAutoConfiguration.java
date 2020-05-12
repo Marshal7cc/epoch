@@ -24,12 +24,14 @@ import java.util.Map;
  * @date: 2020/4/23
  * @desc:
  */
-@ComponentScan(basePackages = "com.marshal.epoch.security")
-@EnableConfigurationProperties(SecurityAutoConfiguration.class)
+@EnableConfigurationProperties(SecurityProperty.class)
 public class SecurityAutoConfiguration {
 
     @Autowired
     private SecurityProperty securityProperty;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * 1.未登录
@@ -51,7 +53,6 @@ public class SecurityAutoConfiguration {
         voters.add(webExpressionVoter);
         voters.add(new RoleVoter());
 
-        ApplicationContext applicationContext = ApplicationContextHolder.getApplicationContext();
         Map<String, PermissionVoter> customVoters = applicationContext.getBeansOfType(PermissionVoter.class);
         if (customVoters != null) {
             customVoters.forEach((k, v) -> {

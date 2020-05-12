@@ -10,4 +10,20 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>epoch-auth-base</artifactId>
+    <description>epoch auth base:系统安全/权限共用模块</description>
+
+    <dependencies>
+        <!--spring security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--epoch common -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-common</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+    </dependencies>
 </project>

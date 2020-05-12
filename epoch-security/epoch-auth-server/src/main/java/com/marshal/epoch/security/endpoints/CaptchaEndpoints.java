@@ -14,7 +14,7 @@ import java.io.IOException;
 /**
  * @auth: Marshal
  * @date: 2020/1/28
- * @desc:
+ * @desc: 验证码生成
  */
 @RestController
 @RequestMapping("/captcha")

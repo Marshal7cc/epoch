@@ -5,7 +5,7 @@ import com.marshal.epoch.security.handler.EpochAuthenticationEntryPoint;
 import com.marshal.epoch.security.properties.SecurityProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -17,9 +17,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  * @date: 2020/1/15
  * @desc: 资源服务器认证配置
  */
-@Configuration
 @EnableResourceServer
 @EnableConfigurationProperties(SecurityProperty.class)
+@ComponentScan(basePackages = "com.marshal.epoch.security")
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired

@@ -5,7 +5,7 @@ import com.marshal.epoch.security.component.EpochRedisTokenStore;
 import com.marshal.epoch.security.filter.TokenEndpointAuthenticationFilter;
 import com.marshal.epoch.security.properties.EpochSecurityProperties;
 import com.marshal.epoch.security.translator.EpochExceptionTranslator;
-import com.marshal.epoch.security.service.impl.EpochUserDetailService;
+import com.marshal.epoch.security.service.EpochUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

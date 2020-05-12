@@ -10,6 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>epoch-auth-server</artifactId>
+    <description>epoch auth server:系统认证中心</description>
 
     <dependencies>
         <!-- easy captcha  -->
@@ -17,12 +18,6 @@
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
             <version>1.6.2</version>
-        </dependency>
-
-        <!--spring web mvc-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <!-- oauth2 -->
@@ -56,10 +51,23 @@
             <version>${springboot-admin.version}</version>
         </dependency>
 
+        <!--spring web mvc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!--epoch auth base -->
         <dependency>
             <groupId>com.marshal</groupId>
             <artifactId>epoch-auth-base</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch db starter -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-database-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
     </dependencies>

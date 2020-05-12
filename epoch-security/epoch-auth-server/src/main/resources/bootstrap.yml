@@ -12,5 +12,4 @@ spring:
         file-extension: yml
         refreshable-dataids:
       discovery:
-        # ip: 114.67.107.190
         server-addr: ${nacos.url:localhost}:8010
