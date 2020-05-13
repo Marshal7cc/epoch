@@ -66,7 +66,7 @@
         <!-- epoch auth base -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth-base</artifactId>
+            <artifactId>epoch-security-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 
