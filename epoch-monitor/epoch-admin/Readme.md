@@ -19,7 +19,7 @@ spring:
   boot:
     admin:
       client:
-        url: ${admin.url:localhost:8090}
+        url: ${admin.url:http://localhost:8090}
         username: epoch
         password: epoch1234!
         instance:
