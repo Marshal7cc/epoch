@@ -12,7 +12,7 @@
     <artifactId>epoch-monitor</artifactId>
 
     <modules>
-        <module>epoch-monitor-admin</module>
+        <module>epoch-admin</module>
         <module>epoch-zipkin</module>
     </modules>
 </project>

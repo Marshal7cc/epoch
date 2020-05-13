@@ -1,6 +1,6 @@
 spring:
   application:
-    name: epoch-monitor-admin
+    name: epoch-admin
   profiles:
     active: dev
   cloud:
@@ -8,7 +8,7 @@ spring:
       config:
         server-addr: ${nacos.url:localhost}:8010
         group: EPOCH_GROUP
-        prefix: epoch-monitor-admin
+        prefix: epoch-admin
         file-extension: yml
         refreshable-dataids:
       discovery:

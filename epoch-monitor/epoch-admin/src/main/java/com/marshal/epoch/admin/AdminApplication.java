@@ -11,10 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @EnableAdminServer
 @SpringBootApplication
-public class MonitorAdminApplication {
+public class AdminApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MonitorAdminApplication.class, args);
+        SpringApplication.run(AdminApplication.class, args);
     }
 
 }

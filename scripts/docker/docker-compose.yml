@@ -13,9 +13,9 @@ services:
       - 8888:8888
     restart: on-failure
 
-  epoch-monitor-admin:
-    image: epoch-monitor-admin:latest
-    container_name: epoch-monitor-admin
+  epoch-admin:
+    image: epoch-admin:latest
+    container_name: epoch-admin
     command:
       - "--nacos.url=47.102.158.43"
     environment:

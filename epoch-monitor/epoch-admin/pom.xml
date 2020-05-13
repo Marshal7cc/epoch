@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>epoch-monitor-admin</artifactId>
+    <artifactId>epoch-admin</artifactId>
 
     <dependencies>
         <!-- spring-boot-starter-web -->

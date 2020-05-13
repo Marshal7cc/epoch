@@ -6,9 +6,9 @@ SOURCE_PATH=/usr/local/dev/docker/volumes/jenkins_home/workspace
 cd $SOURCE_PATH/epoch/epoch-base/epoch-gateway
 docker build -t epoch-gateway .
 
-# epoch-monitor-admin
-cd $SOURCE_PATH/epoch/epoch-monitor/epoch-monitor-admin
-docker build -t epoch-monitor-admin .
+# epoch-admin
+cd $SOURCE_PATH/epoch/epoch-monitor/epoch-admin
+docker build -t epoch-admin .
 
 # epoch-auth-server
 cd $SOURCE_PATH/epoch/epoch-security/epoch-auth-server
