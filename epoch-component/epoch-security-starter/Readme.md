@@ -23,7 +23,7 @@ epoch:
 
 application.java
 ```
-@EnableEpochResourceServer
+@EnableAuth
 ```
 
 ### 添加自定义权限策略

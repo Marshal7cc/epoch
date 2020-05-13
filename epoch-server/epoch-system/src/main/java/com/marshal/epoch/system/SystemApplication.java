@@ -1,6 +1,6 @@
 package com.marshal.epoch.system;
 
-import com.marshal.epoch.security.annotation.EnableEpochResourceServer;
+import com.marshal.epoch.security.annotation.EnableAuth;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -13,8 +13,8 @@ import tk.mybatis.spring.annotation.MapperScan;
  * @date: 2020/1/12
  * @desc:
  */
+@EnableAuth
 @EnableFeignClients
-@EnableEpochResourceServer
 @MapperScan("com.marshal.epoch.**.mapper")
 @SpringBootApplication
 public class SystemApplication {

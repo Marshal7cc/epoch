@@ -9,7 +9,7 @@ import java.lang.annotation.*;
  * <p>开启资源服务器权限注解<p/>
  * 当且仅当:
  * 1.引入epoch-security-starter依赖
- * 2.使用注解@EnableEpochResourceServer
+ * 2.使用注解@EnableAuth
  * 时能够真正接入Epoch安全认证服务,否则相当于仅引入相关jar包
  *
  * @auth: Marshal
@@ -20,5 +20,5 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Import(ResourceServerConfig.class)
-public @interface EnableEpochResourceServer {
+public @interface EnableAuth {
 }
