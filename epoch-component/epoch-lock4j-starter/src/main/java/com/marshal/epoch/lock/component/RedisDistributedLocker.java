@@ -1,12 +1,15 @@
 package com.marshal.epoch.lock.component;
 
 import com.marshal.epoch.lock.DistributedLocker;
+import com.marshal.epoch.lock.component.redisson.RedissonClientHolder;
 import com.marshal.epoch.lock.util.IdWorker;
 import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.util.Assert;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @auth: Marshal
@@ -14,105 +17,92 @@ import redis.clients.jedis.JedisPool;
  * @desc: redis 分布式锁实现
  */
 @Data
-@Slf4j
 public class RedisDistributedLocker implements DistributedLocker {
 
-    //redis key 前缀
-    private static final String LOCK_KEY_PREFIX = "epoch:distributed-lock:";
+    private static Logger logger = LoggerFactory.getLogger(RedisDistributedLocker.class);
 
-    //redis 连接池
-    private JedisPool jedisPool;
+    private RedissonClientHolder redissonClientHolder;
 
-    //分布式ID生成器
-    private IdWorker idWorker = new IdWorker(1, 1);
-
-    //存储生成的标识
-    private ThreadLocal<Long> valueThreadLocal = new ThreadLocal<>();
+    //存储RLock
+    private ThreadLocal<RLock> lockHolder = new ThreadLocal<>();
 
     @Override
-    public boolean lock(String lock) {
-        return tryLock(lock, 0, 0);
+    public void lock(String lockKey) {
+        RLock lock = getLock(lockKey, false);
+        lock.lock();
     }
 
     @Override
-    public boolean tryLock(String lock, long timeout) {
-        return tryLock(lock, timeout, 0);
+    public boolean tryLock(String lockKey) {
+        RLock lock = getLock(lockKey, false);
+        return lock.tryLock();
     }
 
     @Override
-    public boolean tryLock(String lock, long timeout, long ttl) {
-        Assert.isTrue(timeout >= 0 && ttl >= 0, "timeout or ttl can not less than 0");
-        Assert.hasText(lock, "lock can not be empty");
-
-        Jedis conn = null;
+    public boolean tryLock(String lockKey, long timeout) {
+        RLock lock = getLock(lockKey, false);
         try {
-            // 1.建立redis连接
-            conn = jedisPool.getResource();
-            // 2.随机生成一个value
-            long value = idWorker.nextId();
-            // 3.定义锁的名称
-            String lockName = LOCK_KEY_PREFIX + lock;
-            // 4.上锁成功之后,锁的超时时间==>ttl
-            // 5.定义在没有获取锁之前,锁的超时时间
-            if (timeout == 0) {
-                while (true) {
-                    if (conn.setnx(lockName, String.valueOf(value)).equals(1L)) {
-                        if (ttl != 0) {
-                            conn.expire(lockName, Integer.parseInt(String.valueOf(ttl)));
-                        }
-                        valueThreadLocal.set(value);
-                        return true;
-                    }
-                }
+            return lock.tryLock(timeout, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            logger.debug("get lock fail");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean tryLock(String lockKey, long timeout, long ttl) {
+        RLock lock = getLock(lockKey, false);
+        try {
+            return lock.tryLock(timeout, ttl, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            logger.debug("get lock fail");
+        }
+        return false;
+    }
+
+    @Override
+    public boolean tryLock(String lockKey, long timeout, long ttl, boolean fair, boolean async) {
+        RLock lock = getLock(lockKey, fair);
+
+        try {
+            if (async) {
+                return lock.tryLockAsync(timeout, ttl, TimeUnit.MILLISECONDS).get();
             } else {
-                Long endTime = System.currentTimeMillis() + timeout;
-                while (System.currentTimeMillis() < endTime) {
-                    // 6.使用setnx方法设置锁值
-                    if (conn.setnx(lockName, String.valueOf(value)).equals(1L)) {
-                        valueThreadLocal.set(value);
-                        // 7.判断返回结果如果为1,则可以成功获取锁,并且设置锁的超时时间
-                        if (ttl != 0) {
-                            conn.expire(lockName, Integer.parseInt(String.valueOf(ttl)));
-                        }
-                        return true;
-                    }
-                    // 8.否则情况下继续循环等待
-                }
+                return lock.tryLock(timeout, ttl, TimeUnit.MILLISECONDS);
             }
         } catch (Exception e) {
-            log.error(e.getMessage());
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
-            conn = null;
+            logger.debug("try lock failed");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean unlock() {
+        if (redissonClientHolder.isStarted()) {
+            RLock rLock = lockHolder.get();
+            rLock.unlock();
+            return true;
         }
         return false;
     }
 
-    @Override
-    public boolean release(String lock) {
-        Jedis conn = null;
-        try {
-            // 1.建立redis连接
-            conn = jedisPool.getResource();
-            // 2.定义锁的名称
-            String lockName = LOCK_KEY_PREFIX + lock;
-            // 3.如果value与redis中一直直接删除，否则等待超时
-            Long value = valueThreadLocal.get();
-            if (String.valueOf(value).equals(conn.get(lockName))) {
-                conn.del(lockName);
-                log.debug("release lock success, lockKey :{},value :{}", lock, value);
-                return true;
-            }
-        } catch (Exception e) {
-            log.debug("release lock fail");
-            return false;
-        } finally {
-            if (conn != null) {
-                conn.close();
-            }
+    /**
+     * 获取lock
+     *
+     * @param lockKey lockKey
+     * @param fair    是否公平
+     * @return
+     */
+    private RLock getLock(String lockKey, boolean fair) {
+        RedissonClient redisson = redissonClientHolder.getRedisson();
+        RLock lock = null;
+        if (fair) {
+            lock = redisson.getFairLock(lockKey);
+        } else {
+            lock = redisson.getFairLock(lockKey);
         }
-        return false;
+
+        lockHolder.set(lock);
+        return lock;
     }
 }

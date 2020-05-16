@@ -1,43 +1,62 @@
 package com.marshal.epoch.lock;
 
+
 /**
  * @author Marshal
- * @desc 分布式锁抽象接口
- * @since 2020/4/17
+ * @desc 分布式锁
+ * @since 2020/5/16
  */
 public interface DistributedLocker {
 
     /**
-     * 获取分布式锁，获取不到的情况下将会自旋重试
+     * 获取分布式锁
+     * <pre>如果没有立刻获取锁，该线程将会一直获取锁</pre>
      *
-     * @param lock
-     * @return true if acquire lock,else false
+     * @param lockKey
      */
-    boolean lock(String lock);
+    void lock(String lockKey);
+
+    /**
+     * 获取分布式锁
+     * <pre>如果没有立刻获取锁，立刻返回false</pre>
+     *
+     * @param lockKey
+     * @return
+     */
+    boolean tryLock(String lockKey);
 
     /**
      * 获取分布式锁，在尝试到达超时时间后会返回false
      *
-     * @param lock
+     * @param lockKey
      * @param timeout 超时时间
      * @return
      */
-    boolean tryLock(String lock, long timeout);
+    boolean tryLock(String lockKey, long timeout);
 
     /**
-     * @param lock
-     * @param timeout
-     * @param ttl     锁的自动过期时间
+     * @param lockKey 锁的key
+     * @param timeout 持续请求时间
+     * @param ttl     持有锁时长到达ttl后，会自动释放该锁
      * @return
      */
-    boolean tryLock(String lock, long timeout, long ttl);
+    boolean tryLock(String lockKey, long timeout, long ttl);
+
+    /**
+     * @param lockKey 锁的key
+     * @param timeout 持续请求时间
+     * @param ttl     锁的自动过期时间
+     * @param fair
+     * @param async
+     * @return
+     */
+    boolean tryLock(String lockKey, long timeout, long ttl, boolean fair, boolean async);
 
     /**
      * 释放锁
      *
-     * @param lock
      * @return
      */
-    boolean release(String lock);
+    boolean unlock();
 
 }

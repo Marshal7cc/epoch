@@ -1,56 +1,80 @@
 package com.marshal.epoch.lock.config;
 
 import com.marshal.epoch.lock.DistributedLocker;
+import com.marshal.epoch.lock.aop.DistributedLockAspect;
 import com.marshal.epoch.lock.component.RedisDistributedLocker;
-import com.marshal.epoch.lock.propertis.DistributedLockProperty;
-import com.marshal.epoch.lock.propertis.JedisPoolProperty;
+import com.marshal.epoch.lock.component.redisson.RedissonClientHolder;
+import com.marshal.epoch.lock.propertis.Lock4jProperties;
+import com.marshal.epoch.lock.propertis.RedissonProperties;
+import org.redisson.Redisson;
+import org.redisson.api.RedissonClient;
+import org.redisson.config.Config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
+
+import java.io.IOException;
+
 
 /**
  * @auth: Marshal
  * @date: 2020/4/17
- * @desc: epoch 分布式锁
+ * @desc: epoch锁(主要是分布式锁)
  */
-@EnableConfigurationProperties({DistributedLockProperty.class})
+@EnableConfigurationProperties({Lock4jProperties.class})
 public class LockAutoConfiguration {
 
     @Autowired
-    private DistributedLockProperty distributedLockProperty;
+    private Lock4jProperties lock4JProperties;
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "epoch.distributed-lock", name = {"type"}, havingValue = "redis")
-    public JedisPool jedisPool() {
-        JedisPoolProperty jedisPoolProperty = distributedLockProperty.getJedis();
-        JedisPoolConfig config = new JedisPoolConfig();
-        // 设置最大连接数
-        config.setMaxTotal(jedisPoolProperty.getMaxTotal());
-        // 设置最大空闲数
-        config.setMaxIdle(jedisPoolProperty.getMaxIdle());
-        // 设置最大等待时间
-        config.setMaxWaitMillis(jedisPoolProperty.getMaxWaitMillis());
-        // 在borrow一个jedis实例时，是否需要验证，若为true，则所有jedis实例均是可用的
-        config.setTestOnBorrow(true);
-
-        JedisPool pool = new JedisPool(config, jedisPoolProperty.getHost(),
-                jedisPoolProperty.getPort(), 3000, jedisPoolProperty.getPassword(),
-                jedisPoolProperty.getDatabase());
-        return pool;
+    @ConditionalOnProperty(prefix = "epoch.lock4j", name = {"type"}, havingValue = "redisson")
+    RedissonClient redisson() throws IOException {
+        RedissonProperties redissonProperties = lock4JProperties.getRedissonProperties();
+        Config config = new Config();
+        config.useSingleServer()
+                .setIdleConnectionTimeout(redissonProperties.getIdleConnectionTimeout())
+                .setConnectTimeout(redissonProperties.getConnectTimeout())
+                .setTimeout(redissonProperties.getTimeout())
+                .setRetryAttempts(redissonProperties.getRetryAttempts())
+                .setRetryInterval(redissonProperties.getRetryInterval())
+                .setPassword(redissonProperties.getPassword())
+                .setAddress(redissonProperties.getAddress())
+                .setClientName(redissonProperties.getClientName())
+                .setSubscriptionConnectionMinimumIdleSize(redissonProperties.getSubscriptionConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(redissonProperties.getSubscriptionConnectionPoolSize())
+                .setSubscriptionsPerConnection(redissonProperties.getSubscriptionsPerConnection())
+                .setConnectionPoolSize(redissonProperties.getConnectionPoolSize())
+                .setConnectionMinimumIdleSize(redissonProperties.getConnectionMinimumIdleSize())
+                .setDatabase(redissonProperties.getDatabase())
+                .setDnsMonitoringInterval(redissonProperties.getDnsMonitoringInterval());
+        return Redisson.create(config);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "epoch.distributed-lock", name = {"type"}, havingValue = "redis")
-    public DistributedLocker redisDistributedLocker(JedisPool jedisPool) {
+    @ConditionalOnProperty(prefix = "epoch.lock4j", name = {"type"}, havingValue = "redisson")
+    public DistributedLocker redisDistributedLocker(RedissonClientHolder redissonClientHolder) {
         RedisDistributedLocker distributedLocker = new RedisDistributedLocker();
-        distributedLocker.setJedisPool(jedisPool);
+        distributedLocker.setRedissonClientHolder(redissonClientHolder);
         return distributedLocker;
     }
 
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(prefix = "epoch.lock4j", name = {"type"}, havingValue = "redisson")
+    public RedissonClientHolder redissonClientHolder(RedissonClient redissonClient) {
+        RedissonClientHolder redissonClientHolder = new RedissonClientHolder();
+        redissonClientHolder.setRedisson(redissonClient);
+        return redissonClientHolder;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public DistributedLockAspect distributedLockAspect() {
+        return new DistributedLockAspect();
+    }
 }
