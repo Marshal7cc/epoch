@@ -1,7 +1,7 @@
-package com.marshal.epoch.distributedlock.component;
+package com.marshal.epoch.lock.component;
 
-import com.marshal.epoch.distributedlock.DistributedLocker;
-import com.marshal.epoch.distributedlock.util.IdWorker;
+import com.marshal.epoch.lock.DistributedLocker;
+import com.marshal.epoch.lock.util.IdWorker;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;

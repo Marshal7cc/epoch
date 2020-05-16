@@ -1,9 +1,9 @@
-package com.marshal.epoch.distributedlock.config;
+package com.marshal.epoch.lock.config;
 
-import com.marshal.epoch.distributedlock.DistributedLocker;
-import com.marshal.epoch.distributedlock.component.RedisDistributedLocker;
-import com.marshal.epoch.distributedlock.propertis.DistributedLockProperty;
-import com.marshal.epoch.distributedlock.propertis.JedisPoolProperty;
+import com.marshal.epoch.lock.DistributedLocker;
+import com.marshal.epoch.lock.component.RedisDistributedLocker;
+import com.marshal.epoch.lock.propertis.DistributedLockProperty;
+import com.marshal.epoch.lock.propertis.JedisPoolProperty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,7 +18,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @desc: epoch 分布式锁
  */
 @EnableConfigurationProperties({DistributedLockProperty.class})
-public class DistributedLockAutoConfiguration {
+public class LockAutoConfiguration {
 
     @Autowired
     private DistributedLockProperty distributedLockProperty;

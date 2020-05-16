@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>epoch-distributedlock-starter</artifactId>
+    <artifactId>epoch-lock4j-starter</artifactId>
     <description>epoch distributed lock boot starter 标准化分布式锁组件</description>
 
     <dependencies>

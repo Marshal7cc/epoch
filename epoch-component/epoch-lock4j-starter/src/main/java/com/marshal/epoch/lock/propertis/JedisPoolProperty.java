@@ -1,4 +1,4 @@
-package com.marshal.epoch.distributedlock.propertis;
+package com.marshal.epoch.lock.propertis;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

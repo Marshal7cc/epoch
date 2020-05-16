@@ -1,4 +1,4 @@
-package com.marshal.epoch.distributedlock;
+package com.marshal.epoch.lock;
 
 /**
  * @author Marshal

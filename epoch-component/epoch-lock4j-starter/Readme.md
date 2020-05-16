@@ -1,6 +1,6 @@
-### epoch-distributedlock-starter
+### epoch-lock4j-starter
 
-epoch-distributedlock-starter提供了标准的分布式锁实现，目前只提供了一种实现方式：
+epoch-lock4j-starter提供了标准的分布式锁实现，目前只提供了一种实现方式：
 
 1.Redis
 
@@ -9,14 +9,14 @@ pom.xml
 ```
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-distributedlock-starter</artifactId>
+            <artifactId>epoch-lock4j-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 ```
 
 application.yml
 ```
-# epoch-distributedlock-starter配置
+# epoch-lock4j-starter配置
 epoch:
   distributed-lock:
     type: redis

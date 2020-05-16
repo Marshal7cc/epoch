@@ -1,4 +1,4 @@
-package com.marshal.epoch.distributedlock.util;
+package com.marshal.epoch.lock.util;
 
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
