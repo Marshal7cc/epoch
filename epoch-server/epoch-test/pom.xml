@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-auth-client</artifactId>
+            <artifactId>epoch-security-starter</artifactId>
             <version>${epoch.version}</version>
         </dependency>
 

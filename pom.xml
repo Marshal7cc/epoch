@@ -21,6 +21,7 @@
         <module>epoch-base</module>
         <module>epoch-component</module>
         <module>epoch-monitor</module>
+        <module>epoch-platform</module>
         <module>epoch-security</module>
         <module>epoch-server</module>
         <module>epoch-server-api</module>
