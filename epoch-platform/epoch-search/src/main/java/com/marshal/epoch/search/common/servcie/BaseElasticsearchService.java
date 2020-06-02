@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @auth Marshal
+ * @author Marshal
  * @date 2019/9/24
  * @desc 全文检索通用服务
  */
@@ -60,9 +60,12 @@ public interface BaseElasticsearchService<T> {
      * @param fieldNames
      * @return
      */
-    Map<String, Object> queryHighlight(int pageNo, int pageSize, String keyword, String indexName, String... fieldNames);
+    Map<String, Object> queryHighlight(int pageNo, int pageSize, String keyword, String indexName,
+                                       String... fieldNames);
 
     /**
+     * 分页高亮查询
+     *
      * @param pageNo
      * @param pageSize
      * @param termWord
@@ -71,7 +74,8 @@ public interface BaseElasticsearchService<T> {
      * @param fieldNames
      * @return
      */
-    Map<String, Object> queryHighlight(int pageNo, int pageSize, String termWord, String keyword, String indexName, String... fieldNames);
+    Map<String, Object> queryHighlight(int pageNo, int pageSize, String termWord, String keyword, String indexName,
+                                       String... fieldNames);
 
 
     /**

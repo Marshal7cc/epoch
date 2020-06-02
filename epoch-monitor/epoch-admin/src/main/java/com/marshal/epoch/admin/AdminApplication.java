@@ -5,9 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @auth: Marshal
- * @date: 2020/2/14
- * @desc:
+ * @author Marshal
+ * @date 2020/2/14
  */
 @EnableAdminServer
 @SpringBootApplication

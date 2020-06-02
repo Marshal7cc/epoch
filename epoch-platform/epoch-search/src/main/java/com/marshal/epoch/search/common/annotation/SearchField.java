@@ -2,6 +2,9 @@ package com.marshal.epoch.search.common.annotation;
 
 import java.lang.annotation.*;
 
+/**
+ * @author Marshal
+ */
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

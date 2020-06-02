@@ -7,9 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 /**
- * @auth: Marshal
- * @date: 2020/2/14
- * @desc:
+ * @author Marshal
+ * @date 2020/2/14
  */
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

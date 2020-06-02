@@ -1,9 +1,9 @@
 package com.marshal.epoch.generator.util;
 
 /**
- * @auth: Marshal
- * @date: 2019/5/19
- * @desc:
+ * @author Marshal
+ * @date 2019/5/19
+ *
  */
 public class StringUtil {
     private static final char UNDERLINE = '_';

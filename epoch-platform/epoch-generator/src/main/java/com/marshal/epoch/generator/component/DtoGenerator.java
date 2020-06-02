@@ -1,8 +1,8 @@
 package com.marshal.epoch.generator.component;
 
-import com.marshal.epoch.common.dto.BaseDto;
-import com.marshal.epoch.generator.dto.DBColumn;
-import com.marshal.epoch.generator.dto.DBTable;
+import com.marshal.epoch.mybatis.domain.AuditDomain;
+import com.marshal.epoch.generator.dto.DbColumn;
+import com.marshal.epoch.generator.dto.DbTable;
 import com.marshal.epoch.generator.dto.GeneratorConfig;
 import com.marshal.epoch.generator.enums.FileType;
 import org.apache.commons.lang3.StringUtils;
@@ -13,9 +13,9 @@ import java.util.List;
 import static com.marshal.epoch.generator.util.TemplateUtil.columnToCamel;
 
 /**
- * @auth: Marshal
- * @date: 2020/1/20
- * @desc:
+ * @author Marshal
+ * @date 2020/1/20
+ *
  */
 @Component
 public class DtoGenerator implements AbstractGenerator {
@@ -26,7 +26,7 @@ public class DtoGenerator implements AbstractGenerator {
     }
 
     @Override
-    public byte[] generate(DBTable table, GeneratorConfig generatorConfig) throws Exception {
+    public byte[] generate(DbTable table, GeneratorConfig generatorConfig) throws Exception {
         // key 是否需要引入相对包
         boolean needUtil = false;
         boolean needNotNull = false;
@@ -36,9 +36,9 @@ public class DtoGenerator implements AbstractGenerator {
         String parentPackagePath = generatorConfig.getParentPackagePath();
         String packagePath = generatorConfig.getPackagePath();
 
-        List<DBColumn> columns = table.getColumns();
+        List<DbColumn> columns = table.getColumns();
         // 判断是否需要引入包
-        for (DBColumn s : columns) {
+        for (DbColumn s : columns) {
             switch (s.getJdbcType().toUpperCase()) {
                 case "DATE":
                 case "TIMESTAMP":
@@ -85,7 +85,7 @@ public class DtoGenerator implements AbstractGenerator {
         sb.append("import javax.persistence.Id;\r\n");
         sb.append("import org.hibernate.validator.constraints.Length;\r\n");
         sb.append("import javax.persistence.Table;\r\n");
-        String d = BaseDto.class.getName();
+        String d = AuditDomain.class.getName();
         sb.append("import " + d + ";\r\n");
         if (needUtil) {
             sb.append("import java.util.Date;\r\n");
@@ -94,14 +94,21 @@ public class DtoGenerator implements AbstractGenerator {
             sb.append("import javax.validation.constraints.NotNull;\r\n");
         }
         if (needNotEmpty) {
-            sb.append("import org.hibernate.validator.constraints.NotEmpty;\r\n");
+            sb.append("\r\n");
         }
         sb.append("\r\n@Data\r\n");
         sb.append("@Table(name = " + "\"" + table.getName() + "\")\r\n");
-        sb.append("public class " + name + " extends BaseDto {\r\n\r\n");
+        sb.append("public class " + name + " extends AuditDomain {\r\n\r\n");
 
         // 生成属性
-        for (DBColumn cl : columns) {
+        generateColumns(columns, sb);
+
+        sb.append("}\r\n");
+        return sb.toString().getBytes("utf-8");
+    }
+
+    private void generateColumns(List<DbColumn> columns, StringBuilder sb) {
+        for (DbColumn cl : columns) {
             if (!StringUtils.isEmpty(cl.getRemarks())) {
                 sb.append("    /**\r\n");
                 sb.append("     * " + cl.getRemarks() + "\r\n");
@@ -115,7 +122,7 @@ public class DtoGenerator implements AbstractGenerator {
                 } else if (cl.isNotNull()) {
                     sb.append("    @NotNull\r\n");
                 }
-                if (cl.getJavaType().equalsIgnoreCase("String")) {
+                if ("String".equals(cl.getJavaType())) {
                     sb.append("    @Length(max = ");
                     sb.append(cl.getColumnLength() + ")\r\n");
                 }
@@ -124,7 +131,5 @@ public class DtoGenerator implements AbstractGenerator {
             str += "\r\n\r\n";
             sb.append(str);
         }
-        sb.append("}\r\n");
-        return sb.toString().getBytes("utf-8");
     }
 }

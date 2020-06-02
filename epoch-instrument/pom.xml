@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>epoch</artifactId>
+        <groupId>com.marshal</groupId>
+        <version>1.0-RELEASE</version>
+    </parent>
+    <artifactId>epoch-instrument</artifactId>
+    <packaging>pom</packaging>
+
+    <name>epoch instrument</name>
+    <description>epoch平台--可插拔式组件</description>
+
+    <modules>
+        <module>epoch-starter-core</module>
+        <module>epoch-starter-cache</module>
+        <module>epoch-starter-lock4j</module>
+        <module>epoch-starter-message</module>
+        <module>epoch-starter-mybatis</module>
+        <module>epoch-starter-security</module>
+        <module>epoch-starter-web</module>
+    </modules>
+</project>

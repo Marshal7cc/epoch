@@ -1,11 +1,13 @@
 package com.marshal.epoch.generator.component;
 
-import com.marshal.epoch.generator.dto.DBTable;
+import com.marshal.epoch.generator.dto.DbTable;
 import com.marshal.epoch.generator.dto.GeneratorConfig;
 import com.marshal.epoch.generator.enums.FileType;
 
 /**
  * 代码生成器抽象接口
+ *
+ * @author Marshal
  */
 public interface AbstractGenerator {
 
@@ -23,7 +25,8 @@ public interface AbstractGenerator {
      * @param table
      * @param info
      * @return
+     * @throws Exception
      */
-    byte[] generate(DBTable table, GeneratorConfig info) throws Exception;
+    byte[] generate(DbTable table, GeneratorConfig info) throws Exception;
 
 }

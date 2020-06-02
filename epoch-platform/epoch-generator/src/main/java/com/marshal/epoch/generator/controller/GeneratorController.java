@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * epoch代码生成器
+ * @author Marshal
  */
 @RestController
 public class GeneratorController {

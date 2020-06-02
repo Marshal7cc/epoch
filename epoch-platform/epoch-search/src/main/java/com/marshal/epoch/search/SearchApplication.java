@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @auth: Marshal
- * @date: 2020/2/16
- * @desc: 全文检索服务
+ * @author Marshal
+ * @date 2020/2/16
+ *  全文检索服务
  */
 @SpringBootApplication
 public class SearchApplication {

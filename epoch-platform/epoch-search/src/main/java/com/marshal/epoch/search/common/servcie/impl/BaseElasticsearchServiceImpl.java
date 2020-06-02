@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @auth Marshal
+ * @author Marshal
  * @date 2019/9/24
  * @desc
  */
@@ -76,7 +76,7 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
         // 返回搜索结果
         SearchHits hits = response.getHits();
 
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>(2);
         result.put("totalCount", hits.getTotalHits());
         result.put("rows", ElasticSearchUtil.getHitList(hits));
         return result;
@@ -111,7 +111,7 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
         // 返回搜索结果
         SearchHits hits = response.getHits();
 
-        Map<String, Object> result = new HashMap<>();
+        Map<String, Object> result = new HashMap<>(2);
         result.put("totalCount", hits.getTotalHits());
         result.put("rows", ElasticSearchUtil.getHitList(hits));
         return result;

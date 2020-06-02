@@ -2,13 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <packaging>pom</packaging>
-    <groupId>com.marshal</groupId>
-    <artifactId>epoch</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-
-    <name>epoch</name>
-    <description>Halcyon version 2.0 of Spring Cloud ==> epoch</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -16,27 +9,43 @@
         <version>2.2.2.RELEASE</version>
         <relativePath/>
     </parent>
+    <groupId>com.marshal</groupId>
+    <artifactId>epoch</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-RELEASE</version>
+
+    <name>epoch</name>
+    <description>Halcyon version 2.0 using Spring Cloud ==> epoch-cloud</description>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>marshal</name>
+            <email>marshal960818@gmail.com</email>
+        </developer>
+    </developers>
 
     <modules>
-        <module>epoch-base</module>
-        <module>epoch-component</module>
+        <module>epoch-infra</module>
+        <module>epoch-instrument</module>
         <module>epoch-monitor</module>
         <module>epoch-platform</module>
-        <module>epoch-security</module>
-        <module>epoch-server</module>
-        <module>epoch-server-api</module>
-        <module>epoch-server-entity</module>
+        <module>epoch-service</module>
+        <module>epoch-service-api</module>
     </modules>
 
     <properties>
-        <epoch.version>1.0.0-SNAPSHOT</epoch.version>
-        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
-        <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
-        <springboot-admin.version>2.2.0</springboot-admin.version>
-
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
+        <epoch.version>1.0-RELEASE</epoch.version>
+        <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
+        <springboot-admin.version>2.2.0</springboot-admin.version>
+        <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
     </properties>
 
     <!-- maven 私服地址,用于deploy -->
@@ -54,7 +63,6 @@
             <name>aliyun Repository</name>
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </repository>
-
         <repository>
             <id>maven-repository</id>
             <name>maven Repository</name>
@@ -71,10 +79,8 @@
         </pluginRepository>
     </pluginRepositories>
 
-    <!--  依赖管理  -->
     <dependencyManagement>
         <dependencies>
-            <!-- spring cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -82,7 +88,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- spring cloud alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

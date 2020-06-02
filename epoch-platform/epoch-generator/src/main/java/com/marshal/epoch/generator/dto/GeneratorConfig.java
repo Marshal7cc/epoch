@@ -3,9 +3,9 @@ package com.marshal.epoch.generator.dto;
 import lombok.Data;
 
 /**
- * @auth: Marshal
- * @date: 2019/11/6
- * @desc: 代码生成请求信息
+ * @author Marshal
+ * @date 2019/11/6
+ *  代码生成请求信息
  */
 @Data
 public class GeneratorConfig {

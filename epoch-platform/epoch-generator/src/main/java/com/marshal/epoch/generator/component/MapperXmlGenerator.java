@@ -1,7 +1,7 @@
 package com.marshal.epoch.generator.component;
 
-import com.marshal.epoch.generator.dto.DBColumn;
-import com.marshal.epoch.generator.dto.DBTable;
+import com.marshal.epoch.generator.dto.DbColumn;
+import com.marshal.epoch.generator.dto.DbTable;
 import com.marshal.epoch.generator.dto.GeneratorConfig;
 import com.marshal.epoch.generator.enums.FileType;
 import org.springframework.stereotype.Component;
@@ -11,9 +11,9 @@ import java.util.List;
 import static com.marshal.epoch.generator.util.TemplateUtil.columnToCamel;
 
 /**
- * @auth: Marshal
- * @date: 2020/1/20
- * @desc:
+ * @author Marshal
+ * @date 2020/1/20
+ *
  */
 @Component
 public class MapperXmlGenerator implements AbstractGenerator {
@@ -24,14 +24,14 @@ public class MapperXmlGenerator implements AbstractGenerator {
     }
 
     @Override
-    public byte[] generate(DBTable table, GeneratorConfig generatorConfig) throws Exception {
+    public byte[] generate(DbTable table, GeneratorConfig generatorConfig) throws Exception {
         String parentPackagePath = generatorConfig.getParentPackagePath();
         String packagePath = generatorConfig.getPackagePath();
         String targetName = generatorConfig.getTargetName();
         String packageName = parentPackagePath.replaceAll("/", ".") + "." + packagePath;
         String mapperNameSpace = generatorConfig.getTargetName() + "Mapper";
 
-        List<DBColumn> columns = table.getColumns();
+        List<DbColumn> columns = table.getColumns();
 
         // 生成属性
         StringBuilder sb = new StringBuilder();
@@ -41,7 +41,7 @@ public class MapperXmlGenerator implements AbstractGenerator {
         sb.append("<resultMap id=\"BaseResultMap\" type=\"" + packageName + ".entity." + targetName + "\">\r\n");
 
         // 生成属性
-        for (DBColumn cl : columns) {
+        for (DbColumn cl : columns) {
             String str = "        <result column=\"" + cl.getName() + "\" property=\"" + columnToCamel(cl.getName()) + "\" jdbcType=\"" + cl.getJdbcType() + "\" />\r\n";
             if (cl.isId()) {
                 str = "        <id column=\"" + cl.getName() + "\" property=\"" + columnToCamel(cl.getName()) + "\" jdbcType=\"" + cl.getJdbcType() + "\" />\r\n";

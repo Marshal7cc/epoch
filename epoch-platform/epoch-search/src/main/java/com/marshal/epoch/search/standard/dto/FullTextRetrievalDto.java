@@ -1,7 +1,7 @@
 package com.marshal.epoch.search.standard.dto;
 
 /**
- * @auth Marshal
+ * @author Marshal
  * @date 2019/9/26
  * @desc 全文检索查询参数
  */

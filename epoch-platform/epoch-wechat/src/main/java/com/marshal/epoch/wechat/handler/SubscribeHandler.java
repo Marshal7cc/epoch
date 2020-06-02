@@ -17,22 +17,22 @@ import java.util.Map;
 @Component
 public class SubscribeHandler extends AbstractHandler {
 
+    private static final int ERROR_CODE = 48001;
+
     @Override
-    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage,
-                                    Map<String, Object> context, WxMpService weixinService,
+    public WxMpXmlOutMessage handle(WxMpXmlMessage wxMessage, Map<String, Object> context, WxMpService weixinService,
                                     WxSessionManager sessionManager) throws WxErrorException {
 
         this.logger.info("新关注用户 OPENID: " + wxMessage.getFromUser());
 
         // 获取微信用户基本信息
         try {
-            WxMpUser userWxInfo = weixinService.getUserService()
-                .userInfo(wxMessage.getFromUser(), null);
+            WxMpUser userWxInfo = weixinService.getUserService().userInfo(wxMessage.getFromUser(), null);
             if (userWxInfo != null) {
                 // TODO 可以添加关注用户到本地数据库
             }
         } catch (WxErrorException e) {
-            if (e.getError().getErrorCode() == 48001) {
+            if (e.getError().getErrorCode() == ERROR_CODE) {
                 this.logger.info("该公众号没有获取用户信息权限！");
             }
         }
@@ -61,9 +61,8 @@ public class SubscribeHandler extends AbstractHandler {
     /**
      * 处理特殊请求，比如如果是扫码进来的，可以做相应处理
      */
-    private WxMpXmlOutMessage handleSpecial(WxMpXmlMessage wxMessage)
-        throws Exception {
-        //TODO
+    private WxMpXmlOutMessage handleSpecial(WxMpXmlMessage wxMessage) throws Exception {
+        // TODO
         return null;
     }
 

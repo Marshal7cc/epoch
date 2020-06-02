@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.marshal.epoch.system.infra.mapper.SysPromptMapper">
+    <resultMap id="BaseResultMap" type="com.marshal.epoch.system.domain.entity.SysPrompt">
+        <id column="prompt_id" property="promptId" jdbcType="BIGINT"/>
+        <result column="prompt_code" property="promptCode" jdbcType="VARCHAR"/>
+        <result column="lang" property="lang" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByLangCode" resultMap="BaseResultMap">
+        select sp.prompt_code,sp.description
+        from
+        sys_prompt sp,sys_lang sl
+        where
+        sp.lang = sl.lang_id
+        and sl.lang_code = #{langCode}
+    </select>
+</mapper>

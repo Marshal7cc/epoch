@@ -4,9 +4,9 @@ import com.marshal.epoch.search.standard.dto.SysUser;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
- * @auth: Marshal
- * @date: 2020/2/16
- * @desc:
+ * @author Marshal
+ * @date 2020/2/16
+ *
  */
 public interface SysUserRepository extends ElasticsearchRepository<SysUser, Long> {
 }

@@ -4,13 +4,16 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.FileTemplateResolver;
 
 /**
- * @auth: Marshal
- * @date: 2019/10/31
- * @desc: 枚举单例
- * * ThymeLeaf的Text模式,用于生成文件
+ * 枚举单例 * ThymeLeaf的Text模式,用于生成文件
+ *
+ * @author Marshal
+ * @date 2019/10/31
  */
 public enum ThymeLeafConfig {
 
+    /**
+     * 文本模式
+     */
     TEXT("TEXT");
 
     private TemplateEngine templateEngine;

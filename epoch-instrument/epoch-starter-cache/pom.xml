@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>epoch-instrument</artifactId>
+        <groupId>com.marshal</groupId>
+        <version>1.0-RELEASE</version>
+    </parent>
+    <artifactId>epoch-starter-cache</artifactId>
+
+    <name>epoch-starter-cache</name>
+    <description>epoch starter cache--epoch标准化缓存组件</description>
+
+    <dependencies>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!--epoch starter core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-starter-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+
+        <!--epoch starter mybatis -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-starter-mybatis</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
+    </dependencies>
+</project>

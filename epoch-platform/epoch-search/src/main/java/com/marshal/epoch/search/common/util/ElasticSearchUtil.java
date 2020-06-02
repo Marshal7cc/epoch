@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @auth Marshal
+ * @author Marshal
  * @date 2019/9/27
  * @desc
  */
@@ -104,7 +104,7 @@ public class ElasticSearchUtil {
         for (SearchHit searchHit : hits) {
             row = new HashMap<>(2);
             // 处理高亮数据
-            Map<String, Object> hitMap = new HashMap<>();
+            Map<String, Object> hitMap = new HashMap<>(16);
             searchHit.getHighlightFields().forEach((k, v) -> {
                 String highlight = "";
                 for (Text text : v.getFragments()) {

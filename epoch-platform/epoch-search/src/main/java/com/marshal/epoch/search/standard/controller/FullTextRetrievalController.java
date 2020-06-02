@@ -1,7 +1,7 @@
 package com.marshal.epoch.search.standard.controller;
 
-import com.marshal.epoch.common.dto.ResponseEntity;
-import com.marshal.epoch.common.util.ResponseUtil;
+import com.marshal.epoch.core.rest.ResponseEntity;
+import com.marshal.epoch.core.rest.Response;
 import com.marshal.epoch.search.standard.dto.FullTextRetrievalDto;
 import com.marshal.epoch.search.standard.dto.SysUser;
 import com.marshal.epoch.search.standard.servcie.SysUserSearchService;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @auth: Marshal
- * @date: 2020/2/16
- * @desc:
+ * @author Marshal
+ * @date 2020/2/16
+ *
  */
 @RestController
 public class FullTextRetrievalController {
@@ -24,30 +24,30 @@ public class FullTextRetrievalController {
 
     @PostMapping("/query")
     public ResponseEntity query(@RequestBody FullTextRetrievalDto dto) {
-        return ResponseUtil.responseOk(sysUserSearchService.query(dto));
+        return Response.success(sysUserSearchService.query(dto));
     }
 
     @PostMapping("/save")
     public ResponseEntity save(@RequestBody SysUser dto) {
         sysUserSearchService.save(dto);
-        return ResponseUtil.responseOk();
+        return Response.success();
     }
 
     @GetMapping("/createIndex")
     public ResponseEntity createIndex() {
         sysUserSearchService.createIndex(SysUser.class);
-        return ResponseUtil.responseOk();
+        return Response.success();
     }
 
     @GetMapping("/putMappings")
     public ResponseEntity putMappings() {
         sysUserSearchService.putMapping(SysUser.class);
-        return ResponseUtil.responseOk();
+        return Response.success();
     }
 
     @GetMapping("/deleteIndex")
     public ResponseEntity deleteIndex() {
         sysUserSearchService.deleteIndex(SysUser.class);
-        return ResponseUtil.responseOk();
+        return Response.success();
     }
 }

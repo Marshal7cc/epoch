@@ -8,6 +8,9 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 
+/**
+ * @author Marshal
+ */
 @Data
 @Document(indexName = "epoch_standard", type = "sys_user", shards = 5, replicas = 1)
 public class SysUser {

@@ -5,9 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * @auth: Marshal
- * @date: 2019/10/31
- * @desc: 代码生成器服务
+ * @author Marshal
+ * @date 2019/10/31
+ *  代码生成器服务
  */
 @EnableSwagger2Doc
 @SpringBootApplication
