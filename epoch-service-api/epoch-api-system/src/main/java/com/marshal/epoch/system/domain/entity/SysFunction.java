@@ -1,6 +1,7 @@
 package com.marshal.epoch.system.domain.entity;
 
 import com.marshal.epoch.mybatis.domain.AuditDomain;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;;
 import javax.persistence.Id;
 import org.hibernate.validator.constraints.Length;
@@ -18,6 +19,7 @@ public class SysFunction extends AuditDomain {
      * 主键
      */
     @Id
+    @ApiModelProperty(value = "")
     private Long functionId;
 
     /**

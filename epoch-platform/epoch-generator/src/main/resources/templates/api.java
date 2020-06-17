@@ -1,28 +1,10 @@
 package [(${package})].api;
 
-[# th:each="item:${import}"]
-import [(${item})];
-[/]
-import [(${package})].entity.[(${dtoName})];
-import org.springframework.web.bind.annotation.*;
-import java.util.List;
+import com.marshal.epoch.core.base.BaseApi;
+import [(${package})].domain.entity.[(${entityName})];
 
-@RestController
-@RequestMapping("/[(${dtoName})]")
-public interface [(${apiName})]{
-
-    @PostMapping(value = "/query")
-    ResponseEntity query(@RequestParam int page,
-                         @RequestParam int pageSize,
-                         @RequestBody [(${dtoName})] dto);
-
-    @PostMapping(value = "/submit")
-    ResponseEntity submit(@RequestBody [(${dtoName})] dto);
-
-    @PostMapping(value = "/remove")
-    ResponseEntity remove(@RequestBody List<[(${dtoName})]> list);
-
-    @GetMapping(value = "/queryById")
-    ResponseEntity queryById(@RequestParam Long id);
-
+/**
+ * @author [(${authorName})]
+ */
+public interface [(${apiName})] extends BaseApi<[(${entityName})]>{
 }

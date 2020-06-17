@@ -16,24 +16,6 @@
     </properties>
 
     <dependencies>
-        <!--spring web mvc-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <!-- spring cloud nacos config -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-nacos-config</artifactId>
-        </dependency>
-
-        <!-- spring cloud nacos registry -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-alibaba-nacos-discovery</artifactId>
-        </dependency>
-
         <!-- spring-boot-admin-client -->
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -54,24 +36,10 @@
             <version>${ognl.version}</version>
         </dependency>
 
-        <!-- swagger -->
-        <dependency>
-            <groupId>com.spring4all</groupId>
-            <artifactId>swagger-spring-boot-starter</artifactId>
-            <version>1.9.1.RELEASE</version>
-        </dependency>
-
-        <!--epoch-starter-core -->
+        <!--epoch-starter-web -->
         <dependency>
             <groupId>com.marshal</groupId>
-            <artifactId>epoch-starter-core</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-
-        <!--epoch db starter -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-starter-mybatis</artifactId>
+            <artifactId>epoch-starter-web</artifactId>
             <version>${epoch.version}</version>
         </dependency>
     </dependencies>

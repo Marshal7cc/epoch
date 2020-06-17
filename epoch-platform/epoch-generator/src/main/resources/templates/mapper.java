@@ -1,10 +1,11 @@
 package [(${package})].mapper;
 
-[# th:each="item:${import}"]
-import [(${item})];
-[/]
-import [(${package})].entity.[(${dtoName})];
+import [(${package})].domain.entity.[(${entityName})];
+import tk.mybatis.mapper.common.Mapper;
 
-public interface [(${mapperName})] extends Mapper<[(${dtoName})]>{
+/**
+ * @author [(${authorName})]
+ */
+public interface [(${mapperName})] extends Mapper<[(${entityName})]>{
 
 }
