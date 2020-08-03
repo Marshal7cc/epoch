@@ -3,15 +3,21 @@ package com.marshal.epoch.search.common.servcie.impl;
 
 import com.marshal.epoch.search.common.servcie.BaseElasticsearchService;
 import com.marshal.epoch.search.common.util.ElasticSearchUtil;
+import com.marshal.epoch.search.standard.dto.SysUser;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
+import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
+import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
@@ -33,7 +39,7 @@ import java.util.Map;
 public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService<T> {
 
     @Autowired
-    private ElasticsearchTemplate elasticsearchTemplate;
+    private ElasticsearchRestTemplate elasticsearchTemplate;
 
     @Override
     public void createIndex(Class clazz) {
@@ -67,19 +73,25 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
         // 设置高亮,使用默认的highlighter高亮器
         HighlightBuilder highlightBuilder = ElasticSearchUtil.getHighlightBuilder(fieldNames);
 
+
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(matchQuery)
+                .withHighlightBuilder(highlightBuilder).build();
+
+
         // 设置查询字段
-        SearchResponse response = elasticsearchTemplate.getClient().prepareSearch(indexName)
-                .setQuery(matchQuery)
-                .highlighter(highlightBuilder)
-                .get();
+        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
+
+        Aggregations aggregations = list.getAggregations();
 
         // 返回搜索结果
-        SearchHits hits = response.getHits();
-
-        Map<String, Object> result = new HashMap<>(2);
-        result.put("totalCount", hits.getTotalHits());
-        result.put("rows", ElasticSearchUtil.getHitList(hits));
-        return result;
+//        SearchHits hits = response.getHits();
+//
+//        Map<String, Object> result = new HashMap<>(2);
+//        result.put("totalCount", hits.getTotalHits());
+//        result.put("rows", ElasticSearchUtil.getHitList(hits));
+//        return result;
+        return null;
     }
 
     @Override
@@ -100,21 +112,32 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
         // 设置高亮,使用默认的highlighter高亮器
         HighlightBuilder highlightBuilder = ElasticSearchUtil.getHighlightBuilder(fieldNames);
 
+        NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
+                .withQuery(matchQuery)
+                .withHighlightBuilder(highlightBuilder).build();
+
+
         // 设置查询字段
-        SearchResponse response = elasticsearchTemplate.getClient().prepareSearch(indexName)
-                .setQuery(matchQuery)
-                .highlighter(highlightBuilder)
-                .setFrom((pageNo - 1) * pageSize)
-                .setSize(pageNo * pageSize)
-                .get();
+        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
 
-        // 返回搜索结果
-        SearchHits hits = response.getHits();
+        Aggregations aggregations = list.getAggregations();
 
-        Map<String, Object> result = new HashMap<>(2);
-        result.put("totalCount", hits.getTotalHits());
-        result.put("rows", ElasticSearchUtil.getHitList(hits));
-        return result;
+        // 设置查询字段
+//        SearchResponse response = elasticsearchTemplate.getClient().prepareSearch(indexName)
+//                .setQuery(matchQuery)
+//                .highlighter(highlightBuilder)
+//                .setFrom((pageNo - 1) * pageSize)
+//                .setSize(pageNo * pageSize)
+//                .get();
+//
+//        // 返回搜索结果
+//        SearchHits hits = response.getHits();
+//
+//        Map<String, Object> result = new HashMap<>(2);
+//        result.put("totalCount", hits.getTotalHits());
+//        result.put("rows", ElasticSearchUtil.getHitList(hits));
+//        return result;
+        return null;
     }
 }
 

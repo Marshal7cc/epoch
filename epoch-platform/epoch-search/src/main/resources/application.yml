@@ -6,13 +6,17 @@ spring:
   application:
     name: epoch-search
 
+  elasticsearch:
+    rest:
+      uris: localhost:9200
+
   # elasticsearch
-  data:
-    elasticsearch:
-      cluster-name: elasticsearch-cluster
-      cluster-nodes: 192.168.1.102:9300,192.168.1.102:9301,192.168.1.102:9302
-      repositories:
-        enabled: true
+#  data:
+#    elasticsearch:
+##      cluster-name: elasticsearch
+##      cluster-nodes: localhost:9300
+#      repositories:
+#        enabled: true
 #    rest:
-#      uris: 192.168.1.102:9200,192.168.1.102:9201,192.168.1.102:9202
+#      uris: localhost:9200
 
