@@ -21,6 +21,7 @@
         <module>epoch-starter-lock4j</module>
         <module>epoch-starter-message</module>
         <module>epoch-starter-mybatis</module>
+        <module>epoch-starter-rule-engine</module>
         <module>epoch-starter-security</module>
         <module>epoch-starter-web</module>
     </modules>
