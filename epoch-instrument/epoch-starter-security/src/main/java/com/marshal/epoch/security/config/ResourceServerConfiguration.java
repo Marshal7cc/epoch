@@ -1,5 +1,6 @@
 package com.marshal.epoch.security.config;
 
+import com.marshal.epoch.security.constants.SecurityConstants;
 import com.marshal.epoch.security.handler.EpochAccessDeniedHandler;
 import com.marshal.epoch.security.handler.EpochAuthenticationEntryPoint;
 import com.marshal.epoch.security.properties.SecurityProperty;
@@ -38,15 +39,25 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     @Override
     public void configure(HttpSecurity http) throws Exception {
 
-        http.csrf().disable().requestMatchers().antMatchers("/**");
+        http
+                .csrf().disable()
+                .requestMatchers()
+                .antMatchers("/**");
 
-        // 白名单
+        // 资源服务器默认白名单
+        http.authorizeRequests().antMatchers(SecurityConstants.RESOURCE_SERVER_DEFAULT_WHITE_LIST).permitAll();
+        // 自定义白名单
         String[] whiteList = securityProperty.getWhiteList();
         if (whiteList != null) {
             http.authorizeRequests().antMatchers(whiteList).permitAll();
         }
 
-        http.authorizeRequests().antMatchers("/**").authenticated().accessDecisionManager(accessDecisionManager).and()
+        http
+                .authorizeRequests()
+                .antMatchers("/**")
+                .authenticated()
+                .accessDecisionManager(accessDecisionManager)
+                .and()
                 .httpBasic();
 
     }

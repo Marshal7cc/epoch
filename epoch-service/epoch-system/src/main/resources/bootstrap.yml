@@ -18,5 +18,5 @@ spring:
         tx-service-group: ${spring.application.name}
 epoch:
   security:
-    white-list: /user/query,/user/remove,/swagger-ui.html
+    white-list: /user/query,/user/remove
     enable-auth: true
