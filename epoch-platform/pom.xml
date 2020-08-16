@@ -18,6 +18,7 @@
     <modules>
         <module>epoch-generator</module>
         <module>epoch-search</module>
+        <module>epoch-swagger</module>
         <module>epoch-wechat</module>
         <module>epoch-workflow</module>
     </modules>
