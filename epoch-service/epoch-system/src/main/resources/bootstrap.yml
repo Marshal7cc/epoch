@@ -19,3 +19,4 @@ spring:
 epoch:
   security:
     white-list: /user/query,/user/remove,/swagger-ui.html
+    enable-auth: true

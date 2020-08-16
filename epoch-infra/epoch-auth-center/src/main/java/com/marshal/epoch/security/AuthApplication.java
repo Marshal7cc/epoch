@@ -1,5 +1,6 @@
 package com.marshal.epoch.security;
 
+import com.marshal.epoch.security.annotation.EpochAuthorizationServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -10,6 +11,7 @@ import tk.mybatis.spring.annotation.MapperScan;
  *
  */
 @MapperScan("com.marshal.epoch.**.mapper")
+@EpochAuthorizationServer
 @SpringBootApplication
 public class AuthApplication {
 

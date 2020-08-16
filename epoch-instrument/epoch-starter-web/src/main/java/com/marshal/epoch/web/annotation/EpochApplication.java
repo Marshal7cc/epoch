@@ -2,7 +2,8 @@ package com.marshal.epoch.web.annotation;
 
 import java.lang.annotation.*;
 
-import com.marshal.epoch.security.annotation.EnableAuth;
+import com.marshal.epoch.security.annotation.EpochResourceServer;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -22,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@EnableAuth
+@EpochResourceServer
 @EnableSwagger2
 @EnableFeignClients
 @SpringBootApplication
@@ -34,7 +35,7 @@ public @interface EpochApplication {
      * @return the classes to exclude
      */
     @AliasFor(annotation = EnableAutoConfiguration.class)
-    Class<?>[] exclude() default {};
+    Class<?>[] exclude() default {org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class, ManagementWebSecurityAutoConfiguration.class};
 
     /**
      * Exclude specific auto-configuration class names such that they will never be

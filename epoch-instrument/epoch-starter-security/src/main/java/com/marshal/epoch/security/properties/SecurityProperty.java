@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "epoch.security")
 public class SecurityProperty {
-
+    private boolean enableAuth;
     private String[] whiteList;
 
 }

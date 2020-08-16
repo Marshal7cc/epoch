@@ -4,8 +4,8 @@ import com.marshal.epoch.security.handler.EpochAccessDeniedHandler;
 import com.marshal.epoch.security.handler.EpochAuthenticationEntryPoint;
 import com.marshal.epoch.security.properties.SecurityProperty;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -20,7 +20,8 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
  */
 @EnableResourceServer
 @EnableConfigurationProperties(SecurityProperty.class)
-public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
+@ConditionalOnProperty(prefix = "epoch.security", name = {"enable-auth"}, havingValue = "true", matchIfMissing = false)
+public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private SecurityProperty securityProperty;
