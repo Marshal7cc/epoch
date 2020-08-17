@@ -17,9 +17,12 @@ public interface SecurityConstants {
      * 资源服务器默认白名单
      */
     String[] RESOURCE_SERVER_DEFAULT_WHITE_LIST = {
+            "/",
+            "/csrf",
             "/v2/api-docs",
             "/swagger-ui.html",
             "/swagger-resources",
+            "/webjars/springfox-swagger-ui/**",
             "/swagger-resources/configuration/ui",
             "/swagger-resources/configuration/security"
     };
