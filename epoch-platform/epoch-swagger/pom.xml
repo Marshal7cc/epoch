@@ -40,5 +40,12 @@
             <artifactId>swagger-spring-boot-starter</artifactId>
             <version>1.9.1.RELEASE</version>
         </dependency>
+
+        <!-- epoch starter core -->
+        <dependency>
+            <groupId>com.marshal</groupId>
+            <artifactId>epoch-starter-core</artifactId>
+            <version>${epoch.version}</version>
+        </dependency>
     </dependencies>
 </project>
