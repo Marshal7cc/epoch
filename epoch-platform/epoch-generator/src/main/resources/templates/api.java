@@ -1,10 +1,10 @@
 package [(${package})].api;
 
-import com.marshal.epoch.core.base.BaseApi;
+import org.epoch.mybatis.common.CommonApi;
 import [(${package})].domain.entity.[(${entityName})];
 
 /**
  * @author [(${authorName})]
  */
-public interface [(${apiName})] extends BaseApi<[(${entityName})]>{
+public interface [(${apiName})] extends CommonApi<[(${entityName})]>{
 }

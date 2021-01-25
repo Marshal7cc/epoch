@@ -1,6 +1,6 @@
 package [(${package})].service;
 
-import com.marshal.epoch.mybatis.service.BaseRepository;
+import org.epoch.mybatis.repository.BaseRepository;
 import [(${package})].domain.entity.[(${entityName})];
 
 /**

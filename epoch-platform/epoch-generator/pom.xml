@@ -6,8 +6,8 @@
 
     <parent>
         <artifactId>epoch-platform</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-generator</artifactId>
 
@@ -16,13 +16,6 @@
     </properties>
 
     <dependencies>
-        <!-- spring-boot-admin-client -->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${springboot-admin.version}</version>
-        </dependency>
-
         <!-- thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -36,11 +29,10 @@
             <version>${ognl.version}</version>
         </dependency>
 
-        <!--epoch-starter-web -->
+        <!-- EPOCH Starter -->
         <dependency>
-            <groupId>com.marshal</groupId>
+            <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-web</artifactId>
-            <version>${epoch.version}</version>
         </dependency>
     </dependencies>
 

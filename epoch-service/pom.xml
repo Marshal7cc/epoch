@@ -5,16 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>epoch</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <artifactId>epoch-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-service</artifactId>
     <packaging>pom</packaging>
 
     <modules>
         <module>epoch-hr</module>
-        <module>epoch-system</module>
-        <module>epoch-test</module>
     </modules>
 </project>

@@ -6,8 +6,8 @@
 
     <parent>
         <artifactId>epoch-platform</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-workflow</artifactId>
 
@@ -33,12 +33,11 @@
         </dependency>
         <!--epoch starter web -->
         <dependency>
-            <groupId>com.marshal</groupId>
+            <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-web</artifactId>
-            <version>${epoch.version}</version>
             <exclusions>
                 <exclusion>
-                    <groupId>com.marshal</groupId>
+                    <groupId>org.epoch.starter</groupId>
                     <artifactId>epoch-starter-security</artifactId>
                 </exclusion>
             </exclusions>
@@ -115,15 +114,9 @@
         </dependency>
         <!-- HR api -->
         <dependency>
-            <groupId>com.marshal</groupId>
             <artifactId>epoch-api-hr</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
-        <!-- system api -->
-        <dependency>
-            <groupId>com.marshal</groupId>
-            <artifactId>epoch-api-system</artifactId>
-            <version>${epoch.version}</version>
+            <groupId>org.epoch</groupId>
+            <version>1.0.0.RELEASE</version>
         </dependency>
     </dependencies>
 </project>

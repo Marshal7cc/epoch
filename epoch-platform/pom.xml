@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>epoch</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <artifactId>epoch-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-platform</artifactId>
     <packaging>pom</packaging>
@@ -18,7 +18,6 @@
     <modules>
         <module>epoch-generator</module>
         <module>epoch-search</module>
-        <module>epoch-swagger</module>
         <module>epoch-wechat</module>
         <module>epoch-workflow</module>
     </modules>

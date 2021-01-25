@@ -6,8 +6,8 @@
 
     <parent>
         <artifactId>epoch-platform</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-wechat</artifactId>
 

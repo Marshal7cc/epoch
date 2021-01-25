@@ -6,8 +6,8 @@
 
     <parent>
         <artifactId>epoch-service</artifactId>
-        <groupId>com.marshal</groupId>
-        <version>1.0-RELEASE</version>
+        <groupId>org.epoch</groupId>
+        <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-hr</artifactId>
 
@@ -18,25 +18,18 @@
         <!--            <artifactId>spring-cloud-alibaba-seata</artifactId>-->
         <!--        </dependency>-->
 
-        <!-- spring-boot-admin-client -->
-        <dependency>
-            <groupId>de.codecentric</groupId>
-            <artifactId>spring-boot-admin-starter-client</artifactId>
-            <version>${springboot-admin.version}</version>
-        </dependency>
 
         <!--epoch starter web -->
         <dependency>
-            <groupId>com.marshal</groupId>
+            <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-web</artifactId>
-            <version>${epoch.version}</version>
         </dependency>
 
         <!-- HR api -->
         <dependency>
-            <groupId>com.marshal</groupId>
             <artifactId>epoch-api-hr</artifactId>
-            <version>${epoch.version}</version>
+            <groupId>org.epoch</groupId>
+            <version>1.0.0.RELEASE</version>
         </dependency>
     </dependencies>
 

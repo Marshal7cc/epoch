@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.epoch</groupId>
+        <artifactId>epoch-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+    <artifactId>epoch-infrastructure</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>epoch-gateway</module>
+        <module>epoch-oauth</module>
+        <module>epoch-iam</module>
+        <module>epoch-swagger</module>
+        <module>epoch-admin</module>
+        <module>epoch-zipkin</module>
+    </modules>
+</project>

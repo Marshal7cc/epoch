@@ -1,7 +1,7 @@
 package [(${package})].service.impl;
 
 
-import com.marshal.epoch.mybatis.service.impl.BaseRepositoryImpl;
+import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
 import [(${package})].domain.entity.[(${entityName})];
 import [(${package})].domain.repository.[(${repositoryName})];
 import org.springframework.stereotype.Service;

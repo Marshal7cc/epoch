@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.marshal.epoch.hr.infra.mapper.HrCompanyMapper">
-    <resultMap id="BaseResultMap" type="com.marshal.epoch.hr.domain.entity.HrCompany">
+<mapper namespace="org.epoch.hr.infra.mapper.HrCompanyMapper">
+    <resultMap id="BaseResultMap" type="org.epoch.hr.domain.entity.HrCompany">
         <id column="company_id" property="companyId" jdbcType="BIGINT"/>
         <result column="company_code" property="companyCode" jdbcType="VARCHAR"/>
         <result column="company_type" property="companyType" jdbcType="VARCHAR"/>

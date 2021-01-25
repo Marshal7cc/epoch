@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: epoch-gateway
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        namespace: EPOCH
+        group: EPOCH_GROUP
+        server-addr: ${nacos.url:localhost}:8010
+        prefix: epoch-gateway
+        file-extension: yml
+        refreshable-dataids:
+      discovery:
+        namespace: EPOCH
+        server-addr: ${nacos.url:localhost}:8010
