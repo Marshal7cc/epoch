@@ -40,6 +40,7 @@ public class RequestHelper {
     private static ThreadLocal<User> verifiedUser = new ThreadLocal<>();
 
     public static User getCurrentUser() {
+        // todo: fix better
         User user = RequestHelper.verifiedUser.get();
         if (user == null) {
             SecurityContext context = SecurityContextHolder.getContext();

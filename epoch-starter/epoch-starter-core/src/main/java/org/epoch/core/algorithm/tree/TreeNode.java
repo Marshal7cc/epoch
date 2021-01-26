@@ -15,7 +15,6 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TreeNode<T> {
-
     private String id;
 
     private String label;
@@ -31,5 +30,4 @@ public class TreeNode<T> {
     public void initChildren() {
         this.children = new ArrayList<>();
     }
-
 }

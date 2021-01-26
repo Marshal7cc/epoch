@@ -15,3 +15,7 @@ spring:
       discovery:
         namespace: EPOCH
         server-addr: ${nacos.url:localhost}:8010
+epoch:
+  security:
+    white-list: /user/query,/user/remove
+    enable-auth: true

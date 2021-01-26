@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-com.marshal.epoch.cache.CacheAutoConfiguration
+org.epoch.message.config.MessageAutoConfiguration

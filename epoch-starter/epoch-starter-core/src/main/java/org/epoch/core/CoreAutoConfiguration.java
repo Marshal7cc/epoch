@@ -25,10 +25,4 @@ public class CoreAutoConfiguration {
     public ApplicationContextHolder applicationContextHolder() {
         return new ApplicationContextHolder();
     }
-
-//    @Bean
-//    @ConditionalOnMissingBean
-//    public ConvertWebMvcConfigurer convertWebMvcConfigurer() {
-//        return new ConvertWebMvcConfigurer();
-//    }
 }

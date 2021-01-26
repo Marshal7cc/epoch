@@ -44,6 +44,7 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
             <version>${security-core.version}</version>
+            <optional>true</optional>
         </dependency>
 
         <!--  Page Helper -->

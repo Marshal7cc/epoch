@@ -2,6 +2,7 @@ package org.epoch.core.algorithm.structure;
 
 import java.util.*;
 
+import lombok.Data;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.util.CollectionUtils;
  *
  * @author Marshal
  */
+@Data
 public class LinkedQueue<T> implements Collection<T> {
     private LinkedList<T> list;
     private Comparator<T> comparator;
@@ -136,34 +138,5 @@ public class LinkedQueue<T> implements Collection<T> {
         } else {
             return dichotomyFindIndex(element, start, middle);
         }
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof LinkedQueue)) {
-            return false;
-        }
-
-        LinkedQueue<?> that = (LinkedQueue<?>) o;
-
-        if (list != null ? !list.equals(that.list) : that.list != null) {
-            return false;
-        }
-        return comparator != null ? comparator.equals(that.comparator) : that.comparator == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = list != null ? list.hashCode() : 0;
-        result = 31 * result + (comparator != null ? comparator.hashCode() : 0);
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        return list.toString();
     }
 }

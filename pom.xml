@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.2.RELEASE</version>
-        <relativePath/>
     </parent>
-    <groupId>com.marshal</groupId>
-    <artifactId>epoch</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-RELEASE</version>
 
-    <name>epoch</name>
-    <description>Halcyon version 2.0 using Spring Cloud ==> epoch-cloud</description>
+    <groupId>org.epoch</groupId>
+    <artifactId>epoch-parent</artifactId>
+    <version>1.0.0.RELEASE</version>
+    <packaging>pom</packaging>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -30,33 +29,214 @@
     </developers>
 
     <modules>
-        <module>epoch-infra</module>
-        <module>epoch-instrument</module>
-        <module>epoch-monitor</module>
+        <module>epoch-starter</module>
+        <module>epoch-infrastructure</module>
         <module>epoch-platform</module>
+        <module>epoch-api</module>
         <module>epoch-service</module>
-        <module>epoch-service-api</module>
     </modules>
 
     <properties>
-        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <epoch.version>1.0-RELEASE</epoch.version>
+        <java.version>1.8</java.version>
+
+        <epoch-starter.version>1.0.0.RELEASE</epoch-starter.version>
+
         <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
         <springboot-admin.version>2.2.0</springboot-admin.version>
         <spring-cloud-alibaba.version>2.1.1.RELEASE</spring-cloud-alibaba.version>
+
+        <commons-collections4.version>4.1</commons-collections4.version>
+        <commons-fileupload.version>1.3.2</commons-fileupload.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
+        <commons-io.version>2.6</commons-io.version>
+        <commons-io.codec>1.11</commons-io.codec>
+        <commons-io.beanutils>1.9.3</commons-io.beanutils>
+        <guava.version>25.0-jre</guava.version>
+        <servlet.version>3.1.0</servlet.version>
+        <jackson-dataformat>2.9.0</jackson-dataformat>
+        <fastjson.version>1.2.71</fastjson.version>
+        <poi.version>4.0.0</poi.version>
+
+        <mysql.version>8.0.18</mysql.version>
+        <oracle.version>12.1.0.1.0</oracle.version>
+        <sqlserver.version>4.2</sqlserver.version>
+        <durid.version>1.1.18</durid.version>
+        <mybatis.version>1.3.2</mybatis.version>
+        <tk-mapper.version>2.1.3</tk-mapper.version>
+        <page-helper-boot.version>1.2.10</page-helper-boot.version>
     </properties>
 
-    <!-- maven 私服地址,用于deploy -->
-    <distributionManagement>
-        <repository>
-            <id>epoch-snapshots</id>
-            <url>http://47.102.158.43:8081/repository/epoch-snapshots/</url>
-        </repository>
-    </distributionManagement>
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
-    <!-- 设定主仓库，按设定顺序进行查找 -->
+            <!-- Spring Cloud alibaba -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring-Boot-Admin -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server</artifactId>
+                <version>${springboot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-server-ui</artifactId>
+                <version>${springboot-admin.version}</version>
+            </dependency>
+
+            <!-- EPOCH Starter -->
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-core</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-mybatis</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-security</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-web</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-cache</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+
+            <!-- commons -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-collections4</artifactId>
+                <version>${commons-collections4.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-io.codec}</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-io.beanutils}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <!-- json -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-yaml</artifactId>
+                <version>${jackson-dataformat}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <!-- poi -->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <!--  http servlet  -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>${servlet.version}</version>
+            </dependency>
+
+            <!-- jdbc -->
+            <dependency>
+                <artifactId>mysql-connector-java</artifactId>
+                <groupId>mysql</groupId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.oracle</groupId>
+                <artifactId>ojdbc7</artifactId>
+                <version>${oracle.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>sqljdbc4</artifactId>
+                <version>${sqlserver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${durid.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${tk-mapper.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${page-helper-boot.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!-- 设定主仓库 -->
     <repositories>
         <repository>
             <id>aliyun-repository</id>
@@ -78,23 +258,4 @@
             <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
         </pluginRepository>
     </pluginRepositories>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.cloud</groupId>
-                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
-                <version>${spring-cloud-alibaba.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 </project>

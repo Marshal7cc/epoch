@@ -20,5 +20,6 @@
         <module>epoch-search</module>
         <module>epoch-wechat</module>
         <module>epoch-workflow</module>
+        <module>epoch-rule-engine</module>
     </modules>
 </project>
