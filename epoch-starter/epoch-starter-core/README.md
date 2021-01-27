@@ -4,7 +4,7 @@
 ### 2. 组件坐标
 ```
 <dependency>
-    <groupId>org.epoch</groupId>
+    <groupId>org.epoch.starter</groupId>
     <artifactId>epoch-starter-core</artifactId>
     <version>${epoch-starter.version}</version>
 </dependency>
