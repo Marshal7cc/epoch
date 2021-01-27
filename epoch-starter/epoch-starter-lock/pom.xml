@@ -9,7 +9,7 @@
         <groupId>org.epoch.starter</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-starter-lock4j</artifactId>
+    <artifactId>epoch-starter-lock</artifactId>
 
     <properties>
         <redisson.version>3.11.0</redisson.version>

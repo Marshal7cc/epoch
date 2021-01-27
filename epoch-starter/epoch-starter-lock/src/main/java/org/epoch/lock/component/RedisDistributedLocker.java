@@ -1,14 +1,14 @@
 package org.epoch.lock.component;
 
+import java.util.concurrent.TimeUnit;
+
+import lombok.Data;
 import org.epoch.lock.DistributedLocker;
 import org.epoch.lock.component.redisson.RedissonClientHolder;
-import lombok.Data;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @author Marshal

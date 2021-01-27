@@ -1,5 +1,7 @@
 package org.epoch.lock;
 
+import java.io.IOException;
+
 import org.epoch.lock.aop.DistributedLockAspect;
 import org.epoch.lock.component.RedisDistributedLocker;
 import org.epoch.lock.component.redisson.RedissonClientHolder;
@@ -13,8 +15,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import java.io.IOException;
 
 
 /**

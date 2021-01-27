@@ -1,12 +1,12 @@
 package org.epoch.lock.aop;
 
-import org.epoch.lock.DistributedLocker;
-import org.epoch.lock.annotation.DistributedLock;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.epoch.lock.DistributedLocker;
+import org.epoch.lock.annotation.DistributedLock;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
