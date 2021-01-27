@@ -13,16 +13,11 @@ import lombok.Data;
  */
 @Data
 public class PageableData<T> {
-
-    /**
-     * 返回记录总数
-     */
     private long total;
-
-    /**
-     * 数据列表
-     */
     private List<T> rows;
+
+    public PageableData() {
+    }
 
     public PageableData(List<T> rows) {
         if (rows instanceof Page) {

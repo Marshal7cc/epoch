@@ -10,8 +10,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import org.epoch.core.base.BaseConstants;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.epoch.core.base.BaseConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,17 +22,11 @@ import org.slf4j.LoggerFactory;
  * @date 2019/8/27
  */
 public class Response implements BaseConstants {
-
     private static final Logger logger = LoggerFactory.getLogger(Response.class);
 
     private Response() {
     }
 
-    /**
-     * 请求成功
-     *
-     * @return
-     */
     public static ResponseEntity success() {
         return success(ResponseMessage.SUCCESS);
     }
@@ -49,11 +43,6 @@ public class Response implements BaseConstants {
         return new ResponseEntity(data);
     }
 
-    /**
-     * 请求失败
-     *
-     * @return
-     */
     public static ResponseEntity fail() {
         return fail(ResponseMessage.ERROR);
     }
@@ -168,5 +157,4 @@ public class Response implements BaseConstants {
         bos.close();
         servletOutputStream.close();
     }
-
 }

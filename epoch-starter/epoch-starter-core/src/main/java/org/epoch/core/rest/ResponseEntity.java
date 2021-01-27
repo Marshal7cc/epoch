@@ -9,28 +9,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * @date 2019/8/27
  */
 public class ResponseEntity<T> {
-
-    /**
-     * 本次请求是否成功
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean success = true;
-
-    /**
-     * 返回数据
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
-
-    /**
-     * 状态码-默认200为正常
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String code;
-
-    /**
-     * 提示消息
-     */
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String message;
 

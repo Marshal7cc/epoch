@@ -12,4 +12,7 @@ import lombok.Data;
 public class User {
     private Long userId;
     private String username;
+
+    public static final String FILED_USER_ID = "userId";
+    public static final String FILED_USER_NAME = "userName";
 }

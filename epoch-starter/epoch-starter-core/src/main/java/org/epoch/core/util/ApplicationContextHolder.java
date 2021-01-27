@@ -1,8 +1,21 @@
 package org.epoch.core.util;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.support.AbstractRefreshableApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 /**
  * 获取上下文实例
@@ -12,56 +25,138 @@ import org.springframework.context.ApplicationContextAware;
  */
 public class ApplicationContextHolder implements ApplicationContextAware {
 
-    /**
-     * 上下文对象实例
-     */
-    private static ApplicationContext applicationContext;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationContextHolder.class);
 
-    /**
-     * 通过name,以及Clazz返回指定的Bean
-     *
-     * @param name  bean name
-     * @param clazz class
-     * @param <T>
-     * @return bean
-     */
-    public static <T> T getBean(String name, Class<T> clazz) {
-        return getApplicationContext().getBean(name, clazz);
+    private static DefaultListableBeanFactory springFactory;
+
+    private static ApplicationContext context;
+
+    private static void setFactory(DefaultListableBeanFactory springFactory) {
+        ApplicationContextHolder.springFactory = springFactory;
+    }
+
+    public static DefaultListableBeanFactory getSpringFactory() {
+        return springFactory;
+    }
+
+    public static ApplicationContext getContext() {
+        return context;
+    }
+
+    private static void setContext(ApplicationContext applicationContext) {
+        ApplicationContextHolder.context = applicationContext;
     }
 
     /**
-     * 获取applicationContext
+     * 异步从 ApplicationContextHelper 获取 bean 对象并设置到目标对象中，在某些启动期间需要初始化的bean可采用此方法。
+     * <p>
+     * 适用于实例方法注入。
      *
-     * @return applicationContext
+     * @param type         bean type
+     * @param target       目标类对象
+     * @param setterMethod setter 方法，target 中需包含此方法名，且类型与 type 一致
+     * @param <T>          type
      */
-    public static ApplicationContext getApplicationContext() {
-        return applicationContext;
+    public static <T> void asyncInstanceSetter(Class<T> type, Object target, String setterMethod) {
+        if (setByMethod(type, target, setterMethod)) {
+            return;
+        }
+
+        AtomicInteger counter = new AtomicInteger(0);
+        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1, r -> new Thread(r, "sync-setter"));
+        executorService.scheduleAtFixedRate(() -> {
+            boolean success = setByMethod(type, target, setterMethod);
+            if (success) {
+                executorService.shutdown();
+            } else {
+                if (counter.addAndGet(1) > 240) {
+                    LOGGER.error("Setter field [{}] in [{}] failure because timeout.", setterMethod, target.getClass().getName());
+                    executorService.shutdown();
+                }
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
     /**
-     * 通过name获取 Bean.
+     * 异步从 ApplicationContextHelper 获取 bean 对象并设置到目标对象中，在某些启动期间需要初始化的bean可采用此方法。
+     * <br>
+     * 一般可用于向静态类注入实例对象。
      *
-     * @param name bean name
-     * @return bean
+     * @param type        bean type
+     * @param target      目标类
+     * @param targetField 目标字段
      */
-    public static Object getBean(String name) {
-        return getApplicationContext().getBean(name);
+    public static void asyncStaticSetter(Class<?> type, Class<?> target, String targetField) {
+        if (setByField(type, target, targetField)) {
+            return;
+        }
+
+        AtomicInteger counter = new AtomicInteger(0);
+        ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1, r -> new Thread(r, "sync-setter"));
+        executorService.scheduleAtFixedRate(() -> {
+            boolean success = setByField(type, target, targetField);
+            if (success) {
+                executorService.shutdown();
+            } else {
+                if (counter.addAndGet(1) > 240) {
+                    LOGGER.error("Setter field [{}] in [{}] failure because timeout.", targetField, target.getName());
+                    executorService.shutdown();
+                }
+            }
+        }, 0, 1, TimeUnit.SECONDS);
     }
 
-    /**
-     * 通过class获取Bean.
-     *
-     * @param clazz class
-     * @param <T>
-     * @return
-     */
-    public static <T> T getBean(Class<T> clazz) {
-        return getApplicationContext().getBean(clazz);
+    private static boolean setByMethod(Class<?> type, Object target, String targetMethod) {
+        if (ApplicationContextHolder.getContext() != null) {
+            try {
+                Object obj = ApplicationContextHolder.getContext().getBean(type);
+                Method method = target.getClass().getDeclaredMethod(targetMethod, type);
+                method.setAccessible(true);
+                method.invoke(target, obj);
+                LOGGER.info("Async set field [{}] in [{}] success by method.", targetMethod, target.getClass().getName());
+                return true;
+            } catch (NoSuchMethodException e) {
+                LOGGER.error("Not found method [{}] in [{}].", targetMethod, target.getClass().getName(), e);
+            } catch (NoSuchBeanDefinitionException e) {
+                LOGGER.error("Not found bean [{}] for [{}].", type.getName(), target.getClass().getName(), e);
+            } catch (Exception e) {
+                LOGGER.error("Async set field [{}] in [{}] failure by method.", targetMethod, target.getClass().getName(), e);
+            }
+        }
+        return false;
+    }
+
+    private static boolean setByField(Class<?> type, Class<?> target, String targetField) {
+        if (ApplicationContextHolder.getContext() != null) {
+            try {
+                Object obj = ApplicationContextHolder.getContext().getBean(type);
+                Field field = target.getDeclaredField(targetField);
+                field.setAccessible(true);
+                field.set(target, obj);
+                LOGGER.info("Async set field [{}] in [{}] success by field.", targetField, target.getName());
+                return true;
+            } catch (NoSuchFieldException e) {
+                LOGGER.error("Not found field [{}] in [{}].", targetField, target.getName(), e);
+            } catch (NoSuchBeanDefinitionException e) {
+                LOGGER.error("Not found bean [{}] for [{}].", type.getName(), target.getName(), e);
+            } catch (Exception e) {
+                LOGGER.error("Async set field [{}] in [{}] failure by field.", targetField, target.getName(), e);
+            }
+        }
+        return false;
     }
 
     @Override
-    public void setApplicationContext(ApplicationContext ctx) throws BeansException {
-        applicationContext = ctx;
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        ApplicationContextHolder.setContext(applicationContext);
+        if (applicationContext instanceof AbstractRefreshableApplicationContext) {
+            AbstractRefreshableApplicationContext springContext =
+                    (AbstractRefreshableApplicationContext) applicationContext;
+            ApplicationContextHolder.setFactory((DefaultListableBeanFactory) springContext.getBeanFactory());
+        } else if (applicationContext instanceof GenericApplicationContext) {
+            GenericApplicationContext springContext = (GenericApplicationContext) applicationContext;
+            ApplicationContextHolder.setFactory(springContext.getDefaultListableBeanFactory());
+        }
     }
 }
 

@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.InitBinder;
  */
 public class BaseController extends BaseValidator {
     /**
-     * 控制层请求String字符串去除前后空格 主要用于get搜索接口请求参数 post/put请求对象里面的String字段无法操作
+     * function:去除QueryString字符串前后空格
+     * [post/put请求对象里面的String字段无法操作]
      */
     @InitBinder
     public void initBinder(WebDataBinder binder) {

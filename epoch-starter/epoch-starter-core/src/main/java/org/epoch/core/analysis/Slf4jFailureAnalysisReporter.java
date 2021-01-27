@@ -7,10 +7,7 @@ import org.springframework.boot.diagnostics.FailureAnalysisReporter;
 import org.springframework.util.StringUtils;
 
 /**
- * <p>name:Slf4jFailureAnalysisReporter</p>
- * <pre>
- *      description:用于Slf4j日志打印的失败分析报告器
- * </pre>
+ * use log4j for record failure
  *
  * @author Marshal Yuan
  * @date 2021/1/24

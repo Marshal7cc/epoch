@@ -1,15 +1,11 @@
 package org.epoch.core.util;
 
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.LinkedHashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.epoch.core.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.epoch.core.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,9 +30,6 @@ public class RequestHelper {
     private static final String FILED_USER_AUTHENTICATION = "userAuthentication";
     private static final String FILED_PRINCIPAL = "principal";
 
-    private static final String FILED_USER_ID = "userId";
-    private static final String FILED_USER_NAME = "userName";
-
     private static ThreadLocal<User> verifiedUser = new ThreadLocal<>();
 
     public static User getCurrentUser() {
@@ -52,8 +45,8 @@ public class RequestHelper {
 
             LinkedHashMap<String, String> map = (LinkedHashMap<String, String>) details.get(FILED_PRINCIPAL);
             user = new User();
-            user.setUserId(Long.parseLong(String.valueOf(map.get(FILED_USER_ID))));
-            user.setUsername(map.get(FILED_USER_NAME));
+            user.setUserId(Long.parseLong(String.valueOf(map.get(User.FILED_USER_ID))));
+            user.setUsername(map.get(User.FILED_USER_NAME));
 
             setCurrentUser(user);
             return user;
@@ -110,30 +103,4 @@ public class RequestHelper {
         return (request.getHeader("X-Requested-With") != null
                 && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
     }
-
-    /**
-     * 解析post请求的参数
-     *
-     * @param request
-     * @return
-     */
-    public static JSONObject parseRequestBody(HttpServletRequest request) {
-        BufferedReader reader = null;
-        char[] reqStr = new char[1000];
-        try {
-            reader = request.getReader();
-            reader.read(reqStr);
-        } catch (IOException e) {
-            logger.error("parse requestBody fail !");
-        } finally {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                logger.error("close reader fail!");
-            }
-        }
-        JSONObject result = JSON.parseObject(new String(reqStr));
-        return result;
-    }
-
 }
