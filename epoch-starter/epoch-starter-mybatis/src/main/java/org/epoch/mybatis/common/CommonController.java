@@ -4,7 +4,6 @@ import java.util.List;
 
 import io.swagger.annotations.ApiOperation;
 import org.epoch.core.base.BaseController;
-import org.epoch.core.base.BaseController;
 import org.epoch.core.rest.PageableData;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
@@ -22,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Marshal
  * @date 2020/5/30
  */
-public class CommonController<T extends BaseDomain, R extends BaseRepository> extends BaseController implements CommonApi<T> {
+public class CommonController<T extends BaseDomain, R extends BaseRepository<T>> extends BaseController implements CommonApi<T> {
 
     /**
      * 基础资源库

@@ -1,25 +1,24 @@
-### epoch-starter-mybatis
-
+## Introduction
+### 1. 简介
 epoch-starter-mybatis提供了符合epoch标准的mybatis引入，提供了一些标准化机制。
 
-### 如何引入
-pom.xml
+### 2. 组件坐标
 ```
-        <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-mybatis</artifactId>
-            <version>${epoch.version}</version>
-        </dependency>
+<dependency>
+    <groupId>org.epoch.starter</groupId>
+    <artifactId>epoch-starter-mybatis</artifactId>
+    <version>${epoch-starter.version}</version>
+</dependency>
 ```
 
-application.yml
+### 3. 接入配置
 ```
 # epoch-starter-mybatis配置
 spring:
   # 数据源
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${url}?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8
+    driver-class-name: ${className}
+    url: ${url}
     username: ${username}
     password: ${pwd}
 
