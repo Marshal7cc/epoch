@@ -29,7 +29,7 @@
     </developers>
 
     <modules>
-        <module>epoch-starter</module>
+        <module>epoch-starters</module>
         <module>epoch-infrastructure</module>
         <module>epoch-platform</module>
         <module>epoch-api</module>
@@ -103,7 +103,7 @@
             <!-- EPOCH Starter -->
             <dependency>
                 <groupId>org.epoch.starter</groupId>
-                <artifactId>epoch-starter</artifactId>
+                <artifactId>epoch-starters</artifactId>
                 <version>${epoch-starter.version}</version>
             </dependency>
             <dependency>

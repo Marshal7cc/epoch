@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.epoch</groupId>
+        <artifactId>epoch-parent</artifactId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+
+    <groupId>org.epoch.starter</groupId>
+    <artifactId>epoch-starters</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>epoch-starter-core</module>
+        <module>epoch-starter-cache</module>
+        <module>epoch-starter-mybatis</module>
+        <module>epoch-starter-message</module>
+        <module>epoch-starter-lock</module>
+        <module>epoch-starter-security</module>
+        <module>epoch-starter-web</module>
+    </modules>
+</project>
