@@ -13,7 +13,7 @@
 
     <properties>
         <page-helper.version>5.1.8</page-helper.version>
-        <security-core.version>5.2.1.RELEASE</security-core.version>
+        <security-core.version>5.2.5.RELEASE</security-core.version>
     </properties>
 
     <dependencies>
