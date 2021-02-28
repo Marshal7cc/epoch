@@ -61,10 +61,6 @@
         </dependency>
         <dependency>
             <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-mybatis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-security</artifactId>
         </dependency>
     </dependencies>
