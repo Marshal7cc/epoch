@@ -23,4 +23,9 @@ public interface SecurityConstants {
             "/swagger-resources/configuration/ui",
             "/swagger-resources/configuration/security"
     };
+
+    interface ResponseMessage {
+        String INVALID_REFRESH_TOKEN = "Invalid refresh token";
+        String LOCKER = "locked";
+    }
 }
