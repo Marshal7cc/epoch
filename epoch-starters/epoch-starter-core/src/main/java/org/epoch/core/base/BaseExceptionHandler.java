@@ -39,9 +39,10 @@ public class BaseExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity handleException(Exception ex) {
+    public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, Exception ex) {
+        String message = exceptionMessage("base checked exception", request, method);
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(ex.getMessage());
+            LOGGER.debug(message);
         }
         return Response.fail(BaseConstants.ResponseCode.FAIL, ex.getMessage());
     }
@@ -54,9 +55,10 @@ public class BaseExceptionHandler {
      */
     @ResponseBody
     @ExceptionHandler(value = CommonException.class)
-    public ResponseEntity handleException(CommonException ex) {
+    public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, CommonException ex) {
+        String message = exceptionMessage("epoch common exception", request, method);
         if (LOGGER.isDebugEnabled()) {
-            LOGGER.debug(ex.getMessage());
+            LOGGER.debug(message);
         }
         return Response.fail(ex.getCode(), ex.getMessage());
     }
