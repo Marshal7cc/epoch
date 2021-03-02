@@ -52,7 +52,7 @@ public class Response implements BaseConstants {
     }
 
     public static ResponseEntity fail(String code, String message) {
-        return new ResponseEntity(false, message);
+        return new ResponseEntity(code, false, message);
     }
 
     public static void fail(HttpServletResponse response, String message) {

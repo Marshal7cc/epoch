@@ -32,7 +32,22 @@ public class BaseExceptionHandler {
     private String env;
 
     /**
-     * 异常处理
+     * 默认通用异常处理
+     *
+     * @param ex
+     * @return
+     */
+    @ResponseBody
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity handleException(Exception ex) {
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug(ex.getMessage());
+        }
+        return Response.fail(BaseConstants.ResponseCode.FAIL, ex.getMessage());
+    }
+
+    /**
+     * CommonException异常处理
      *
      * @param ex
      * @return
