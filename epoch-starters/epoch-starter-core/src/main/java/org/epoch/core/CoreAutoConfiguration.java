@@ -1,7 +1,6 @@
 package org.epoch.core;
 
 import org.epoch.core.base.BaseExceptionHandler;
-import org.epoch.core.convert.config.ConvertWebMvcConfigurer;
 import org.epoch.core.endpoint.RefreshConfigEndpoint;
 import org.epoch.core.properties.CoreProperties;
 import org.epoch.core.util.ApplicationContextHolder;
@@ -33,13 +32,6 @@ public class CoreAutoConfiguration {
     @ConditionalOnProperty(prefix = "epoch.core", name = {"refresh-enable"}, havingValue = "true", matchIfMissing = true)
     public RefreshConfigEndpoint endpoint(ContextRefresher contextRefresher) {
         return new RefreshConfigEndpoint(contextRefresher);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "epoch.core", name = {"date-convert-enable"}, havingValue = "true", matchIfMissing = true)
-    public ConvertWebMvcConfigurer webMvcConfigurer() {
-        return new ConvertWebMvcConfigurer();
     }
 
     @Bean
