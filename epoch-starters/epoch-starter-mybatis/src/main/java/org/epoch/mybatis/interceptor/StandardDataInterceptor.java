@@ -13,7 +13,7 @@ import org.epoch.core.domain.User;
 import org.epoch.core.util.ReflectUtil;
 import org.epoch.core.util.RequestHelper;
 import org.epoch.mybatis.annotation.AuditRecord;
-import org.epoch.mybatis.domain.BaseDomain;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.springframework.stereotype.Component;
 
 /**
@@ -49,12 +49,12 @@ public class StandardDataInterceptor implements Interceptor {
             User user = RequestHelper.getCurrentUser();
             Long userId = user.getUserId();
 
-            ReflectUtil.setFieldValue(param, BaseDomain.FILED_LAST_UPDATED_BY, userId);
-            ReflectUtil.setFieldValue(param, BaseDomain.FILED_LAST_UPDATE_DATE, new Date());
+            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATED_BY, userId);
+            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATE_DATE, new Date());
 
             if (INSERT.equals(mappedStatement.getSqlCommandType())) {
-                ReflectUtil.setFieldValue(param, BaseDomain.FILED_CREATED_BY, userId);
-                ReflectUtil.setFieldValue(param, BaseDomain.FILED_CREATED_DATE, new Date());
+                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_BY, userId);
+                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_DATE, new Date());
             }
 
             ReflectUtil.setFieldValue(boundSql, "parameterObject", param);

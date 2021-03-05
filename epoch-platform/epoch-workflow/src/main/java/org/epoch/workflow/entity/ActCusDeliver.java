@@ -1,17 +1,13 @@
 package org.epoch.workflow.entity;
 
 import java.util.Date;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 @Table(name = "act_cus_deliver")
-public class ActCusDeliver extends BaseDomain {
-
-    @Id
-    private Long id;
+public class ActCusDeliver extends BaseEntity {
 
     @Length(max = 30)
     private String employeeCode; //员工代码
@@ -22,14 +18,6 @@ public class ActCusDeliver extends BaseDomain {
     private Date deliverStartDate; //有效期从
 
     private Date deliverEndDate; //有效期至
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getEmployeeCode() {
         return employeeCode;

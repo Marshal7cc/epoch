@@ -6,13 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.epoch.mybatis.domain.BaseDomain;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 
 /**
  * @author Marshal
  */
 @Table(name = "sys_role")
-public class SysRole extends BaseDomain {
+public class SysRole extends BaseEntity {
     @Id
     @Column(name = "ROLE_ID")
     private Long roleId;

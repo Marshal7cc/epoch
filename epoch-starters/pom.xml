@@ -20,6 +20,7 @@
         <module>epoch-starter-mybatis</module>
         <module>epoch-starter-message</module>
         <module>epoch-starter-lock</module>
+        <module>epoch-starter-redis</module>
         <module>epoch-starter-security</module>
         <module>epoch-starter-web</module>
     </modules>

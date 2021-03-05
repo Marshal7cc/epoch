@@ -3,8 +3,8 @@ package org.epoch.iam.domain.entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
 import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "sys_lang")
-public class SysLang extends BaseDomain {
+public class SysLang extends BaseEntity {
 
     @Id
     private Long langId;

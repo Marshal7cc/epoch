@@ -9,21 +9,18 @@
         <groupId>org.epoch.starter</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-starter-cache</artifactId>
+    <artifactId>epoch-starter-redis</artifactId>
 
     <dependencies>
+        <!-- redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
         <!-- EPOCH Starter -->
         <dependency>
             <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-mybatis</artifactId>
         </dependency>
     </dependencies>
 </project>

@@ -4,8 +4,8 @@ import java.util.Date;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
 import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -15,7 +15,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "sys_user")
-public class SysUser extends BaseDomain {
+public class SysUser extends BaseEntity {
 
     @Id
     private Long userId;

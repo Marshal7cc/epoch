@@ -1,16 +1,15 @@
 package org.epoch.hr.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;;
+import java.util.Date;
 import javax.persistence.Id;
-
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+;
 
 
 /**
@@ -18,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @Table(name = "hr_employee")
-public class HrEmployee extends BaseDomain {
+public class HrEmployee extends BaseEntity {
 
     @Id
     private Long employeeId;

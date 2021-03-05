@@ -62,5 +62,9 @@
             <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.epoch.starter</groupId>
+            <artifactId>epoch-starter-redis</artifactId>
+        </dependency>
     </dependencies>
 </project>

@@ -3,9 +3,9 @@ package org.epoch.iam.domain.entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "sys_function")
-public class SysFunction extends BaseDomain {
+public class SysFunction extends BaseEntity {
 
     /**
      * 主键

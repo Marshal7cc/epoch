@@ -3,16 +3,16 @@ package org.epoch.iam.domain.entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.BaseDomain;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 
 /**
  * @author Marshal
  */
 @Data
 @Table(name = "sys_resource")
-public class Resource extends BaseDomain {
+public class Resource extends BaseEntity {
 
     private static final String RESOURCE_ID = "resource_id";
     private static final String MENU_ID = "menu_id";

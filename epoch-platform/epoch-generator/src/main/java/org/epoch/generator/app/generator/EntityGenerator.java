@@ -2,16 +2,16 @@ package org.epoch.generator.app.generator;
 
 import static org.epoch.generator.infra.util.TemplateUtil.columnToCamel;
 
-import org.epoch.generator.infra.util.TemplateUtil;
-import org.epoch.mybatis.domain.BaseDomain;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 import org.epoch.generator.api.dto.DbColumn;
 import org.epoch.generator.api.dto.DbTable;
 import org.epoch.generator.api.dto.GeneratorConfig;
 import org.epoch.generator.infra.enums.FileType;
-import org.apache.commons.lang3.StringUtils;
+import org.epoch.generator.infra.util.TemplateUtil;
+import org.epoch.mybatis.domain.entity.BaseEntity;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
 
 /**
  * entity文件生成器
@@ -122,7 +122,7 @@ public class EntityGenerator implements AbstractGenerator {
     private void importPackage(StringBuilder sb, String entityDir, boolean needTime, boolean needNotNull) {
 
         sb.append("package " + entityDir + ";\r\n\r\n");
-        String d = BaseDomain.class.getName();
+        String d = BaseEntity.class.getName();
         sb.append("import " + d + ";\r\n");
         sb.append("import io.swagger.annotations.ApiModelProperty;\r\n");
         sb.append("import lombok.Data;\r\n");

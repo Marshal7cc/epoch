@@ -1,15 +1,14 @@
 package org.epoch.hr.domain.entity;
 
-import org.epoch.mybatis.domain.BaseDomain;
-import lombok.Data;;
+import java.util.Date;
 import javax.persistence.Id;
-
-import org.hibernate.validator.constraints.Length;
-
 import javax.persistence.Table;
 
+import lombok.Data;
+import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.hibernate.validator.constraints.Length;
 
-import java.util.Date;
+;
 
 
 /**
@@ -17,7 +16,7 @@ import java.util.Date;
  */
 @Data
 @Table(name = "hr_company")
-public class HrCompany extends BaseDomain {
+public class HrCompany extends BaseEntity {
 
     /**
      * 主键
