@@ -3,11 +3,11 @@ package org.epoch.workflow.entity;
 import java.util.Date;
 import javax.persistence.Table;
 
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 @Table(name = "act_cus_deliver")
-public class ActCusDeliver extends BaseEntity {
+public class ActCusDeliver extends BaseAuditEntity {
 
     @Length(max = 30)
     private String employeeCode; //员工代码

@@ -7,7 +7,7 @@ import org.epoch.core.base.BaseController;
 import org.epoch.core.rest.PageableData;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.epoch.mybatis.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author Marshal
  * @date 2020/5/30
  */
-public class CommonController<T extends BaseEntity, R extends BaseRepository<T>> extends BaseController implements CommonApi<T> {
+public class CommonController<T extends BaseAuditEntity, R extends BaseRepository<T>> extends BaseController implements CommonApi<T> {
 
     /**
      * 基础资源库

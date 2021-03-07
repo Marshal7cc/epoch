@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -17,7 +17,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "hr_employee")
-public class HrEmployee extends BaseEntity {
+public class HrEmployee extends BaseAuditEntity {
 
     @Id
     private Long employeeId;

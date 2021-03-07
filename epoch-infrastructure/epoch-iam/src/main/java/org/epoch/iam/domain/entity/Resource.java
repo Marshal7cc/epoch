@@ -5,14 +5,14 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 
 /**
  * @author Marshal
  */
 @Data
 @Table(name = "sys_resource")
-public class Resource extends BaseEntity {
+public class Resource extends BaseAuditEntity {
 
     private static final String RESOURCE_ID = "resource_id";
     private static final String MENU_ID = "menu_id";

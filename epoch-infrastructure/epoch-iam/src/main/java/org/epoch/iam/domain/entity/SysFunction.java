@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "sys_function")
-public class SysFunction extends BaseEntity {
+public class SysFunction extends BaseAuditEntity {
 
     /**
      * 主键

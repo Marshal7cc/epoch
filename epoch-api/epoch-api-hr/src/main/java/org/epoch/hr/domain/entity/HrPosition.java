@@ -5,7 +5,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -16,7 +16,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @Table(name = "hr_position")
-public class HrPosition extends BaseEntity {
+public class HrPosition extends BaseAuditEntity {
 
     /**
      * 主键

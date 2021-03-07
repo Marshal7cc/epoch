@@ -6,14 +6,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 
 /**
  * @author Marshal
  */
 @Data
 @Table(name = "sys_role")
-public class SysRole extends BaseEntity {
+public class SysRole extends BaseAuditEntity {
     @Column(name = "code")
     private String code;
     @Column(name = "name")
