@@ -1,6 +1,7 @@
 package org.epoch.redis;
 
 import org.epoch.redis.helper.RedisHelper;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.*;
 
@@ -10,6 +11,7 @@ import org.springframework.data.redis.core.*;
  */
 public class RedisAutoConfiguration {
     @Bean
+    @ConditionalOnMissingBean
     public RedisHelper redisHelper() {
         return new RedisHelper();
     }

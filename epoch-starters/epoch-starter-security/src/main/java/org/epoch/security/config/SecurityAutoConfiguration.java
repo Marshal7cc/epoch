@@ -38,7 +38,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class SecurityAutoConfiguration {
 
     @Configuration
-    @ConditionalOnProperty(prefix = "epoch.security", name = {"enable-auth"}, havingValue = "true", matchIfMissing = true)
+    @ConditionalOnProperty(prefix = "epoch.security", name = {"enable-auth"}, havingValue = "true", matchIfMissing = false)
     @Import({ManagementWebSecurityAutoConfiguration.class,
             org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class,})
     public class AuthEnabledConfiguration {

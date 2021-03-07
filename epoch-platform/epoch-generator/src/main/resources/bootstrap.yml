@@ -6,10 +6,14 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: ${nacos.url:localhost}:8010
+        namespace: EPOCH
         group: EPOCH_GROUP
+        server-addr: ${nacos.url:localhost}:8010
         prefix: epoch-generator
         file-extension: yml
         refreshable-dataids:
       discovery:
+        namespace: EPOCH
         server-addr: ${nacos.url:localhost}:8010
+
+
