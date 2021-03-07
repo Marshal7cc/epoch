@@ -7,7 +7,7 @@ import com.github.pagehelper.PageHelper;
 import org.epoch.core.base.BaseConstants;
 import org.epoch.core.exception.OptimisticLockException;
 import org.epoch.mybatis.repository.BaseRepository;
-import org.epoch.mybatis.util.DomainUtil;
+import org.epoch.mybatis.util.EntityHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import tk.mybatis.mapper.common.Mapper;
@@ -79,7 +79,7 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T>, BaseConstants {
 
     @Override
     public int submit(T record) throws OptimisticLockException {
-        if (DomainUtil.isPrimaryKeyNull(record)) {
+        if (EntityHelper.isPrimaryKeyNull(record)) {
             return this.insertSelective(record);
         } else {
             return this.updateByPrimaryKey(record);

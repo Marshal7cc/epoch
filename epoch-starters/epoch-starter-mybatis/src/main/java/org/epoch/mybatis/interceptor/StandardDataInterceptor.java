@@ -2,7 +2,7 @@ package org.epoch.mybatis.interceptor;
 
 import static org.apache.ibatis.mapping.SqlCommandType.INSERT;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Properties;
 
 import org.apache.ibatis.executor.Executor;
@@ -49,12 +49,12 @@ public class StandardDataInterceptor implements Interceptor {
             User user = RequestHelper.getCurrentUser();
             Long userId = user.getUserId();
 
-            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATED_BY, userId);
-            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATE_DATE, new Date());
+            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATED_BY, String.valueOf(userId));
+            ReflectUtil.setFieldValue(param, BaseEntity.FILED_LAST_UPDATE_DATE, LocalDateTime.now());
 
             if (INSERT.equals(mappedStatement.getSqlCommandType())) {
-                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_BY, userId);
-                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_DATE, new Date());
+                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_BY, String.valueOf(userId));
+                ReflectUtil.setFieldValue(param, BaseEntity.FILED_CREATED_DATE, LocalDateTime.now());
             }
 
             ReflectUtil.setFieldValue(boundSql, "parameterObject", param);

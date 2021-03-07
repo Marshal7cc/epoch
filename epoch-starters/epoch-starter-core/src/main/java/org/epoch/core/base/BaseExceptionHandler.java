@@ -12,9 +12,8 @@ import org.epoch.core.rest.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
 
 /**
@@ -23,9 +22,8 @@ import org.springframework.web.method.HandlerMethod;
  * @author Marshal
  * @date 2018/10/26
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class BaseExceptionHandler {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseExceptionHandler.class);
 
     @Value("${spring.profiles.active:" + DEFAULT_ENV + "}")
@@ -37,7 +35,6 @@ public class BaseExceptionHandler {
      * @param ex
      * @return
      */
-    @ResponseBody
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, Exception ex) {
         String message = exceptionMessage("base checked exception", request, method);
@@ -53,7 +50,6 @@ public class BaseExceptionHandler {
      * @param ex
      * @return
      */
-    @ResponseBody
     @ExceptionHandler(value = CommonException.class)
     public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, CommonException ex) {
         String message = exceptionMessage("epoch common exception", request, method);

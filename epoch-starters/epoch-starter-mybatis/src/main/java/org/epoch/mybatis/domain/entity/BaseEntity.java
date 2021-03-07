@@ -2,8 +2,11 @@ package org.epoch.mybatis.domain.entity;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import javax.persistence.Id;
 
 import lombok.Data;
+import org.epoch.mybatis.helper.SnowflakeKeyGenerator;
+import tk.mybatis.mapper.annotation.KeySql;
 import tk.mybatis.mapper.annotation.Version;
 
 /**
@@ -16,14 +19,14 @@ public class BaseEntity implements Serializable {
     public static String FILED_CREATED_DATE = "createdDate";
     public static String FILED_LAST_UPDATED_BY = "updatedBy";
     public static String FILED_LAST_UPDATE_DATE = "updatedDate";
-    /* common fields */
-//    @KeySql(g)
+    @Id
+    @KeySql(genId = SnowflakeKeyGenerator.class)
     protected String id;
     protected String createdBy;
     protected String updatedBy;
+    protected String status;
     protected LocalDateTime createdDate;
     protected LocalDateTime updatedDate;
-    protected String status;
     @Version
     private String objectVersion;
 }
