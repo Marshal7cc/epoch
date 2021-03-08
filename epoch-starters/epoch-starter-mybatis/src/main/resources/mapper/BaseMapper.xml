@@ -4,8 +4,8 @@
     <resultMap id="BaseResultMap" type="org.epoch.mybatis.domain.entity.BaseAuditEntity">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
-        <result column="created_date" property="createdDate" jdbcType="DATETIME"/>
-        <result column="updated_date" property="updatedDate" jdbcType="DATETIME"/>
+        <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
+        <result column="updated_date" property="updatedDate" jdbcType="TIMESTAMP"/>
         <result column="updated_by" property="updatedBy" jdbcType="VARCHAR"/>
     </resultMap>
 
