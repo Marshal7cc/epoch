@@ -108,6 +108,11 @@
             </dependency>
             <dependency>
                 <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-message</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
                 <artifactId>epoch-starter-cache</artifactId>
                 <version>${epoch-starter.version}</version>
             </dependency>
