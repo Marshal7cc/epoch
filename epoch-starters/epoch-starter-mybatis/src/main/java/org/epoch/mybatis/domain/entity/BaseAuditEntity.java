@@ -6,6 +6,7 @@ import javax.persistence.Id;
 
 import lombok.Data;
 import org.epoch.mybatis.helper.SnowflakeKeyGenerator;
+import org.epoch.mybatis.version.ObjectNextVersion;
 import tk.mybatis.mapper.annotation.KeySql;
 import tk.mybatis.mapper.annotation.Version;
 
@@ -30,6 +31,6 @@ public class BaseAuditEntity implements Serializable {
     protected LocalDateTime createdDate;
     protected LocalDateTime updatedDate;
     protected String status;
-    @Version
+    @Version(nextVersion = ObjectNextVersion.class)
     private String objectVersion;
 }

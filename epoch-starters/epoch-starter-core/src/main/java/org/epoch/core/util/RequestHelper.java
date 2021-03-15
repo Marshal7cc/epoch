@@ -1,17 +1,20 @@
 package org.epoch.core.util;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
+import org.epoch.core.base.BaseConstants;
 import org.epoch.core.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -27,26 +30,33 @@ public class RequestHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(RequestHelper.class);
 
-    private static final String FILED_USER_AUTHENTICATION = "userAuthentication";
+    private static final User ANONYMOUS_USER =
+            new User(BaseConstants.ANONYMOUS_USER_ID, BaseConstants.ANONYMOUS_USER_NAME);
+
     private static final String FILED_PRINCIPAL = "principal";
 
-    private static ThreadLocal<User> verifiedUser = new ThreadLocal<>();
+    private static ThreadLocal<User> currentUser = new ThreadLocal<>();
 
     public static User getCurrentUser() {
         // todo: fix better
-        User user = RequestHelper.verifiedUser.get();
+        User user = RequestHelper.currentUser.get();
         if (user == null) {
             SecurityContext context = SecurityContextHolder.getContext();
             Authentication authentication = context.getAuthentication();
+            if (!(authentication instanceof OAuth2Authentication)) {
+                return ANONYMOUS_USER;
+            }
+            Authentication userAuthentication = ((OAuth2Authentication) authentication).getUserAuthentication();
+            if (!(userAuthentication.getDetails() instanceof Map)) {
+                return ANONYMOUS_USER;
+            }
 
-            UsernamePasswordAuthenticationToken userAuthentication = (UsernamePasswordAuthenticationToken) ReflectUtil
-                    .getFieldValue(authentication, FILED_USER_AUTHENTICATION);
-            LinkedHashMap details = (LinkedHashMap<String, Object>) userAuthentication.getDetails();
+            Map<String, Object> details = Collections.unmodifiableMap((Map<String, Object>) userAuthentication.getDetails());
 
-            LinkedHashMap<String, String> map = (LinkedHashMap<String, String>) details.get(FILED_PRINCIPAL);
+            LinkedHashMap<String, String> principal = (LinkedHashMap<String, String>) details.get(FILED_PRINCIPAL);
             user = new User();
-            user.setUserId(Long.parseLong(String.valueOf(map.get(User.FILED_USER_ID))));
-            user.setUsername(map.get(User.FILED_USER_NAME));
+            user.setUserId(Long.parseLong(String.valueOf(principal.get(User.FILED_USER_ID))));
+            user.setUsername(principal.get(User.FILED_USER_NAME));
 
             setCurrentUser(user);
             return user;
@@ -55,11 +65,11 @@ public class RequestHelper {
     }
 
     public static void setCurrentUser(User user) {
-        verifiedUser.set(user);
+        currentUser.set(user);
     }
 
     public static void removeCurrentUser(User user) {
-        verifiedUser.remove();
+        currentUser.remove();
     }
 
     /**

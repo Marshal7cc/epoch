@@ -13,7 +13,6 @@
 
     <properties>
         <page-helper.version>5.1.8</page-helper.version>
-        <security-core.version>5.2.1.RELEASE</security-core.version>
     </properties>
 
     <dependencies>
@@ -45,9 +44,8 @@
 
         <!-- Spring Security -->
         <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-            <version>${security-core.version}</version>
+            <groupId>org.springframework.security.oauth</groupId>
+            <artifactId>spring-security-oauth2</artifactId>
             <optional>true</optional>
         </dependency>
         <!--  Page Helper -->
