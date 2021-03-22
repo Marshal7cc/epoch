@@ -44,8 +44,8 @@
 
         <!-- Spring Security -->
         <dependency>
-            <groupId>org.springframework.security.oauth</groupId>
-            <artifactId>spring-security-oauth2</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-oauth2</artifactId>
             <optional>true</optional>
         </dependency>
         <!--  Page Helper -->
