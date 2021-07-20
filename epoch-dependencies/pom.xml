@@ -32,7 +32,7 @@
         <commons-lang3.version>3.7</commons-lang3.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-io.codec>1.11</commons-io.codec>
-        <commons-io.beanutils>1.9.3</commons-io.beanutils>
+        <commons-io.beanutils>1.9.4</commons-io.beanutils>
         <guava.version>25.0-jre</guava.version>
         <servlet.version>3.1.0</servlet.version>
         <jackson-dataformat>2.9.0</jackson-dataformat>
