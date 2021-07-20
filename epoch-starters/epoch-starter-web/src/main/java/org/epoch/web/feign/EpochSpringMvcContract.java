@@ -27,7 +27,6 @@ public class EpochSpringMvcContract extends SpringMvcContract implements BaseCon
 
     private ResourceLoader resourceLoader;
 
-    @Override
     public List<MethodMetadata> parseAndValidatateMetadata(final Class<?> targetType) {
         checkState(targetType.getTypeParameters().length == 0,
                 "Parameterized types unsupported: %s",

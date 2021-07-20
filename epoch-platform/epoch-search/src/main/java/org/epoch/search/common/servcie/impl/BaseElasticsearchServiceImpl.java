@@ -1,27 +1,24 @@
 package org.epoch.search.common.servcie.impl;
 
 
-import org.epoch.search.common.servcie.BaseElasticsearchService;
-import org.epoch.search.common.util.ElasticSearchUtil;
-import org.epoch.search.standard.dto.SysUser;
+import java.util.List;
+import java.util.Map;
+
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryStringQueryBuilder;
-import org.elasticsearch.search.aggregations.Aggregations;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.search.sort.SortOrder;
+import org.epoch.search.common.servcie.BaseElasticsearchService;
+import org.epoch.search.common.util.ElasticSearchUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
-import org.springframework.data.elasticsearch.core.aggregation.AggregatedPage;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
+import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.ObjectUtils;
-
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Marshal
@@ -52,11 +49,11 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
 
     @Override
     public List<T> query(String keyword, Class<T> clazz) {
-        SearchQuery searchQuery = new NativeSearchQueryBuilder()
+        Query searchQuery = new NativeSearchQueryBuilder()
                 .withQuery(new QueryStringQueryBuilder(keyword))
                 .withSort(SortBuilders.scoreSort().order(SortOrder.ASC))
                 .build();
-        return elasticsearchTemplate.queryForList(searchQuery, clazz);
+        return null;
     }
 
     @Override
@@ -74,17 +71,12 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
 
 
         // 设置查询字段
-        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
+//        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
 
-        Aggregations aggregations = list.getAggregations();
+//        Aggregations aggregations = list.getAggregations();
 
         // 返回搜索结果
-//        SearchHits hits = response.getHits();
-//
-//        Map<String, Object> result = new HashMap<>(2);
-//        result.put("totalCount", hits.getTotalHits());
-//        result.put("rows", ElasticSearchUtil.getHitList(hits));
-//        return result;
+
         return null;
     }
 
@@ -112,9 +104,9 @@ public class BaseElasticsearchServiceImpl<T> implements BaseElasticsearchService
 
 
         // 设置查询字段
-        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
+//        AggregatedPage<SysUser> list = elasticsearchTemplate.queryForPage(searchQuery, SysUser.class);
 
-        Aggregations aggregations = list.getAggregations();
+//        Aggregations aggregations = list.getAggregations();
 
         // 设置查询字段
 //        SearchResponse response = elasticsearchTemplate.getClient().prepareSearch(indexName)
