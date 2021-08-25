@@ -1,17 +1,17 @@
 package org.epoch.security.entity;
 
-import org.epoch.mybatis.annotation.AuditRecord;
-
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
+
+import org.epoch.mybatis.annotation.AuditDomain;
 
 /**
  * @author Marshal
  * @date 2020/1/17
  */
-@AuditRecord(enabled = false)
+@AuditDomain(enabled = false)
 @Table(name = "oauth_access_token")
 public class OauthAccessToken {
     @Id

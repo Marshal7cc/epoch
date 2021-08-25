@@ -12,7 +12,7 @@ import org.apache.ibatis.plugin.*;
 import org.epoch.core.domain.User;
 import org.epoch.core.util.ReflectUtil;
 import org.epoch.core.util.RequestHelper;
-import org.epoch.mybatis.annotation.AuditRecord;
+import org.epoch.mybatis.annotation.AuditDomain;
 import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.springframework.stereotype.Component;
 
@@ -36,10 +36,10 @@ public class StandardDataInterceptor implements Interceptor {
             MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
             Object param = invocation.getArgs()[1];
 
-            // 当实体类引入@AuditRecord注解并且enable设置为false时，跳过本拦截器
+            // 当实体类引入@AuditDomain注解并且enable设置为false时，跳过本拦截器
             Class<?> clazz = param.getClass();
-            boolean isEnableRecord = clazz.isAnnotationPresent(AuditRecord.class);
-            if (isEnableRecord && !clazz.getAnnotation(AuditRecord.class).enabled()) {
+            boolean isEnableRecord = clazz.isAnnotationPresent(AuditDomain.class);
+            if (isEnableRecord && !clazz.getAnnotation(AuditDomain.class).enabled()) {
                 return invocation.proceed();
             }
 
