@@ -36,10 +36,10 @@ public class StandardDataInterceptor implements Interceptor {
             MappedStatement mappedStatement = (MappedStatement) invocation.getArgs()[0];
             Object param = invocation.getArgs()[1];
 
-            // 当实体类引入@AuditDomain注解并且enable设置为false时，跳过本拦截器
+            // Effective while annotation @AuditDomain exists and is enabled.
             Class<?> clazz = param.getClass();
-            boolean isEnableRecord = clazz.isAnnotationPresent(AuditDomain.class);
-            if (isEnableRecord && !clazz.getAnnotation(AuditDomain.class).enabled()) {
+            boolean annotationPresent = clazz.isAnnotationPresent(AuditDomain.class);
+            if (!annotationPresent || !clazz.getAnnotation(AuditDomain.class).enabled()) {
                 return invocation.proceed();
             }
 
