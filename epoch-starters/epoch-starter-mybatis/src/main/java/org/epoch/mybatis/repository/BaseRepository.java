@@ -3,6 +3,7 @@ package org.epoch.mybatis.repository;
 import java.util.List;
 
 import org.epoch.core.exception.OptimisticLockException;
+import org.epoch.core.proxy.AopProxy;
 
 /**
  * 基础资源库
@@ -10,7 +11,7 @@ import org.epoch.core.exception.OptimisticLockException;
  * @param <T> domain
  * @author Marshal
  */
-public interface BaseRepository<T> {
+public interface BaseRepository<T> extends AopProxy<T>, ParallelOperations<T> {
 
     /**
      * 分页条件查询方法
