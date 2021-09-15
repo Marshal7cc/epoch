@@ -185,9 +185,9 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T>, BaseConstants {
                 mainLatch.countDown();
             }
 
-            if (Boolean.FALSE.equals(transactionManager.isRollback())) {
-                log.error("parallel ops: save failed, rollback transaction.");
-                throw new TransactionException("parallel ops: save failed, rollback transaction.");
+            if (transactionManager.isRollback()) {
+                log.error("parallel ops: save failed, rollback transaction in main thread.");
+                throw new TransactionException("parallel ops: save failed, rollback transaction in main thread.");
             } else {
                 if (log.isDebugEnabled()) {
                     log.debug("parallel save success.");
@@ -204,7 +204,7 @@ public class BaseRepositoryImpl<T> implements BaseRepository<T>, BaseConstants {
             this.batchSubmit(list);
         } catch (Exception e) {
             transactionManager.setRollback(true);
-            log.error("parallel ops: save failed, sub thread rollback transaction.");
+            log.error("parallel ops: save failed, sub thread set attribute 'rollback' to false, thread id: {}, message: {}", Thread.currentThread().getId(), e.getMessage());
         } finally {
             subLatch.countDown();
         }
