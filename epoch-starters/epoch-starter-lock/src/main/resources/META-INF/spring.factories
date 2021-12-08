@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.lock.LockAutoConfiguration
+org.epoch.starter.lock.autoconfigure.LockAutoConfiguration
