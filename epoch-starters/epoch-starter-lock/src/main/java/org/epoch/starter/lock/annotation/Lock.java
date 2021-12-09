@@ -22,7 +22,7 @@ public @interface Lock {
     /**
      * Redisson lock name.
      */
-    String name();
+    String name() default "";
 
     /**
      * LockType.
