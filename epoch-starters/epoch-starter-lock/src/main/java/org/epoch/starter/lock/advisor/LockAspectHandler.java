@@ -3,8 +3,8 @@ package org.epoch.starter.lock.advisor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.epoch.core.exception.CommonException;
 import org.epoch.starter.lock.annotation.Lock;
+import org.epoch.starter.lock.exception.LockedException;
 import org.epoch.starter.lock.provider.LockContextHolder;
 import org.epoch.starter.lock.provider.LockInfo;
 import org.epoch.starter.lock.provider.LockInfoProvider;
@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 切面加锁处理
+ * Aspect of @Lock Annotation.
  *
  * @author Marshal
  * @date 2021/12/7
@@ -24,10 +24,9 @@ import org.springframework.stereotype.Component;
 public class LockAspectHandler {
 
     @Autowired
-    private LockInfoProvider lockInfoProvider;
-    @Autowired
     private LockServiceFactory lockFactory;
-
+    @Autowired
+    private LockInfoProvider lockInfoProvider;
 
     @Around(value = "@annotation(lock)")
     public Object around(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
@@ -46,10 +45,9 @@ public class LockAspectHandler {
         try {
             lockResult = lockService.lock(lockInfo);
             if (lockResult) {
-                lockResult = true;
                 return joinPoint.proceed();
             } else {
-                throw new CommonException("Get lock failed.");
+                throw new LockedException("Get lock failed.");
             }
         } finally {
             if (lockResult) {

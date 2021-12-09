@@ -37,7 +37,7 @@ public class LockInfoProvider {
      *
      * @param joinPoint join point
      * @param lock      lock
-     * @return lockinfo
+     * @return lockInfo
      */
     public LockInfo getLockInfo(JoinPoint joinPoint, Lock lock) {
         // Get running method.
@@ -92,7 +92,7 @@ public class LockInfoProvider {
                 list.add(parameterValues[i].toString());
             } else {
                 StandardEvaluationContext context = new StandardEvaluationContext(parameterValues[i]);
-                Object value = parser.parseExpression(keyAnnotation.value()).getValue();
+                Object value = parser.parseExpression(keyAnnotation.value()).getValue(context);
                 if (value != null) {
                     list.add(value.toString());
                 }

@@ -1,4 +1,4 @@
-### epoch-starter-lock4j
+### epoch-starter-lock
 
 epoch-starter-lock提供了标准的分布式锁实现，目前只提供了一种实现方式：
 
@@ -19,10 +19,12 @@ pom.xml
 application.yml
 
 ```
-# epoch-lock4j-starter配置
+# epoch lock
 epoch:
   lock:
-    type: redisson
+    single-server:
+      address: localhost
+      port: 6379
 ```
 
 分布式锁的使用： 1.直接方法加上注解
