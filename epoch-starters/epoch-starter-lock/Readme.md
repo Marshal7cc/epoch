@@ -31,6 +31,13 @@ epoch:
 
 ```
 @Lock
+public void lockDemo(){
+    // ...
+}
 ```
 
 2.手动调用
+
+```
+lockService.lock(lockInfo);
+```

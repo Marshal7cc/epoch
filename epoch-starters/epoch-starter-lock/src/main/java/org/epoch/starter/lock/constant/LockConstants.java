@@ -9,7 +9,7 @@ public class LockConstants {
     /**
      * 默认客户端名字
      */
-    public static final String LOCK_CLIENT_NAME = "epochLockClient";
+    public static final String LOCK_CLIENT_NAME = "epoch-lock-client";
     /**
      * 默认SSL实现方式：JDK
      */

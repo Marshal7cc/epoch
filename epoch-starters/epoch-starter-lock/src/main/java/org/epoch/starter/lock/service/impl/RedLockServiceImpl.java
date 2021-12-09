@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 红锁实现类
+ * 红锁
  *
  * @author Marshal
  * @date 2021/12/8
@@ -23,12 +23,12 @@ public class RedLockServiceImpl implements LockService {
 
     @Override
     public boolean lock(LockInfo lockInfo) {
-        RLock[] lockList = new RLock[lockInfo.getKeys().size()];
+        RLock[] locks = new RLock[lockInfo.getKeys().size()];
         for (int i = 0; i < lockInfo.getKeys().size(); i++) {
-            lockList[i] = redissonClient.getLock(lockInfo.getKeys().get(i));
+            locks[i] = redissonClient.getLock(lockInfo.getKeys().get(i));
         }
         try {
-            RedissonRedLock lock = new RedissonRedLock(lockList);
+            RedissonRedLock lock = new RedissonRedLock(locks);
             return lock.tryLock(lockInfo.getWaitTime(), lockInfo.getLeaseTime(), lockInfo.getTimeUnit());
         } catch (Exception e) {
             return false;
@@ -37,11 +37,11 @@ public class RedLockServiceImpl implements LockService {
 
     @Override
     public void unlock(LockInfo lockInfo) {
-        RLock[] lockList = new RLock[lockInfo.getKeys().size()];
+        RLock[] locks = new RLock[lockInfo.getKeys().size()];
         for (int i = 0; i < lockInfo.getKeys().size(); i++) {
-            lockList[i] = redissonClient.getLock(lockInfo.getKeys().get(i));
+            locks[i] = redissonClient.getLock(lockInfo.getKeys().get(i));
         }
-        RedissonRedLock lock = new RedissonRedLock(lockList);
+        RedissonRedLock lock = new RedissonRedLock(locks);
         lock.unlock();
     }
 }

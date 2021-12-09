@@ -19,7 +19,8 @@ public interface LockService {
 
     /**
      * Release the lock.
-     * *@param lockAttribute lock attributes
+     *
+     * @param lockInfo lock attributes
      */
     void unlock(LockInfo lockInfo);
 }

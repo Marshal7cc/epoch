@@ -23,18 +23,6 @@
             <version>${redisson.version}</version>
         </dependency>
 
-        <!-- Auto Configuration -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-autoconfigure</artifactId>
-            <optional>true</optional>
-        </dependency>
-
         <!-- EPOCH Starter -->
         <dependency>
             <groupId>org.epoch.starter</groupId>

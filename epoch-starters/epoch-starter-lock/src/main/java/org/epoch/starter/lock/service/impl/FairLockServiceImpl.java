@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 公平锁实现
+ * 公平锁
  *
  * @author Marshal
  * @date 2021/12/8
@@ -19,7 +19,6 @@ public class FairLockServiceImpl implements LockService {
     @Qualifier("lockRedissonClient")
     @Autowired
     private RedissonClient redissonClient;
-
 
     @Override
     public boolean lock(LockInfo lockInfo) {

@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * 可重入锁实现
+ * 可重入锁
  *
  * @author Marshal
  * @date 2021/12/8

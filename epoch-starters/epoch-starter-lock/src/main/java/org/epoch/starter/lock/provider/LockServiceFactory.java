@@ -9,7 +9,7 @@ import org.epoch.starter.lock.service.impl.*;
 
 
 /**
- * 锁处理工厂类
+ * LockService Provider
  *
  * @author Marshal
  * @date 2021/12/7
@@ -27,8 +27,6 @@ public class LockServiceFactory {
     }
 
     /**
-     * 根据类型进行不同的锁实现
-     *
      * @param lockType 锁类
      * @return LockService
      */

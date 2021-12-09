@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.epoch.core.exception.CommonException;
 import org.epoch.starter.lock.advisor.LockAspectHandler;
@@ -36,6 +37,7 @@ import org.springframework.util.Assert;
  * @author Marshal
  * @date 2021/12/7
  */
+@Slf4j
 @Configuration
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @EnableConfigurationProperties(LockConfigProperties.class)
@@ -83,6 +85,7 @@ public class LockAutoConfiguration {
             default:
                 break;
         }
+        log.info("epoch lock is starting, server pattern is {}", serverPattern);
         return Redisson.create(config);
     }
 
