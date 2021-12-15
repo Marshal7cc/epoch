@@ -32,8 +32,5 @@
         <module>epoch-dependencies</module>
         <module>epoch-starters</module>
         <module>epoch-infrastructure</module>
-        <module>epoch-platform</module>
-        <module>epoch-api</module>
-        <module>epoch-service</module>
     </modules>
 </project>
