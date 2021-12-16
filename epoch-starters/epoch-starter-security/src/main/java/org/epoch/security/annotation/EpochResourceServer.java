@@ -2,8 +2,8 @@ package org.epoch.security.annotation;
 
 import java.lang.annotation.*;
 
-import org.epoch.security.config.ResourceServerConfiguration;
-import org.epoch.security.config.SecurityAutoConfiguration;
+import org.epoch.security.autoconfigure.ResourceServerConfiguration;
+import org.epoch.security.autoconfigure.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Import;
 
 /**

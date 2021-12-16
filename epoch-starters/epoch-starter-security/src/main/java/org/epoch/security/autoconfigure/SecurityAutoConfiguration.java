@@ -1,4 +1,4 @@
-package org.epoch.security.config;
+package org.epoch.security.autoconfigure;
 
 import java.util.ArrayList;
 import java.util.List;

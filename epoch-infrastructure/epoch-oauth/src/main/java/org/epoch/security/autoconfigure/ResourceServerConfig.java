@@ -1,11 +1,11 @@
-package org.epoch.security.config;
+package org.epoch.security.autoconfigure;
 
 
+import org.apache.commons.lang3.StringUtils;
 import org.epoch.security.constants.Oauth2EndpointConstant;
-import org.epoch.security.properties.EpochSecurityProperties;
 import org.epoch.security.handler.EpochAccessDeniedHandler;
 import org.epoch.security.handler.EpochAuthenticationEntryPoint;
-import org.apache.commons.lang3.StringUtils;
+import org.epoch.security.properties.EpochSecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;

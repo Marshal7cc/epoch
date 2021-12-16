@@ -1,4 +1,7 @@
-package org.epoch.security.config;
+package org.epoch.security.autoconfigure;
+
+import java.io.Serializable;
+import java.time.Duration;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
@@ -14,9 +17,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.*;
-
-import java.io.Serializable;
-import java.time.Duration;
 
 /**
  * @author Marshal
