@@ -15,3 +15,6 @@ spring:
       discovery:
         namespace: EPOCH
         server-addr: ${nacos.url:localhost}:8010
+epoch:
+  security:
+    enable-auth: true

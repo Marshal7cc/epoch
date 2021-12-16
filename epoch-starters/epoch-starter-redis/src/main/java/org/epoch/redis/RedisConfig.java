@@ -1,4 +1,4 @@
-package org.epoch.cache.config;
+package org.epoch.redis;
 
 import java.io.Serializable;
 import java.time.Duration;

@@ -1,4 +1,4 @@
-package org.epoch.core.base;
+package org.epoch.core.constants;
 
 import java.util.Locale;
 

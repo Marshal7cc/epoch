@@ -10,7 +10,7 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.epoch.core.async.AsyncTask;
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 import org.epoch.core.exception.CommonException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

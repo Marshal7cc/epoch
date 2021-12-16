@@ -14,7 +14,7 @@ import org.epoch.core.util.valid.constraints.NotEqualConstraint;
 
 /**
  * <p>
- * 字符串通用校验，校验字段必须不等于某个值
+ * 字符串通用校验，校验字段必须不等于某个值或者不属于指定集合
  * </p>
  *
  * @author Marshal

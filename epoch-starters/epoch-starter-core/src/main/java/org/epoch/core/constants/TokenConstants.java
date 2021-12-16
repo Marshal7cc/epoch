@@ -1,4 +1,4 @@
-package org.epoch.core.base;
+package org.epoch.core.constants;
 
 /**
  * Token 相关常量

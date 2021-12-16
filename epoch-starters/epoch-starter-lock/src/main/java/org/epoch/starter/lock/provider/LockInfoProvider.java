@@ -29,7 +29,7 @@ public class LockInfoProvider {
     private static final ParameterNameDiscoverer nameDiscoverer = new DefaultParameterNameDiscoverer();
     private static final ExpressionParser parser = new SpelExpressionParser();
 
-    public LockInfoProvider() {
+    private LockInfoProvider() {
     }
 
     /**
@@ -39,7 +39,7 @@ public class LockInfoProvider {
      * @param lock      lock
      * @return lockInfo
      */
-    public LockInfo getLockInfo(JoinPoint joinPoint, Lock lock) {
+    public static LockInfo getLockInfo(JoinPoint joinPoint, Lock lock) {
         // Get running method.
         Method method = getMethod(joinPoint);
         // Resolve lock key.
@@ -57,7 +57,7 @@ public class LockInfoProvider {
      * @param joinPoint join point
      * @return
      */
-    private Method getMethod(JoinPoint joinPoint) {
+    private static Method getMethod(JoinPoint joinPoint) {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
         if (method.getDeclaringClass().isInterface()) {
@@ -70,7 +70,7 @@ public class LockInfoProvider {
         return method;
     }
 
-    private List<String> resolveKeyExpressions(Method method, JoinPoint joinPoint, Lock lock) {
+    private static List<String> resolveKeyExpressions(Method method, JoinPoint joinPoint, Lock lock) {
         List<String> result = new ArrayList<>();
         if (lock.keys().length > 0) {
             result.addAll(parseExpression(method, joinPoint.getArgs(), lock.keys()));
@@ -81,7 +81,7 @@ public class LockInfoProvider {
     }
 
 
-    private List<String> resolveParameterKeys(Parameter[] parameters, Object[] parameterValues) {
+    private static List<String> resolveParameterKeys(Parameter[] parameters, Object[] parameterValues) {
         List<String> list = new ArrayList<>();
         for (int i = 0; i < parameters.length; i++) {
             if (!parameters[i].isAnnotationPresent(LockKey.class)) {
@@ -102,7 +102,7 @@ public class LockInfoProvider {
     }
 
 
-    private String parseLockName(Method method, JoinPoint joinPoint, String nameExpression, List<String> keySet) {
+    private static String parseLockName(Method method, JoinPoint joinPoint, String nameExpression, List<String> keySet) {
         if (nameExpression.isEmpty()) {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();
             return String.format("%s.%s.%s", signature.getDeclaringTypeName(), signature.getMethod().getName(), StringUtils.collectionToDelimitedString(keySet, "", "-", ""));
@@ -111,13 +111,13 @@ public class LockInfoProvider {
         }
     }
 
-    private String parseExpression(Method method, Object[] parameterValues, String expression) {
+    private static String parseExpression(Method method, Object[] parameterValues, String expression) {
         List<String> result = parseExpression(method, parameterValues, new String[]{expression});
         String value = Iterators.getOnlyElement(result.iterator());
         return value == null ? expression : value;
     }
 
-    private List<String> parseExpression(Method method, Object[] parameterValues, String[] expressions) {
+    private static List<String> parseExpression(Method method, Object[] parameterValues, String[] expressions) {
         EvaluationContext context = new MethodBasedEvaluationContext(null, method, parameterValues, nameDiscoverer);
 
         List<String> list = new ArrayList<>();

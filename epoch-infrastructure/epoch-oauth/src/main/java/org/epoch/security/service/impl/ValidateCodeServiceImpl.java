@@ -1,22 +1,22 @@
 package org.epoch.security.service.impl;
 
-import org.epoch.core.base.BaseConstants;
-import org.epoch.security.exception.ValidateCodeException;
-import org.epoch.security.properties.EpochValidateCodeProperties;
-import org.epoch.security.service.ValidateCodeService;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.wf.captcha.GifCaptcha;
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
 import org.apache.commons.lang3.StringUtils;
+import org.epoch.core.constants.BaseConstants;
+import org.epoch.security.exception.ValidateCodeException;
+import org.epoch.security.properties.EpochValidateCodeProperties;
+import org.epoch.security.service.ValidateCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * @author Marshal

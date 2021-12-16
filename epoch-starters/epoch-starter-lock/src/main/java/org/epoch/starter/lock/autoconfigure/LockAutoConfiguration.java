@@ -12,7 +12,6 @@ import org.epoch.core.exception.CommonException;
 import org.epoch.starter.lock.advisor.LockAspectHandler;
 import org.epoch.starter.lock.constant.LockConstants;
 import org.epoch.starter.lock.enums.ServerPattern;
-import org.epoch.starter.lock.provider.LockInfoProvider;
 import org.epoch.starter.lock.provider.LockServiceFactory;
 import org.epoch.starter.lock.service.impl.*;
 import org.redisson.Redisson;
@@ -87,11 +86,6 @@ public class LockAutoConfiguration {
         }
         log.info("epoch lock is starting, server pattern is {}", serverPattern);
         return Redisson.create(config);
-    }
-
-    @Bean
-    public LockInfoProvider lockInfoProvider() {
-        return new LockInfoProvider();
     }
 
     @Bean

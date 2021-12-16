@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.ibatis.transaction.TransactionException;
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 import org.epoch.core.exception.OptimisticLockException;
 import org.epoch.mybatis.repository.BaseRepository;
 import org.epoch.mybatis.util.EntityHelper;

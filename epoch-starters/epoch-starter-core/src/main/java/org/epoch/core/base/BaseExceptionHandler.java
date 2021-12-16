@@ -1,11 +1,12 @@
 package org.epoch.core.base;
 
 
-import static org.epoch.core.base.BaseConstants.DEFAULT_ENV;
+import static org.epoch.core.constants.BaseConstants.DEFAULT_ENV;
 
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.epoch.core.constants.BaseConstants;
 import org.epoch.core.exception.CommonException;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
@@ -36,7 +37,7 @@ public class BaseExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, Exception ex) {
+    public ResponseEntity<Void> handleException(HttpServletRequest request, HandlerMethod method, Exception ex) {
         String message = exceptionMessage("base checked exception", request, method);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
@@ -51,7 +52,7 @@ public class BaseExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = CommonException.class)
-    public ResponseEntity handleException(HttpServletRequest request, HandlerMethod method, CommonException ex) {
+    public ResponseEntity<Void> handleException(HttpServletRequest request, HandlerMethod method, CommonException ex) {
         String message = exceptionMessage("epoch common exception", request, method);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
@@ -66,7 +67,7 @@ public class BaseExceptionHandler {
      * @return ExceptionResponse
      */
     @ExceptionHandler(SQLException.class)
-    public ResponseEntity process(HttpServletRequest request, HandlerMethod method, SQLException exception) {
+    public ResponseEntity<Void> process(HttpServletRequest request, HandlerMethod method, SQLException exception) {
         String message = exceptionMessage("Sql exception", request, method);
         if (LOGGER.isErrorEnabled()) {
             LOGGER.error(message, exception);

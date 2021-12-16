@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants.ResponseMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,17 +21,18 @@ import org.slf4j.LoggerFactory;
  * @author Marshal
  * @date 2019/8/27
  */
-public class Response implements BaseConstants {
+@SuppressWarnings("rawtypes,unchecked")
+public class Response {
     private static final Logger logger = LoggerFactory.getLogger(Response.class);
 
     private Response() {
     }
 
-    public static ResponseEntity success() {
+    public static ResponseEntity<Void> success() {
         return success(ResponseMessage.SUCCESS);
     }
 
-    public static ResponseEntity success(String message) {
+    public static ResponseEntity<Void> success(String message) {
         return new ResponseEntity(message);
     }
 
@@ -43,15 +44,15 @@ public class Response implements BaseConstants {
         return new ResponseEntity(data);
     }
 
-    public static ResponseEntity fail() {
+    public static ResponseEntity<Void> fail() {
         return fail(ResponseMessage.ERROR);
     }
 
-    public static ResponseEntity fail(String message) {
+    public static ResponseEntity<Void> fail(String message) {
         return new ResponseEntity(false, message);
     }
 
-    public static ResponseEntity fail(String code, String message) {
+    public static ResponseEntity<Void> fail(String code, String message) {
         return new ResponseEntity(code, false, message);
     }
 
@@ -64,7 +65,9 @@ public class Response implements BaseConstants {
         } catch (IOException e) {
             logger.error("io exception happen ,please check");
         } finally {
-            writer.close();
+            if (writer != null) {
+                writer.close();
+            }
         }
     }
 

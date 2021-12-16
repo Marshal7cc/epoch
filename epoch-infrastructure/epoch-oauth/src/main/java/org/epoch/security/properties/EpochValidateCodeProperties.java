@@ -1,7 +1,7 @@
 package org.epoch.security.properties;
 
-import org.epoch.core.base.BaseConstants;
 import lombok.Data;
+import org.epoch.core.constants.BaseConstants;
 
 /**
  * @author Marshal

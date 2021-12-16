@@ -61,5 +61,5 @@ public interface CommonApi<T> {
      * @return
      */
     @DeleteMapping
-    ResponseEntity<T> delete(@RequestBody List<T> list);
+    ResponseEntity<Void> delete(@RequestBody List<T> list);
 }

@@ -18,7 +18,7 @@ import org.springframework.context.support.AbstractRefreshableApplicationContext
 import org.springframework.context.support.GenericApplicationContext;
 
 /**
- * 获取上下文实例
+ * ApplicationContextHolder
  *
  * @author Marshal
  * @date 2018/11/30

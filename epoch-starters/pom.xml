@@ -16,7 +16,6 @@
 
     <modules>
         <module>epoch-starter-core</module>
-        <module>epoch-starter-cache</module>
         <module>epoch-starter-metric</module>
         <module>epoch-starter-mybatis</module>
         <module>epoch-starter-message</module>

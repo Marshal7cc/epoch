@@ -10,7 +10,7 @@ import java.util.*;
 
 import feign.MethodMetadata;
 import feign.Util;
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 import org.springframework.cloud.openfeign.support.SpringMvcContract;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.ResourceLoader;

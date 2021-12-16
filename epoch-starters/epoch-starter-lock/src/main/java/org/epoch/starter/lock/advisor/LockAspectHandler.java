@@ -25,13 +25,11 @@ public class LockAspectHandler {
 
     @Autowired
     private LockServiceFactory lockFactory;
-    @Autowired
-    private LockInfoProvider lockInfoProvider;
 
     @Around(value = "@annotation(lock)")
     public Object around(ProceedingJoinPoint joinPoint, Lock lock) throws Throwable {
         // Get Lock Attribute.
-        LockInfo lockInfo = lockInfoProvider.getLockInfo(joinPoint, lock);
+        LockInfo lockInfo = LockInfoProvider.getLockInfo(joinPoint, lock);
         // Resolve LockService.
         LockService lockService = lockFactory.getLock(lock.lockType());
         // Skip while current thread hold a same lock already.

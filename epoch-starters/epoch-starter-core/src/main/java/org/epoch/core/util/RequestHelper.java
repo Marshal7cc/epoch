@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 import org.epoch.core.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

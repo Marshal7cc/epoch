@@ -58,7 +58,7 @@ public class CommonController<T extends BaseAuditEntity, R extends BaseRepositor
 
     @Override
     @ApiOperation(value = "E批量删除")
-    public ResponseEntity<T> delete(List<T> list) {
+    public ResponseEntity<Void> delete(List<T> list) {
         repository.batchDelete(list);
         return Response.success();
     }

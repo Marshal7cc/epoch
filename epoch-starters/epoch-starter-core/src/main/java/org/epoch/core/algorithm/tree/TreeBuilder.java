@@ -14,6 +14,7 @@ public class TreeBuilder {
     private TreeBuilder() {
     }
 
+    @SuppressWarnings("rawtypes,unchecked")
     public static List<TreeNode> build(List<TreeNode> nodes) {
         if (nodes == null) {
             return null;

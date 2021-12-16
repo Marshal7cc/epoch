@@ -1,7 +1,7 @@
 package org.epoch.core.exception;
 
 
-import org.epoch.core.base.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 
 /**
  * 乐观锁更新异常
