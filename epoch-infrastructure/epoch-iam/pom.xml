@@ -17,6 +17,10 @@
             <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.epoch.starter</groupId>
+            <artifactId>epoch-starter-mybatis</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

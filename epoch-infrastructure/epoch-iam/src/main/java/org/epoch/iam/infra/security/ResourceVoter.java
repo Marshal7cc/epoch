@@ -1,19 +1,15 @@
 package org.epoch.iam.infra.security;
 
-import org.epoch.security.voter.PermissionVoter;
-import org.epoch.cache.component.Cache;
-import org.epoch.cache.component.CacheManager;
-import org.epoch.iam.domain.entity.SysResource;
+import java.util.Collection;
+import javax.servlet.http.HttpServletRequest;
+
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.epoch.security.voter.PermissionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
 
 /**
  * 资源投票器
@@ -25,8 +21,6 @@ public class ResourceVoter extends PermissionVoter {
 
     private static final String RESOURCE_CACHE_KEY = "resourceCache";
 
-    @Autowired
-    private CacheManager cacheManager;
 
     @Override
     public boolean supports(ConfigAttribute configAttribute) {
@@ -64,12 +58,11 @@ public class ResourceVoter extends PermissionVoter {
             return ACCESS_ABSTAIN;
         }
 
-        Cache<SysResource> cache = cacheManager.getCache(RESOURCE_CACHE_KEY);
-        SysResource sysResource = cache.get(uri);
-        if (sysResource == null) {
-            log.debug("access denied,uri : {} not registered", uri);
-            return ACCESS_DENIED;
-        }
+
+//        if (sysResource == null) {
+//            log.debug("access denied,uri : {} not registered", uri);
+//            return ACCESS_DENIED;
+//        }
 
         result = ACCESS_ABSTAIN;
         return result;
