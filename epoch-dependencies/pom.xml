@@ -17,10 +17,11 @@
     <packaging>pom</packaging>
 
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
 
+        <epoch.version>1.0.0.RELEASE</epoch.version>
         <epoch-starter.version>1.0.0.RELEASE</epoch-starter.version>
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
@@ -110,11 +111,6 @@
             <dependency>
                 <groupId>org.epoch.starter</groupId>
                 <artifactId>epoch-starter-message</artifactId>
-                <version>${epoch-starter.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.epoch.starter</groupId>
-                <artifactId>epoch-starter-cache</artifactId>
                 <version>${epoch-starter.version}</version>
             </dependency>
             <dependency>
