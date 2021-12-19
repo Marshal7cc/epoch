@@ -1,7 +1,10 @@
 package org.epoch.security.service;
 
 
-import org.epoch.security.component.EpochUserDetails;
+import java.io.Serializable;
+import java.util.*;
+
+import org.epoch.starter.security.component.EpochUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,9 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-
-import java.io.Serializable;
-import java.util.*;
 
 /**
  * Spring Security UserService

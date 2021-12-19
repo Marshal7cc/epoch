@@ -1,11 +1,10 @@
 package org.epoch.iam.domain.repository;
 
 
-import org.epoch.mybatis.repository.BaseRepository;
+import java.util.Map;
 
 import org.epoch.iam.domain.entity.SysPrompt;
-
-import java.util.Map;
+import org.epoch.starter.mybatis.repository.BaseRepository;
 
 /**
  * @author Marshal

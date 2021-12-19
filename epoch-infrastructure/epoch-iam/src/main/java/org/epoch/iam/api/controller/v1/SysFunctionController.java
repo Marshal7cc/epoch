@@ -1,13 +1,14 @@
 package org.epoch.iam.api.controller.v1;
 
 
-import org.epoch.mybatis.common.CommonController;
+import io.swagger.annotations.Api;
+import org.epoch.iam.api.SysFunctionApi;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysFunction;
-import org.epoch.iam.api.SysFunctionApi;
 import org.epoch.iam.domain.repository.SysFunctionRepository;
-import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.*;
+import org.epoch.starter.mybatis.common.CommonController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author Marshal

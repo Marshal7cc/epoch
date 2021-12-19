@@ -1,12 +1,11 @@
 package org.epoch.iam.infra.mapper;
 
 
-import org.epoch.core.algorithm.tree.TreeNode;
-import tk.mybatis.mapper.common.Mapper;
+import java.util.List;
 
 import org.epoch.iam.domain.entity.SysMenu;
-
-import java.util.List;
+import org.epoch.starter.core.algorithm.tree.TreeNode;
+import tk.mybatis.mapper.common.Mapper;
 
 /**
  * @author Marshal

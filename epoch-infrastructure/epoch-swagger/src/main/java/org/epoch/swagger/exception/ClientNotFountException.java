@@ -1,6 +1,6 @@
 package org.epoch.swagger.exception;
 
-import org.epoch.core.exception.CommonException;
+import org.epoch.starter.core.exception.CommonException;
 
 /**
  * <p>name:ClientNotFountException</p>

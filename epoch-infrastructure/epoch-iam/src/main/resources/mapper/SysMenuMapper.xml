@@ -15,7 +15,8 @@
         <result column="enable_flag" property="enableFlag" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <select id="selectForTree" resultType="org.epoch.core.algorithm.tree.TreeNode">
-        select sm.menu_id id,menu_name label,parent_id parentId from sys_menu sm
+    <select id="selectForTree" resultType="org.epoch.starter.core.algorithm.tree.TreeNode">
+        select sm.menu_id id, menu_name label, parent_id parentId
+        from sys_menu sm
     </select>
 </mapper>

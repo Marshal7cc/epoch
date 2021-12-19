@@ -1,6 +1,6 @@
 package org.epoch.starter.lock.exception;
 
-import org.epoch.core.exception.CommonException;
+import org.epoch.starter.core.exception.CommonException;
 
 /**
  * @author Marshal

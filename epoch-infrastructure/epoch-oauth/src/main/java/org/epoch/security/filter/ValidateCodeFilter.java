@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
-import org.epoch.core.rest.Response;
 import org.epoch.security.constants.Oauth2EndpointConstant;
 import org.epoch.security.exception.ValidateCodeException;
 import org.epoch.security.service.ValidateCodeService;
+import org.epoch.starter.core.rest.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;

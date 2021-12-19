@@ -1,8 +1,8 @@
 package org.epoch.iam.api;
 
 
-import org.epoch.mybatis.common.CommonApi;
 import org.epoch.iam.domain.entity.SysFunction;
+import org.epoch.starter.mybatis.common.CommonApi;
 
 /**
  * @author Marshal

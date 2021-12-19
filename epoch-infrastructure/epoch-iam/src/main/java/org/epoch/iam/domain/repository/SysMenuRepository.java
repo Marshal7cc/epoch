@@ -1,13 +1,12 @@
 package org.epoch.iam.domain.repository;
 
 
-import org.epoch.core.algorithm.tree.TreeNode;
-import org.epoch.iam.api.dto.VueRouter;
-import org.epoch.mybatis.repository.BaseRepository;
-
-import org.epoch.iam.domain.entity.SysMenu;
-
 import java.util.List;
+
+import org.epoch.iam.api.dto.VueRouter;
+import org.epoch.iam.domain.entity.SysMenu;
+import org.epoch.starter.core.algorithm.tree.TreeNode;
+import org.epoch.starter.mybatis.repository.BaseRepository;
 
 /**
  * @author Marshal

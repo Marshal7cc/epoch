@@ -8,7 +8,7 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.epoch.core.exception.CommonException;
+import org.epoch.starter.core.exception.CommonException;
 import org.epoch.starter.lock.advisor.LockAspectHandler;
 import org.epoch.starter.lock.constant.LockConstants;
 import org.epoch.starter.lock.enums.ServerPattern;

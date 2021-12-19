@@ -1,24 +1,23 @@
 package org.epoch.iam.infra.repository.impl;
 
 
-import org.epoch.core.algorithm.tree.TreeNode;
-import org.epoch.core.algorithm.tree.TreeBuilder;
-import org.epoch.iam.api.dto.VueRouter;
-import org.epoch.iam.api.dto.VueRouterMeta;
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
-import org.epoch.iam.infra.mapper.SysMenuMapper;
-import org.epoch.iam.infra.util.VueRouterTreeUtil;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import org.epoch.iam.domain.entity.SysMenu;
-import org.epoch.iam.domain.repository.SysMenuRepository;
-import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.epoch.iam.api.dto.VueRouter;
+import org.epoch.iam.api.dto.VueRouterMeta;
+import org.epoch.iam.domain.entity.SysMenu;
+import org.epoch.iam.domain.repository.SysMenuRepository;
+import org.epoch.iam.infra.mapper.SysMenuMapper;
+import org.epoch.iam.infra.util.VueRouterTreeUtil;
+import org.epoch.starter.core.algorithm.tree.TreeBuilder;
+import org.epoch.starter.core.algorithm.tree.TreeNode;
+import org.epoch.starter.mybatis.repository.impl.BaseRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import tk.mybatis.mapper.entity.Example;
 
 /**
  * @author Marshal

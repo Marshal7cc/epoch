@@ -1,21 +1,20 @@
 package org.epoch.iam.api.controller.v1;
 
-import org.epoch.core.rest.ResponseEntity;
-import org.epoch.core.rest.Response;
-import org.epoch.iam.domain.repository.SysUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.epoch.iam.domain.repository.SysUserRepository;
+import org.epoch.starter.core.rest.Response;
+import org.epoch.starter.core.rest.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  * @author Marshal
  * @date 2019/8/25
- *
  */
 @RestController
 public class TestController {

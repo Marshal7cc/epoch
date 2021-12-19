@@ -1,9 +1,13 @@
 package org.epoch.security.component;
 
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
+
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.epoch.security.entity.OauthAccessToken;
 import org.epoch.security.service.OauthAccessTokenRepository;
-import lombok.extern.slf4j.Slf4j;
+import org.epoch.starter.security.component.EpochUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -11,9 +15,6 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.stereotype.Component;
-
-import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 自定义TokenStore, 获取token后将token同时存入数据库和redis

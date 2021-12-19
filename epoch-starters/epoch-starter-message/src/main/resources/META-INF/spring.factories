@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.message.config.MessageAutoConfiguration
+org.epoch.starter.message.config.MessageAutoConfiguration

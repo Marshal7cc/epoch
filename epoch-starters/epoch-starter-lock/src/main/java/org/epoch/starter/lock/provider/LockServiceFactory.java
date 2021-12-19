@@ -2,7 +2,7 @@ package org.epoch.starter.lock.provider;
 
 import java.util.EnumMap;
 
-import org.epoch.core.util.ApplicationContextHolder;
+import org.epoch.starter.core.util.ApplicationContextHolder;
 import org.epoch.starter.lock.enums.LockType;
 import org.epoch.starter.lock.service.LockService;
 import org.epoch.starter.lock.service.impl.*;

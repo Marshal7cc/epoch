@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.web.autoconfigure.WebAutoConfiguration
+org.epoch.starter.web.autoconfigure.WebAutoConfiguration

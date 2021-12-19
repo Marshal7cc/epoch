@@ -1,9 +1,9 @@
 package org.epoch.iam.infra.repository.impl;
 
 
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
 import org.epoch.iam.domain.entity.Resource;
 import org.epoch.iam.domain.repository.ResourceRepository;
+import org.epoch.starter.mybatis.repository.impl.BaseRepositoryImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
