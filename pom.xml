@@ -29,6 +29,7 @@
     </developers>
 
     <modules>
+        <module>epoch-commons</module>
         <module>epoch-dependencies</module>
         <module>epoch-starters</module>
         <module>epoch-infrastructure</module>
