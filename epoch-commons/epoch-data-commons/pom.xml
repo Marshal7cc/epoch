@@ -5,14 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>epoch-parent</artifactId>
+        <artifactId>epoch-commons</artifactId>
         <groupId>org.epoch</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-commons</artifactId>
-    <packaging>pom</packaging>
+    <artifactId>epoch-data-commons</artifactId>
 
-    <modules>
-        <module>epoch-data-commons</module>
-    </modules>
 </project>
