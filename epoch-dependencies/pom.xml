@@ -37,7 +37,7 @@
         <guava.version>29.0-jre</guava.version>
         <servlet.version>3.1.0</servlet.version>
         <jackson-dataformat>2.9.0</jackson-dataformat>
-        <fastjson.version>1.2.71</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <log4j2.version>2.16.0</log4j2.version>
         <poi.version>4.0.0</poi.version>
 
