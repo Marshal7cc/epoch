@@ -23,5 +23,6 @@
         <module>epoch-starter-redis</module>
         <module>epoch-starter-security</module>
         <module>epoch-starter-web</module>
+        <module>epoch-starter-ddd</module>
     </modules>
 </project>
