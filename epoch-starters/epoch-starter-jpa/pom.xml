@@ -5,16 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>epoch-commons</artifactId>
-        <groupId>org.epoch</groupId>
+        <artifactId>epoch-starters</artifactId>
+        <groupId>org.epoch.starter</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-data-commons</artifactId>
+    <artifactId>epoch-starter-jpa</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
 </project>

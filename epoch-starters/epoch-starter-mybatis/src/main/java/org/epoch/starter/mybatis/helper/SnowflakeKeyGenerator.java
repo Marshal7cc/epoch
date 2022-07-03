@@ -1,6 +1,7 @@
 package org.epoch.starter.mybatis.helper;
 
 import org.epoch.starter.core.util.ApplicationContextHolder;
+import org.epoch.starter.snowflake.helper.SnowflakeHelper;
 import org.springframework.context.ApplicationContext;
 import tk.mybatis.mapper.genid.GenId;
 

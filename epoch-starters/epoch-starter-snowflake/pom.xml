@@ -5,16 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>epoch-commons</artifactId>
-        <groupId>org.epoch</groupId>
+        <artifactId>epoch-starters</artifactId>
+        <groupId>org.epoch.starter</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-data-commons</artifactId>
+    <artifactId>epoch-starter-snowflake</artifactId>
 
     <dependencies>
+        <!-- EPOCH Starter -->
         <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-commons</artifactId>
+            <groupId>org.epoch.starter</groupId>
+            <artifactId>epoch-starter-redis</artifactId>
         </dependency>
     </dependencies>
+
 </project>

@@ -1,4 +1,4 @@
-package org.epoch.starter.mybatis.helper;
+package org.epoch.starter.snowflake.helper;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,8 +11,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.epoch.starter.core.exception.CommonException;
-import org.epoch.starter.mybatis.properties.MybatisProperties;
 import org.epoch.starter.redis.helper.RedisHelper;
+import org.epoch.starter.snowflake.properties.SnowflakeProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -61,13 +61,13 @@ public final class RedisSnowflakeMetaProvider implements SnowflakeMetaProvider {
     private Long workerId;
 
     public RedisSnowflakeMetaProvider(String dataCenterName,
-                                      MybatisProperties.SnowflakeProperties properties,
+                                      SnowflakeProperties properties,
                                       RedisHelper redisHelper) {
         this(dataCenterName, UUID.randomUUID().toString().replace("-", ""), properties, BIT_DATA_CENTER, BIT_WORKER, redisHelper);
     }
 
     public RedisSnowflakeMetaProvider(String dataCenterName,
-                                      MybatisProperties.SnowflakeProperties properties,
+                                      SnowflakeProperties properties,
                                       Integer bitDataCenterId,
                                       Integer bitWorkerId,
                                       RedisHelper redisHelper) {
@@ -76,7 +76,7 @@ public final class RedisSnowflakeMetaProvider implements SnowflakeMetaProvider {
 
     public RedisSnowflakeMetaProvider(String dataCenterName,
                                       String workerName,
-                                      MybatisProperties.SnowflakeProperties properties,
+                                      SnowflakeProperties properties,
                                       Integer bitDataCenterId,
                                       Integer bitWorkerId,
                                       RedisHelper redisHelper) {

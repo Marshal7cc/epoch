@@ -1,4 +1,4 @@
-package org.epoch.starter.mybatis.helper;
+package org.epoch.starter.snowflake.helper;
 
 import org.epoch.starter.core.exception.CommonException;
 import org.epoch.starter.core.util.SystemClock;
