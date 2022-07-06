@@ -22,6 +22,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <epoch.version>1.0.0.RELEASE</epoch.version>
+        <epoch-common.version>1.0.0.RELEASE</epoch-common.version>
         <epoch-starter.version>1.0.0.RELEASE</epoch-starter.version>
 
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
@@ -82,7 +83,13 @@
                 <version>${springboot-admin.version}</version>
             </dependency>
 
-            <!-- EPOCH Starter -->
+            <!-- EPOCH Commons -->
+            <dependency>
+                <groupId>org.epoch</groupId>
+                <artifactId>epoch-data-commons</artifactId>
+                <version>${epoch-common.version}</version>
+            </dependency>
+            <!-- EPOCH Starters -->
             <dependency>
                 <groupId>org.epoch.starter</groupId>
                 <artifactId>epoch-starters</artifactId>

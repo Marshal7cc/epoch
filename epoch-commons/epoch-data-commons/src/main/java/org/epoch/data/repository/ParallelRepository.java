@@ -1,6 +1,8 @@
-package org.epoch.starter.mybatis.repository;
+package org.epoch.data.repository;
 
 import java.util.List;
+
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * Parallel Operations in Persistence.
@@ -8,24 +10,25 @@ import java.util.List;
  * @author Marshal
  * @since 2021/8/25
  */
-public interface ParallelOperations<T> {
-    int DEFAULT_THRESHOLD = 2000;
+@NoRepositoryBean
+public interface ParallelRepository<T> {
+    int DEFAULT_THRESHOLD = 5000;
     int THREAD_POOL_SIZE = 1 << 4;
 
     /**
      * Parallel method for saving operations.
      *
-     * @param list records
+     * @param entities records
      */
-    void parallelSave(List<T> list);
+    void parallelSave(List<T> entities);
 
     /**
      * Parallel method for saving operations with target threshold.
      *
-     * @param list      records
+     * @param entities  records
      * @param threshold threshold
      */
-    void parallelSave(List<T> list, int threshold);
+    void parallelSave(List<T> entities, int threshold);
 
     /**
      * Get default threshold in single thread.
