@@ -1,30 +1,23 @@
 package org.epoch.iam.domain.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Table;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseAuditEntity;
+import org.epoch.mybatis.domain.BaseAuditEntity;
 
 /**
  * @author Marshal
  */
 @Data
-@Table(name = "sys_role")
-public class SysRole extends BaseAuditEntity {
-    @Column(name = "code")
+@TableName("sys_role")
+public class SysRole extends BaseAuditEntity<SysRole,Long> {
     private String code;
-    @Column(name = "name")
     private String name;
-    @Column(name = "DESCRIPTION")
     private String description;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @Column(name = "START_ACTIVE_DATE")
     private Date startActiveDate;
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @Column(name = "END_ACTIVE_DATE")
     private Date endActiveDate;
-
 }

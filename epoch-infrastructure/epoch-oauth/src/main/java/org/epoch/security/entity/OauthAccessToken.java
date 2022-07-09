@@ -1,63 +1,53 @@
 package org.epoch.security.entity;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-import org.epoch.mybatis.annotation.AuditDomain;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 
 /**
  * @author Marshal
  * @date 2020/1/17
  */
-@AuditDomain(enabled = false)
-@Table(name = "oauth_access_token")
+@TableName("oauth_access_token")
 public class OauthAccessToken {
-    @Id
-    @Column(name = "ID")
+    @TableId(type = IdType.ASSIGN_ID)
     private Long id;
 
     /**
      * 用户ID
      */
-    @Column(name = "USER_ID")
     private Long userId;
 
     /**
      * 客户端ID
      */
-    @Column(name = "CLIENT_ID")
     private String clientId;
 
     /**
      * token
      */
-    @Column(name = "TOKEN")
     private String token;
 
     /**
      * token获取日期
      */
-    @Column(name = "TOKEN_ACCESS_TIME")
     private Date tokenAccessTime;
 
     /**
      * token获取方式
      */
-    @Column(name = "TOKEN_ACCESS_TYPE")
     private String tokenAccessType;
 
     /**
      * token失效日期
      */
-    @Column(name = "TOKEN_EXPIRES_TIME")
     private Date tokenExpiresTime;
 
     /**
      * 是否有效
      */
-    @Column(name = "REVOKE_FLAG")
     private String revokeFlag;
 
     /**

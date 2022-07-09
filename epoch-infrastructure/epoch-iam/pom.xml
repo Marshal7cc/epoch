@@ -12,6 +12,16 @@
     <artifactId>epoch-iam</artifactId>
 
     <dependencies>
+        <!-- database driver -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
         <!-- EPOCH Starter -->
         <dependency>
             <groupId>org.epoch.starter</groupId>

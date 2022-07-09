@@ -2,15 +2,18 @@ package org.epoch.iam.api;
 
 
 import org.epoch.core.rest.ResponseEntity;
+import org.epoch.iam.api.dto.PromptDTO;
+import org.epoch.iam.api.query.PromptQuery;
+import org.epoch.iam.api.vo.PromptVO;
 import org.epoch.iam.domain.entity.SysPrompt;
-import org.epoch.mybatis.common.CommonApi;
+import org.epoch.web.common.BaseFacade;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author Marshal
  */
-public interface SysPromptApi extends CommonApi<SysPrompt> {
+public interface SysPromptApi extends BaseFacade<PromptDTO, PromptVO, PromptQuery, Long> {
 
     /**
      * 国际化查询

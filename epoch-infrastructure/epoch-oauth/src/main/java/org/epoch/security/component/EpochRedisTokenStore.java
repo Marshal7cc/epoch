@@ -70,7 +70,7 @@ public class EpochRedisTokenStore extends RedisTokenStore {
         expiration.add(Calendar.SECOND, -token.getExpiresIn());
         oauthAccessToken.setTokenAccessTime(expiration.getTime());
         oauthAccessToken.setTokenExpiresTime(token.getExpiration());
-        oauthAccessTokenService.submit(oauthAccessToken);
+        oauthAccessTokenService.saveOne(oauthAccessToken);
 
         redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), JSON.toJSONString(token),
                 token.getExpiresIn(), TimeUnit.SECONDS);

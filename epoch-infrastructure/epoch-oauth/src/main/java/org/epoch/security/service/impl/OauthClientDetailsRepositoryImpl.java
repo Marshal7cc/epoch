@@ -1,9 +1,10 @@
 package org.epoch.security.service.impl;
 
 
+import org.epoch.mybatis.repository.BaseMybatisRepository;
 import org.epoch.security.entity.OauthClientDetails;
+import org.epoch.security.mapper.OauthClientDetailsMapper;
 import org.epoch.security.service.OauthClientDetailsRepository;
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,5 +12,5 @@ import org.springframework.stereotype.Service;
  * @date 2019/3/8
  */
 @Service
-public class OauthClientDetailsRepositoryImpl extends BaseRepositoryImpl<OauthClientDetails> implements OauthClientDetailsRepository {
+public class OauthClientDetailsRepositoryImpl extends BaseMybatisRepository<OauthClientDetailsMapper, OauthClientDetails, String> implements OauthClientDetailsRepository {
 }

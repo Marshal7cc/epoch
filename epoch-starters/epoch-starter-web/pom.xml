@@ -54,6 +54,11 @@
             <version>${swagger2.version}</version>
         </dependency>
 
+        <!-- EPOCH Common -->
+        <dependency>
+            <groupId>org.epoch</groupId>
+            <artifactId>epoch-data-commons</artifactId>
+        </dependency>
         <!-- EPOCH Starter -->
         <dependency>
             <groupId>org.epoch.starter</groupId>

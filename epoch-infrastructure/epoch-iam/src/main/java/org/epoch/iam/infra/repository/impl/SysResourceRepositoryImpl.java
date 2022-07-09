@@ -3,15 +3,14 @@ package org.epoch.iam.infra.repository.impl;
 
 import org.epoch.iam.domain.entity.SysResource;
 import org.epoch.iam.domain.repository.SysResourceRepository;
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
+import org.epoch.iam.infra.mapper.SysResourceMapper;
+import org.epoch.mybatis.repository.BaseMybatisRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Marshal
  */
 @Service
-@Transactional(rollbackFor = Exception.class)
-public class SysResourceRepositoryImpl extends BaseRepositoryImpl<SysResource> implements SysResourceRepository {
+public class SysResourceRepositoryImpl extends BaseMybatisRepository<SysResourceMapper, SysResource, Long> implements SysResourceRepository {
 
 }

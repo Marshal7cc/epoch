@@ -4,27 +4,28 @@ package org.epoch.iam.infra.repository.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import org.apache.commons.collections.CollectionUtils;
+import org.epoch.core.algorithm.tree.TreeBuilder;
+import org.epoch.core.algorithm.tree.TreeNode;
 import org.epoch.iam.api.dto.VueRouter;
 import org.epoch.iam.api.dto.VueRouterMeta;
 import org.epoch.iam.domain.entity.SysMenu;
 import org.epoch.iam.domain.repository.SysMenuRepository;
 import org.epoch.iam.infra.mapper.SysMenuMapper;
 import org.epoch.iam.infra.util.VueRouterTreeUtil;
-import org.epoch.core.algorithm.tree.TreeBuilder;
-import org.epoch.core.algorithm.tree.TreeNode;
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
+import org.epoch.mybatis.repository.BaseMybatisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import tk.mybatis.mapper.entity.Example;
 
 /**
  * @author Marshal
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class SysMenuRepositoryImpl extends BaseRepositoryImpl<SysMenu> implements SysMenuRepository {
+public class SysMenuRepositoryImpl extends BaseMybatisRepository<SysMenuMapper, SysMenu, Long> implements SysMenuRepository {
 
     @Autowired
     private SysMenuMapper menuMapper;
@@ -49,20 +50,20 @@ public class SysMenuRepositoryImpl extends BaseRepositoryImpl<SysMenu> implement
      */
     private void removeRecursion(SysMenu sysMenu) {
         Long menuId = sysMenu.getMenuId();
-        Example example = new Example(SysMenu.class);
-        example.createCriteria().andEqualTo("parent_id", menuId);
-        List<SysMenu> childMenuList = menuMapper.selectByExample(example);
+        QueryWrapper<SysMenu> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("parent_id", menuId);
+        List<SysMenu> childMenuList = menuMapper.selectList(queryWrapper);
         if (CollectionUtils.isNotEmpty(childMenuList)) {
             for (SysMenu item : childMenuList) {
                 removeRecursion(item);
             }
         }
-        menuMapper.deleteByPrimaryKey(sysMenu);
+        menuMapper.deleteById(sysMenu);
     }
 
     @Override
     public List<VueRouter> getUserMenu() {
-        List<SysMenu> list = menuMapper.selectAll();
+        List<SysMenu> list = menuMapper.selectList(Wrappers.emptyWrapper());
         List<VueRouter> routers = new ArrayList<>();
         list.forEach(item -> {
             VueRouter route = new VueRouter();

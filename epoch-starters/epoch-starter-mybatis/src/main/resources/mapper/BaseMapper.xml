@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.epoch.mybatis.mapper.BaseMapper">
-    <resultMap id="BaseResultMap" type="org.epoch.mybatis.domain.entity.BaseAuditEntity">
+    <resultMap id="BaseResultMap" type="org.epoch.mybatis.domain.BaseAuditEntity">
         <id column="id" property="id" jdbcType="VARCHAR"/>
         <result column="status" property="status" jdbcType="VARCHAR"/>
         <result column="created_date" property="createdDate" jdbcType="TIMESTAMP"/>
@@ -9,7 +9,7 @@
         <result column="updated_by" property="updatedBy" jdbcType="VARCHAR"/>
     </resultMap>
 
-    <resultMap id="BaseDictionaryMap" type="org.epoch.mybatis.domain.entity.BaseDictionaryEntity"
+    <resultMap id="BaseDictionaryMap" type="org.epoch.mybatis.domain.BaseDictionaryEntity"
                extends="BaseResultMap">
         <result column="tenant_id" property="tenantId" jdbcType="VARCHAR"/>
         <result column="code" property="code" jdbcType="VARCHAR"/>

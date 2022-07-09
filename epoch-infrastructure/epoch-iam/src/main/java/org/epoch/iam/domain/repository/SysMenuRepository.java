@@ -6,12 +6,12 @@ import java.util.List;
 import org.epoch.core.algorithm.tree.TreeNode;
 import org.epoch.iam.api.dto.VueRouter;
 import org.epoch.iam.domain.entity.SysMenu;
-import org.epoch.mybatis.repository.BaseRepository;
+import org.epoch.data.repository.BaseRepository;
 
 /**
  * @author Marshal
  */
-public interface SysMenuRepository extends BaseRepository<SysMenu> {
+public interface SysMenuRepository extends BaseRepository<SysMenu,Long> {
 
     /**
      * 获取菜单树

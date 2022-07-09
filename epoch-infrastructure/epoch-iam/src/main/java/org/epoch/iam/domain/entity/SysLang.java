@@ -1,22 +1,20 @@
 package org.epoch.iam.domain.entity;
 
-import javax.persistence.Id;
-import javax.persistence.Table;
-
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.epoch.mybatis.domain.entity.BaseAuditEntity;
+import org.epoch.mybatis.domain.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
-;
 
 /**
  * @author Marshal
  */
 @Data
-@Table(name = "sys_lang")
-public class SysLang extends BaseAuditEntity {
+@TableName("sys_lang")
+public class SysLang extends BaseAuditEntity<SysLang,Long> {
 
-    @Id
     private Long langId;
 
     /**

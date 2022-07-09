@@ -1,13 +1,12 @@
 package org.epoch.iam.infra.mapper;
 
 
-import tk.mybatis.mapper.common.Mapper;
-
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.epoch.iam.domain.entity.SysResource;
 
 /**
  * @author Marshal
  */
-public interface SysResourceMapper extends Mapper<SysResource> {
+public interface SysResourceMapper extends BaseMapper<SysResource> {
 
 }

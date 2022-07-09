@@ -1,11 +1,13 @@
 package org.epoch.iam.api;
 
 
-import org.epoch.iam.domain.entity.SysRole;
-import org.epoch.mybatis.common.CommonApi;
+import org.epoch.iam.api.dto.RoleDTO;
+import org.epoch.iam.api.query.RoleQuery;
+import org.epoch.iam.api.vo.RoleVO;
+import org.epoch.web.common.BaseFacade;
 
 /**
  * @author Marshal
  */
-public interface SysRoleApi extends CommonApi<SysRole> {
+public interface SysRoleApi extends BaseFacade<RoleDTO, RoleVO, RoleQuery,Long> {
 }

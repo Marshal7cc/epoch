@@ -8,7 +8,7 @@ import java.util.Map;
 import org.epoch.iam.domain.entity.SysPrompt;
 import org.epoch.iam.domain.repository.SysPromptRepository;
 import org.epoch.iam.infra.mapper.SysPromptMapper;
-import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
+import org.epoch.mybatis.repository.BaseMybatisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional(rollbackFor = Exception.class)
-public class SysPromptRepositoryImpl extends BaseRepositoryImpl<SysPrompt> implements SysPromptRepository {
+public class SysPromptRepositoryImpl extends BaseMybatisRepository<SysPromptMapper, SysPrompt, Long> implements SysPromptRepository {
 
     @Autowired
     private SysPromptMapper promptMapper;
