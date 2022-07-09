@@ -1,19 +1,19 @@
-package org.epoch.mybatis.helper;
+package org.epoch.mybatis.domain.support;
 
+import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import org.epoch.core.util.ApplicationContextHolder;
 import org.epoch.snowflake.helper.SnowflakeHelper;
 import org.springframework.context.ApplicationContext;
-import tk.mybatis.mapper.genid.GenId;
 
 /**
  * @author Marshal
- * @date 2021/3/5
+ * @since 2022/7/9
  */
-public class SnowflakeKeyGenerator implements GenId<String> {
+public class SnowflakeKeyGenerator implements IdentifierGenerator {
     @Override
-    public String genId(String table, String column) {
+    public Number nextId(Object entity) {
         ApplicationContext context = ApplicationContextHolder.getContext();
         SnowflakeHelper snowflakeHelper = context.getBean(SnowflakeHelper.class);
-        return String.valueOf(snowflakeHelper.next());
+        return snowflakeHelper.next();
     }
 }
