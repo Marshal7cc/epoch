@@ -6,7 +6,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.starter.mybatis.domain.entity.BaseAuditEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 
 /**
  * @author Marshal

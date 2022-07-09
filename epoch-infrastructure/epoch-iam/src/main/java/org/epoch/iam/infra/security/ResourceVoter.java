@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.epoch.starter.security.voter.PermissionVoter;
+import org.epoch.security.voter.PermissionVoter;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.FilterInvocation;

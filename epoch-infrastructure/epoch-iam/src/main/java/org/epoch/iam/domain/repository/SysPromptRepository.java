@@ -4,7 +4,7 @@ package org.epoch.iam.domain.repository;
 import java.util.Map;
 
 import org.epoch.iam.domain.entity.SysPrompt;
-import org.epoch.starter.mybatis.repository.BaseRepository;
+import org.epoch.mybatis.repository.BaseRepository;
 
 /**
  * @author Marshal

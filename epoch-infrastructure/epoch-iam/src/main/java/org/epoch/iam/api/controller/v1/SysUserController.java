@@ -6,7 +6,7 @@ import org.epoch.iam.api.SysUserApi;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysUser;
 import org.epoch.iam.domain.repository.SysUserRepository;
-import org.epoch.starter.mybatis.common.CommonController;
+import org.epoch.mybatis.common.CommonController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

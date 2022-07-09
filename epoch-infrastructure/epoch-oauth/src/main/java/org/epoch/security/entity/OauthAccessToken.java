@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.epoch.starter.mybatis.annotation.AuditDomain;
+import org.epoch.mybatis.annotation.AuditDomain;
 
 /**
  * @author Marshal

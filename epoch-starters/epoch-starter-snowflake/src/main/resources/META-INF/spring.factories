@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.starter.snowflake.autoconfigure.SnowflakeAutoConfiguration
+org.epoch.snowflake.autoconfigure.SnowflakeAutoConfiguration

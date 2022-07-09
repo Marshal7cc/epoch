@@ -4,7 +4,7 @@ package org.epoch.iam.infra.repository.impl;
 import org.epoch.iam.domain.entity.SysUser;
 import org.epoch.iam.domain.repository.SysUserRepository;
 import org.epoch.iam.infra.mapper.SysUserMapper;
-import org.epoch.starter.mybatis.repository.impl.BaseRepositoryImpl;
+import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

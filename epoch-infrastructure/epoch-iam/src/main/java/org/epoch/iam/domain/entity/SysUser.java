@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import org.epoch.starter.mybatis.domain.entity.BaseAuditEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;

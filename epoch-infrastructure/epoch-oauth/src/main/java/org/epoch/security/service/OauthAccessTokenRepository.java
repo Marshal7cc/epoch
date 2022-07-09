@@ -2,7 +2,7 @@ package org.epoch.security.service;
 
 
 import org.epoch.security.entity.OauthAccessToken;
-import org.epoch.starter.mybatis.repository.BaseRepository;
+import org.epoch.mybatis.repository.BaseRepository;
 
 /**
  * @author Marshal

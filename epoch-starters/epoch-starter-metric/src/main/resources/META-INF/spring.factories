@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.starter.metric.autoconfigure.MetricAutoConfiguration
+org.epoch.metric.autoconfigure.MetricAutoConfiguration

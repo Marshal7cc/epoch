@@ -2,7 +2,7 @@ package org.epoch.iam.api;
 
 
 import org.epoch.iam.domain.entity.SysRole;
-import org.epoch.starter.mybatis.common.CommonApi;
+import org.epoch.mybatis.common.CommonApi;
 
 /**
  * @author Marshal

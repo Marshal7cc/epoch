@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.starter.mybatis.domain.entity.BaseAuditEntity;
+import org.epoch.mybatis.domain.entity.BaseAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;

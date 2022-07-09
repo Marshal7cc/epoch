@@ -20,7 +20,7 @@ import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
 import org.apache.ibatis.plugin.*;
-import org.epoch.starter.core.util.ReflectUtil;
+import org.epoch.core.util.ReflectUtil;
 import org.springframework.stereotype.Component;
 
 /**

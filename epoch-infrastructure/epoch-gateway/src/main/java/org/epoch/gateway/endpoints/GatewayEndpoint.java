@@ -1,7 +1,7 @@
 package org.epoch.gateway.endpoints;
 
-import org.epoch.starter.core.rest.Response;
-import org.epoch.starter.core.rest.ResponseEntity;
+import org.epoch.core.rest.Response;
+import org.epoch.core.rest.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

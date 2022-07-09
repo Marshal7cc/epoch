@@ -11,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.epoch.security.exception.ValidateCodeException;
 import org.epoch.security.properties.EpochValidateCodeProperties;
 import org.epoch.security.service.ValidateCodeService;
-import org.epoch.starter.core.constants.BaseConstants;
+import org.epoch.core.constants.BaseConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpHeaders;

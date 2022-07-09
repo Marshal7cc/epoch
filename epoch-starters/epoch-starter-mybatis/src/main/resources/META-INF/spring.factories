@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.starter.mybatis.MybatisAutoConfiguration
+org.epoch.mybatis.MybatisAutoConfiguration

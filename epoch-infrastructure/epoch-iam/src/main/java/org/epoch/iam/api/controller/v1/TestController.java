@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.epoch.core.rest.Response;
+import org.epoch.core.rest.ResponseEntity;
 import org.epoch.iam.domain.repository.SysUserRepository;
-import org.epoch.starter.core.rest.Response;
-import org.epoch.starter.core.rest.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

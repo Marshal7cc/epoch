@@ -8,7 +8,7 @@ import java.util.Map;
 import org.epoch.iam.domain.entity.SysPrompt;
 import org.epoch.iam.domain.repository.SysPromptRepository;
 import org.epoch.iam.infra.mapper.SysPromptMapper;
-import org.epoch.starter.mybatis.repository.impl.BaseRepositoryImpl;
+import org.epoch.mybatis.repository.impl.BaseRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

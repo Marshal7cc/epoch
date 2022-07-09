@@ -3,8 +3,8 @@ package org.epoch.iam.infra.mapper;
 
 import java.util.List;
 
+import org.epoch.core.algorithm.tree.TreeNode;
 import org.epoch.iam.domain.entity.SysMenu;
-import org.epoch.starter.core.algorithm.tree.TreeNode;
 import tk.mybatis.mapper.common.Mapper;
 
 /**

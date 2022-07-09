@@ -4,7 +4,7 @@ package org.epoch.security.service;
 import java.io.Serializable;
 import java.util.*;
 
-import org.epoch.starter.security.component.EpochUserDetails;
+import org.epoch.security.component.EpochUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
