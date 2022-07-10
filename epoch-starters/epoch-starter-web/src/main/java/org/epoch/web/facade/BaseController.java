@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Objects;
 
 import io.swagger.annotations.ApiOperation;
-import org.epoch.core.base.BaseValidator;
 import org.epoch.core.convert.CommonConverter;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
@@ -15,12 +14,9 @@ import org.epoch.web.facade.dto.BaseDTO;
 import org.epoch.web.facade.query.BaseQuery;
 import org.epoch.web.facade.vo.BaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  * <p>通用controller</p>
@@ -33,7 +29,7 @@ import org.springframework.web.bind.annotation.InitBinder;
  * @date 2020/5/30
  */
 public class BaseController<R extends BaseRepository<T, ID>, D extends BaseDTO, V extends BaseVO, Q extends BaseQuery, T extends Auditable<ID>, ID extends Serializable>
-        extends BaseValidator
+        extends AbstractController
         implements BaseFacade<D, V, Q, ID> {
 
     @Autowired
@@ -65,14 +61,14 @@ public class BaseController<R extends BaseRepository<T, ID>, D extends BaseDTO, 
     }
 
     @Override
-    @ApiOperation(value = "记录创建")
+    @ApiOperation(value = "创建记录")
     public ResponseEntity<D> insert(D baseDTO) {
         baseRepository.saveOne(CommonConverter.parseObject(tClass, baseDTO));
         return Response.success(baseDTO);
     }
 
     @Override
-    @ApiOperation(value = "记录更新")
+    @ApiOperation(value = "更新记录")
     public ResponseEntity<D> update(ID id, D baseDTO) {
         baseDTO.setId(String.valueOf(id));
         baseRepository.saveOne(CommonConverter.parseObject(tClass, baseDTO));
@@ -86,13 +82,10 @@ public class BaseController<R extends BaseRepository<T, ID>, D extends BaseDTO, 
         return Response.success();
     }
 
-    /**
-     * function:去除QueryString字符串前后空格
-     * [post/put请求对象里面的String字段无法操作]
-     */
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
-        binder.registerCustomEditor(String.class, stringTrimmer);
+    @Override
+    @ApiOperation(value = "主键删除")
+    public ResponseEntity<Void> removeById(ID id) {
+        baseRepository.deleteById(id);
+        return Response.success();
     }
 }

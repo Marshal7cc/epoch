@@ -67,4 +67,13 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, Q extends BaseQ
      */
     @DeleteMapping
     ResponseEntity<Void> remove(@RequestBody List<D> list);
+
+    /**
+     * 批量删除
+     *
+     * @param id primary key
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> removeById(@PathVariable("id") ID id);
 }
