@@ -13,11 +13,12 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
+import org.epoch.core.convert.CommonConverter;
+import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
-import org.epoch.mybatis.domain.BaseAuditEntity;
+import org.epoch.mybatis.repository.query.QueryHelper;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -110,15 +111,26 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
 
     @Override
     public Iterable<T> findAll(Sort sort) {
-        QueryWrapper<T> queryWrapper = Wrappers.emptyWrapper();
-
-
-        return null;
+        return mapper.selectList(QueryHelper.getQueryWrapper(sort));
     }
 
     @Override
     public Page<T> findAll(Pageable pageable) {
-        return null;
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page
+                = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageable.getPageNumber(), pageable.getPageSize());
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> pageResponse = super.page(page, Wrappers.emptyWrapper());
+
+        return QueryHelper.getPage(pageResponse);
     }
 
+    @Override
+    public <Q> Page<T> findAll(Pageable pageable, Q query) {
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page
+                = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageable.getPageNumber(), pageable.getPageSize());
+
+        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.beanConvert(entityClass, query));
+        com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> pageResponse = super.page(page, queryWrapper);
+
+        return QueryHelper.getPage(pageResponse);
+    }
 }

@@ -19,3 +19,6 @@ epoch:
   security:
     white-list: /user/query,/user/remove
     enable-auth: true
+logging:
+  level:
+    org.epoch: debug

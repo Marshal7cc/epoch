@@ -2,8 +2,8 @@ package org.epoch.iam.api.controller.v1;
 
 
 import io.swagger.annotations.Api;
-import org.epoch.core.rest.Response;
-import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.rest.Response;
+import org.epoch.web.rest.ResponseEntity;
 import org.epoch.iam.api.SysMenuApi;
 import org.epoch.iam.api.dto.MenuDTO;
 import org.epoch.iam.api.query.MenuQuery;

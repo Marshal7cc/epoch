@@ -1,6 +1,5 @@
 package org.epoch.core;
 
-import org.epoch.core.base.BaseExceptionHandler;
 import org.epoch.core.endpoint.RefreshConfigEndpoint;
 import org.epoch.core.properties.CoreProperties;
 import org.epoch.core.util.ApplicationContextHolder;
@@ -34,10 +33,4 @@ public class CoreAutoConfiguration {
         return new RefreshConfigEndpoint(contextRefresher);
     }
 
-    @Bean
-    @ConditionalOnMissingBean
-    @ConditionalOnProperty(prefix = "epoch.core", name = {"default-exception-handler-enable"}, havingValue = "true", matchIfMissing = true)
-    public BaseExceptionHandler exceptionHandler() {
-        return new BaseExceptionHandler();
-    }
 }

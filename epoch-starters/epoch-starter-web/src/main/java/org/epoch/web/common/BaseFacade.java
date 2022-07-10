@@ -3,11 +3,11 @@ package org.epoch.web.common;
 import java.io.Serializable;
 import java.util.List;
 
-import org.epoch.core.rest.PageableData;
-import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.rest.ResponseEntity;
 import org.epoch.web.domain.BaseQuery;
 import org.epoch.web.domain.BaseDTO;
 import org.epoch.web.domain.BaseVO;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -27,9 +27,9 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, Q extends BaseQ
      * @return 结果集合
      */
     @GetMapping("{page}/{size}")
-    ResponseEntity<PageableData<V>> selectPage(@PathVariable("page") int page,
-                                               @PathVariable("size") int size,
-                                               Q query);
+    ResponseEntity<Page<V>> selectPage(@PathVariable("page") int page,
+                                       @PathVariable("size") int size,
+                                       Q query);
 
     /**
      * 基础详情

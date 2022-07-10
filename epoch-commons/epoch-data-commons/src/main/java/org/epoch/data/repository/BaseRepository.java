@@ -2,7 +2,7 @@ package org.epoch.data.repository;
 
 import java.util.Optional;
 
-import org.springframework.data.domain.Page;
+import org.epoch.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
@@ -140,4 +140,14 @@ public interface BaseRepository<T, ID> {
      * @see org.springframework.data.repository.PagingAndSortingRepository#findAll(Pageable)
      */
     Page<T> findAll(Pageable pageable);
+
+
+    /**
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object and query object.
+     *
+     * @param pageable
+     * @param query
+     * @return a page of entities
+     */
+    <Q> Page<T> findAll(Pageable pageable, Q query);
 }

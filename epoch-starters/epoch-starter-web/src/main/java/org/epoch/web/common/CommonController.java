@@ -6,9 +6,8 @@ import java.util.Objects;
 
 import io.swagger.annotations.ApiOperation;
 import org.epoch.core.convert.CommonConverter;
-import org.epoch.core.rest.PageableData;
-import org.epoch.core.rest.Response;
-import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.rest.Response;
+import org.epoch.web.rest.ResponseEntity;
 import org.epoch.data.domain.Auditable;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.web.domain.BaseDTO;
@@ -16,6 +15,8 @@ import org.epoch.web.domain.BaseQuery;
 import org.epoch.web.domain.BaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  * <p>通用controller</p>
@@ -27,11 +28,9 @@ import org.springframework.core.GenericTypeResolver;
  * @author Marshal
  * @date 2020/5/30
  */
-public class CommonController<R extends BaseRepository<T, ID>,
-        D extends BaseDTO, V extends BaseVO, Q extends BaseQuery,
-        T extends Auditable, ID extends Serializable> extends BaseController
+public class CommonController<R extends BaseRepository<T, ID>, D extends BaseDTO, V extends BaseVO, Q extends BaseQuery, T extends Auditable<ID>, ID extends Serializable>
+        extends BaseController
         implements BaseFacade<D, V, Q, ID> {
-
 
     protected Class<D> dClass;
     protected Class<V> vClass;
@@ -44,7 +43,6 @@ public class CommonController<R extends BaseRepository<T, ID>,
         this.vClass = (Class<V>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), CommonController.class))[2];
         this.qClass = (Class<Q>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), CommonController.class))[3];
         this.tClass = (Class<T>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), CommonController.class))[4];
-
     }
 
     @Autowired
@@ -52,9 +50,8 @@ public class CommonController<R extends BaseRepository<T, ID>,
 
     @Override
     @ApiOperation(value = "列表查询")
-    public ResponseEntity<PageableData<V>> selectPage(int page, int size, Q condition) {
-        List<V> list = null;
-        return Response.success(list);
+    public ResponseEntity<Page<V>> selectPage(int page, int size, Q condition) {
+        return Response.success(baseRepository.findAll(PageRequest.of(page,size),condition));
     }
 
     @Override

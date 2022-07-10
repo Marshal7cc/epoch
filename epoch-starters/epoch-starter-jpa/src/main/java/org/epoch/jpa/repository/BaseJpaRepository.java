@@ -1,10 +1,15 @@
 package org.epoch.jpa.repository;
 
+import java.util.Objects;
 import java.util.Optional;
 
+import org.epoch.core.convert.CommonConverter;
+import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
+import org.epoch.data.repository.query.QueryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.core.GenericTypeResolver;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +21,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements BaseRepository<T, ID> {
     @Autowired
     protected R repository;
+
+    private final Class<T> entityClass;
+
+    @SuppressWarnings("unchecked")
+    protected BaseJpaRepository() {
+        this.entityClass = (Class<T>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseRepository.class))[0];
+    }
 
     @Override
     public <S extends T> S saveOne(S entity) {
@@ -79,6 +91,11 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
 
     @Override
     public Page<T> findAll(Pageable pageable) {
-        return repository.findAll(pageable);
+        return QueryHelper.getPage(repository.findAll(pageable));
+    }
+
+    @Override
+    public <Q> Page<T> findAll(Pageable pageable, Q query) {
+        return QueryHelper.getPage(repository.findAll(Example.of(CommonConverter.beanConvert(entityClass, query)), pageable));
     }
 }

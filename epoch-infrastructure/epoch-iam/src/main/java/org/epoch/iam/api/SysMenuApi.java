@@ -1,7 +1,7 @@
 package org.epoch.iam.api;
 
 
-import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.rest.ResponseEntity;
 import org.epoch.iam.api.dto.MenuDTO;
 import org.epoch.iam.api.query.MenuQuery;
 import org.epoch.iam.api.vo.MenuVO;

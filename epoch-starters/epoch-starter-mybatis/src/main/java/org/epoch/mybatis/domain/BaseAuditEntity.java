@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
+import org.epoch.core.constants.BaseConstants.Status;
 import org.epoch.data.domain.Auditable;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -28,4 +30,6 @@ public class BaseAuditEntity<T extends Model<?>, ID> extends Model<T> implements
     private String updatedBy;
     @LastModifiedDate
     private LocalDateTime updatedDate;
+    @TableLogic(value = Status.YES, delval = Status.NO)
+    private String status;
 }

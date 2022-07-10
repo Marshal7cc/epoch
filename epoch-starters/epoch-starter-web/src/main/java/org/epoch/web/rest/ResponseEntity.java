@@ -1,4 +1,4 @@
-package org.epoch.core.rest;
+package org.epoch.web.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

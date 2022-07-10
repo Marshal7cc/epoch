@@ -1,4 +1,4 @@
-package org.epoch.core.rest;
+package org.epoch.web.rest;
 
 import java.io.*;
 import java.net.URLEncoder;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.epoch.core.constants.BaseConstants;
+import org.epoch.data.domain.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,8 +37,8 @@ public class Response {
         return new ResponseEntity(message);
     }
 
-    public static <T> ResponseEntity<PageableData<T>> success(List<T> rows) {
-        return new ResponseEntity<PageableData<T>>(new PageableData(rows));
+    public static <T> ResponseEntity<Page<T>> success(List<T> rows) {
+        return new ResponseEntity<Page<T>>(new Page(rows));
     }
 
     public static <T> ResponseEntity<T> success(Object data) {
