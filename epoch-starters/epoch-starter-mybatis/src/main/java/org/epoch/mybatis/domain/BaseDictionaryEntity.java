@@ -7,7 +7,7 @@ import lombok.Data;
  * @date 2021/3/7
  */
 @Data
-public class BaseDictionaryEntity extends BaseAuditEntity<BaseDictionaryEntity, String> {
+public class BaseDictionaryEntity extends SimpleAuditEntity<BaseDictionaryEntity, String> {
     public static String FILED_TENANT_ID = "tenantId";
     public static String FILED_CODE = "code";
     public static String FILED_NAME = "name";

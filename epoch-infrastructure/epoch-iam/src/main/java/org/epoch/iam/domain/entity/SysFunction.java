@@ -1,11 +1,9 @@
 package org.epoch.iam.domain.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.mybatis.domain.BaseAuditEntity;
+import org.epoch.mybatis.domain.SimpleAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -16,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @TableName("sys_function")
-public class SysFunction extends BaseAuditEntity<SysFunction, Long> {
+public class SysFunction extends SimpleAuditEntity<SysFunction, Long> {
 
     /**
      * 主键

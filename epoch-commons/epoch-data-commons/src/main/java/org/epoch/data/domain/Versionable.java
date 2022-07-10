@@ -12,12 +12,12 @@ public interface Versionable {
      *
      * @return the status
      */
-    String getVersionNumber();
+    String getObjectVersion();
 
     /**
      * Sets the status of this entity.
      *
-     * @param versionNumber the version of this entity
+     * @param objectVersion the version of this entity
      */
-    void setVersionNumber(String versionNumber);
+    void setObjectVersion(String objectVersion);
 }

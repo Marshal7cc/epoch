@@ -1,10 +1,8 @@
 package org.epoch.iam.domain.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.epoch.mybatis.domain.BaseAuditEntity;
+import org.epoch.mybatis.domain.SimpleAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 
@@ -13,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @TableName("sys_resource")
-public class SysResource extends BaseAuditEntity<SysResource,Long> {
+public class SysResource extends SimpleAuditEntity<SysResource,Long> {
 
     /**
      * 主键

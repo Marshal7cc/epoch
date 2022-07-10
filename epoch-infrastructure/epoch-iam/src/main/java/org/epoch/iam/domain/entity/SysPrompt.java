@@ -1,10 +1,8 @@
 package org.epoch.iam.domain.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.epoch.mybatis.domain.BaseAuditEntity;
+import org.epoch.mybatis.domain.SimpleAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -14,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @TableName( "sys_prompt")
-public class SysPrompt extends BaseAuditEntity<SysPrompt,Long> {
+public class SysPrompt extends SimpleAuditEntity<SysPrompt,Long> {
 
     /**
      * 主键

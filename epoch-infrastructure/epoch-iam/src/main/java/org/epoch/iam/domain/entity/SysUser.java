@@ -2,11 +2,9 @@ package org.epoch.iam.domain.entity;
 
 import java.util.Date;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.epoch.mybatis.domain.BaseAuditEntity;
+import org.epoch.mybatis.domain.SimpleAuditEntity;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -16,7 +14,7 @@ import org.hibernate.validator.constraints.Length;
  */
 @Data
 @TableName(  "sys_user")
-public class SysUser extends BaseAuditEntity<SysUser,Long> {
+public class SysUser extends SimpleAuditEntity<SysUser,Long> {
 
     private Long userId;
 
