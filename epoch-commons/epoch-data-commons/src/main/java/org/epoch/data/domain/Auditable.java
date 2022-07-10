@@ -2,19 +2,15 @@ package org.epoch.data.domain;
 
 import java.time.LocalDateTime;
 
-import org.springframework.data.domain.Persistable;
-
 /**
  * @author Marshal
  * @since 2022/7/9
  */
 public interface Auditable<ID> extends Persistable<ID> {
-    String FIELD_ID = "id";
     String FIELD_CREATED_BY = "createdBy";
     String FIELD_CREATED_DATE = "createdDate";
     String FIELD_UPDATED_BY = "updatedBy";
     String FIELD_UPDATED_DATE = "updatedDate";
-    String FIELD_STATUS = "status";
 
     /**
      * Returns the user who created this entity.
@@ -71,32 +67,4 @@ public interface Auditable<ID> extends Persistable<ID> {
      * @param updatedDate the date of the last modification to set
      */
     void setUpdatedDate(LocalDateTime updatedDate);
-
-    /**
-     * Returns the status of entity.
-     *
-     * @return status of entity
-     */
-    default String getStatus() {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Set the status of entity.
-     *
-     * @param status status of entity
-     */
-    default void setStatus(String status) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * Returns if the {@code Persistable} is new or was persisted already.
-     *
-     * @return if {@literal true} the object is new.
-     */
-    @Override
-    default boolean isNew() {
-        return getId() == null;
-    }
 }
