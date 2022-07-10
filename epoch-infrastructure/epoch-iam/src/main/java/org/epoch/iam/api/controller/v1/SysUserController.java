@@ -9,7 +9,7 @@ import org.epoch.iam.api.vo.UserVO;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysUser;
 import org.epoch.iam.domain.repository.SysUserRepository;
-import org.epoch.web.common.CommonController;
+import org.epoch.web.facade.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = SwaggerTags.USER)
 @RequestMapping("/users")
 @RestController("sysUserController.v1")
-public class SysUserController extends CommonController<SysUserRepository, UserDTO, UserVO, UserQuery, SysUser, Long> implements SysUserApi {
+public class SysUserController extends BaseController<SysUserRepository, UserDTO, UserVO, UserQuery, SysUser, Long> implements SysUserApi {
 
 }

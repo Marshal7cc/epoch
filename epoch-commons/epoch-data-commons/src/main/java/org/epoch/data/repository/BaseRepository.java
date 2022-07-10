@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.epoch.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * Base repository accessing database.
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Sort;
  * @author Marshal
  * @since 2022/6/18
  */
+@NoRepositoryBean
 public interface BaseRepository<T, ID> {
 
     /**

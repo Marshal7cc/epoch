@@ -24,7 +24,7 @@
         </dependency>
         <!-- epoch commons -->
         <dependency>
-            <groupId>org.epoch</groupId>
+            <groupId>org.epoch.common</groupId>
             <artifactId>epoch-data-commons</artifactId>
         </dependency>
         <!-- epoch starters -->

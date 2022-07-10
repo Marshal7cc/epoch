@@ -1,4 +1,4 @@
-package org.epoch.web.config;
+package org.epoch.web.autoconfigure;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import springfox.documentation.spring.web.plugins.Docket;
  * @date 2020/5/31
  */
 @Configuration
-public class SwaggerConfiguration {
+public class SwaggerAutoConfiguration {
 
     private static final String DEFAULT_SCAN_PACKAGE = "org.epoch";
     private static final String DEFAULT_DESCRIPTION = "epoch平台接口文档";

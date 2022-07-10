@@ -1,7 +1,7 @@
 package org.epoch.iam.api.vo;
 
 import lombok.Data;
-import org.epoch.web.domain.BaseVO;
+import org.epoch.web.facade.vo.BaseVO;
 import org.hibernate.validator.constraints.Length;
 
 

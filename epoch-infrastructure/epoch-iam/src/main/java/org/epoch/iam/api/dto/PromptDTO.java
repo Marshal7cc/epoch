@@ -1,7 +1,7 @@
 package org.epoch.iam.api.dto;
 
 import lombok.Data;
-import org.epoch.web.domain.BaseDTO;
+import org.epoch.web.facade.dto.BaseDTO;
 import org.hibernate.validator.constraints.Length;
 
 

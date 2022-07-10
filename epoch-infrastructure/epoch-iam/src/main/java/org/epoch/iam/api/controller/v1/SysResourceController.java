@@ -9,7 +9,7 @@ import org.epoch.iam.api.vo.ResourceVO;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysResource;
 import org.epoch.iam.domain.repository.SysResourceRepository;
-import org.epoch.web.common.CommonController;
+import org.epoch.web.facade.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = SwaggerTags.RESOURCE)
 @RequestMapping("/resources")
 @RestController("sysResourceController.v1")
-public class SysResourceController extends CommonController<SysResourceRepository, ResourceDTO, ResourceVO, ResourceQuery, SysResource, Long> implements SysResourceApi {
+public class SysResourceController extends BaseController<SysResourceRepository, ResourceDTO, ResourceVO, ResourceQuery, SysResource, Long> implements SysResourceApi {
 
 }

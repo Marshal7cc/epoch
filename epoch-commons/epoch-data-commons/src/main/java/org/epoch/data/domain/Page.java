@@ -15,10 +15,6 @@ public class Page<T> {
     private PageInfo pageInfo;
     private List<T> content;
 
-    public Page(List<T> content) {
-        this.content = content;
-    }
-
     public Page(PageInfo pageInfo, List<T> content) {
         this.pageInfo = pageInfo;
         this.content = content;

@@ -135,7 +135,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page
                 = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageable.getPageNumber(), pageable.getPageSize());
 
-        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.beanConvert(entityClass, query));
+        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.parseObject(entityClass, query));
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> pageResponse = super.page(page, queryWrapper);
 
         return QueryHelper.getPage(pageResponse);

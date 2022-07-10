@@ -9,7 +9,7 @@ import org.epoch.iam.api.vo.FunctionVO;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysFunction;
 import org.epoch.iam.domain.repository.SysFunctionRepository;
-import org.epoch.web.common.CommonController;
+import org.epoch.web.facade.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = SwaggerTags.FUNCTION)
 @RequestMapping("/functions")
 @RestController("sysFunctionController.v1")
-public class SysFunctionController extends CommonController<SysFunctionRepository, FunctionDTO, FunctionVO, FunctionQuery, SysFunction, Long> implements SysFunctionApi {
+public class SysFunctionController extends BaseController<SysFunctionRepository, FunctionDTO, FunctionVO, FunctionQuery, SysFunction, Long> implements SysFunctionApi {
 
 }

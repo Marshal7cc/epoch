@@ -1,9 +1,7 @@
 package org.epoch.iam.api.dto;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
-import org.epoch.web.domain.BaseDTO;
+import org.epoch.web.facade.dto.BaseDTO;
 import org.hibernate.validator.constraints.Length;
 
 

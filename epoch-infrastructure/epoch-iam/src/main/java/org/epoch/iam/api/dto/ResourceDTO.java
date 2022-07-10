@@ -2,7 +2,7 @@ package org.epoch.iam.api.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.web.domain.BaseDTO;
+import org.epoch.web.facade.dto.BaseDTO;
 
 /**
  * @author Marshal

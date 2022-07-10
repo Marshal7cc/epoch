@@ -15,7 +15,7 @@ public class PageInfo {
     private Integer totalElements;
     private Integer totalPages;
 
-    public long getTotalPages() {
+    public int getTotalPages() {
         return getSize() == 0 ? 1 : (int) Math.ceil((double) totalElements / (double) getSize());
     }
 }

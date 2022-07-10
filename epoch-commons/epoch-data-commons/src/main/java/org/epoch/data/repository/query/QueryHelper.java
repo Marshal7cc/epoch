@@ -14,7 +14,7 @@ public class QueryHelper {
 
     public static <T> Page<T> getPage(org.springframework.data.domain.Page<T> page) {
         PageInfo pageInfo = PageInfo.builder().page(page.getNumber() + 1).size(page.getSize())
-                .totalPages(page.getTotalPages()).totalElements(page.getNumberOfElements()).build();
+                .totalPages(page.getTotalPages()).totalElements(Integer.parseInt(String.valueOf(page.getTotalElements()))).build();
         return new Page<>(pageInfo, page.getContent());
     }
 }

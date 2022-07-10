@@ -56,7 +56,7 @@
 
         <!-- EPOCH Common -->
         <dependency>
-            <groupId>org.epoch</groupId>
+            <groupId>org.epoch.common</groupId>
             <artifactId>epoch-data-commons</artifactId>
         </dependency>
         <!-- EPOCH Starter -->

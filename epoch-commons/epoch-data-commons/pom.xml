@@ -5,17 +5,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
+        <groupId>org.epoch.common</groupId>
         <artifactId>epoch-commons</artifactId>
-        <groupId>org.epoch</groupId>
         <version>1.0.0.RELEASE</version>
     </parent>
     <artifactId>epoch-data-commons</artifactId>
 
     <dependencies>
+        <!-- lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <!-- spring data commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>

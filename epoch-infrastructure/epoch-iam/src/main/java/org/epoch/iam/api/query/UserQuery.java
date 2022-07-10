@@ -3,7 +3,7 @@ package org.epoch.iam.api.query;
 import java.util.Date;
 
 import lombok.Data;
-import org.epoch.web.domain.BaseQuery;
+import org.epoch.web.facade.query.BaseQuery;
 import org.hibernate.validator.constraints.Length;
 
 ;

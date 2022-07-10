@@ -2,7 +2,7 @@ package org.epoch.iam.api.query;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.web.domain.BaseQuery;
+import org.epoch.web.facade.query.BaseQuery;
 
 /**
  * @author Marshal

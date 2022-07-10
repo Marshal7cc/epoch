@@ -2,7 +2,7 @@ package org.epoch.iam.api.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.web.domain.BaseVO;
+import org.epoch.web.facade.vo.BaseVO;
 
 /**
  * @author Marshal

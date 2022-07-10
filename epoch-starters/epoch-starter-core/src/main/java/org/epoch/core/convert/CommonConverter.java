@@ -23,8 +23,8 @@ public class CommonConverter {
      * @param <V>         源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> listConverter(Class<T> targetClazz, List<V> sourceList) {
-        return listConverter(targetClazz, sourceList, null);
+    public static <T, V> List<T> parseArray(Class<T> targetClazz, List<V> sourceList) {
+        return parseArray(targetClazz, sourceList, null);
     }
 
     /**
@@ -37,7 +37,7 @@ public class CommonConverter {
      * @param <V>         源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> listConverter(Class<T> targetClazz, List<V> sourceList, Map<String, String> rule) {
+    public static <T, V> List<T> parseArray(Class<T> targetClazz, List<V> sourceList, Map<String, String> rule) {
         Assert.notNull(sourceList, "source convert list can't be null.");
         List<T> targetObjects = new ArrayList<>();
         sourceList.forEach(sourceObject -> {
@@ -81,8 +81,8 @@ public class CommonConverter {
      * @param <V>         源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> listConverter(Class<T> targetClazz, String field, List<V> sourceList) {
-        return listConverter(targetClazz, field, sourceList, null);
+    public static <T, V> List<T> parseArray(Class<T> targetClazz, String field, List<V> sourceList) {
+        return parseArray(targetClazz, field, sourceList, null);
     }
 
     /**
@@ -96,8 +96,8 @@ public class CommonConverter {
      * @param <V>         源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> listConverter(Class<T> targetClazz, String field, List<V> sourceList,
-                                               Map<String, String> rule) {
+    public static <T, V> List<T> parseArray(Class<T> targetClazz, String field, List<V> sourceList,
+                                            Map<String, String> rule) {
         Assert.notNull(sourceList, "source convert list can't be null.");
         List<T> targetObjects = new ArrayList<>();
         sourceList.forEach(sourceObject -> {
@@ -122,7 +122,7 @@ public class CommonConverter {
      * @param <V>          源对象
      * @return 目标对象
      */
-    public static <T, V> T beanConvert(Class<T> targetClazz, V sourceObject) {
+    public static <T, V> T parseObject(Class<T> targetClazz, V sourceObject) {
         Assert.notNull(sourceObject, "source convert object can't be null.");
         try {
             T targetObject = targetClazz.newInstance();

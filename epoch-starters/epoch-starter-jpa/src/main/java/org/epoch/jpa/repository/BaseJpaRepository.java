@@ -96,6 +96,6 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
 
     @Override
     public <Q> Page<T> findAll(Pageable pageable, Q query) {
-        return QueryHelper.getPage(repository.findAll(Example.of(CommonConverter.beanConvert(entityClass, query)), pageable));
+        return QueryHelper.getPage(repository.findAll(Example.of(CommonConverter.parseObject(entityClass, query)), pageable));
     }
 }

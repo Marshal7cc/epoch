@@ -1,14 +1,13 @@
-package org.epoch.web.base;
+package org.epoch.web.advisor;
 
 
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.epoch.core.constants.BaseConstants;
-
 import org.epoch.core.exception.CommonException;
-import org.epoch.web.rest.Response;
-import org.epoch.web.rest.ResponseEntity;
+import org.epoch.core.rest.Response;
+import org.epoch.core.rest.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

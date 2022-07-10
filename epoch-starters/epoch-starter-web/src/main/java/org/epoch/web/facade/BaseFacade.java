@@ -1,12 +1,12 @@
-package org.epoch.web.common;
+package org.epoch.web.facade;
 
 import java.io.Serializable;
 import java.util.List;
 
-import org.epoch.web.rest.ResponseEntity;
-import org.epoch.web.domain.BaseQuery;
-import org.epoch.web.domain.BaseDTO;
-import org.epoch.web.domain.BaseVO;
+import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.facade.dto.BaseDTO;
+import org.epoch.web.facade.query.BaseQuery;
+import org.epoch.web.facade.vo.BaseVO;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,11 +52,12 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, Q extends BaseQ
     /**
      * 基础更新
      *
+     * @param id  主键
      * @param dto 记录属性
      * @return
      */
-    @PutMapping
-    ResponseEntity<D> update(@RequestBody D dto);
+    @PutMapping("/{id}")
+    ResponseEntity<D> update(@PathVariable("id") ID id, @RequestBody D dto);
 
     /**
      * 批量删除

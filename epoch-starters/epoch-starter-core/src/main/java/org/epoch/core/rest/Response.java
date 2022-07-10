@@ -1,8 +1,7 @@
-package org.epoch.web.rest;
+package org.epoch.core.rest;
 
 import java.io.*;
 import java.net.URLEncoder;
-import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.alibaba.fastjson.JSON;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.epoch.core.constants.BaseConstants;
-import org.epoch.data.domain.Page;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,10 +33,6 @@ public class Response {
 
     public static ResponseEntity<Void> success(String message) {
         return new ResponseEntity(message);
-    }
-
-    public static <T> ResponseEntity<Page<T>> success(List<T> rows) {
-        return new ResponseEntity<Page<T>>(new Page(rows));
     }
 
     public static <T> ResponseEntity<T> success(Object data) {

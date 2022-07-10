@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.web.domain.BaseVO;
+import org.epoch.web.facade.vo.BaseVO;
 
 /**
  * @author Marshal

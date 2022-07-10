@@ -1,7 +1,6 @@
 package org.epoch.web.autoconfigure;
 
-import org.epoch.web.base.BaseExceptionHandler;
-import org.epoch.web.config.SwaggerConfiguration;
+import org.epoch.web.advisor.BaseExceptionHandler;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -13,7 +12,7 @@ import org.springframework.context.annotation.Import;
  * @date 2020/5/31
  */
 @Configuration
-@Import(value = SwaggerConfiguration.class)
+@Import(value = SwaggerAutoConfiguration.class)
 public class WebAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
