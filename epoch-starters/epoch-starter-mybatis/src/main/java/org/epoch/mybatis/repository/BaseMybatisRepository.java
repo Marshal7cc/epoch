@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Marshal
@@ -42,12 +43,14 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
 
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public <S extends T> S saveOne(@NotNull S entity) {
         super.saveOrUpdate(entity);
         return entity;
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public <S extends T> Iterable<S> saveAll(Iterable<S> entities) {
         Collection<T> entityList = Lists.newArrayList();
         CollectionUtils.addAll(entityList, entities.iterator());
@@ -88,16 +91,19 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(@NotNull ID id) {
         mapper.deleteById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(@NotNull T entity) {
         mapper.deleteById(entity);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteAll(Iterable<? extends T> entities) {
         Collection<T> entityList = Lists.newArrayList();
         CollectionUtils.addAll(entityList, entities.iterator());
@@ -105,6 +111,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteAll() {
         mapper.delete(Wrappers.emptyWrapper());
     }

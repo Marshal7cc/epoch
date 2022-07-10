@@ -36,7 +36,7 @@ public class QueryHelper {
                 .size(Integer.parseInt(String.valueOf(page.getSize())))
                 .totalPages(Integer.parseInt(String.valueOf(page.getPages())))
                 .totalElements(Integer.parseInt(String.valueOf(page.getTotal()))).build();
-        return new Page<T>(pageInfo, page.getRecords());
+        return new Page<>(pageInfo, page.getRecords());
     }
 
 }

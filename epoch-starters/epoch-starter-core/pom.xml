@@ -52,12 +52,6 @@
             <artifactId>spring-cloud-starter-oauth2</artifactId>
             <optional>true</optional>
         </dependency>
-        <!--  Page Helper -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${page-helper.version}</version>
-        </dependency>
 
         <!-- commons -->
         <dependency>

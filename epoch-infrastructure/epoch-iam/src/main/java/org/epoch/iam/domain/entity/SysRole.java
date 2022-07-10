@@ -5,14 +5,14 @@ import java.util.Date;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.mybatis.domain.SimpleAuditEntity;
+import org.epoch.mybatis.domain.BaseAuditEntity;
 
 /**
  * @author Marshal
  */
 @Data
 @TableName("sys_role")
-public class SysRole extends SimpleAuditEntity<SysRole,Long> {
+public class SysRole extends BaseAuditEntity<SysRole, Long> {
     private String code;
     private String name;
     private String description;

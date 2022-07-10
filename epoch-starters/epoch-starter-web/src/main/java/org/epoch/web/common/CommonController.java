@@ -6,13 +6,13 @@ import java.util.Objects;
 
 import io.swagger.annotations.ApiOperation;
 import org.epoch.core.convert.CommonConverter;
-import org.epoch.web.rest.Response;
-import org.epoch.web.rest.ResponseEntity;
 import org.epoch.data.domain.Auditable;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.web.domain.BaseDTO;
 import org.epoch.web.domain.BaseQuery;
 import org.epoch.web.domain.BaseVO;
+import org.epoch.web.rest.Response;
+import org.epoch.web.rest.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.domain.Page;
@@ -32,10 +32,10 @@ public class CommonController<R extends BaseRepository<T, ID>, D extends BaseDTO
         extends BaseController
         implements BaseFacade<D, V, Q, ID> {
 
-    protected Class<D> dClass;
-    protected Class<V> vClass;
-    protected Class<Q> qClass;
-    protected Class<T> tClass;
+    protected final Class<D> dClass;
+    protected final Class<V> vClass;
+    protected final Class<Q> qClass;
+    protected final Class<T> tClass;
 
     @SuppressWarnings("unchecked")
     protected CommonController() {
@@ -51,7 +51,7 @@ public class CommonController<R extends BaseRepository<T, ID>, D extends BaseDTO
     @Override
     @ApiOperation(value = "列表查询")
     public ResponseEntity<Page<V>> selectPage(int page, int size, Q condition) {
-        return Response.success(baseRepository.findAll(PageRequest.of(page,size),condition));
+        return Response.success(baseRepository.findAll(PageRequest.of(page, size), condition));
     }
 
     @Override
