@@ -1,10 +1,8 @@
 package org.epoch.jpa.domain;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
-import javax.persistence.Convert;
-import javax.persistence.EntityListeners;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Data;
 import org.epoch.data.domain.Auditable;
@@ -22,8 +20,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  * @since 2022/7/9
  */
 @Data
+@MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class SimpleAuditEntity<ID> implements Auditable<ID> {
+public class SimpleAuditEntity<ID extends Serializable> implements Auditable<ID> {
     @Id
     @GeneratedValue(generator = SnowflakeKeyGenerator.GENERATOR_NAME)
     @GenericGenerator(name = SnowflakeKeyGenerator.GENERATOR_NAME, strategy = SnowflakeKeyGenerator.GENERATOR_REFERENCE)

@@ -236,11 +236,11 @@ public interface BaseConstants {
         /**
          * 1
          */
-        String YES = "1";
+        String ENABLE = "1";
         /**
          * 0
          */
-        String NO = "0";
+        String DISABLE = "0";
     }
 
     /**

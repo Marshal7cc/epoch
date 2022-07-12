@@ -17,7 +17,7 @@ import org.epoch.data.domain.Versionable;
 @EqualsAndHashCode(callSuper = true)
 public class BaseAuditEntity<T extends Model<?>, ID> extends SimpleAuditEntity<T, ID> implements Statusable, Versionable {
     @Version
-    private String objectVersion;
-    @TableLogic(value = Status.YES, delval = Status.NO)
+    private Integer objectVersion;
+    @TableLogic(value = Status.ENABLE, delval = Status.DISABLE)
     private String status;
 }

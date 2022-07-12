@@ -1,21 +1,23 @@
 package org.epoch.jpa.domain;
 
+import java.io.Serializable;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.epoch.data.domain.Statusable;
 import org.epoch.data.domain.Versionable;
-import org.epoch.jpa.annotation.LogicDelete;
-import org.springframework.data.annotation.Version;
 
 /**
  * @author Marshal
  * @since 2022/7/10
  */
 @Data
+@MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
-public class BaseAuditEntity<ID> extends SimpleAuditEntity<ID> implements Statusable, Versionable {
+public class BaseAuditEntity<ID extends Serializable> extends SimpleAuditEntity<ID> implements Statusable, Versionable {
     @Version
-    private String objectVersion;
-    @LogicDelete
+    private Integer objectVersion;
     private String status;
 }

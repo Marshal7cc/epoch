@@ -21,6 +21,6 @@ public class SnowflakeKeyGenerator implements IdentifierGenerator {
     public Serializable generate(SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException {
         ApplicationContext context = ApplicationContextHolder.getContext();
         SnowflakeHelper snowflakeHelper = context.getBean(SnowflakeHelper.class);
-        return snowflakeHelper.next();
+        return String.valueOf(snowflakeHelper.next());
     }
 }

@@ -10,6 +10,7 @@ import org.epoch.data.repository.query.QueryHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -91,11 +92,14 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
 
     @Override
     public Page<T> findAll(Pageable pageable) {
-        return QueryHelper.getPage(repository.findAll(pageable));
+        return QueryHelper.getPage(repository.findAll(PageRequest.of(pageable.getPageNumber() - 1, pageable.getPageSize())));
     }
 
     @Override
     public <Q> Page<T> findAll(Pageable pageable, Q query) {
-        return QueryHelper.getPage(repository.findAll(Example.of(CommonConverter.parseObject(entityClass, query)), pageable));
+        return QueryHelper.getPage(repository.findAll(
+                Example.of(CommonConverter.parseObject(entityClass, query)),
+                PageRequest.of(pageable.getPageNumber() - 1, pageable.getPageSize()))
+        );
     }
 }
