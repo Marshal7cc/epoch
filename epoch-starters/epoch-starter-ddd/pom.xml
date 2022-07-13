@@ -11,4 +11,10 @@
     </parent>
     <artifactId>epoch-starter-ddd</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-data-commons</artifactId>
+        </dependency>
+    </dependencies>
 </project>
