@@ -12,11 +12,17 @@ import javax.persistence.AttributeConverter;
 public class LocalDateTimeConverter implements AttributeConverter<LocalDateTime, Date> {
     @Override
     public Date convertToDatabaseColumn(LocalDateTime localDateTime) {
+        if (localDateTime == null) {
+            return null;
+        }
         return Date.from(localDateTime.atZone(ZoneId.systemDefault()).toInstant());
     }
 
     @Override
     public LocalDateTime convertToEntityAttribute(Date date) {
+        if (date == null) {
+            return null;
+        }
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
     }
 }
