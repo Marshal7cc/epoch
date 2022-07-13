@@ -9,4 +9,5 @@ import lombok.Data;
 @Data
 public class BaseDTO {
     private String id;
+    private String objectVersion;
 }

@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.epoch.data.domain.Stateful;
 import org.epoch.data.domain.Versionable;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 /**
  * @author Marshal
@@ -16,6 +18,8 @@ import org.epoch.data.domain.Versionable;
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
+@Where(clause = "status ='1'")
+@SQLDelete(sql = "update #{#entityName} set status = '0' ")
 public class BaseAuditEntity<ID extends Serializable> extends SimpleAuditEntity<ID> implements Stateful, Versionable {
     @Version
     private Integer objectVersion;
