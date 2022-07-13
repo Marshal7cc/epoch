@@ -6,18 +6,16 @@ import javax.persistence.Version;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.epoch.data.domain.Stateful;
 import org.epoch.data.domain.Versionable;
 
 /**
  * @author Marshal
- * @since 2022/7/10
+ * @since 2022/7/13
  */
 @Data
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
-public class BaseAuditEntity<ID extends Serializable> extends SimpleAuditEntity<ID> implements Stateful, Versionable {
+public class VersionableAuditEntity<ID extends Serializable> extends SimpleAuditEntity<ID> implements Versionable {
     @Version
     private Integer objectVersion;
-    private String status;
 }

@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.epoch.core.constants.BaseConstants.Status;
-import org.epoch.data.domain.Statusable;
+import org.epoch.data.domain.Stateful;
 import org.epoch.data.domain.Versionable;
 
 /**
@@ -15,7 +15,7 @@ import org.epoch.data.domain.Versionable;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class BaseAuditEntity<T extends Model<?>, ID> extends SimpleAuditEntity<T, ID> implements Statusable, Versionable {
+public class BaseAuditEntity<T extends Model<?>, ID> extends SimpleAuditEntity<T, ID> implements Stateful, Versionable {
     @Version
     private Integer objectVersion;
     @TableLogic(value = Status.ENABLE, delval = Status.DISABLE)

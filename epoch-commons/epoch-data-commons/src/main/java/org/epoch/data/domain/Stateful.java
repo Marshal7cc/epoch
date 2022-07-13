@@ -1,10 +1,12 @@
 package org.epoch.data.domain;
 
 /**
+ * Interface for stateful auditable entities.
+ *
  * @author Marshal
  * @since 2022/7/10
  */
-public interface Statusable {
+public interface Stateful {
     String FIELD_STATUS = "status";
 
     /**
