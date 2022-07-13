@@ -28,8 +28,10 @@ public class SimpleAuditEntity<ID extends Serializable> implements Auditable<ID>
     @GenericGenerator(name = SnowflakeKeyGenerator.GENERATOR_NAME, strategy = SnowflakeKeyGenerator.GENERATOR_REFERENCE)
     private ID id;
     @CreatedBy
+    @Column(updatable = false)
     private String createdBy;
     @CreatedDate
+    @Column(updatable = false)
     @Convert(converter = LocalDateTimeConverter.class)
     private LocalDateTime createdDate;
     @LastModifiedBy
