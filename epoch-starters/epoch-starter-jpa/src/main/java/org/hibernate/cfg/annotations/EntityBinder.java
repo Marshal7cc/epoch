@@ -47,6 +47,7 @@ import org.jboss.logging.Logger;
 
 
 /**
+ * Todo: @SQLDelete still need rewrite CollectionBinder
  * Stateful holder and processor for binding Entity information
  *
  * @author Emmanuel Bernard
