@@ -15,6 +15,7 @@ import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.*;
 
+import org.epoch.jpa.util.StringQueryUtils;
 import org.hibernate.AnnotationException;
 import org.hibernate.AssertionFailure;
 import org.hibernate.EntityMode;
@@ -311,8 +312,10 @@ public class EntityBinder {
 			);
 		}
 		if ( sqlDelete != null ) {
-			persistentClass.setCustomSQLDelete( sqlDelete.sql(), sqlDelete.callable(),
-					ExecuteUpdateResultCheckStyle.fromExternalName( sqlDelete.check().toString().toLowerCase(Locale.ROOT) )
+			String entityName = Optional.ofNullable(annotatedClass.getAnnotation(javax.persistence.Table.class))
+					.map(javax.persistence.Table::name).orElse(persistentClass.getJpaEntityName());
+			persistentClass.setCustomSQLDelete(StringQueryUtils.renderQueryIfExpressionOrReturnQuery(sqlDelete.sql(), entityName), sqlDelete.callable(),
+					ExecuteUpdateResultCheckStyle.fromExternalName(sqlDelete.check().toString().toLowerCase(Locale.ROOT))
 			);
 		}
 		if ( sqlDeleteAll != null ) {

@@ -19,7 +19,7 @@ import org.hibernate.annotations.Where;
 @MappedSuperclass
 @EqualsAndHashCode(callSuper = true)
 @Where(clause = "status ='1'")
-@SQLDelete(sql = "update #{#entityName} set status = '0' ")
+@SQLDelete(sql = "update #{#entityName} set status = '0' where id = ? and object_version = ?")
 public class BaseAuditEntity<ID extends Serializable> extends SimpleAuditEntity<ID> implements Stateful, Versionable {
     @Version
     private Integer objectVersion;
