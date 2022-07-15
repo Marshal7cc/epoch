@@ -97,7 +97,9 @@ public abstract class AbstractAuditorAwareInterceptor implements Interceptor {
         if (!field.isAnnotationPresent(clazz)) {
             return;
         }
-        field.set(entity, value);
+        if (field.get(entity) == null) {
+            field.set(entity, value);
+        }
     }
 
     public abstract String getUserId();
