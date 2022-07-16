@@ -1,4 +1,4 @@
-package org.epoch.web.facade;
+package org.epoch.web.facade.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
 import org.epoch.data.domain.Auditable;
 import org.epoch.data.repository.BaseRepository;
+import org.epoch.web.facade.BaseFacade;
 import org.epoch.web.facade.dto.BaseDTO;
 import org.epoch.web.facade.query.BaseQuery;
 import org.epoch.web.facade.vo.BaseVO;

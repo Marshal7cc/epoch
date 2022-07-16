@@ -20,12 +20,12 @@ public interface BaseConstants {
     /**
      * 匿名用户ID
      */
-    Long ANONYMOUS_USER_ID = 0L;
+    String ANONYMOUS_USER_ID = "0";
 
     /**
      * 匿名用户名
      */
-    String ANONYMOUS_USER_NAME = "ANONYMOUS";
+    String ANONYMOUS_USER_NAME = "anonymous";
 
     /**
      * 默认页码

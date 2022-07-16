@@ -1,4 +1,4 @@
-package org.epoch.core.domain;
+package org.epoch.security.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Long userId;
+    private String userId;
     private String username;
 
     public static final String FILED_USER_ID = "userId";

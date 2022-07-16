@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.epoch.security.domain.support.DefaultAuditorAware;
 import org.epoch.security.handler.EpochAccessDeniedHandler;
 import org.epoch.security.handler.EpochAuthenticationEntryPoint;
-import org.epoch.security.voter.PermissionVoter;
 import org.epoch.security.properties.SecurityProperty;
+import org.epoch.security.voter.PermissionVoter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.ManagementWebSecurityAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.access.AccessDecisionVoter;
 import org.springframework.security.access.vote.RoleVoter;
 import org.springframework.security.access.vote.UnanimousBased;
@@ -114,5 +116,11 @@ public class SecurityAutoConfiguration {
         corsConfiguration.addAllowedMethod("*");
         urlBasedCorsConfigurationSource.registerCorsConfiguration("/v2/api-docs", corsConfiguration);
         return urlBasedCorsConfigurationSource;
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public AuditorAware<String> auditorAware() {
+        return new DefaultAuditorAware();
     }
 }

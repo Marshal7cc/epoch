@@ -29,6 +29,11 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!-- EPOCH Common -->
+        <dependency>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-data-commons</artifactId>
+        </dependency>
         <!-- EPOCH Starter -->
         <dependency>
             <groupId>org.epoch.starter</groupId>

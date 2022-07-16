@@ -11,7 +11,7 @@ import org.epoch.iam.api.vo.MenuVO;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysMenu;
 import org.epoch.iam.domain.repository.SysMenuRepository;
-import org.epoch.web.facade.BaseController;
+import org.epoch.web.facade.controller.BaseController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

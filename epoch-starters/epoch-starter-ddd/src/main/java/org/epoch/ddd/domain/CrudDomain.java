@@ -8,4 +8,5 @@ import org.epoch.data.repository.BaseRepository;
  * @since 2022/7/14
  */
 public interface CrudDomain<R extends BaseRepository<T, ID>, T extends Auditable<ID>, ID> {
+
 }

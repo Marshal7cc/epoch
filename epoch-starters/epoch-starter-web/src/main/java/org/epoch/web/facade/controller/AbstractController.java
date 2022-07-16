@@ -1,4 +1,4 @@
-package org.epoch.web.facade;
+package org.epoch.web.facade.controller;
 
 import org.epoch.core.base.BaseValidator;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;

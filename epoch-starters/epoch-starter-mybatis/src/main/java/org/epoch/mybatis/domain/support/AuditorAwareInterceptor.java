@@ -3,6 +3,7 @@ package org.epoch.mybatis.domain.support;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
@@ -11,20 +12,30 @@ import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.Interceptor;
+import org.apache.ibatis.plugin.Intercepts;
 import org.apache.ibatis.plugin.Invocation;
+import org.apache.ibatis.plugin.Signature;
 import org.epoch.data.domain.Auditable;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.domain.AuditorAware;
 
 /**
  * @author Marshal
  * @since 2022/7/9
  */
-public abstract class AbstractAuditorAwareInterceptor implements Interceptor {
+@Intercepts({@Signature(type = Executor.class, method = "update", args = {MappedStatement.class, Object.class})})
+public class AuditorAwareInterceptor implements Interceptor {
     private static final String ENTITY = "et";
     private static final String ENTITY_WRAPPER = "ew";
+
+    private AuditorAware<String> auditorAware;
+
+    public AuditorAwareInterceptor(AuditorAware<String> auditorAware) {
+        this.auditorAware = auditorAware;
+    }
 
     @Override
     public Object intercept(Invocation invocation) throws Throwable {
@@ -97,10 +108,28 @@ public abstract class AbstractAuditorAwareInterceptor implements Interceptor {
         if (!field.isAnnotationPresent(clazz)) {
             return;
         }
-        if (field.get(entity) == null) {
-            field.set(entity, value);
+        if (!field.isAccessible()) {
+            field.setAccessible(true);
+            if (field.get(entity) == null) {
+                field.set(entity, value);
+            }
+            field.setAccessible(false);
+        } else {
+            if (field.get(entity) == null) {
+                field.set(entity, value);
+            }
         }
     }
 
-    public abstract String getUserId();
+    private String getUserId() {
+        if (auditorAware == null) {
+            return null;
+        }
+        Optional<String> currentAuditor = auditorAware.getCurrentAuditor();
+        if (!currentAuditor.isPresent()) {
+            return null;
+        }
+        return auditorAware.getCurrentAuditor().get();
+    }
+
 }
