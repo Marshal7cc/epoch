@@ -2,6 +2,7 @@ package org.epoch.mybatis.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -75,12 +76,12 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     }
 
     @Override
-    public Iterable<T> findAll() {
+    public List<T> findAll() {
         return mapper.selectList(Wrappers.emptyWrapper());
     }
 
     @Override
-    public <Q> Iterable<T> findAll(Q query) {
+    public <Q> List<T> findAll(Q query) {
         if (Objects.isNull(query)) {
             return findAll();
         }
@@ -89,7 +90,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     }
 
     @Override
-    public Iterable<T> findAllById(Iterable<ID> ids) {
+    public List<T> findAllById(Iterable<ID> ids) {
         Collection<Serializable> idList = Lists.newArrayList();
         CollectionUtils.addAll(idList, ids.iterator());
         return mapper.selectBatchIds(idList);
@@ -127,7 +128,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     }
 
     @Override
-    public Iterable<T> findAll(Sort sort) {
+    public List<T> findAll(Sort sort) {
         return mapper.selectList(QueryHelper.getQueryWrapper(sort));
     }
 

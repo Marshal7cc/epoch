@@ -1,5 +1,6 @@
 package org.epoch.jpa.repository;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -51,12 +52,12 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     }
 
     @Override
-    public Iterable<T> findAll() {
+    public List<T> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public <Q> Iterable<T> findAll(Q query) {
+    public <Q> List<T> findAll(Q query) {
         if (Objects.isNull(query)) {
             return findAll();
         }
@@ -64,7 +65,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     }
 
     @Override
-    public Iterable<T> findAllById(Iterable<ID> ids) {
+    public List<T> findAllById(Iterable<ID> ids) {
         return repository.findAllById(ids);
     }
 
@@ -94,7 +95,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     }
 
     @Override
-    public Iterable<T> findAll(Sort sort) {
+    public List<T> findAll(Sort sort) {
         return repository.findAll(sort);
     }
 

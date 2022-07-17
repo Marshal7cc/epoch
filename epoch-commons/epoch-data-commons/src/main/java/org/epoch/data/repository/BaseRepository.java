@@ -1,5 +1,6 @@
 package org.epoch.data.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.epoch.data.domain.Page;
@@ -65,7 +66,7 @@ public interface BaseRepository<T, ID> {
      * @return all entities
      * @see org.springframework.data.repository.CrudRepository#findAll()
      */
-    Iterable<T> findAll();
+    List<T> findAll();
 
     /**
      * Returns all instances of the type {@code T} with the given IDs.
@@ -80,7 +81,7 @@ public interface BaseRepository<T, ID> {
      * @throws IllegalArgumentException in case the given {@link Iterable ids} or one of its items is {@literal null}.
      * @see org.springframework.data.repository.CrudRepository#findById(Object)
      */
-    Iterable<T> findAllById(Iterable<ID> ids);
+    List<T> findAllById(Iterable<ID> ids);
 
     /**
      * Returns all entities meeting the restriction provided in the {@code Query} object.
@@ -88,7 +89,7 @@ public interface BaseRepository<T, ID> {
      * @param query
      * @return all hit entities
      */
-    <Q> Iterable<T> findAll(Q query);
+    <Q> List<T> findAll(Q query);
 
     /**
      * Returns the number of entities available.
@@ -140,7 +141,7 @@ public interface BaseRepository<T, ID> {
      * @return all entities sorted by the given options
      * @see org.springframework.data.repository.PagingAndSortingRepository#findAll(Sort)
      */
-    Iterable<T> findAll(Sort sort);
+    List<T> findAll(Sort sort);
 
     /**
      * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object.
