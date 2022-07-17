@@ -2,6 +2,7 @@ package org.epoch.mybatis.repository;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -76,6 +77,15 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
     @Override
     public Iterable<T> findAll() {
         return mapper.selectList(Wrappers.emptyWrapper());
+    }
+
+    @Override
+    public <Q> Iterable<T> findAll(Q query) {
+        if (Objects.isNull(query)) {
+            return findAll();
+        }
+        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.parseObject(entityClass, query));
+        return mapper.selectList(queryWrapper);
     }
 
     @Override

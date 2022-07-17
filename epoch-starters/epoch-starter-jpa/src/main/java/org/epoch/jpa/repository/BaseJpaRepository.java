@@ -56,6 +56,14 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     }
 
     @Override
+    public <Q> Iterable<T> findAll(Q query) {
+        if (Objects.isNull(query)) {
+            return findAll();
+        }
+        return repository.findAll(Example.of(CommonConverter.parseObject(entityClass, query)));
+    }
+
+    @Override
     public Iterable<T> findAllById(Iterable<ID> ids) {
         return repository.findAllById(ids);
     }

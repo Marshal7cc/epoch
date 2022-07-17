@@ -83,6 +83,14 @@ public interface BaseRepository<T, ID> {
     Iterable<T> findAllById(Iterable<ID> ids);
 
     /**
+     * Returns all entities meeting the restriction provided in the {@code Query} object.
+     *
+     * @param query
+     * @return all hit entities
+     */
+    <Q> Iterable<T> findAll(Q query);
+
+    /**
      * Returns the number of entities available.
      *
      * @return the number of entities.
@@ -145,7 +153,7 @@ public interface BaseRepository<T, ID> {
 
 
     /**
-     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object and query object.
+     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@code Pageable} object and the {@code Query} object.
      *
      * @param pageable
      * @param query
