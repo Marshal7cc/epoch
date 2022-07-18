@@ -1,4 +1,4 @@
-package org.epoch.core.analysis;
+package org.epoch.core.diagnostics;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

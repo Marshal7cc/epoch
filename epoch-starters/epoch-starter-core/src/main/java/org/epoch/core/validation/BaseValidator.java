@@ -1,4 +1,4 @@
-package org.epoch.core.base;
+package org.epoch.core.validation;
 
 import java.util.Collection;
 import javax.validation.Validator;

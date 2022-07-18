@@ -24,6 +24,15 @@ public interface SecurityConstants {
             "/swagger-resources/configuration/security"
     };
 
+
+    interface Token {
+        String HEADER_JWT = "Jwt_Token";
+        String HEADER_BEARER = "Bearer";
+        String HEADER_AUTH = "Authorization";
+        String ACCESS_TOKEN = "access_token";
+        String JWT_TOKEN = "jwt_token";
+    }
+
     interface ResponseMessage {
         String INVALID_REFRESH_TOKEN = "Invalid refresh token";
         String LOCKER = "locked";

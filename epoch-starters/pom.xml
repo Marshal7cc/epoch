@@ -16,15 +16,15 @@
 
     <modules>
         <module>epoch-starter-core</module>
-        <module>epoch-starter-metric</module>
+        <module>epoch-starter-ddd</module>
         <module>epoch-starter-jpa</module>
-        <module>epoch-starter-mybatis</module>
-        <module>epoch-starter-message</module>
         <module>epoch-starter-lock</module>
+        <module>epoch-starter-message</module>
+        <module>epoch-starter-metric</module>
+        <module>epoch-starter-mybatis</module>
         <module>epoch-starter-redis</module>
         <module>epoch-starter-security</module>
         <module>epoch-starter-snowflake</module>
         <module>epoch-starter-web</module>
-        <module>epoch-starter-ddd</module>
     </modules>
 </project>

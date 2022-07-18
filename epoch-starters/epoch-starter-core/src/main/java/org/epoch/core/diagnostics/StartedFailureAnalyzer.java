@@ -1,4 +1,4 @@
-package org.epoch.core.analysis;
+package org.epoch.core.diagnostics;
 
 
 import org.epoch.core.exception.ServiceStartException;

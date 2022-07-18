@@ -1,4 +1,4 @@
-package org.epoch.core.util.valid;
+package org.epoch.core.validation;
 
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -8,8 +8,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-
-import org.epoch.core.util.valid.constraints.NotEqualConstraint;
 
 
 /**
@@ -24,7 +22,7 @@ import org.epoch.core.util.valid.constraints.NotEqualConstraint;
 @Documented
 @Constraint(validatedBy = NotEqualConstraint.class)
 public @interface NotEqual {
-    String message() default "{org.epoch.core.util.valid.NotEqual.message}";
+    String message() default "{org.epoch.core.validation.NotEqual.message}";
 
     Class<?>[] groups() default {};
 

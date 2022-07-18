@@ -3,7 +3,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 org.epoch.core.CoreAutoConfiguration
 # FailureAnalyzers
 org.springframework.boot.diagnostics.FailureAnalyzer=\
-org.epoch.core.analysis.StartedFailureAnalyzer
+org.epoch.core.diagnostics.StartedFailureAnalyzer
 # FailureAnalysisReporters
 org.springframework.boot.diagnostics.FailureAnalysisReporter=\
-org.epoch.core.analysis.Slf4jFailureAnalysisReporter
+org.epoch.core.diagnostics.Slf4jFailureAnalysisReporter

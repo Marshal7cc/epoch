@@ -1,12 +1,10 @@
-package org.epoch.core.util.valid.constraints;
+package org.epoch.core.validation;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-
-import org.epoch.core.util.valid.NotEqual;
 
 
 /**
