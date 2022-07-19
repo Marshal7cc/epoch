@@ -8,52 +8,60 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * 通用标准异常类
+ * Base parent exception.
  *
  * @author Marshal
  * @date 2020/5/12
  */
-public class CommonException extends RuntimeException {
-    private static final Logger logger = LoggerFactory.getLogger(CommonException.class);
+@Slf4j
+public class BaseException extends RuntimeException {
     private static final long serialVersionUID = 1L;
-    private final transient Object[] parameters;
+
+    /**
+     * the detail code.
+     * A common use case here is for response code.
+     */
+    @Getter
     private String code;
+    /**
+     * external attributes.
+     */
+    @Getter
+    private transient Object[] parameters;
 
-    public CommonException(String code, Object... parameters) {
-        super(code);
-        this.parameters = parameters;
-        this.code = code;
+    public BaseException() {
     }
 
-    public CommonException(String code, Throwable cause, Object... parameters) {
-        super(code, cause);
+    public BaseException(String message, Object... parameters) {
+        super(message);
         this.parameters = parameters;
-        this.code = code;
     }
 
-    public CommonException(String code, Throwable cause) {
-        super(code, cause);
-        this.code = code;
+    public BaseException(String message, Throwable cause, Object... parameters) {
+        super(message, cause);
+        this.parameters = parameters;
+    }
+
+    public BaseException(String message, Throwable cause) {
+        super(message, cause);
         this.parameters = new Object[]{};
     }
 
 
-    public CommonException(Throwable cause, Object... parameters) {
+    public BaseException(Throwable cause, Object... parameters) {
         super(cause);
         this.parameters = parameters;
     }
 
-    public Object[] getParameters() {
-        return parameters;
+    public BaseException withCode(String code) {
+        this.code = code;
+        return this;
     }
 
-    public String getCode() {
-        return code;
-    }
 
     public String getTrace() {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -61,7 +69,7 @@ public class CommonException extends RuntimeException {
         try {
             ps = new PrintStream(baos, false, StandardCharsets.UTF_8.name());
         } catch (UnsupportedEncodingException e) {
-            logger.error("Error get trace, unsupported encoding.", e);
+            log.error("Error get trace, unsupported encoding.", e);
             return null;
         } finally {
             if (ps != null) {

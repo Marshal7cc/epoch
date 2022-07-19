@@ -15,6 +15,7 @@ public interface AopProxy<T> {
      *
      * @return 代理对象, 如果未被代理, 则抛出 IllegalStateException
      */
+    @SuppressWarnings("unchecked")
     default T self() {
         return (T) AopContext.currentProxy();
     }

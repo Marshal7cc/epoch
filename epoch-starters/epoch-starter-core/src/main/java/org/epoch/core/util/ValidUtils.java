@@ -6,7 +6,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.springframework.util.CollectionUtils;
 
 /**
@@ -111,7 +111,7 @@ public class ValidUtils {
      */
     public static void isSameDay(final Date date1, final Date date2) {
         if (!DateUtils.isSameDay(date1, date2)) {
-            throw new CommonException("error.data.not.same");
+            throw new BaseException("error.data.not.same");
         }
     }
 
@@ -127,7 +127,7 @@ public class ValidUtils {
             throw new IllegalArgumentException("The date must not be null");
         }
         if (startDate.getTime() >= endDate.getTime()) {
-            throw new CommonException("error.data.not.after");
+            throw new BaseException("error.data.not.after");
         }
     }
 
@@ -143,7 +143,7 @@ public class ValidUtils {
             throw new IllegalArgumentException("The date must not be null");
         }
         if (startDate.getTime() > endDate.getTime()) {
-            throw new CommonException("error.data.not.same.after");
+            throw new BaseException("error.data.not.same.after");
         }
     }
 
@@ -161,7 +161,7 @@ public class ValidUtils {
                         value.stream().map(item -> item.getPropertyPath().toString() + " " + item.getMessage())
                                 .collect(Collectors.toList()).toString())
                         .append(";\n"));
-                throw new CommonException(sb.toString());
+                throw new BaseException(sb.toString());
             }
         }
 
@@ -173,7 +173,7 @@ public class ValidUtils {
          */
         default <T> void process(Set<ConstraintViolation<T>> resultSet) {
             if (!CollectionUtils.isEmpty(resultSet)) {
-                throw new CommonException(resultSet
+                throw new BaseException(resultSet
                         .stream()
                         .map(item -> item.getPropertyPath().toString() + " " + item.getMessage() + "; ")
                         .collect(Collectors.toList())

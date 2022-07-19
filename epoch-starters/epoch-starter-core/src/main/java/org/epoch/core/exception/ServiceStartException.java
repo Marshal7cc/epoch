@@ -6,7 +6,7 @@ package org.epoch.core.exception;
  * @author Marshal
  * @date 2021/1/24
  */
-public class ServiceStartException extends CommonException {
+public class ServiceStartException extends BaseException {
 
     private String failureCause;
 

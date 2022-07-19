@@ -1,6 +1,6 @@
 package org.epoch.snowflake.helper;
 
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.epoch.core.util.SystemClock;
 import org.springframework.util.Assert;
 
@@ -124,7 +124,7 @@ public class SnowflakeHelper {
     public synchronized long next() {
         long now = now();
         if (now < latestTimestamp) {
-            throw new CommonException("Snowflake ID clock abnormal.");
+            throw new BaseException("Snowflake ID clock abnormal.");
         }
         if (now == latestTimestamp) {
             sequence = (sequence + 1) & MAX_SEQUENCE;

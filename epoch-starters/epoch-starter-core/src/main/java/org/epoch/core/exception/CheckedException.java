@@ -1,7 +1,5 @@
 package org.epoch.core.exception;
 
-import org.springframework.http.HttpStatus;
-
 /**
  * 受检异常
  *
@@ -15,8 +13,9 @@ public class CheckedException extends Exception {
     private String code;
 
 
-    public CheckedException(String message) {
-        this(HttpStatus.INTERNAL_SERVER_ERROR.toString(), message);
+    public CheckedException(String message, Object... parameters) {
+        super(message);
+        this.parameters = parameters;
     }
 
     public CheckedException(String code, String message) {
@@ -27,6 +26,11 @@ public class CheckedException extends Exception {
         super(message);
         this.code = code;
         this.parameters = parameters;
+    }
+
+    public CheckedException withCode(String code) {
+        this.code = code;
+        return this;
     }
 
     public String getCode() {

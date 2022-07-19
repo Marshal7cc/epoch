@@ -5,12 +5,13 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.epoch.core.constants.BaseConstants;
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.HandlerMethod;
@@ -40,7 +41,7 @@ public class BaseExceptionHandler {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
         }
-        return Response.fail(BaseConstants.ResponseCode.FAIL, ex.getMessage());
+        return Response.fail(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR), ex.getMessage());
     }
 
     /**
@@ -49,13 +50,13 @@ public class BaseExceptionHandler {
      * @param ex
      * @return
      */
-    @ExceptionHandler(value = CommonException.class)
-    public ResponseEntity<Void> handleException(HttpServletRequest request, HandlerMethod method, CommonException ex) {
+    @ExceptionHandler(value = BaseException.class)
+    public ResponseEntity<Void> handleException(HttpServletRequest request, HandlerMethod method, BaseException ex) {
         String message = exceptionMessage("epoch common exception", request, method);
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
         }
-        return Response.fail(ex.getCode(), ex.getMessage());
+        return Response.fail(ex.getMessage(), ex.getMessage());
     }
 
     /**

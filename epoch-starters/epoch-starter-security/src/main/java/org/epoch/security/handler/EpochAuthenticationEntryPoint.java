@@ -4,8 +4,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
 import org.epoch.core.rest.Response;
+import org.epoch.core.util.TypeConverter;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 
@@ -22,7 +22,7 @@ public class EpochAuthenticationEntryPoint implements AuthenticationEntryPoint {
         String message = e.getMessage() == null ? TIP_UNAUTHORIZED : e.getMessage();
 
         httpServletResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        httpServletResponse.getWriter().write(JSON.toJSONString(Response.fail(message)));
+        httpServletResponse.getWriter().write(TypeConverter.toJSONString(Response.fail(message)));
     }
 
 }

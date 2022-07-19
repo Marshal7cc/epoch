@@ -3,7 +3,7 @@ package org.epoch.core.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.springframework.util.Assert;
 
 /**
@@ -22,7 +22,7 @@ public class AssertUtils extends Assert {
      */
     public static void notNull(Object object, String message, Object... parameters) {
         if (object == null) {
-            throw new CommonException(message, parameters);
+            throw new BaseException(message, parameters);
         }
     }
 
@@ -38,7 +38,7 @@ public class AssertUtils extends Assert {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(str);
         if (!matcher.matches()) {
-            throw new CommonException(message, parameters);
+            throw new BaseException(message, parameters);
         }
     }
 
@@ -54,7 +54,7 @@ public class AssertUtils extends Assert {
     public static void notBetweenInSize(String str, int min, int max, String message, Object... parameters) {
         AssertUtils.notNull(str, message, parameters);
         if (str.length() < min || str.length() > max) {
-            throw new CommonException(message, parameters);
+            throw new BaseException(message, parameters);
         }
     }
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.epoch.core.convert.CommonConverter;
+import org.epoch.core.util.TypeConverter;
 import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.data.repository.query.QueryHelper;
@@ -61,7 +61,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
         if (Objects.isNull(query)) {
             return findAll();
         }
-        return repository.findAll(Example.of(CommonConverter.parseObject(entityClass, query)));
+        return repository.findAll(Example.of(TypeConverter.parseObject(entityClass, query)));
     }
 
     @Override
@@ -107,7 +107,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     @Override
     public <Q> Page<T> findAll(Pageable pageable, Q query) {
         return QueryHelper.getPage(repository.findAll(
-                Example.of(CommonConverter.parseObject(entityClass, query)),
+                Example.of(TypeConverter.parseObject(entityClass, query)),
                 PageRequest.of(pageable.getPageNumber() - 1, pageable.getPageSize()))
         );
     }

@@ -10,7 +10,7 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.epoch.redis.helper.RedisHelper;
 import org.epoch.snowflake.properties.SnowflakeProperties;
 import org.slf4j.Logger;
@@ -180,7 +180,7 @@ public final class RedisSnowflakeMetaProvider implements SnowflakeMetaProvider {
                 logger.error("Error get lock.", e);
                 // 重置线程中断标记
                 Thread.currentThread().interrupt();
-                throw new CommonException("[Snowflake] Thread was interrupted while acquiring lock.");
+                throw new BaseException("[Snowflake] Thread was interrupted while acquiring lock.");
             }
         }
         redisHelper.setExpire(CACHE_LOCK_KEY, CACHE_LOCK_EXPIRE_SECOND);
@@ -235,7 +235,7 @@ public final class RedisSnowflakeMetaProvider implements SnowflakeMetaProvider {
             }
             if (this.dataCenterId == null) {
                 logger.error("Error provide snowflake meta [{}] - [{}].", this.dataCenterName, this.workerName);
-                throw new CommonException("Failed to get data center ID, request to ensure that the number of data centers is " + maxDataCenter + " or less, or manually specify the data center ID.");
+                throw new BaseException("Failed to get data center ID, request to ensure that the number of data centers is " + maxDataCenter + " or less, or manually specify the data center ID.");
             }
             // 缓存当前 data-center id
             redisHelper.strSet(cacheDataCenterIdKey, String.valueOf(this.dataCenterId));
@@ -296,7 +296,7 @@ public final class RedisSnowflakeMetaProvider implements SnowflakeMetaProvider {
             }
             if (this.workerId == null) {
                 logger.error("Error provide snowflake meta [{}] - [{}].", this.dataCenterName, this.workerName);
-                throw new CommonException("Failed to get worker ID, request to ensure that the number of worker is " + maxWorker + " or less, or manually specify the worker ID.");
+                throw new BaseException("Failed to get worker ID, request to ensure that the number of worker is " + maxWorker + " or less, or manually specify the worker ID.");
             }
             // 缓存当前 Worker id
             redisHelper.strSet(cacheWorkerIdKey, String.valueOf(this.workerId));

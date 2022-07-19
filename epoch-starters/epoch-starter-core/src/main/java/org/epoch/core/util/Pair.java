@@ -1,4 +1,4 @@
-package org.epoch.core.algorithm.structure;
+package org.epoch.core.util;
 
 import java.util.Map;
 import java.util.stream.Collector;

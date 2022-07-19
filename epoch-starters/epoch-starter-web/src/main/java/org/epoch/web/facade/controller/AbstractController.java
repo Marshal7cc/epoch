@@ -1,6 +1,6 @@
 package org.epoch.web.facade.controller;
 
-import org.epoch.core.validation.BaseValidator;
+import org.epoch.web.validation.BaseValidator;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;

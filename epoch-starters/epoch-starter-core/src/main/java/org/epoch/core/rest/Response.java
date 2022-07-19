@@ -8,9 +8,9 @@ import java.util.zip.ZipOutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.epoch.core.constants.BaseConstants;
+import org.epoch.core.constants.ResponseConstants;
+import org.epoch.core.util.TypeConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public class Response {
     }
 
     public static ResponseEntity<Void> success() {
-        return success(BaseConstants.ResponseMessage.SUCCESS);
+        return success(ResponseConstants.SuccessMessage.SUCCESS);
     }
 
     public static ResponseEntity<Void> success(String message) {
@@ -40,7 +40,7 @@ public class Response {
     }
 
     public static ResponseEntity<Void> fail() {
-        return fail(BaseConstants.ResponseMessage.ERROR);
+        return fail(ResponseConstants.ErrorMessage.ERROR);
     }
 
     public static ResponseEntity<Void> fail(String message) {
@@ -56,7 +56,7 @@ public class Response {
         PrintWriter writer = null;
         try {
             writer = response.getWriter();
-            writer.write(JSON.toJSONString(fail(message)));
+            writer.write(TypeConverter.toJSONString(fail(message)));
         } catch (IOException e) {
             logger.error("io exception happen ,please check");
         } finally {

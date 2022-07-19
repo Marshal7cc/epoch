@@ -1,4 +1,4 @@
-package org.epoch.core.algorithm.tree;
+package org.epoch.core.util;
 
 import java.util.ArrayList;
 import java.util.List;

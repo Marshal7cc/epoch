@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.compress.utils.Lists;
-import org.epoch.core.convert.CommonConverter;
+import org.epoch.core.util.TypeConverter;
 import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.mybatis.repository.query.QueryHelper;
@@ -85,7 +85,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
         if (Objects.isNull(query)) {
             return findAll();
         }
-        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.parseObject(entityClass, query));
+        QueryWrapper<T> queryWrapper = Wrappers.query(TypeConverter.parseObject(entityClass, query));
         return mapper.selectList(queryWrapper);
     }
 
@@ -146,7 +146,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page
                 = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageable.getPageNumber(), pageable.getPageSize());
 
-        QueryWrapper<T> queryWrapper = Wrappers.query(CommonConverter.parseObject(entityClass, query));
+        QueryWrapper<T> queryWrapper = Wrappers.query(TypeConverter.parseObject(entityClass, query));
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> pageResponse = super.page(page, queryWrapper);
 
         return QueryHelper.getPage(pageResponse);

@@ -8,12 +8,11 @@ import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.epoch.core.exception.CommonException;
+import org.epoch.core.exception.BaseException;
 import org.epoch.lock.advisor.LockAspectHandler;
 import org.epoch.lock.constant.LockConstants;
 import org.epoch.lock.enums.ServerPattern;
 import org.epoch.lock.provider.LockServiceFactory;
-import org.epoch.lock.service.impl.*;
 import org.epoch.lock.service.impl.*;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -452,10 +451,10 @@ public class LockAutoConfiguration {
          * @param pattern
          * @return
          */
-        public static ServerPattern getServerPattern(String pattern) throws CommonException {
+        public static ServerPattern getServerPattern(String pattern) throws BaseException {
             ServerPattern serverPattern = serverPatternMap.get(pattern);
             if (serverPattern == null) {
-                throw new CommonException("没有找到相应的服务器模式,请检测参数是否正常,pattern的值为:" + pattern);
+                throw new BaseException("没有找到相应的服务器模式,请检测参数是否正常,pattern的值为:" + pattern);
             }
             return serverPattern;
         }

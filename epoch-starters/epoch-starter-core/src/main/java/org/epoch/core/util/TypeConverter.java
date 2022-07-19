@@ -1,19 +1,30 @@
-package org.epoch.core.convert;
+package org.epoch.core.util;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-import org.epoch.core.exception.CommonException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.epoch.core.exception.BaseException;
+import org.epoch.core.exception.JsonConvertException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.Assert;
 
 /**
  * @author Marshal
  * @date 2021/1/24
  */
-public class CommonConverter {
+public class TypeConverter implements ApplicationContextAware {
+
+    private static ObjectMapper objectMapper;
+
+
     /**
      * List对象转换
      *
@@ -44,7 +55,7 @@ public class CommonConverter {
             try {
                 source2Target(targetClazz, rule, targetObjects, sourceObject);
             } catch (Exception e) {
-                throw new CommonException("convert to {} error:", e, targetClazz.getName());
+                throw new BaseException("convert to {} error:", e, targetClazz.getName());
             }
         });
         return targetObjects;
@@ -64,7 +75,7 @@ public class CommonConverter {
                     targetObjField.setAccessible(true);
                     targetObjField.set(target, value);
                 } catch (Exception e) {
-                    throw new CommonException("convert field error:", e, targetField);
+                    throw new BaseException("convert field error:", e, targetField);
                 }
             });
         }
@@ -106,7 +117,7 @@ public class CommonConverter {
                 langField.setAccessible(true);
                 source2Target(targetClazz, rule, targetObjects, sourceObject);
             } catch (Exception e) {
-                throw new CommonException("convert to {} error:", e, targetClazz.getName());
+                throw new BaseException("convert to {} error:", e, targetClazz.getName());
             }
         });
         return targetObjects;
@@ -129,7 +140,23 @@ public class CommonConverter {
             BeanUtils.copyProperties(sourceObject, targetObject);
             return targetObject;
         } catch (Exception e) {
-            throw new CommonException("convert to {} error:", e, targetClazz.getName());
+            throw new BaseException("convert to {} error:", e, targetClazz.getName());
+        }
+    }
+
+    public static String toJSONString(Object obj) {
+        try {
+            return objectMapper.writeValueAsString(obj);
+        } catch (JsonProcessingException e) {
+            throw new JsonConvertException();
+        }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        objectMapper = applicationContext.getBean(ObjectMapper.class);
+        if (Objects.isNull(objectMapper)) {
+            objectMapper = new ObjectMapper();
         }
     }
 }

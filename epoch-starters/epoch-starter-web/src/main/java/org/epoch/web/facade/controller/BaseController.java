@@ -5,9 +5,9 @@ import java.util.List;
 import java.util.Objects;
 
 import io.swagger.annotations.ApiOperation;
-import org.epoch.core.convert.CommonConverter;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
+import org.epoch.core.util.TypeConverter;
 import org.epoch.data.domain.Auditable;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.web.facade.BaseFacade;
@@ -64,7 +64,7 @@ public class BaseController<R extends BaseRepository<T, ID>, D extends BaseDTO, 
     @Override
     @ApiOperation(value = "创建记录")
     public ResponseEntity<D> insert(D baseDTO) {
-        baseRepository.saveOne(CommonConverter.parseObject(tClass, baseDTO));
+        baseRepository.saveOne(TypeConverter.parseObject(tClass, baseDTO));
         return Response.success(baseDTO);
     }
 
@@ -72,14 +72,14 @@ public class BaseController<R extends BaseRepository<T, ID>, D extends BaseDTO, 
     @ApiOperation(value = "更新记录")
     public ResponseEntity<D> update(ID id, D baseDTO) {
         baseDTO.setId(String.valueOf(id));
-        baseRepository.saveOne(CommonConverter.parseObject(tClass, baseDTO));
+        baseRepository.saveOne(TypeConverter.parseObject(tClass, baseDTO));
         return Response.success(baseDTO);
     }
 
     @Override
     @ApiOperation(value = "批量删除")
     public ResponseEntity<Void> remove(List<D> list) {
-        baseRepository.deleteAll(CommonConverter.parseArray(tClass, list));
+        baseRepository.deleteAll(TypeConverter.parseArray(tClass, list));
         return Response.success();
     }
 

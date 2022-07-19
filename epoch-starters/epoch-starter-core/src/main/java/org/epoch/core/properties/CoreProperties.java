@@ -10,7 +10,4 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @Data
 @ConfigurationProperties(prefix = "epoch.core")
 public class CoreProperties {
-    private Boolean convertEnable;
-    private Boolean refreshEnable;
-    private Boolean defaultExceptionHandleEnable;
 }
