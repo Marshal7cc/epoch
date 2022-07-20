@@ -9,9 +9,9 @@ import java.io.IOException;
  * @author Marshal
  * @date 2020/1/20
  */
-public class FileUtil {
+public class FileOperations {
 
-    private FileUtil() {
+    private FileOperations() {
     }
 
     /**

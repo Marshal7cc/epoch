@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.epoch.core.constants.BaseConstants.Status;
+import org.epoch.core.constant.Status;
 import org.epoch.data.domain.Stateful;
 import org.epoch.data.domain.Versionable;
 

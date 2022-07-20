@@ -1,9 +1,11 @@
-package org.epoch.core.constants;
+package org.epoch.core.constant;
 
 /**
  * 日期时间匹配格式
+ *
+ * @author Marshal
  */
-public interface DatePatternConstants {
+public interface DatePattern {
     //
     // 常规模式
     // ----------------------------------------------------------------------------------------------------

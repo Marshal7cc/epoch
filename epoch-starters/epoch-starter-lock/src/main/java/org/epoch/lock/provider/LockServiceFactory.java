@@ -2,10 +2,9 @@ package org.epoch.lock.provider;
 
 import java.util.EnumMap;
 
-import org.epoch.core.util.ApplicationContextHolder;
+import org.epoch.core.util.ApplicationContextHelper;
 import org.epoch.lock.enums.LockType;
 import org.epoch.lock.service.LockService;
-import org.epoch.lock.service.impl.*;
 import org.epoch.lock.service.impl.*;
 
 
@@ -32,6 +31,6 @@ public class LockServiceFactory {
      * @return LockService
      */
     public LockService getLock(LockType lockType) {
-        return (LockService) ApplicationContextHolder.getContext().getBean(serviceMap.get(lockType));
+        return (LockService) ApplicationContextHelper.getContext().getBean(serviceMap.get(lockType));
     }
 }

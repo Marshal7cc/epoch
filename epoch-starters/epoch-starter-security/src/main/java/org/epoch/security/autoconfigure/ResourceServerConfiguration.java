@@ -1,6 +1,6 @@
 package org.epoch.security.autoconfigure;
 
-import org.epoch.security.constants.SecurityConstants;
+import org.epoch.security.constant.SecurityConstants;
 import org.epoch.security.handler.EpochAccessDeniedHandler;
 import org.epoch.security.handler.EpochAuthenticationEntryPoint;
 import org.epoch.security.properties.SecurityProperty;

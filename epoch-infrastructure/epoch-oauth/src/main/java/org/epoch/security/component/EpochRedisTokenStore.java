@@ -4,7 +4,8 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
-import org.epoch.core.util.TypeConverter;
+import org.epoch.core.util.BaseConverter;
+import org.epoch.security.domain.DefaultUserDetails;
 import org.epoch.security.entity.OauthAccessToken;
 import org.epoch.security.service.OauthAccessTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,8 +58,8 @@ public class EpochRedisTokenStore extends RedisTokenStore {
         String clientId = authentication.getOAuth2Request().getClientId();
         OauthAccessToken oauthAccessToken = new OauthAccessToken();
         Object principal = authentication.getPrincipal();
-        if (principal instanceof EpochUserDetails) {
-            EpochUserDetails details = (EpochUserDetails) principal;
+        if (principal instanceof DefaultUserDetails) {
+            DefaultUserDetails details = (DefaultUserDetails) principal;
             oauthAccessToken.setUserId(details.getUserId());
         }
         oauthAccessToken.setToken(token.getValue());
@@ -72,7 +73,7 @@ public class EpochRedisTokenStore extends RedisTokenStore {
         oauthAccessToken.setTokenExpiresTime(token.getExpiration());
         oauthAccessTokenService.saveOne(oauthAccessToken);
 
-        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), TypeConverter.toJSONString(token),
+        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), BaseConverter.toJSONString(token),
                 token.getExpiresIn(), TimeUnit.SECONDS);
     }
 }

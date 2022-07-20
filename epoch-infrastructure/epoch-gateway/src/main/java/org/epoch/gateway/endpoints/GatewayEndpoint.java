@@ -20,6 +20,6 @@ public class GatewayEndpoint {
     @ResponseStatus(HttpStatus.BAD_GATEWAY)
     public Mono<ResponseEntity> systemFallback(@PathVariable String name) {
         String response = String.format("访问%s超时或者服务不可用", name);
-        return Mono.just(Response.fail(response));
+        return Mono.just(Response.error(response));
     }
 }

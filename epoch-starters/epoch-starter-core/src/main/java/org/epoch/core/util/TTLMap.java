@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
-import org.epoch.core.constants.ResponseConstants;
+import org.epoch.core.constant.MessageResp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.Assert;
@@ -371,7 +371,7 @@ public class TTLMap<K, V> implements Map<K, V> {
          * @return
          */
         public Builder<K, V> innerMapClass(@SuppressWarnings("rawtypes") Class<? extends Map> innerMapClass) {
-            Assert.notNull(innerMapClass, ResponseConstants.ErrorMessage.NOT_NULL);
+            Assert.notNull(innerMapClass, MessageResp.Error.NOT_NULL);
             this.innerMapClass = innerMapClass;
             return this;
         }
@@ -384,7 +384,7 @@ public class TTLMap<K, V> implements Map<K, V> {
          * @return
          */
         public Builder<K, V> timeUnit(TimeUnit timeUnit) {
-            Assert.notNull(timeUnit, ResponseConstants.ErrorMessage.NOT_NULL);
+            Assert.notNull(timeUnit, MessageResp.Error.NOT_NULL);
             this.timeUnit = timeUnit;
             return this;
         }
@@ -397,7 +397,7 @@ public class TTLMap<K, V> implements Map<K, V> {
          * @return
          */
         public Builder<K, V> ttl(long ttl) {
-            Assert.isTrue(ttl >= 0, ResponseConstants.ErrorMessage.DATA_INVALID);
+            Assert.isTrue(ttl >= 0, MessageResp.Error.DATA_INVALID);
             this.ttl = ttl;
             return this;
         }

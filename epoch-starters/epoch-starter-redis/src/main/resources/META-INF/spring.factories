@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.epoch.redis.RedisAutoConfiguration
+org.epoch.redis.autoconfigure.RedisAutoConfiguration

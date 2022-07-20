@@ -1,22 +1,17 @@
-package org.epoch.redis;
-
-import java.io.Serializable;
-import java.time.Duration;
+package org.epoch.redis.autoconfigure;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.impl.LaissezFaireSubTypeValidator;
-import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.cache.RedisCacheConfiguration;
-import org.springframework.data.redis.cache.RedisCacheManager;
-import org.springframework.data.redis.cache.RedisCacheWriter;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.serializer.*;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * Redis配置
@@ -47,41 +42,6 @@ public class RedisConfig {
         redisTemplate.setHashValueSerializer(valueSerializer());
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
-    }
-
-    @Bean
-    public RedisTemplate<String, Serializable> limitRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Serializable> template = new RedisTemplate<>();
-        template.setKeySerializer(new StringRedisSerializer());
-        template.setValueSerializer(new GenericJackson2JsonRedisSerializer());
-        template.setConnectionFactory(redisConnectionFactory);
-        return template;
-    }
-
-    /**
-     * SpringCache
-     *
-     * @param redisConnectionFactory
-     * @return
-     */
-    @Bean
-    public CacheManager cacheManager(RedisConnectionFactory redisConnectionFactory) {
-        // 缓存配置对象
-        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig();
-
-
-        redisCacheConfiguration =
-                // 设置缓存的默认超时时间：30分钟
-                redisCacheConfiguration.entryTtl(Duration.ofMinutes(30L))
-                        // 如果是空值，不缓存
-                        .disableCachingNullValues()
-                        .serializeKeysWith(RedisSerializationContext.SerializationPair
-                                .fromSerializer(keySerializer()))
-                        .serializeValuesWith(RedisSerializationContext.SerializationPair
-                                .fromSerializer((valueSerializer())));
-
-        return RedisCacheManager.builder(RedisCacheWriter.nonLockingRedisCacheWriter(redisConnectionFactory))
-                .cacheDefaults(redisCacheConfiguration).build();
     }
 
 

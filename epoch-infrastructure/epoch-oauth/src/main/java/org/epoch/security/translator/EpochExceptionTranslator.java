@@ -3,7 +3,7 @@ package org.epoch.security.translator;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.epoch.core.rest.Response;
-import org.epoch.security.constants.SecurityConstants;
+import org.epoch.security.constant.SecurityConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
@@ -46,6 +46,6 @@ public class EpochExceptionTranslator implements WebResponseExceptionTranslator,
             }
             message = "用户名或密码错误";
         }
-        return status.body(Response.fail(message));
+        return status.body(Response.error(message));
     }
 }

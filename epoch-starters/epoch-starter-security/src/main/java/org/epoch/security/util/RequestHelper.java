@@ -1,5 +1,8 @@
 package org.epoch.security.util;
 
+import static org.epoch.security.constant.SecurityConstants.ANONYMOUS_USER_ID;
+import static org.epoch.security.constant.SecurityConstants.ANONYMOUS_USER_NAME;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -7,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
-import org.epoch.core.constants.BaseConstants;
 import org.epoch.security.domain.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -25,7 +27,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @Slf4j
 public class RequestHelper {
-    private static final User ANONYMOUS_USER = new User(BaseConstants.ANONYMOUS_USER_ID, BaseConstants.ANONYMOUS_USER_NAME);
+    private static final User ANONYMOUS_USER = new User(ANONYMOUS_USER_ID, ANONYMOUS_USER_NAME);
 
     private static final String FILED_PRINCIPAL = "principal";
 

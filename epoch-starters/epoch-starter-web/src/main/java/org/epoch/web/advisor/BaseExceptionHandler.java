@@ -4,7 +4,7 @@ package org.epoch.web.advisor;
 import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 
-import org.epoch.core.constants.BaseConstants;
+import org.epoch.core.constant.BaseConstants;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.rest.Response;
 import org.epoch.core.rest.ResponseEntity;
@@ -41,7 +41,7 @@ public class BaseExceptionHandler {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
         }
-        return Response.fail(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR), ex.getMessage());
+        return Response.error(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR), ex.getMessage());
     }
 
     /**
@@ -56,7 +56,7 @@ public class BaseExceptionHandler {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
         }
-        return Response.fail(ex.getMessage(), ex.getMessage());
+        return Response.error(ex.getMessage(), ex.getMessage());
     }
 
     /**
@@ -71,7 +71,7 @@ public class BaseExceptionHandler {
         if (LOGGER.isErrorEnabled()) {
             LOGGER.error(message, exception);
         }
-        return Response.fail(String.valueOf(exception.getErrorCode()), message);
+        return Response.error(String.valueOf(exception.getErrorCode()), message);
     }
 
     private String exceptionMessage(String message, HttpServletRequest request, HandlerMethod method) {

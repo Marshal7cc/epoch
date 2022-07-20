@@ -1,6 +1,7 @@
 package org.epoch.core.rest;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import lombok.Builder;
 
 /**
  * 标准返回结果
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
  * @author Marshal
  * @date 2019/8/27
  */
+@Builder
 public class ResponseEntity<T> {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Boolean success = true;

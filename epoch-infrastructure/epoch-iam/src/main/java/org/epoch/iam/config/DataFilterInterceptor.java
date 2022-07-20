@@ -20,7 +20,7 @@
 //import org.apache.ibatis.executor.statement.StatementHandler;
 //import org.apache.ibatis.mapping.BoundSql;
 //import org.apache.ibatis.plugin.*;
-//import org.epoch.core.util.ReflectUtil;
+//import org.epoch.core.util.ReflectUtils;
 //import org.springframework.stereotype.Component;
 //
 ///**
@@ -37,11 +37,11 @@
 //    @Override
 //    public Object intercept(Invocation invocation) throws Throwable {
 //        RoutingStatementHandler handler = getRoutingStatementHandler(invocation);
-//        StatementHandler delegate = (StatementHandler) ReflectUtil.getFieldValue(handler, "delegate");
+//        StatementHandler delegate = (StatementHandler) ReflectUtils.getFieldValue(handler, "delegate");
 //        BoundSql boundSql = delegate.getBoundSql();
 //        String sql = boundSql.getSql();
 //        String newSql = filter(sql);
-//        ReflectUtil.setFieldValue(boundSql, "sql", newSql);
+//        ReflectUtils.setFieldValue(boundSql, "sql", newSql);
 //        return invocation.proceed();
 //    }
 //
@@ -53,7 +53,7 @@
 //            return (RoutingStatementHandler) target;
 //        } else if (target instanceof Proxy) {
 //            InvocationHandler invocationHandler = Proxy.getInvocationHandler(target);
-//            Object targetObj = ReflectUtil.getFieldValue(invocationHandler, "target");
+//            Object targetObj = ReflectUtils.getFieldValue(invocationHandler, "target");
 //            return getRoutingStatementHandler(targetObj);
 //        }
 //        return null;

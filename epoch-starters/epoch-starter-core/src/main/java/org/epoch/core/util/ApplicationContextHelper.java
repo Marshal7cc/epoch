@@ -18,21 +18,21 @@ import org.springframework.context.support.AbstractRefreshableApplicationContext
 import org.springframework.context.support.GenericApplicationContext;
 
 /**
- * ApplicationContextHolder
+ * ApplicationContextHelper
  *
  * @author Marshal
  * @date 2018/11/30
  */
-public class ApplicationContextHolder implements ApplicationContextAware {
+public class ApplicationContextHelper implements ApplicationContextAware {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationContextHolder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApplicationContextHelper.class);
 
     private static DefaultListableBeanFactory springFactory;
 
     private static ApplicationContext context;
 
     private static void setFactory(DefaultListableBeanFactory springFactory) {
-        ApplicationContextHolder.springFactory = springFactory;
+        ApplicationContextHelper.springFactory = springFactory;
     }
 
     public static DefaultListableBeanFactory getSpringFactory() {
@@ -44,7 +44,7 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     private static void setContext(ApplicationContext applicationContext) {
-        ApplicationContextHolder.context = applicationContext;
+        ApplicationContextHelper.context = applicationContext;
     }
 
     /**
@@ -107,9 +107,9 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     private static boolean setByMethod(Class<?> type, Object target, String targetMethod) {
-        if (ApplicationContextHolder.getContext() != null) {
+        if (ApplicationContextHelper.getContext() != null) {
             try {
-                Object obj = ApplicationContextHolder.getContext().getBean(type);
+                Object obj = ApplicationContextHelper.getContext().getBean(type);
                 Method method = target.getClass().getDeclaredMethod(targetMethod, type);
                 method.setAccessible(true);
                 method.invoke(target, obj);
@@ -127,9 +127,9 @@ public class ApplicationContextHolder implements ApplicationContextAware {
     }
 
     private static boolean setByField(Class<?> type, Class<?> target, String targetField) {
-        if (ApplicationContextHolder.getContext() != null) {
+        if (ApplicationContextHelper.getContext() != null) {
             try {
-                Object obj = ApplicationContextHolder.getContext().getBean(type);
+                Object obj = ApplicationContextHelper.getContext().getBean(type);
                 Field field = target.getDeclaredField(targetField);
                 field.setAccessible(true);
                 field.set(target, obj);
@@ -148,14 +148,14 @@ public class ApplicationContextHolder implements ApplicationContextAware {
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextHolder.setContext(applicationContext);
+        ApplicationContextHelper.setContext(applicationContext);
         if (applicationContext instanceof AbstractRefreshableApplicationContext) {
             AbstractRefreshableApplicationContext springContext =
                     (AbstractRefreshableApplicationContext) applicationContext;
-            ApplicationContextHolder.setFactory((DefaultListableBeanFactory) springContext.getBeanFactory());
+            ApplicationContextHelper.setFactory((DefaultListableBeanFactory) springContext.getBeanFactory());
         } else if (applicationContext instanceof GenericApplicationContext) {
             GenericApplicationContext springContext = (GenericApplicationContext) applicationContext;
-            ApplicationContextHolder.setFactory(springContext.getDefaultListableBeanFactory());
+            ApplicationContextHelper.setFactory(springContext.getDefaultListableBeanFactory());
         }
     }
 }

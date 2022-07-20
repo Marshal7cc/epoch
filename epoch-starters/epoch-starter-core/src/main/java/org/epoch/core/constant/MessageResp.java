@@ -1,18 +1,23 @@
-package org.epoch.core.constants;
+package org.epoch.core.constant;
 
 /**
  * 返回信息
+ *
+ * @author Marshal
  */
-public interface ResponseConstants {
+public interface MessageResp {
 
-    interface SuccessMessage {
-        String SUCCESS = "success.operate_success";
+    /**
+     * 基础成功编码
+     */
+    interface Success {
+        String OPERATE_SUCCESS = "success.operate_success";
     }
 
     /**
      * 基础异常编码
      */
-    interface ErrorMessage {
+    interface Error {
         /**
          * 数据校验不通过
          */

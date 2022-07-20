@@ -4,7 +4,7 @@ package org.epoch.security.service;
 import java.io.Serializable;
 import java.util.*;
 
-import org.epoch.security.component.EpochUserDetails;
+import org.epoch.security.domain.DefaultUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -47,7 +47,7 @@ public class EpochUserDetailServiceImpl implements UserDetailsService, Serializa
         //todo:角色授权
 
 
-        UserDetails userDetails = new EpochUserDetails((Long) userInfo.get("user_id"), (String) userInfo.get("user_name"),
+        UserDetails userDetails = new DefaultUserDetails((Long) userInfo.get("user_id"), (String) userInfo.get("user_name"),
                 (String) userInfo.get("password"), true, true, true, true, authorities) {
         };
         return userDetails;

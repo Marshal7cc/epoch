@@ -1,4 +1,4 @@
-package org.epoch.security.constants;
+package org.epoch.security.constant;
 
 /**
  * @author Marshal

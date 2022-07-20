@@ -2,7 +2,7 @@ package org.epoch.security.autoconfigure;
 
 import java.util.Collections;
 
-import org.epoch.security.constants.Oauth2EndpointConstant;
+import org.epoch.security.constant.Oauth2EndpointConstant;
 import org.epoch.security.filter.ValidateCodeFilter;
 import org.epoch.security.service.EpochUserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.epoch.core.exception.BaseException;
-import org.springframework.util.Assert;
 
 /**
  * <p>
@@ -13,7 +12,7 @@ import org.springframework.util.Assert;
  *
  * @author Marshal
  */
-public class AssertUtils extends Assert {
+public class Assert extends org.springframework.util.Assert {
     /**
      * 替代标准Assert.notNull; CommonException可以使用多语言消息
      *
@@ -52,7 +51,7 @@ public class AssertUtils extends Assert {
      * @param parameters 异常参数
      */
     public static void notBetweenInSize(String str, int min, int max, String message, Object... parameters) {
-        AssertUtils.notNull(str, message, parameters);
+        Assert.notNull(str, message, parameters);
         if (str.length() < min || str.length() > max) {
             throw new BaseException(message, parameters);
         }

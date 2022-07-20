@@ -7,14 +7,14 @@ package org.epoch.core.exception;
  *
  * @author Marshal
  */
-public class JsonConvertException extends BaseException {
+public class JsonProcessingException extends BaseException {
 
     private static final long serialVersionUID = -847651565156777077L;
 
-    public JsonConvertException() {
+    public JsonProcessingException() {
     }
 
-    public JsonConvertException(String message, Throwable cause) {
+    public JsonProcessingException(String message, Throwable cause) {
         super(message, cause);
     }
 }

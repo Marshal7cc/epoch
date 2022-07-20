@@ -1,4 +1,4 @@
-package org.epoch.redis;
+package org.epoch.redis.autoconfigure;
 
 import org.epoch.redis.helper.RedisHelper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

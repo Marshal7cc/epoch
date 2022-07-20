@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.epoch.core.exception.BaseException;
-import org.epoch.core.exception.JsonConvertException;
+import org.epoch.core.exception.JsonProcessingException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +19,7 @@ import org.springframework.util.Assert;
  * @author Marshal
  * @date 2021/1/24
  */
-public class TypeConverter implements ApplicationContextAware {
+public class BaseConverter implements ApplicationContextAware {
 
     private static ObjectMapper objectMapper;
 
@@ -147,8 +146,8 @@ public class TypeConverter implements ApplicationContextAware {
     public static String toJSONString(Object obj) {
         try {
             return objectMapper.writeValueAsString(obj);
-        } catch (JsonProcessingException e) {
-            throw new JsonConvertException();
+        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            throw new JsonProcessingException();
         }
     }
 

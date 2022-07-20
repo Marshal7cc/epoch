@@ -108,16 +108,15 @@ public class AuditorAwareInterceptor implements Interceptor {
         if (!field.isAnnotationPresent(clazz)) {
             return;
         }
-        if (!field.isAccessible()) {
+        boolean accessible = field.isAccessible();
+        if (!accessible) {
             field.setAccessible(true);
-            if (field.get(entity) == null) {
-                field.set(entity, value);
-            }
+        }
+        if (field.get(entity) == null) {
+            field.set(entity, value);
+        }
+        if (!accessible) {
             field.setAccessible(false);
-        } else {
-            if (field.get(entity) == null) {
-                field.set(entity, value);
-            }
         }
     }
 

@@ -1,7 +1,7 @@
 package org.epoch.mybatis.domain.support;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
-import org.epoch.core.util.ApplicationContextHolder;
+import org.epoch.core.util.ApplicationContextHelper;
 import org.epoch.snowflake.helper.SnowflakeHelper;
 import org.springframework.context.ApplicationContext;
 
@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 public class SnowflakeKeyGenerator implements IdentifierGenerator {
     @Override
     public Number nextId(Object entity) {
-        ApplicationContext context = ApplicationContextHolder.getContext();
+        ApplicationContext context = ApplicationContextHelper.getContext();
         SnowflakeHelper snowflakeHelper = context.getBean(SnowflakeHelper.class);
         return snowflakeHelper.next();
     }

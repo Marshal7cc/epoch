@@ -8,27 +8,27 @@ import java.util.zip.ZipOutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.epoch.core.constants.ResponseConstants;
-import org.epoch.core.util.TypeConverter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.epoch.core.constant.MessageResp;
+import org.epoch.core.exception.BaseException;
+import org.epoch.core.util.BaseConverter;
 
 /**
+ * TODO: move file operations out.
  * response工具类
  *
  * @author Marshal
  * @date 2019/8/27
  */
 @SuppressWarnings("rawtypes,unchecked")
+@Slf4j
 public class Response {
-    private static final Logger logger = LoggerFactory.getLogger(Response.class);
-
     private Response() {
     }
 
     public static ResponseEntity<Void> success() {
-        return success(ResponseConstants.SuccessMessage.SUCCESS);
+        return success(MessageResp.Success.OPERATE_SUCCESS);
     }
 
     public static ResponseEntity<Void> success(String message) {
@@ -39,26 +39,26 @@ public class Response {
         return new ResponseEntity(data);
     }
 
-    public static ResponseEntity<Void> fail() {
-        return fail(ResponseConstants.ErrorMessage.ERROR);
+    public static ResponseEntity<Void> error() {
+        return error(MessageResp.Error.ERROR);
     }
 
-    public static ResponseEntity<Void> fail(String message) {
+    public static ResponseEntity<Void> error(String message) {
         return new ResponseEntity(false, message);
     }
 
-    public static ResponseEntity<Void> fail(String code, String message) {
+    public static ResponseEntity<Void> error(String code, String message) {
         return new ResponseEntity(code, false, message);
     }
 
-    public static void fail(HttpServletResponse response, String message) {
+    public static void error(HttpServletResponse response, String message) {
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         PrintWriter writer = null;
         try {
             writer = response.getWriter();
-            writer.write(TypeConverter.toJSONString(fail(message)));
+            writer.write(BaseConverter.toJSONString(error(message)));
         } catch (IOException e) {
-            logger.error("io exception happen ,please check");
+            log.error("io exception occur while resp...");
         } finally {
             if (writer != null) {
                 writer.close();
@@ -74,11 +74,8 @@ public class Response {
      * @param response
      * @throws IOException
      */
-    public static void responseExcel(Workbook workbook, String fileName, HttpServletResponse response) throws IOException {
-        response.setHeader("content-type", "application/octet-stream");
-        response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+    public static void excel(Workbook workbook, String fileName, HttpServletResponse response) throws IOException {
+        setResponseHeaderWhileDownloading(response, fileName);
 
         ServletOutputStream outputStream = null;
         try {
@@ -100,11 +97,8 @@ public class Response {
      * @param response
      * @throws IOException
      */
-    public static void download(byte[] bytes, String fileName, HttpServletResponse response) throws IOException {
-        response.setHeader("content-type", "application/octet-stream");
-        response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+    public static void file(byte[] bytes, String fileName, HttpServletResponse response) throws IOException {
+        setResponseHeaderWhileDownloading(response, fileName);
 
         ServletOutputStream outputStream = null;
         try {
@@ -125,11 +119,8 @@ public class Response {
      * @param response
      * @throws IOException
      */
-    public static void downloadZip(Map<String, byte[]> files, String fileName, HttpServletResponse response) throws IOException {
-        response.setHeader("content-type", "application/octet-stream");
-        response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+    public static void zip(Map<String, byte[]> files, String fileName, HttpServletResponse response) throws IOException {
+        setResponseHeaderWhileDownloading(response, fileName);
 
         ServletOutputStream servletOutputStream = response.getOutputStream();
         ZipOutputStream zos = new ZipOutputStream(servletOutputStream);
@@ -154,5 +145,16 @@ public class Response {
         bos.flush();
         bos.close();
         servletOutputStream.close();
+    }
+
+    private static void setResponseHeaderWhileDownloading(HttpServletResponse response, String fileName) {
+        response.setHeader("content-type", "application/octet-stream");
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        response.setContentType("application/octet-stream");
+        try {
+            response.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(fileName, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            throw new BaseException("unsupport encoding type...");
+        }
     }
 }

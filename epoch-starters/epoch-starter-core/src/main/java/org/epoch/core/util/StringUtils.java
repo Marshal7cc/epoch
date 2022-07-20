@@ -3,7 +3,6 @@ package org.epoch.core.util;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
 
 /**
  * 驼峰法-划线互转
@@ -12,7 +11,7 @@ import org.apache.commons.lang3.StringUtils;
  * @version 1.0.0
  * @since 2015.07.04
  */
-public class FieldNameUtils {
+public class StringUtils extends org.apache.commons.lang3.StringUtils {
     private static final Pattern CAMEL_PATTERN = Pattern.compile("[A-Z]([a-z\\d]+)?");
 
     private static final Pattern UNDERLINE_TO_CAMEL_PATTERN = Pattern.compile("([A-Za-z\\d]+)(_)?");
@@ -22,7 +21,7 @@ public class FieldNameUtils {
     private static final Pattern CAMEL_TO_MIDDLE_LINE_PATTERN = CAMEL_PATTERN;
 
 
-    private FieldNameUtils() throws IllegalAccessException {
+    private StringUtils() throws IllegalAccessException {
         throw new IllegalAccessException();
     }
 
@@ -80,8 +79,8 @@ public class FieldNameUtils {
      * @return 转换后的字符串
      */
     private static String toCamel(String line, boolean smallCamel, char split, Pattern pattern) {
-        if (StringUtils.isEmpty(line)) {
-            return StringUtils.EMPTY;
+        if (org.apache.commons.lang3.StringUtils.isEmpty(line)) {
+            return org.apache.commons.lang3.StringUtils.EMPTY;
         }
         StringBuilder sb = new StringBuilder();
         Matcher matcher = pattern.matcher(line);
@@ -109,8 +108,8 @@ public class FieldNameUtils {
      * @return 转换后的字符串
      */
     private static String camelTo(String line, boolean upperCase, Pattern pattern, char split) {
-        if (StringUtils.isEmpty(line)) {
-            return StringUtils.EMPTY;
+        if (org.apache.commons.lang3.StringUtils.isEmpty(line)) {
+            return org.apache.commons.lang3.StringUtils.EMPTY;
         }
         line = String.valueOf(line.charAt(0)).toUpperCase().concat(line.substring(1));
         StringBuilder sb = new StringBuilder();
@@ -118,7 +117,7 @@ public class FieldNameUtils {
         while (matcher.find()) {
             String word = matcher.group();
             sb.append(upperCase ? word.toUpperCase() : word.toLowerCase());
-            sb.append(matcher.end() == line.length() ? StringUtils.EMPTY : split);
+            sb.append(matcher.end() == line.length() ? org.apache.commons.lang3.StringUtils.EMPTY : split);
         }
         return sb.toString();
     }

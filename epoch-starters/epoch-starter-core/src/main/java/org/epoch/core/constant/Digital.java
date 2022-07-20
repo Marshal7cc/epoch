@@ -1,11 +1,11 @@
-package org.epoch.core.constants;
+package org.epoch.core.constant;
 
 /**
  * 常用数字
  *
  * @author Marshal
  */
-public interface DigitalConstants {
+public interface Digital {
     int NEGATIVE_ONE = -1;
     int ZERO = 0;
     int ONE = 1;

@@ -1,8 +1,8 @@
 package org.epoch.core.autoconfigure;
 
 import org.epoch.core.properties.CoreProperties;
-import org.epoch.core.util.ApplicationContextHolder;
-import org.epoch.core.util.TypeConverter;
+import org.epoch.core.util.ApplicationContextHelper;
+import org.epoch.core.util.BaseConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,12 +19,12 @@ public class CoreAutoConfiguration {
     private CoreProperties coreProperties;
 
     @Bean
-    public TypeConverter typeConverter() {
-        return new TypeConverter();
+    public BaseConverter typeConverter() {
+        return new BaseConverter();
     }
 
     @Bean
-    public ApplicationContextHolder applicationContextHolder() {
-        return new ApplicationContextHolder();
+    public ApplicationContextHelper applicationContextHolder() {
+        return new ApplicationContextHelper();
     }
 }

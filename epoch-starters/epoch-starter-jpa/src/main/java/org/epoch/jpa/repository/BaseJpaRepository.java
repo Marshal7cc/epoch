@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.epoch.core.util.TypeConverter;
+import org.epoch.core.util.BaseConverter;
 import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.data.repository.query.QueryHelper;
@@ -23,7 +23,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements BaseRepository<T, ID> {
     @Autowired
     protected R repository;
-
     private final Class<T> entityClass;
 
     @SuppressWarnings("unchecked")
@@ -61,7 +60,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
         if (Objects.isNull(query)) {
             return findAll();
         }
-        return repository.findAll(Example.of(TypeConverter.parseObject(entityClass, query)));
+        return repository.findAll(Example.of(BaseConverter.parseObject(entityClass, query)));
     }
 
     @Override
@@ -107,7 +106,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     @Override
     public <Q> Page<T> findAll(Pageable pageable, Q query) {
         return QueryHelper.getPage(repository.findAll(
-                Example.of(TypeConverter.parseObject(entityClass, query)),
+                Example.of(BaseConverter.parseObject(entityClass, query)),
                 PageRequest.of(pageable.getPageNumber() - 1, pageable.getPageSize()))
         );
     }

@@ -1,4 +1,4 @@
-package org.epoch.security.component;
+package org.epoch.security.domain;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author Marshal
  * @date 2018/11/12
  */
-public class EpochUserDetails implements UserDetails, Serializable {
+public class DefaultUserDetails implements UserDetails, Serializable {
 
     private final Long userId;
     private final String userName;
@@ -22,9 +22,9 @@ public class EpochUserDetails implements UserDetails, Serializable {
 
     private final Collection<? extends GrantedAuthority> authorities;
 
-    public EpochUserDetails(Long userId, String userName, String password, boolean enabled, boolean accountNonExpired,
-                            boolean credentialsNonExpired, boolean accountNonLocked,
-                            Collection<? extends GrantedAuthority> authorities) {
+    public DefaultUserDetails(Long userId, String userName, String password, boolean enabled, boolean accountNonExpired,
+                              boolean credentialsNonExpired, boolean accountNonLocked,
+                              Collection<? extends GrantedAuthority> authorities) {
         this.userId = userId;
         this.userName = userName;
         this.password = password;

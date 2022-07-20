@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
  * @author Marshal
  * @date : 2019/4/8
  */
-public class IpUtil {
+public class IPUtils {
 
     private static final String UNKNOWN = "unknown";
 
-    private IpUtil() {
+    private IPUtils() {
     }
 
     /**

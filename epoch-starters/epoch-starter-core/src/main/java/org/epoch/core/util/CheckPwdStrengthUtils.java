@@ -17,7 +17,7 @@ package org.epoch.core.util;
 /**
  * 检测密码强度
  */
-public class CheckStrengthUtils {
+public class CheckPwdStrengthUtils {
 
     private static final int NUM = 1;
     private static final int SMALL_LETTER = 2;

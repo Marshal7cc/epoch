@@ -1,7 +1,9 @@
-package org.epoch.core.constants;
+package org.epoch.core.constant;
 
 /**
  * 符号常量
+ *
+ * @author Marshal
  */
 public interface StringPool {
     /**

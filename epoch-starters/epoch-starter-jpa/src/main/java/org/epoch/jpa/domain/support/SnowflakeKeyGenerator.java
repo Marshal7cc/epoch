@@ -2,7 +2,7 @@ package org.epoch.jpa.domain.support;
 
 import java.io.Serializable;
 
-import org.epoch.core.util.ApplicationContextHolder;
+import org.epoch.core.util.ApplicationContextHelper;
 import org.epoch.snowflake.helper.SnowflakeHelper;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
@@ -19,7 +19,7 @@ public class SnowflakeKeyGenerator implements IdentifierGenerator {
 
     @Override
     public Serializable generate(SharedSessionContractImplementor sharedSessionContractImplementor, Object o) throws HibernateException {
-        ApplicationContext context = ApplicationContextHolder.getContext();
+        ApplicationContext context = ApplicationContextHelper.getContext();
         SnowflakeHelper snowflakeHelper = context.getBean(SnowflakeHelper.class);
         return String.valueOf(snowflakeHelper.next());
     }

@@ -1,4 +1,4 @@
-package org.epoch.security.constants;
+package org.epoch.security.constant;
 
 /**
  * <p>name:SecurityConstants</p>
@@ -10,6 +10,18 @@ package org.epoch.security.constants;
  * @date 2020/8/16
  */
 public interface SecurityConstants {
+
+    /**
+     * 匿名用户ID
+     */
+    String ANONYMOUS_USER_ID = "0";
+
+    /**
+     * 匿名用户名
+     */
+    String ANONYMOUS_USER_NAME = "anonymousUser";
+
+
     /**
      * 资源服务器默认白名单
      */
