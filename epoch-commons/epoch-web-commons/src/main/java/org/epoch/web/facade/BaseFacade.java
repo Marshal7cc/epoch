@@ -3,10 +3,10 @@ package org.epoch.web.facade;
 import java.io.Serializable;
 import java.util.List;
 
-import org.epoch.core.rest.ResponseEntity;
 import org.epoch.web.facade.dto.BaseDTO;
 import org.epoch.web.facade.query.BaseQuery;
 import org.epoch.web.facade.vo.BaseVO;
+import org.epoch.web.rest.ResponseEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 

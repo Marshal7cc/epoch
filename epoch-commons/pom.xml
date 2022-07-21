@@ -17,5 +17,6 @@
     <modules>
         <module>epoch-core-commons</module>
         <module>epoch-data-commons</module>
+        <module>epoch-web-commons</module>
     </modules>
 </project>

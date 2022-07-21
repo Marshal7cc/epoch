@@ -57,11 +57,7 @@
         <!-- EPOCH Commons -->
         <dependency>
             <groupId>org.epoch.common</groupId>
-            <artifactId>epoch-core-commons</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.epoch.common</groupId>
-            <artifactId>epoch-data-commons</artifactId>
+            <artifactId>epoch-web-commons</artifactId>
         </dependency>
         <!-- EPOCH Starters -->
         <dependency>

@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.epoch.core.constant.BaseConstants;
 import org.epoch.core.exception.BaseException;
-import org.epoch.core.rest.Response;
-import org.epoch.core.rest.ResponseEntity;
+import org.epoch.web.rest.Response;
+import org.epoch.web.rest.ResponseEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

@@ -49,7 +49,7 @@
         <!-- epoch commons -->
         <dependency>
             <groupId>org.epoch.common</groupId>
-            <artifactId>epoch-core-commons</artifactId>
+            <artifactId>epoch-web-commons</artifactId>
         </dependency>
     </dependencies>
 

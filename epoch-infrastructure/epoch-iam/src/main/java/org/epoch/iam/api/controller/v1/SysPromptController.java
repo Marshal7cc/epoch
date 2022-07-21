@@ -2,8 +2,6 @@ package org.epoch.iam.api.controller.v1;
 
 
 import io.swagger.annotations.Api;
-import org.epoch.core.rest.Response;
-import org.epoch.core.rest.ResponseEntity;
 import org.epoch.iam.api.SysPromptApi;
 import org.epoch.iam.api.dto.PromptDTO;
 import org.epoch.iam.api.query.PromptQuery;
@@ -12,6 +10,8 @@ import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysPrompt;
 import org.epoch.iam.domain.repository.SysPromptRepository;
 import org.epoch.web.facade.controller.BaseController;
+import org.epoch.web.rest.Response;
+import org.epoch.web.rest.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 

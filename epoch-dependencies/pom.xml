@@ -90,6 +90,11 @@
                 <artifactId>epoch-data-commons</artifactId>
                 <version>${epoch-common.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.epoch.common</groupId>
+                <artifactId>epoch-web-commons</artifactId>
+                <version>${epoch-common.version}</version>
+            </dependency>
             <!-- EPOCH Starters -->
             <dependency>
                 <groupId>org.epoch.starter</groupId>

@@ -1,4 +1,4 @@
-package org.epoch.core.rest;
+package org.epoch.web.rest;
 
 import java.io.*;
 import java.net.URLEncoder;
@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.epoch.core.constant.MessageResp;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.util.BaseConverter;
 
@@ -28,7 +27,7 @@ public class Response {
     }
 
     public static ResponseEntity<Void> success() {
-        return success(MessageResp.Success.OPERATE_SUCCESS);
+        return success(null);
     }
 
     public static ResponseEntity<Void> success(String message) {
@@ -40,7 +39,7 @@ public class Response {
     }
 
     public static ResponseEntity<Void> error() {
-        return error(MessageResp.Error.ERROR);
+        return error(null);
     }
 
     public static ResponseEntity<Void> error(String message) {
