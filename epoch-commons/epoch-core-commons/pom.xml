@@ -3,19 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <groupId>org.epoch.starter</groupId>
-        <artifactId>epoch-starters</artifactId>
+        <groupId>org.epoch.common</groupId>
+        <artifactId>epoch-commons</artifactId>
         <version>1.0.0.RELEASE</version>
     </parent>
-    <artifactId>epoch-starter-core</artifactId>
+    <artifactId>epoch-core-commons</artifactId>
 
     <dependencies>
         <!-- spring boot starter -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-json</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -80,4 +79,5 @@
             <artifactId>javax.servlet-api</artifactId>
         </dependency>
     </dependencies>
+
 </project>
