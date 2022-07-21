@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>epoch-starter-core</module>
         <module>epoch-starter-ddd</module>
         <module>epoch-starter-jpa</module>
         <module>epoch-starter-lock</module>

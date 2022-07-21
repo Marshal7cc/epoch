@@ -23,10 +23,10 @@
             <version>${redisson.version}</version>
         </dependency>
 
-        <!-- EPOCH Starter -->
+        <!-- EPOCH Commons -->
         <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-core</artifactId>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
         </dependency>
     </dependencies>
 </project>

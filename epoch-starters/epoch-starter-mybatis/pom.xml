@@ -16,22 +16,23 @@
     </properties>
 
     <dependencies>
-        <!-- mybatis plus -->
+        <!-- Mybatis Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus.version}</version>
         </dependency>
-        <!-- epoch commons -->
+
+        <!-- EPOCH Commons -->
+        <dependency>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.epoch.common</groupId>
             <artifactId>epoch-data-commons</artifactId>
         </dependency>
-        <!-- epoch starters -->
-        <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-core</artifactId>
-        </dependency>
+        <!-- EPOCH Starters -->
         <dependency>
             <groupId>org.epoch.starter</groupId>
             <artifactId>epoch-starter-snowflake</artifactId>

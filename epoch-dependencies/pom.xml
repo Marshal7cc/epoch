@@ -82,15 +82,15 @@
             <!-- EPOCH Commons -->
             <dependency>
                 <groupId>org.epoch.common</groupId>
+                <artifactId>epoch-core-commons</artifactId>
+                <version>${epoch-common.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.common</groupId>
                 <artifactId>epoch-data-commons</artifactId>
                 <version>${epoch-common.version}</version>
             </dependency>
             <!-- EPOCH Starters -->
-            <dependency>
-                <groupId>org.epoch.starter</groupId>
-                <artifactId>epoch-starter-core</artifactId>
-                <version>${epoch-starter.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.epoch.starter</groupId>
                 <artifactId>epoch-starter-jpa</artifactId>

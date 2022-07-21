@@ -17,10 +17,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- EPOCH Starter -->
+
+        <!-- EPOCH Commons -->
         <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-core</artifactId>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
         </dependency>
     </dependencies>
 </project>

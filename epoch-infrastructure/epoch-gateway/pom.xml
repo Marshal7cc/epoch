@@ -46,16 +46,10 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
 
-        <!-- EPOCH Starter -->
+        <!-- epoch commons -->
         <dependency>
-            <groupId>org.epoch.starter</groupId>
-            <artifactId>epoch-starter-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
         </dependency>
     </dependencies>
 

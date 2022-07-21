@@ -15,6 +15,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>epoch-core-commons</module>
         <module>epoch-data-commons</module>
     </modules>
 </project>

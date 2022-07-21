@@ -4,8 +4,8 @@
 ### 2. 组件坐标
 ```
 <dependency>
-    <groupId>org.epoch.starter</groupId>
-    <artifactId>epoch-starter-core</artifactId>
-    <version>${epoch-starter.version}</version>
+    <groupId>org.epoch.common</groupId>
+    <artifactId>epoch-core-commons</artifactId>
+    <version>${epoch-common.version}</version>
 </dependency>
 ```
