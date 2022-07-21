@@ -98,6 +98,11 @@
             <!-- EPOCH Starters -->
             <dependency>
                 <groupId>org.epoch.starter</groupId>
+                <artifactId>epoch-starter-boot</artifactId>
+                <version>${epoch-starter.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.epoch.starter</groupId>
                 <artifactId>epoch-starter-jpa</artifactId>
                 <version>${epoch-starter.version}</version>
             </dependency>

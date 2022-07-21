@@ -25,5 +25,6 @@
         <module>epoch-starter-security</module>
         <module>epoch-starter-snowflake</module>
         <module>epoch-starter-web</module>
+        <module>epoch-starter-boot</module>
     </modules>
 </project>

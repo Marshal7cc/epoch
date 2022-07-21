@@ -1,4 +1,4 @@
-package org.epoch.web.annotation;
+package org.epoch.boot.annotation;
 
 import java.lang.annotation.*;
 

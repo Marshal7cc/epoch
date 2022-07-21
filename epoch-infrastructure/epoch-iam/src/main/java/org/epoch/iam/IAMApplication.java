@@ -1,6 +1,6 @@
 package org.epoch.iam;
 
-import org.epoch.web.annotation.EpochApplication;
+import org.epoch.boot.annotation.EpochApplication;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 

@@ -60,7 +60,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
         if (Objects.isNull(query)) {
             return findAll();
         }
-        return repository.findAll(Example.of(BaseConverter.parseObject(entityClass, query)));
+        return repository.findAll(Example.of(BaseConverter.parseObject(query, entityClass)));
     }
 
     @Override
@@ -106,7 +106,7 @@ public class BaseJpaRepository<R extends JpaRepository<T, ID>, T, ID> implements
     @Override
     public <Q> Page<T> findAll(Pageable pageable, Q query) {
         return QueryHelper.getPage(repository.findAll(
-                Example.of(BaseConverter.parseObject(entityClass, query)),
+                Example.of(BaseConverter.parseObject(query, entityClass)),
                 PageRequest.of(pageable.getPageNumber() - 1, pageable.getPageSize()))
         );
     }

@@ -85,7 +85,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
         if (Objects.isNull(query)) {
             return findAll();
         }
-        QueryWrapper<T> queryWrapper = Wrappers.query(BaseConverter.parseObject(entityClass, query));
+        QueryWrapper<T> queryWrapper = Wrappers.query(BaseConverter.parseObject(query, entityClass));
         return mapper.selectList(queryWrapper);
     }
 
@@ -146,7 +146,7 @@ public class BaseMybatisRepository<R extends BaseMapper<T>, T, ID extends Serial
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> page
                 = new com.baomidou.mybatisplus.extension.plugins.pagination.Page<>(pageable.getPageNumber(), pageable.getPageSize());
 
-        QueryWrapper<T> queryWrapper = Wrappers.query(BaseConverter.parseObject(entityClass, query));
+        QueryWrapper<T> queryWrapper = Wrappers.query(BaseConverter.parseObject(query, entityClass));
         com.baomidou.mybatisplus.extension.plugins.pagination.Page<T> pageResponse = super.page(page, queryWrapper);
 
         return QueryHelper.getPage(pageResponse);

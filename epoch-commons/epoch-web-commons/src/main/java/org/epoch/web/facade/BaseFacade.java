@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import org.epoch.web.facade.dto.BaseDTO;
-import org.epoch.web.facade.query.BaseQuery;
 import org.epoch.web.facade.vo.BaseVO;
 import org.epoch.web.rest.ResponseEntity;
 import org.springframework.data.domain.Page;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * @author Marshal
  * @date 2020/5/31
  */
-public interface BaseFacade<D extends BaseDTO, V extends BaseVO, Q extends BaseQuery, ID extends Serializable> {
+public interface BaseFacade<D extends BaseDTO, V extends BaseVO, ID extends Serializable> {
 
     /**
      * 基础列表查询
@@ -27,9 +26,9 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, Q extends BaseQ
      * @return 结果集合
      */
     @GetMapping("{page}/{size}")
-    ResponseEntity<Page<V>> selectPage(@PathVariable("page") int page,
-                                       @PathVariable("size") int size,
-                                       Q query);
+    <Q> ResponseEntity<Page<V>> selectPage(@PathVariable("page") int page,
+                                           @PathVariable("size") int size,
+                                           Q query);
 
     /**
      * 基础详情

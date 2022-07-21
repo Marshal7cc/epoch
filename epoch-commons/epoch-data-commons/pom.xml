@@ -22,5 +22,11 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>
         </dependency>
+
+        <!-- EPOCH Commons -->
+        <dependency>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
+        </dependency>
     </dependencies>
 </project>

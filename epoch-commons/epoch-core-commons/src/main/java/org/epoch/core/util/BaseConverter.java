@@ -33,7 +33,7 @@ public class BaseConverter implements ApplicationContextAware {
      * @param <V>         源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> parseArray(Class<T> targetClazz, List<V> sourceList) {
+    public static <T, V> List<T> parseArray(List<V> sourceList, Class<T> targetClazz) {
         return parseArray(targetClazz, sourceList, null);
     }
 
@@ -132,7 +132,7 @@ public class BaseConverter implements ApplicationContextAware {
      * @param <V>          源对象
      * @return 目标对象
      */
-    public static <T, V> T parseObject(Class<T> targetClazz, V sourceObject) {
+    public static <T, V> T parseObject(V sourceObject, Class<T> targetClazz) {
         Assert.notNull(sourceObject, "source convert object can't be null.");
         try {
             T targetObject = targetClazz.newInstance();
