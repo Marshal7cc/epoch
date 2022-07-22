@@ -2,6 +2,7 @@ package org.epoch.web.advisor;
 
 
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import javax.servlet.http.HttpServletRequest;
 
 import org.epoch.core.constant.BaseConstants;
@@ -56,7 +57,10 @@ public class BaseExceptionHandler {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug(message);
         }
-        return Response.error(ex.getMessage(), ex.getMessage());
+        if (ex.getParameters() != null) {
+            return Response.error(new MessageFormat(ex.getMessage()).format(ex.getParameters()));
+        }
+        return Response.error(ex.getMessage());
     }
 
     /**

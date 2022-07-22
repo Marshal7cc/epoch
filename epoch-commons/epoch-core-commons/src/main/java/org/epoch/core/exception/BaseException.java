@@ -28,7 +28,7 @@ public class BaseException extends RuntimeException {
     @Getter
     private String code;
     /**
-     * external attributes.
+     * format parameters.
      */
     @Getter
     private transient Object[] parameters;

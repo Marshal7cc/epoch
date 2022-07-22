@@ -14,6 +14,14 @@ public class JsonProcessingException extends BaseException {
     public JsonProcessingException() {
     }
 
+    public JsonProcessingException(String message) {
+        super(message);
+    }
+
+    public JsonProcessingException(String message, Object... parameters) {
+        super(message, parameters);
+    }
+
     public JsonProcessingException(String message, Throwable cause) {
         super(message, cause);
     }
