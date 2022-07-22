@@ -3,6 +3,7 @@ package org.epoch.iam.api.controller.v1;
 
 import io.swagger.annotations.Api;
 import org.epoch.iam.api.dto.MenuDTO;
+import org.epoch.iam.api.query.MenuQuery;
 import org.epoch.iam.api.vo.MenuVO;
 import org.epoch.iam.config.SwaggerTags;
 import org.epoch.iam.domain.entity.SysMenu;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = SwaggerTags.MENU)
 @RequestMapping("/menus")
 @RestController("sysMenuController.v1")
-public class SysMenuController extends BaseController<MenuService, MenuDTO, MenuVO, SysMenu, Long>  {
+public class SysMenuController extends BaseController<MenuService, MenuVO, MenuQuery, MenuDTO, Long> {
 
     public ResponseEntity queryMenuTree(SysMenu dto) {
         return Response.success();

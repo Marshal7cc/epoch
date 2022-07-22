@@ -1,22 +1,26 @@
 package org.epoch.web.facade.controller;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.Validator;
 
 import io.swagger.annotations.ApiOperation;
 import org.epoch.core.util.BaseConverter;
-import org.epoch.data.domain.Auditable;
+import org.epoch.core.util.ValidUtils;
+import org.epoch.data.domain.Page;
 import org.epoch.data.service.BaseService;
 import org.epoch.web.facade.BaseFacade;
-import org.epoch.web.facade.dto.BaseDTO;
 import org.epoch.web.facade.vo.BaseVO;
 import org.epoch.web.rest.Response;
 import org.epoch.web.rest.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 
 /**
  * <p>通用controller</p>
@@ -28,62 +32,112 @@ import org.springframework.data.domain.PageRequest;
  * @author Marshal
  * @date 2020/5/30
  */
-public class BaseController<S extends BaseService<D, T, ID>, D extends BaseDTO, V extends BaseVO, T extends Auditable<ID>, ID extends Serializable>
-        extends AbstractController
-        implements BaseFacade<D, V, ID> {
+public class BaseController<S extends BaseService<DTO, ID>, VO extends BaseVO, QUERY, DTO, ID extends Serializable>
+        implements BaseFacade<VO, QUERY, ID> {
 
     @Autowired
     protected S service;
-
-    protected final Class<D> dClass;
-    protected final Class<V> vClass;
-    protected final Class<T> tClass;
+    protected final Class<DTO> doClass;
+    protected final Class<VO> dtoClass;
+    @Autowired
+    private Validator validator;
 
     @SuppressWarnings("unchecked")
     protected BaseController() {
-        this.dClass = (Class<D>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[1];
-        this.vClass = (Class<V>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[2];
-        this.tClass = (Class<T>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[3];
+        this.dtoClass = (Class<VO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[1];
+        this.doClass = (Class<DTO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[3];
     }
 
     @Override
     @ApiOperation(value = "列表查询")
-    public <Q> ResponseEntity<Page<V>> selectPage(int page, int size, Q condition) {
+    public ResponseEntity<Page<VO>> selectPage(int page, int size, QUERY condition) {
         return Response.success(service.findAll(PageRequest.of(page, size), condition));
     }
 
     @Override
     @ApiOperation(value = "详情查看")
-    public ResponseEntity<V> findById(ID id) {
+    public ResponseEntity<VO> findById(ID id) {
         return Response.success(service.findById(id));
     }
 
     @Override
     @ApiOperation(value = "创建记录")
-    public ResponseEntity<D> insert(D baseDTO) {
-        service.save(baseDTO);
-        return Response.success(baseDTO);
+    public ResponseEntity<VO> insertItem(VO baseVO) {
+        service.save(BaseConverter.parseObject(baseVO, doClass));
+        return Response.success(baseVO);
     }
 
     @Override
     @ApiOperation(value = "更新记录")
-    public ResponseEntity<D> update(ID id, D baseDTO) {
-        baseDTO.setId(String.valueOf(id));
-        service.save(baseDTO);
-        return Response.success(baseDTO);
+    public ResponseEntity<VO> updateItem(ID id, VO baseVO) {
+        baseVO.setId(String.valueOf(id));
+        service.save(BaseConverter.parseObject(baseVO, doClass));
+        return Response.success(baseVO);
     }
 
     @Override
     @ApiOperation(value = "批量删除")
-    public ResponseEntity<Void> remove(List<D> list) {
-        service.getRepository().deleteAll(BaseConverter.parseArray(list, tClass));
+    public ResponseEntity<Void> removeAll(List<VO> list) {
+        service.deleteAll(BaseConverter.parseArray(list, doClass));
         return Response.success();
     }
 
     @Override
     @ApiOperation(value = "主键删除")
-    public ResponseEntity<Void> removeById(ID id) {
-        service.removeById(id);
+    public ResponseEntity<Void> removeOne(ID id) {
+        service.deleteById(id);
         return Response.success();
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        StringTrimmerEditor stringTrimmer = new StringTrimmerEditor(true);
+        binder.registerCustomEditor(String.class, stringTrimmer);
+    }
+
+    /**
+     * 验证单个对象
+     *
+     * @param object 验证对象
+     * @param groups 验证分组
+     * @param <T>    Bean 泛型
+     */
+    protected <T> void validObject(T object, @SuppressWarnings("rawtypes") Class... groups) {
+        ValidUtils.valid(validator, object, groups);
+    }
+
+    /**
+     * 验证单个对象
+     *
+     * @param object  验证对象
+     * @param groups  验证分组
+     * @param process 异常信息处理
+     * @param <T>     Bean 泛型
+     */
+    protected <T> void validObject(T object, ValidUtils.ValidationResult process, @SuppressWarnings("rawtypes") Class... groups) {
+        ValidUtils.valid(validator, object, process, groups);
+    }
+
+    /**
+     * 迭代验证集合元素，使用默认异常信息处理
+     *
+     * @param collection Bean集合
+     * @param groups     验证组
+     * @param <T>        Bean 泛型
+     */
+    protected <T> void validList(Collection<T> collection, @SuppressWarnings("rawtypes") Class... groups) {
+        ValidUtils.valid(validator, collection, groups);
+    }
+
+    /**
+     * 迭代验证集合元素，使用默认异常信息处理
+     *
+     * @param collection Bean集合
+     * @param groups     验证组
+     * @param process    异常信息处理
+     * @param <T>        Bean 泛型
+     */
+    protected <T> void validList(Collection<T> collection, ValidUtils.ValidationResult process, @SuppressWarnings("rawtypes") Class... groups) {
+        ValidUtils.valid(validator, collection, process, groups);
     }
 }

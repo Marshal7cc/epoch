@@ -1,21 +1,18 @@
 package org.epoch.web.facade;
 
-import java.io.Serializable;
 import java.util.List;
 
-import org.epoch.web.facade.dto.BaseDTO;
-import org.epoch.web.facade.vo.BaseVO;
+import org.epoch.data.domain.Page;
 import org.epoch.web.rest.ResponseEntity;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * <p>基础通用API</p>
+ * <p>基础通用Facade</p>
  *
  * @author Marshal
  * @date 2020/5/31
  */
-public interface BaseFacade<D extends BaseDTO, V extends BaseVO, ID extends Serializable> {
+public interface BaseFacade<VO, QUERY, ID> {
 
     /**
      * 基础列表查询
@@ -26,9 +23,9 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, ID extends Seri
      * @return 结果集合
      */
     @GetMapping("{page}/{size}")
-    <Q> ResponseEntity<Page<V>> selectPage(@PathVariable("page") int page,
-                                           @PathVariable("size") int size,
-                                           Q query);
+    ResponseEntity<Page<VO>> selectPage(@PathVariable("page") int page,
+                                        @PathVariable("size") int size,
+                                        QUERY query);
 
     /**
      * 基础详情
@@ -37,26 +34,35 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, ID extends Seri
      * @return 记录详情
      */
     @GetMapping("/{id}")
-    ResponseEntity<V> findById(@PathVariable("id") ID id);
+    ResponseEntity<VO> findById(@PathVariable("id") ID id);
 
     /**
      * 基础新建
      *
-     * @param dto 记录属性
+     * @param vo 记录属性
      * @return
      */
     @PostMapping
-    ResponseEntity<D> insert(@RequestBody D dto);
+    ResponseEntity<VO> insertItem(@RequestBody VO vo);
 
     /**
      * 基础更新
      *
-     * @param id  主键
-     * @param dto 记录属性
+     * @param id 主键
+     * @param vo 记录属性
      * @return
      */
     @PutMapping("/{id}")
-    ResponseEntity<D> update(@PathVariable("id") ID id, @RequestBody D dto);
+    ResponseEntity<VO> updateItem(@PathVariable("id") ID id, @RequestBody VO vo);
+
+    /**
+     * 删除单条
+     *
+     * @param id primary key
+     * @return
+     */
+    @DeleteMapping("/{id}")
+    ResponseEntity<Void> removeOne(@PathVariable("id") ID id);
 
     /**
      * 批量删除
@@ -65,14 +71,6 @@ public interface BaseFacade<D extends BaseDTO, V extends BaseVO, ID extends Seri
      * @return
      */
     @DeleteMapping
-    ResponseEntity<Void> remove(@RequestBody List<D> list);
+    ResponseEntity<Void> removeAll(@RequestBody List<VO> list);
 
-    /**
-     * 批量删除
-     *
-     * @param id primary key
-     * @return
-     */
-    @DeleteMapping("/{id}")
-    ResponseEntity<Void> removeById(@PathVariable("id") ID id);
 }
