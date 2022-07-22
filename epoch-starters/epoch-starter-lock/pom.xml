@@ -22,6 +22,11 @@
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
         </dependency>
+        <!-- Spring starter AOP -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
 
         <!-- EPOCH Commons -->
         <dependency>

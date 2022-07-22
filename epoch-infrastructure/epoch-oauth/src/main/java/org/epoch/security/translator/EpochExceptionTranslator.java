@@ -24,7 +24,6 @@ public class EpochExceptionTranslator implements WebResponseExceptionTranslator,
     @Override
     public ResponseEntity<?> translate(Exception e) {
         ResponseEntity.BodyBuilder status = ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR);
-        org.epoch.core.rest.ResponseEntity response = new org.epoch.core.rest.ResponseEntity();
         String message = "认证失败";
         log.error(message, e);
         if (e instanceof UnsupportedGrantTypeException) {

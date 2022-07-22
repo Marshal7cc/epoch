@@ -1,0 +1,6 @@
+# FailureAnalyzers
+org.springframework.boot.diagnostics.FailureAnalyzer=\
+org.epoch.boot.diagnostics.StartedFailureAnalyzer
+# FailureAnalysisReporters
+org.springframework.boot.diagnostics.FailureAnalysisReporter=\
+org.epoch.boot.diagnostics.Slf4jFailureAnalysisReporter
