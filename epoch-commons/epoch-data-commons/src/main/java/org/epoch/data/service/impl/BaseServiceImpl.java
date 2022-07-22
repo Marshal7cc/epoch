@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 import org.epoch.data.domain.Page;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.data.service.BaseService;
@@ -31,21 +31,21 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
 
     @Override
     public DO save(DO domain) {
-        T entity = BaseConverter.parseObject(domain, entityClass);
+        T entity = GenericTypeConverter.parseObject(domain, entityClass);
         repository.saveOne(entity);
-        return BaseConverter.parseObject(entity, domainClass);
+        return GenericTypeConverter.parseObject(entity, domainClass);
     }
 
     @Override
     public List<DO> saveAll(List<DO> domains) {
-        List<T> entities = BaseConverter.parseArray(domains, entityClass);
+        List<T> entities = GenericTypeConverter.parseArray(domains, entityClass);
         repository.saveAll(entities);
-        return BaseConverter.parseArray(entities, domainClass);
+        return GenericTypeConverter.parseArray(entities, domainClass);
     }
 
     @Override
     public DO findById(ID id) {
-        return repository.findById(id).map(t -> BaseConverter.parseObject(t, domainClass)).orElse(null);
+        return repository.findById(id).map(t -> GenericTypeConverter.parseObject(t, domainClass)).orElse(null);
     }
 
     @Override
@@ -55,17 +55,17 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
 
     @Override
     public List<DO> findAll() {
-        return BaseConverter.parseArray(repository.findAll(), domainClass);
+        return GenericTypeConverter.parseArray(repository.findAll(), domainClass);
     }
 
     @Override
     public List<DO> findAllById(List<ID> ids) {
-        return BaseConverter.parseArray(repository.findAllById(ids), domainClass);
+        return GenericTypeConverter.parseArray(repository.findAllById(ids), domainClass);
     }
 
     @Override
     public <Q> List<DO> findAll(Q query) {
-        return BaseConverter.parseArray(repository.findAll(query), domainClass);
+        return GenericTypeConverter.parseArray(repository.findAll(query), domainClass);
     }
 
     @Override
@@ -80,12 +80,12 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
 
     @Override
     public void delete(DO domain) {
-        repository.delete(BaseConverter.parseObject(domain, entityClass));
+        repository.delete(GenericTypeConverter.parseObject(domain, entityClass));
     }
 
     @Override
     public void deleteAll(List<DO> domains) {
-        repository.deleteAll(BaseConverter.parseArray(domains, entityClass));
+        repository.deleteAll(GenericTypeConverter.parseArray(domains, entityClass));
     }
 
     @Override
@@ -96,6 +96,6 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
     @Override
     public <Q> Page<DO> findAll(Pageable pageable, Q query) {
         Page<T> tPage = repository.findAll(pageable, query);
-        return new Page<>(tPage.getPageInfo(), BaseConverter.parseArray(tPage.getContent(), domainClass));
+        return new Page<>(tPage.getPageInfo(), GenericTypeConverter.parseArray(tPage.getContent(), domainClass));
     }
 }

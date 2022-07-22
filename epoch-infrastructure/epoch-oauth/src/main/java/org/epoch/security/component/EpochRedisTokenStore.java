@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import lombok.extern.slf4j.Slf4j;
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 import org.epoch.security.domain.DefaultUserDetails;
 import org.epoch.security.entity.OauthAccessToken;
 import org.epoch.security.service.OauthAccessTokenRepository;
@@ -73,7 +73,7 @@ public class EpochRedisTokenStore extends RedisTokenStore {
         oauthAccessToken.setTokenExpiresTime(token.getExpiration());
         oauthAccessTokenService.saveOne(oauthAccessToken);
 
-        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), BaseConverter.toJSONString(token),
+        redisTemplate.opsForValue().set(REDIS_CATALOG + token.getValue(), GenericTypeConverter.toJSONString(token),
                 token.getExpiresIn(), TimeUnit.SECONDS);
     }
 }

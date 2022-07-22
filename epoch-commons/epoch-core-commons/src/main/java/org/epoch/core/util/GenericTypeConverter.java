@@ -4,37 +4,36 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.exception.JsonProcessingException;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.Assert;
 
 /**
  * @author Marshal
  * @date 2021/1/24
  */
-public class BaseConverter implements ApplicationContextAware {
+public class GenericTypeConverter {
 
     private static ObjectMapper objectMapper;
 
+    public GenericTypeConverter(ObjectMapper objectMapper) {
+        GenericTypeConverter.objectMapper = objectMapper;
+    }
 
     /**
      * List对象转换
      *
-     * @param targetClazz 目标对象class
-     * @param sourceList  源对象list
-     * @param <T>         目标对象
-     * @param <V>         源对象
+     * @param clazz  目标对象class
+     * @param source 源对象list
+     * @param <D>    目标对象
+     * @param <S>    源对象
      * @return 目标对象 List
      */
-    public static <T, V> List<T> parseArray(List<V> sourceList, Class<T> targetClazz) {
-        return parseArray(targetClazz, sourceList, null);
+    public static <D, S> List<D> parseArray(List<S> source, Class<D> clazz) {
+        return parseArray(clazz, source, null);
     }
 
     /**
@@ -148,14 +147,6 @@ public class BaseConverter implements ApplicationContextAware {
             return objectMapper.writeValueAsString(obj);
         } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
             throw new JsonProcessingException();
-        }
-    }
-
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        objectMapper = applicationContext.getBean(ObjectMapper.class);
-        if (Objects.isNull(objectMapper)) {
-            objectMapper = new ObjectMapper();
         }
     }
 }

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.epoch.core.exception.BaseException;
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 
 /**
  * TODO: move file operations out.
@@ -55,7 +55,7 @@ public class Response {
         PrintWriter writer = null;
         try {
             writer = response.getWriter();
-            writer.write(BaseConverter.toJSONString(error(message)));
+            writer.write(GenericTypeConverter.toJSONString(error(message)));
         } catch (IOException e) {
             log.error("io exception occur while resp...");
         } finally {

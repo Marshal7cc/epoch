@@ -4,7 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 import org.epoch.web.rest.Response;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -23,7 +23,7 @@ public class EpochAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                        AccessDeniedException e) throws IOException {
         httpServletResponse.setStatus(HttpServletResponse.SC_FORBIDDEN);
-        httpServletResponse.getWriter().write(BaseConverter.toJSONString(Response.error(TIP_ACCESS_DENIED)));
+        httpServletResponse.getWriter().write(GenericTypeConverter.toJSONString(Response.error(TIP_ACCESS_DENIED)));
     }
 
 }

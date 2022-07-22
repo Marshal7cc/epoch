@@ -7,7 +7,7 @@ import java.util.Objects;
 import javax.validation.Validator;
 
 import io.swagger.annotations.ApiOperation;
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 import org.epoch.core.util.ValidUtils;
 import org.epoch.data.domain.Page;
 import org.epoch.data.service.BaseService;
@@ -63,7 +63,7 @@ public class BaseController<S extends BaseService<DTO, ID>, VO extends BaseVO, Q
     @Override
     @ApiOperation(value = "创建记录")
     public ResponseEntity<VO> insertItem(VO baseVO) {
-        service.save(BaseConverter.parseObject(baseVO, doClass));
+        service.save(GenericTypeConverter.parseObject(baseVO, doClass));
         return Response.success(baseVO);
     }
 
@@ -71,14 +71,14 @@ public class BaseController<S extends BaseService<DTO, ID>, VO extends BaseVO, Q
     @ApiOperation(value = "更新记录")
     public ResponseEntity<VO> updateItem(ID id, VO baseVO) {
         baseVO.setId(String.valueOf(id));
-        service.save(BaseConverter.parseObject(baseVO, doClass));
+        service.save(GenericTypeConverter.parseObject(baseVO, doClass));
         return Response.success(baseVO);
     }
 
     @Override
     @ApiOperation(value = "批量删除")
     public ResponseEntity<Void> removeAll(List<VO> list) {
-        service.deleteAll(BaseConverter.parseArray(list, doClass));
+        service.deleteAll(GenericTypeConverter.parseArray(list, doClass));
         return Response.success();
     }
 

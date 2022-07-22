@@ -1,7 +1,8 @@
 package org.epoch.core.autoconfigure;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.epoch.core.util.ApplicationContextHelper;
-import org.epoch.core.util.BaseConverter;
+import org.epoch.core.util.GenericTypeConverter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +15,8 @@ import org.springframework.context.annotation.Configuration;
 public class CoreAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean
-    public BaseConverter baseConverter() {
-        return new BaseConverter();
+    public GenericTypeConverter baseConverter(ObjectMapper objectMapper) {
+        return new GenericTypeConverter(objectMapper);
     }
 
     @Bean
