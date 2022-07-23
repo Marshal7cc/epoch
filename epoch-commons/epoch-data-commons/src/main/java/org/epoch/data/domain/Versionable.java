@@ -5,7 +5,7 @@ package org.epoch.data.domain;
  * @since 2022/7/9
  */
 public interface Versionable {
-    String FIELD_VERSION = "versionNumber";
+    String FIELD_VERSION = "objectVersion";
 
     /**
      * Returns the version of this entity.

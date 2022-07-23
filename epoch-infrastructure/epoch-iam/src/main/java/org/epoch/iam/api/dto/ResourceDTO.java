@@ -2,13 +2,13 @@ package org.epoch.iam.api.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.epoch.web.facade.dto.BaseDTO;
+import org.epoch.data.domain.AbstractDO;
 
 /**
  * @author Marshal
  */
 @Data
-public class ResourceDTO extends BaseDTO {
+public class ResourceDTO extends AbstractDO<Long> {
 
     @ApiModelProperty(value = "主键")
     private Long resourceId;

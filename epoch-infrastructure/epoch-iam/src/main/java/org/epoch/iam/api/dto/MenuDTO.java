@@ -1,7 +1,7 @@
 package org.epoch.iam.api.dto;
 
 import lombok.Data;
-import org.epoch.web.facade.dto.BaseDTO;
+import org.epoch.data.domain.AbstractDO;
 import org.hibernate.validator.constraints.Length;
 
 
@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
  * @author Marshal
  */
 @Data
-public class MenuDTO extends BaseDTO {
+public class MenuDTO extends AbstractDO<Long> {
 
     private Long menuId;
 
