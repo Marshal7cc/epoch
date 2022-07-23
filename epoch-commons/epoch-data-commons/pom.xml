@@ -12,12 +12,7 @@
     <artifactId>epoch-data-commons</artifactId>
 
     <dependencies>
-        <!-- lombok -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-        </dependency>
-        <!-- spring data commons -->
+        <!-- Spring DATA Commons -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-commons</artifactId>

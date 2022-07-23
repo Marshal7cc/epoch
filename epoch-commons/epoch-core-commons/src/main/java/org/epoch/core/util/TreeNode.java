@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * 树节点
@@ -14,12 +15,12 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TreeNode<T> {
+public class TreeNode {
     private String id;
 
     private String label;
 
-    private List<TreeNode<T>> children;
+    private List<TreeNode> children;
 
     private String parentId;
 
@@ -29,5 +30,12 @@ public class TreeNode<T> {
 
     public void initChildren() {
         this.children = new ArrayList<>();
+    }
+
+    public void addChild(TreeNode child) {
+        if (CollectionUtils.isEmpty(this.children)) {
+            initChildren();
+        }
+        this.children.add(child);
     }
 }

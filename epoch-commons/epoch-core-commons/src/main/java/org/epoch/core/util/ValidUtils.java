@@ -1,11 +1,13 @@
 package org.epoch.core.util;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.apache.commons.lang3.time.DateUtils;
 import org.epoch.core.exception.BaseException;
 import org.springframework.util.CollectionUtils;
 
@@ -102,50 +104,6 @@ public class ValidUtils {
         }
     }
 
-    /**
-     * 校验两个日期是否相等
-     * date1 == date2
-     *
-     * @param date1 日期1
-     * @param date2 日期2
-     */
-    public static void isSameDay(final Date date1, final Date date2) {
-        if (!DateUtils.isSameDay(date1, date2)) {
-            throw new BaseException("error.data.not.same");
-        }
-    }
-
-    /**
-     * 校验第一个日期是否是第二个日期之前
-     * startDate &lt; endDate
-     *
-     * @param startDate 开始日期
-     * @param endDate   结束日期
-     */
-    public static void isAfterDay(final Date startDate, final Date endDate) {
-        if (startDate == null || endDate == null) {
-            throw new IllegalArgumentException("The date must not be null");
-        }
-        if (startDate.getTime() >= endDate.getTime()) {
-            throw new BaseException("error.data.not.after");
-        }
-    }
-
-    /**
-     * 校验第一个日期是否是第二个日期之前或相等
-     * startDate &lt;= endDate
-     *
-     * @param startDate 开始日期
-     * @param endDate   结束日期
-     */
-    public static void isSameOrAfterDay(final Date startDate, final Date endDate) {
-        if (startDate == null || endDate == null) {
-            throw new IllegalArgumentException("The date must not be null");
-        }
-        if (startDate.getTime() > endDate.getTime()) {
-            throw new BaseException("error.data.not.same.after");
-        }
-    }
 
     public interface ValidationResult {
         /**

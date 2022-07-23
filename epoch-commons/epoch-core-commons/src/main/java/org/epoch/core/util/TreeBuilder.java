@@ -3,6 +3,12 @@ package org.epoch.core.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  * 树结构构造器
@@ -14,36 +20,27 @@ public class TreeBuilder {
     private TreeBuilder() {
     }
 
-    @SuppressWarnings("rawtypes,unchecked")
-    public static List<TreeNode> build(List<TreeNode> nodes) {
-        if (nodes == null) {
-            return null;
+    public static <T> List<TreeNode> build(List<TreeNode> nodes) {
+        if (CollectionUtils.isEmpty(nodes)) {
+            return nodes;
         }
 
         List<TreeNode> topNodes = new ArrayList<>();
-        nodes.forEach(node -> {
-            String pid = node.getParentId();
-            if (pid == null) {
-                topNodes.add(node);
-                return;
+
+        Map<String, TreeNode> dataMap = nodes.stream().collect(Collectors.toMap(TreeNode::getId, Function.identity()));
+        for (TreeNode n : nodes) {
+            String parentId = n.getParentId();
+            if (StringUtils.isEmpty(parentId)) {
+                topNodes.add(n);
+                continue;
             }
-            for (TreeNode n : nodes) {
-                String id = n.getId();
-                if (id != null && id.equals(pid)) {
-                    if (n.getChildren() == null) {
-                        n.initChildren();
-                    }
-                    n.getChildren().add(node);
-                    node.setHasParent(true);
-                    n.setHasChildren(true);
-                    n.setHasParent(true);
-                    return;
-                }
+            TreeNode parentNode = dataMap.get(parentId);
+            if (Objects.isNull(parentNode)) {
+                continue;
             }
-            if (topNodes.isEmpty()) {
-                topNodes.add(node);
-            }
-        });
+            parentNode.addChild(n);
+        }
+
         return topNodes;
     }
 }

@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  * @author Marshal
  * @date 2019/7/12
  */
-public class ReflectUtils {
+public class ReflectionUtils {
 
     /**
      * 获取指定对象的指定属性
@@ -19,7 +19,7 @@ public class ReflectUtils {
      */
     public static Object getFieldValue(Object obj, String fieldName) {
         Object result = null;
-        Field field = ReflectUtils.getField(obj, fieldName);
+        Field field = ReflectionUtils.getField(obj, fieldName);
         if (field != null) {
             field.setAccessible(true);
             try {
@@ -61,7 +61,7 @@ public class ReflectUtils {
      * @param fieldValue 指定属性值
      */
     public static void setFieldValue(Object obj, String fieldName, Object fieldValue) {
-        Field field = ReflectUtils.getField(obj, fieldName);
+        Field field = ReflectionUtils.getField(obj, fieldName);
         if (field != null) {
             try {
                 field.setAccessible(true);

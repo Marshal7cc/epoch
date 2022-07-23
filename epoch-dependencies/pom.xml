@@ -137,7 +137,7 @@
                 <version>${epoch-starter.version}</version>
             </dependency>
 
-            <!-- commons -->
+            <!-- COMMONS -->
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
@@ -173,13 +173,11 @@
                 <artifactId>guava</artifactId>
                 <version>${guava.version}</version>
             </dependency>
-            <!-- json -->
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
-            <!-- poi -->
             <dependency>
                 <groupId>org.apache.poi</groupId>
                 <artifactId>poi</artifactId>
@@ -190,14 +188,14 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
-            <!--  http servlet  -->
+            <!--  WEB  -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet.version}</version>
             </dependency>
 
-            <!-- jdbc -->
+            <!-- JDBC -->
             <dependency>
                 <artifactId>mysql-connector-java</artifactId>
                 <groupId>mysql</groupId>

@@ -11,7 +11,7 @@ public interface MessageResp {
      * 基础成功编码
      */
     interface Success {
-        String OPERATE_SUCCESS = "success.operate_success";
+        String BASIC = "success.success";
     }
 
     /**
