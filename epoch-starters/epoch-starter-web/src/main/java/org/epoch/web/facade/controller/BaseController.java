@@ -32,20 +32,20 @@ import org.springframework.web.bind.annotation.InitBinder;
  * @author Marshal
  * @date 2020/5/30
  */
-public class BaseController<S extends BaseService<DTO, ID>, VO extends BaseVO, QUERY, DTO, ID extends Serializable>
+public class BaseController<S extends BaseService<DO, ID>, VO extends BaseVO, QUERY, DO, ID extends Serializable>
         implements BaseFacade<VO, QUERY, ID> {
 
     @Autowired
     protected S service;
-    protected final Class<DTO> doClass;
-    protected final Class<VO> dtoClass;
+    protected final Class<DO> doClass;
+    protected final Class<VO> voClass;
     @Autowired
     private Validator validator;
 
     @SuppressWarnings("unchecked")
     protected BaseController() {
-        this.dtoClass = (Class<VO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[1];
-        this.doClass = (Class<DTO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[3];
+        this.voClass = (Class<VO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[1];
+        this.doClass = (Class<DO>) Objects.requireNonNull(GenericTypeResolver.resolveTypeArguments(this.getClass(), BaseController.class))[3];
     }
 
     @Override
