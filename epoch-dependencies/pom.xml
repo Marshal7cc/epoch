@@ -79,6 +79,12 @@
                 <version>${springboot-admin.version}</version>
             </dependency>
 
+            <!-- EPOCH Autoconfigure -->
+            <dependency>
+                <groupId>org.epoch</groupId>
+                <artifactId>epoch-autoconfigure</artifactId>
+                <version>${epoch.version}</version>
+            </dependency>
             <!-- EPOCH Commons -->
             <dependency>
                 <groupId>org.epoch.common</groupId>

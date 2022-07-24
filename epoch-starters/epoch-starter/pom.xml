@@ -32,6 +32,11 @@
             <artifactId>feign-httpclient</artifactId>
         </dependency>
 
+        <!-- EPOCH Autoconfigure -->
+        <dependency>
+            <groupId>org.epoch</groupId>
+            <artifactId>epoch-autoconfigure</artifactId>
+        </dependency>
         <!-- EPOCH Starters -->
         <dependency>
             <groupId>org.epoch.starter</groupId>
