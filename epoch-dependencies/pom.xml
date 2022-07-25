@@ -98,7 +98,7 @@
             <!-- EPOCH Starters -->
             <dependency>
                 <groupId>org.epoch.starter</groupId>
-                <artifactId>epoch-starter-boot</artifactId>
+                <artifactId>epoch-starter</artifactId>
                 <version>${epoch-starter.version}</version>
             </dependency>
             <dependency>
