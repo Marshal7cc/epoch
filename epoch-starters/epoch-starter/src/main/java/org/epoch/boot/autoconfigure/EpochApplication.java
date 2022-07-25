@@ -1,4 +1,4 @@
-package org.epoch.boot.annotation;
+package org.epoch.boot.autoconfigure;
 
 import java.lang.annotation.*;
 
