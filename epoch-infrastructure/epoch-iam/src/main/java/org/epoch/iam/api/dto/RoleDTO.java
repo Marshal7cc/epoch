@@ -4,13 +4,13 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import org.epoch.data.domain.AbstractDO;
+import org.epoch.data.domain.BaseDO;
 
 /**
  * @author Marshal
  */
 @Data
-public class RoleDTO extends AbstractDO<Long> {
+public class RoleDTO extends BaseDO<Long> {
     private String code;
     private String name;
     private String description;

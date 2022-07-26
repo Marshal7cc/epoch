@@ -1,7 +1,7 @@
 package org.epoch.iam.api.dto;
 
 import lombok.Data;
-import org.epoch.data.domain.AbstractDO;
+import org.epoch.data.domain.BaseDO;
 import org.hibernate.validator.constraints.Length;
 
 
@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.Length;
  * @author Marshal
  */
 @Data
-public class PromptDTO extends AbstractDO<Long> {
+public class PromptDTO extends BaseDO<Long> {
 
     /**
      * 主键

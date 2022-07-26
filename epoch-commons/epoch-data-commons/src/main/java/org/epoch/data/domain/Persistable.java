@@ -16,7 +16,7 @@ public interface Persistable<ID> extends org.springframework.data.domain.Persist
      */
     @Transient
     @Override
-    default public boolean isNew() {
-        return getId() == null;
+    default boolean isNew() {
+        return this.getId() == null;
     }
 }

@@ -3,7 +3,7 @@ package org.epoch.iam.api.dto;
 import java.util.Date;
 
 import lombok.Data;
-import org.epoch.data.domain.AbstractDO;
+import org.epoch.data.domain.BaseDO;
 import org.hibernate.validator.constraints.Length;
 
 ;
@@ -12,7 +12,7 @@ import org.hibernate.validator.constraints.Length;
  * @author Marshal
  */
 @Data
-public class UserDTO extends AbstractDO<Long> {
+public class UserDTO extends BaseDO<Long> {
 
     private Long userId;
 
