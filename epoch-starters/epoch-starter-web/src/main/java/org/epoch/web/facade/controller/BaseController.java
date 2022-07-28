@@ -51,28 +51,31 @@ public class BaseController<S extends BaseService<DO, ID>, VO extends BaseVO, QU
     @Override
     @ApiOperation(value = "列表查询")
     public ResponseEntity<Page<VO>> selectPage(int page, int size, QUERY condition) {
-        return Response.success(service.findAll(PageRequest.of(page, size), condition));
+        Page<DO> dPage = service.findAll(PageRequest.of(page, size), condition);
+        Page<VO> vPage = new Page<>(
+                dPage.getPageInfo(),
+                GenericTypeConverter.parseArray(dPage.getContent(), voClass)
+        );
+        return Response.success(vPage);
     }
 
     @Override
     @ApiOperation(value = "详情查看")
     public ResponseEntity<VO> findById(ID id) {
-        return Response.success(service.findById(id));
+        return Response.success(GenericTypeConverter.parseObject(service.findById(id), voClass));
     }
 
     @Override
     @ApiOperation(value = "创建记录")
     public ResponseEntity<VO> insertItem(VO baseVO) {
-        service.save(GenericTypeConverter.parseObject(baseVO, doClass));
-        return Response.success(baseVO);
+        return Response.success(GenericTypeConverter.parseObject(service.save(GenericTypeConverter.parseObject(baseVO, doClass)), voClass));
     }
 
     @Override
     @ApiOperation(value = "更新记录")
     public ResponseEntity<VO> updateItem(ID id, VO baseVO) {
         baseVO.setId(String.valueOf(id));
-        service.save(GenericTypeConverter.parseObject(baseVO, doClass));
-        return Response.success(baseVO);
+        return Response.success(GenericTypeConverter.parseObject(service.save(GenericTypeConverter.parseObject(baseVO, doClass)), voClass));
     }
 
     @Override

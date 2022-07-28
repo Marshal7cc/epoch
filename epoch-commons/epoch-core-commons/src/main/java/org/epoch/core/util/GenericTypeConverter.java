@@ -35,8 +35,8 @@ public class GenericTypeConverter {
         }
         JavaType type = objectMapper.getTypeFactory().constructCollectionType(List.class, clazz);
         try {
-            return objectMapper.readValue(toJSONString(source), type);
-        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            return objectMapper.convertValue(source, type);
+        } catch (IllegalArgumentException e) {
             throw new JsonProcessingException("convert obj to {} error:", clazz.getName());
         }
     }
@@ -54,8 +54,8 @@ public class GenericTypeConverter {
     public static <D, S> D parseObject(S source, Class<D> clazz) {
         Assert.notNull(source, "source object can't be null.");
         try {
-            return objectMapper.readValue(toJSONString(source), clazz);
-        } catch (com.fasterxml.jackson.core.JsonProcessingException e) {
+            return objectMapper.convertValue(source, clazz);
+        } catch (IllegalArgumentException e) {
             throw new JsonProcessingException("convert obj to {} error:", clazz.getName());
         }
     }
