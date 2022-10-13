@@ -51,4 +51,11 @@ public @interface Lock {
      * Redisson lock name => fullClassName.methodName.-key1-key2-key3...
      */
     String[] keys() default {};
+
+    /**
+     * Error message while getting lock fail.
+     *
+     * @return
+     */
+    String errorMessage() default "";
 }

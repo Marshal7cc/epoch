@@ -1,15 +1,17 @@
 package org.epoch.lock.advisor;
 
+import java.util.Optional;
+
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.epoch.lock.provider.LockInfo;
-import org.epoch.lock.provider.LockInfoProvider;
-import org.epoch.lock.service.LockService;
 import org.epoch.lock.annotation.Lock;
 import org.epoch.lock.exception.LockedException;
 import org.epoch.lock.provider.LockContextHolder;
+import org.epoch.lock.provider.LockInfo;
+import org.epoch.lock.provider.LockInfoProvider;
 import org.epoch.lock.provider.LockServiceFactory;
+import org.epoch.lock.service.LockService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,7 +47,7 @@ public class LockAspectHandler {
             if (lockResult) {
                 return joinPoint.proceed();
             } else {
-                throw new LockedException("Get lock failed.");
+                throw new LockedException(Optional.of(lock.errorMessage()).orElse("Get lock failed."));
             }
         } finally {
             if (lockResult) {
