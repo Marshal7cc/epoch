@@ -11,24 +11,26 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @since 2021/8/25
  */
 @NoRepositoryBean
-public interface ParallelRepository<T> {
+public interface ParallelRepository<T, ID> extends BaseRepository<T, ID> {
     int DEFAULT_THRESHOLD = 5000;
-    int THREAD_POOL_SIZE = 1 << 4;
+    int MAX_WORKER_SIZE = 1 << 4;
 
     /**
      * Parallel method for saving operations.
      *
      * @param entities records
+     * @return
      */
-    void parallelSave(List<T> entities);
+    List<T> parallelSave(List<T> entities);
 
     /**
      * Parallel method for saving operations with target threshold.
      *
      * @param entities  records
      * @param threshold threshold
+     * @return
      */
-    void parallelSave(List<T> entities, int threshold);
+    List<T> parallelSave(List<T> entities, int threshold);
 
     /**
      * Get default threshold in single thread.
