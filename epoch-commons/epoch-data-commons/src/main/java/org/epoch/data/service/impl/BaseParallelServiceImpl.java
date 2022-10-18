@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.epoch.core.constant.Digital;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.proxy.AopProxy;
+import org.epoch.core.util.NamedThreadFactory;
 import org.epoch.data.repository.BaseRepository;
 import org.epoch.data.service.BaseParallelService;
 import org.epoch.data.service.BaseService;
@@ -53,7 +54,10 @@ public abstract class BaseParallelServiceImpl<R extends BaseRepository<T, ID>, D
         MultiThreadTransactionManager transactionManager = new MultiThreadTransactionManager(latch, mainLatch, false);
 
         List<Future<List<DO>>> futures = new ArrayList<>(workerSize);
-        ThreadPoolExecutor workerFactory = new ThreadPoolExecutor(MAX_WORKER_SIZE, MAX_WORKER_SIZE, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
+        ThreadPoolExecutor workerFactory = new ThreadPoolExecutor(
+                MAX_WORKER_SIZE, MAX_WORKER_SIZE, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>(), new NamedThreadFactory("parallel-worker")
+        );
+
         lists.forEach(list -> {
             futures.add(workerFactory.submit(new Worker(list, this.self(), transactionManager)));
         });
