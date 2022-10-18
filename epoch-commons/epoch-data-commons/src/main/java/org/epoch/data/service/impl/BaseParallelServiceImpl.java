@@ -1,5 +1,6 @@
-package org.epoch.data.repository;
+package org.epoch.data.service.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -12,27 +13,36 @@ import lombok.extern.slf4j.Slf4j;
 import org.epoch.core.constant.Digital;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.proxy.AopProxy;
+import org.epoch.data.repository.BaseRepository;
+import org.epoch.data.service.BaseParallelService;
+import org.epoch.data.service.BaseService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Marshal
  * @since 2022/10/13
  */
 @Slf4j
-public abstract class AbstractParallelRepository<T, ID> implements ParallelRepository<T, ID>, AopProxy<BaseRepository<T, ID>> {
+public abstract class BaseParallelServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends Serializable>
+        extends BaseServiceImpl<R, DO, T, ID> implements BaseParallelService<DO, ID>, AopProxy<BaseService<DO, ID>> {
+
     @Override
-    public List<T> parallelSave(List<T> entities) {
-        return this.parallelSave(entities, getDefaultThreshold(entities.size()));
+    @Transactional(rollbackFor = Exception.class)
+    public List<DO> parallelSave(List<DO> domains) {
+        return this.parallelSave(domains, getDefaultThreshold(domains.size()));
     }
 
     @Override
     @SneakyThrows
-    public List<T> parallelSave(List<T> entities, int threshold) {
-        int size = entities.size();
+    @Transactional(rollbackFor = Exception.class)
+    public List<DO> parallelSave(List<DO> domains, int threshold) {
+        int size = domains.size();
         if (size < threshold) {
-            this.saveAll(entities);
+            log.debug("size less than threshold, save in main thread.");
+            this.saveAll(domains);
         }
 
-        List<List<T>> lists = Lists.partition(entities, threshold);
+        List<List<DO>> lists = Lists.partition(domains, threshold);
         int workerSize = lists.size();
         if (workerSize > MAX_WORKER_SIZE) {
             throw new BaseException("worker size out of limit.");
@@ -42,7 +52,7 @@ public abstract class AbstractParallelRepository<T, ID> implements ParallelRepos
         CountDownLatch mainLatch = new CountDownLatch(Digital.ONE);
         MultiThreadTransactionManager transactionManager = new MultiThreadTransactionManager(latch, mainLatch, false);
 
-        List<Future<List<T>>> futures = new ArrayList<>(workerSize);
+        List<Future<List<DO>>> futures = new ArrayList<>(workerSize);
         ThreadPoolExecutor workerFactory = new ThreadPoolExecutor(MAX_WORKER_SIZE, MAX_WORKER_SIZE, 0, TimeUnit.SECONDS, new LinkedBlockingQueue<>());
         lists.forEach(list -> {
             futures.add(workerFactory.submit(new Worker(list, this.self(), transactionManager)));
@@ -60,8 +70,9 @@ public abstract class AbstractParallelRepository<T, ID> implements ParallelRepos
             throw new BaseException("exception happens in a thread, rollback transaction");
         }
 
-        List<T> results = new ArrayList<>();
-        for (Future<List<T>> future : futures) {
+        // The time: each thread finish task.
+        List<DO> results = new ArrayList<>(size);
+        for (Future<List<DO>> future : futures) {
             results.addAll(future.get());
         }
         return results;
@@ -77,15 +88,16 @@ public abstract class AbstractParallelRepository<T, ID> implements ParallelRepos
 
     @Data
     @AllArgsConstructor
-    private class Worker implements Callable<List<T>> {
-        private List<T> entities;
-        private BaseRepository<T, ID> repository;
+    private class Worker implements Callable<List<DO>> {
+        private List<DO> domains;
+        private BaseService<DO, ID> service;
         private MultiThreadTransactionManager transactionManager;
 
         @Override
-        public List<T> call() {
+        public List<DO> call() {
+            List<DO> results = null;
             try {
-                repository.saveAll(entities);
+                results = service.saveAll(domains);
             } catch (Exception e) {
                 log.info("exception happens in current thread: {}, rollback transaction, message: {}", Thread.currentThread().getId(), e.getMessage());
                 transactionManager.setRollback(true);
@@ -105,7 +117,7 @@ public abstract class AbstractParallelRepository<T, ID> implements ParallelRepos
                 throw new BaseException("exception happens in other thread, rollback transaction");
             }
 
-            return entities;
+            return results;
         }
     }
 }

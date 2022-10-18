@@ -1,8 +1,6 @@
-package org.epoch.data.repository;
+package org.epoch.data.service;
 
 import java.util.List;
-
-import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * Parallel Operations in Persistence.
@@ -10,27 +8,26 @@ import org.springframework.data.repository.NoRepositoryBean;
  * @author Marshal
  * @since 2021/8/25
  */
-@NoRepositoryBean
-public interface ParallelRepository<T, ID> extends BaseRepository<T, ID> {
+public interface BaseParallelService<DOMAIN, ID> extends BaseService<DOMAIN, ID> {
     int DEFAULT_THRESHOLD = 5000;
     int MAX_WORKER_SIZE = 1 << 4;
 
     /**
      * Parallel method for saving operations.
      *
-     * @param entities records
+     * @param domains records
      * @return
      */
-    List<T> parallelSave(List<T> entities);
+    List<DOMAIN> parallelSave(List<DOMAIN> domains);
 
     /**
      * Parallel method for saving operations with target threshold.
      *
-     * @param entities  records
+     * @param domains   records
      * @param threshold threshold
      * @return
      */
-    List<T> parallelSave(List<T> entities, int threshold);
+    List<DOMAIN> parallelSave(List<DOMAIN> domains, int threshold);
 
     /**
      * Get default threshold in single thread.
