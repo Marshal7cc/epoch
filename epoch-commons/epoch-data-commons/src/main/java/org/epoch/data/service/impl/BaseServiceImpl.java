@@ -11,6 +11,7 @@ import org.epoch.data.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.GenericTypeResolver;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Marshal
@@ -20,6 +21,7 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
 
     @Autowired
     protected R repository;
+
     protected final Class<T> entityClass;
     protected final Class<DO> domainClass;
 
@@ -30,6 +32,7 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public DO save(DO domain) {
         T entity = GenericTypeConverter.parseObject(domain, entityClass);
         repository.saveOne(entity);
@@ -37,6 +40,7 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public List<DO> saveAll(List<DO> domains) {
         List<T> entities = GenericTypeConverter.parseArray(domains, entityClass);
         repository.saveAll(entities);
@@ -74,21 +78,25 @@ public class BaseServiceImpl<R extends BaseRepository<T, ID>, DO, T, ID extends 
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteById(ID id) {
         repository.deleteById(id);
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void delete(DO domain) {
         repository.delete(GenericTypeConverter.parseObject(domain, entityClass));
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteAll(List<DO> domains) {
         repository.deleteAll(GenericTypeConverter.parseArray(domains, entityClass));
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void deleteAll() {
         repository.deleteAll();
     }

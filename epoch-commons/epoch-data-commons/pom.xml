@@ -18,6 +18,12 @@
             <artifactId>spring-data-commons</artifactId>
         </dependency>
 
+        <!-- Spring Transaction -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+        </dependency>
+
         <!-- EPOCH Commons -->
         <dependency>
             <groupId>org.epoch.common</groupId>
