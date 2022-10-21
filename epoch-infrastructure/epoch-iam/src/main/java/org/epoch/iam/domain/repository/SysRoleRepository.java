@@ -1,8 +1,8 @@
 package org.epoch.iam.domain.repository;
 
 
-import org.epoch.iam.domain.entity.SysRole;
 import org.epoch.data.repository.BaseRepository;
+import org.epoch.iam.infrastructure.repository.entity.SysRole;
 
 /**
  * @author Marshal

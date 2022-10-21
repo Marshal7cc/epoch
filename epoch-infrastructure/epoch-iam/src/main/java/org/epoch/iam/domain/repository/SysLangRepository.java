@@ -1,8 +1,8 @@
 package org.epoch.iam.domain.repository;
 
 
-import org.epoch.iam.domain.entity.SysLang;
 import org.epoch.data.repository.BaseRepository;
+import org.epoch.iam.infrastructure.repository.entity.SysLang;
 
 /**
  * @author Marshal

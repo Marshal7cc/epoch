@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.epoch.core.util.TreeNode;
 import org.epoch.data.repository.BaseRepository;
-import org.epoch.iam.api.dto.VueRouter;
-import org.epoch.iam.domain.entity.SysMenu;
+import org.epoch.iam.domain.dto.VueRouter;
+import org.epoch.iam.infrastructure.repository.entity.SysMenu;
 
 /**
  * @author Marshal

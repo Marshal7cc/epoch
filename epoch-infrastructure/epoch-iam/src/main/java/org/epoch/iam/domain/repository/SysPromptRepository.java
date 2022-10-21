@@ -3,8 +3,8 @@ package org.epoch.iam.domain.repository;
 
 import java.util.Map;
 
-import org.epoch.iam.domain.entity.SysPrompt;
 import org.epoch.data.repository.BaseRepository;
+import org.epoch.iam.infrastructure.repository.entity.SysPrompt;
 
 /**
  * @author Marshal

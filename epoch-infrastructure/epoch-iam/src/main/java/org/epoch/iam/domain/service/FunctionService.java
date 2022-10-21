@@ -1,9 +1,9 @@
 package org.epoch.iam.domain.service;
 
 import org.epoch.data.service.impl.BaseServiceImpl;
-import org.epoch.iam.api.dto.FunctionDTO;
-import org.epoch.iam.domain.entity.SysFunction;
+import org.epoch.iam.domain.dto.FunctionDTO;
 import org.epoch.iam.domain.repository.SysFunctionRepository;
+import org.epoch.iam.infrastructure.repository.entity.SysFunction;
 import org.springframework.stereotype.Service;
 
 /**

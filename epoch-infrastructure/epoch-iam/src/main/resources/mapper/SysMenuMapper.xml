@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.epoch.iam.infra.mapper.SysMenuMapper">
-    <resultMap id="BaseResultMap" type="org.epoch.iam.domain.entity.SysMenu">
+<mapper namespace="org.epoch.iam.infrastructure.repository.mapper.SysMenuMapper">
+    <resultMap id="BaseResultMap" type="org.epoch.iam.infrastructure.repository.entity.SysMenu">
         <id column="menu_id" property="menuId" jdbcType="BIGINT"/>
         <result column="menu_code" property="menuCode" jdbcType="VARCHAR"/>
         <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
