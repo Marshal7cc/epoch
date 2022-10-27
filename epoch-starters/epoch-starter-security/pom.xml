@@ -12,13 +12,13 @@
     <artifactId>epoch-starter-security</artifactId>
 
     <dependencies>
-        <!-- oauth2 -->
+        <!-- OAuth2 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
         </dependency>
 
-        <!-- autoconfigure -->
+        <!-- AutoConfigure -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
