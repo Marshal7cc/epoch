@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <artifactId>epoch-starters</artifactId>
+        <groupId>org.epoch.starter</groupId>
+        <version>1.0.0.RELEASE</version>
+    </parent>
+    <artifactId>epoch-starter-rocketmq</artifactId>
+
+    <properties>
+        <rocketmq.version>2.2.2</rocketmq.version>
+    </properties>
+
+    <dependencies>
+        <!-- RocketMQ -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-spring-boot-starter</artifactId>
+            <version>${rocketmq.version}</version>
+        </dependency>
+
+        <!-- EPOCH Commons -->
+        <dependency>
+            <groupId>org.epoch.common</groupId>
+            <artifactId>epoch-core-commons</artifactId>
+        </dependency>
+    </dependencies>
+</project>
