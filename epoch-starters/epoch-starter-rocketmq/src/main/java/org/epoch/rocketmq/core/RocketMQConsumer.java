@@ -41,6 +41,7 @@ public abstract class RocketMQConsumer<T> implements RocketMQListener<MessageExt
         // Resolve runtime variables.
         if (reconsumeTimes > this.maxReconsumeTimes && storeErrorMessage) {
             storeErrorMessage(messageExt);
+            return;
         }
 
         try {
