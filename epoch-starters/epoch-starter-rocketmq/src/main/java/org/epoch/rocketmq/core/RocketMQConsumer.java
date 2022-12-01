@@ -5,6 +5,7 @@ import java.util.Objects;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.spring.autoconfigure.ListenerContainerConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.epoch.core.exception.BaseException;
 import org.epoch.core.util.GenericTypeConverter;
@@ -38,10 +39,8 @@ public abstract class RocketMQConsumer<T> implements RocketMQListener<MessageExt
         log.info("RocketMQ message received, msgId: {}, reconsume time: {}", msgId, reconsumeTimes);
 
         // Resolve runtime variables.
-        if (reconsumeTimes > this.maxReconsumeTimes) {
-            if (storeErrorMessage) {
-                storeErrorMessage(messageExt);
-            }
+        if (reconsumeTimes > this.maxReconsumeTimes && storeErrorMessage) {
+            storeErrorMessage(messageExt);
         }
 
         try {
@@ -59,12 +58,22 @@ public abstract class RocketMQConsumer<T> implements RocketMQListener<MessageExt
      *
      * @param message message body.
      */
-    abstract void consumeMessage(T message);
+    public abstract void consumeMessage(T message);
 
     /**
      * Store error message into database.
      *
      * @param messageExt
      */
-    abstract void storeErrorMessage(MessageExt messageExt);
+    protected abstract void storeErrorMessage(MessageExt messageExt);
+
+    /**
+     * Whether this RocketMQ consumer can start up or not in 'ListenerContainerConfiguration'
+     *
+     * @return
+     * @see ListenerContainerConfiguration
+     */
+    public boolean canStartUp() {
+        return true;
+    }
 }

@@ -18,10 +18,16 @@
 package org.apache.rocketmq.spring.autoconfigure;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
+import lombok.AllArgsConstructor;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.rocketmq.client.AccessChannel;
 import org.apache.rocketmq.spring.annotation.ConsumeMode;
 import org.apache.rocketmq.spring.annotation.MessageModel;
@@ -30,6 +36,8 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQReplyListener;
 import org.apache.rocketmq.spring.support.DefaultRocketMQListenerContainer;
 import org.apache.rocketmq.spring.support.RocketMQMessageConverter;
+import org.epoch.core.constant.Digital;
+import org.epoch.rocketmq.core.RocketMQConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.AopProxyUtils;
@@ -45,7 +53,12 @@ import org.springframework.context.support.GenericApplicationContext;
 import org.springframework.core.env.StandardEnvironment;
 import org.springframework.util.StringUtils;
 
+/**
+ * @author Marshal
+ * @since 2022/11/30
+ */
 @Configuration
+@SuppressWarnings("rawtypes")
 public class ListenerContainerConfiguration implements ApplicationContextAware, SmartInitializingSingleton {
     private final static Logger log = LoggerFactory.getLogger(ListenerContainerConfiguration.class);
 
@@ -74,10 +87,30 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
     @Override
     public void afterSingletonsInstantiated() {
         Map<String, Object> beans = this.applicationContext.getBeansWithAnnotation(RocketMQMessageListener.class)
-            .entrySet().stream().filter(entry -> !ScopedProxyUtils.isScopedTarget(entry.getKey()))
-            .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .entrySet().stream().filter(entry -> !ScopedProxyUtils.isScopedTarget(entry.getKey()))
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
-        beans.forEach(this::registerContainer);
+        // Lazy init parameters.
+        Map<String, RocketMQConsumer> lazyConsumers = new HashMap<>();
+        ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+
+        for (Map.Entry<String, Object> entry : beans.entrySet()) {
+            String beanName = entry.getKey();
+            Object bean = entry.getValue();
+
+            if (bean instanceof RocketMQConsumer && !((RocketMQConsumer) bean).canStartUp()) {
+                lazyConsumers.put(beanName, (RocketMQConsumer) bean);
+                continue;
+            }
+            this.registerContainer(beanName, bean);
+        }
+
+        if (MapUtils.isEmpty(lazyConsumers)) {
+            return;
+        }
+
+        LazyConsumerInitializer lazyConsumerInitializer = new LazyConsumerInitializer(lazyConsumers, scheduledExecutorService);
+        scheduledExecutorService.scheduleAtFixedRate(lazyConsumerInitializer, Digital.ONE, Digital.ONE, TimeUnit.SECONDS);
     }
 
     private void registerContainer(String beanName, Object bean) {
@@ -97,25 +130,25 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
         String topic = this.environment.resolvePlaceholders(annotation.topic());
 
         boolean listenerEnabled =
-            (boolean) rocketMQProperties.getConsumer().getListeners().getOrDefault(consumerGroup, Collections.EMPTY_MAP)
-                .getOrDefault(topic, true);
+                (boolean) rocketMQProperties.getConsumer().getListeners().getOrDefault(consumerGroup, Collections.EMPTY_MAP)
+                        .getOrDefault(topic, true);
 
         if (!listenerEnabled) {
             log.debug(
-                "Consumer Listener (group:{},topic:{}) is not enabled by configuration, will ignore initialization.",
-                consumerGroup, topic);
+                    "Consumer Listener (group:{},topic:{}) is not enabled by configuration, will ignore initialization.",
+                    consumerGroup, topic);
             return;
         }
         validate(annotation);
 
         String containerBeanName = String.format("%s_%s", DefaultRocketMQListenerContainer.class.getName(),
-            counter.incrementAndGet());
+                counter.incrementAndGet());
         GenericApplicationContext genericApplicationContext = (GenericApplicationContext) applicationContext;
 
         genericApplicationContext.registerBean(containerBeanName, DefaultRocketMQListenerContainer.class,
-            () -> createRocketMQListenerContainer(containerBeanName, bean, annotation));
+                () -> createRocketMQListenerContainer(containerBeanName, bean, annotation));
         DefaultRocketMQListenerContainer container = genericApplicationContext.getBean(containerBeanName,
-            DefaultRocketMQListenerContainer.class);
+                DefaultRocketMQListenerContainer.class);
         if (!container.isRunning()) {
             try {
                 container.start();
@@ -129,7 +162,7 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
     }
 
     private DefaultRocketMQListenerContainer createRocketMQListenerContainer(String name, Object bean,
-        RocketMQMessageListener annotation) {
+                                                                             RocketMQMessageListener annotation) {
         DefaultRocketMQListenerContainer container = new DefaultRocketMQListenerContainer();
 
         container.setRocketMQMessageListener(annotation);
@@ -161,9 +194,37 @@ public class ListenerContainerConfiguration implements ApplicationContextAware, 
 
     private void validate(RocketMQMessageListener annotation) {
         if (annotation.consumeMode() == ConsumeMode.ORDERLY &&
-            annotation.messageModel() == MessageModel.BROADCASTING) {
+                annotation.messageModel() == MessageModel.BROADCASTING) {
             throw new BeanDefinitionValidationException(
-                "Bad annotation definition in @RocketMQMessageListener, messageModel BROADCASTING does not support ORDERLY message!");
+                    "Bad annotation definition in @RocketMQMessageListener, messageModel BROADCASTING does not support ORDERLY message!");
+        }
+    }
+
+    /**
+     * Lazy initialize RocketMQ consumers.
+     */
+    @AllArgsConstructor
+    private class LazyConsumerInitializer implements Runnable {
+        private final Map<String, RocketMQConsumer> lazyConsumers;
+        private final ScheduledExecutorService scheduledExecutorService;
+
+        @Override
+        public void run() {
+            lazyInit();
+        }
+
+        private synchronized void lazyInit() {
+            if (MapUtils.isEmpty(lazyConsumers)) {
+                scheduledExecutorService.shutdown();
+                log.info("all lazy consumers init success, shutdown scheduledExecutorService...");
+            }
+
+            lazyConsumers.forEach((beanName, consumer) -> {
+                if (consumer.canStartUp()) {
+                    registerContainer(beanName, consumer);
+                    lazyConsumers.remove(beanName);
+                }
+            });
         }
     }
 }
