@@ -23,6 +23,8 @@ public abstract class RocketMQConsumer<T> implements RocketMQListener<MessageExt
     private int maxReconsumeTimes = 16;
     @Setter
     private boolean storeErrorMessage;
+    @Setter
+    private boolean canStartUp = true;
 
     @Override
     @SuppressWarnings("unchecked")
@@ -75,6 +77,6 @@ public abstract class RocketMQConsumer<T> implements RocketMQListener<MessageExt
      * @see ListenerContainerConfiguration
      */
     public boolean canStartUp() {
-        return true;
+        return this.canStartUp;
     }
 }
