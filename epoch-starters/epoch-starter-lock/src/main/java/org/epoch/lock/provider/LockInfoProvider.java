@@ -3,9 +3,12 @@ package org.epoch.lock.provider;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import com.google.common.collect.Iterators;
+import org.apache.commons.collections4.CollectionUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.epoch.lock.annotation.Lock;
@@ -117,6 +120,7 @@ public class LockInfoProvider {
         return value == null ? expression : value;
     }
 
+    @SuppressWarnings("rawtypes")
     private static List<String> parseExpression(Method method, Object[] parameterValues, String[] expressions) {
         EvaluationContext context = new MethodBasedEvaluationContext(null, method, parameterValues, nameDiscoverer);
 
@@ -126,9 +130,29 @@ public class LockInfoProvider {
                 continue;
             }
             Object value = parser.parseExpression(expression).getValue(context);
-            if (value != null) {
+            if (Objects.isNull(value)) {
+                continue;
+            }
+
+            if (value instanceof Collection) {
+                // #1 Array Type.
+                // Spring EL return Array
+                // -> Multiple Lock Key.
+                // -> 将Spring EL返回的数组解析为多个Redis分布式锁的Key.
+                Collection<?> collection = (Collection<?>) value;
+                if (CollectionUtils.isEmpty(collection)) {
+                    continue;
+                }
+                for (Object obj : collection) {
+                    if (!Objects.isNull(obj)) {
+                        list.add(obj.toString());
+                    }
+                }
+            } else {
+                // #2 Not Array Type.
                 list.add(value.toString());
             }
+
         }
         return list;
     }
